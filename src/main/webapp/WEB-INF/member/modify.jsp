@@ -52,6 +52,7 @@
 </head>
 
 <body>
+<jsp:include page="../common/header.jsp"/>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <!-- Layout wrapper -->
 <div class="layout-wrapper layout-content-navbar">
@@ -278,15 +279,15 @@
                                 <!-- /Account -->
                             </div>
                             <div class="card">
-                                <h5 class="card-header">Delete Account</h5>
+                                <h5 class="card-header">회원탈퇴</h5>
                                 <div class="card-body">
                                     <div class="mb-3 col-12 mb-0">
                                         <div class="alert alert-warning">
-                                            <h6 class="alert-heading fw-bold mb-1">Are you sure you want to delete your account?</h6>
-                                            <p class="mb-0">Once you delete your account, there is no going back. Please be certain.</p>
+                                            <h6 class="alert-heading fw-bold mb-1">탈퇴 하시겠습니까?</h6>
+                                            <p class="mb-0">탈퇴를 하시면 다시 조회를 하실 수 없습니다. 위 사항을 확인해 주십시오.</p>
                                         </div>
                                     </div>
-                                    <form id="formAccountDeactivation" onsubmit="return false">
+                                    <form id="formAccountDeactivation" action="/member/delete" method="post">
                                         <div class="form-check mb-3">
                                             <input
                                                     class="form-check-input"
@@ -295,7 +296,7 @@
                                                     id="accountActivation"
                                             />
                                             <label class="form-check-label" for="accountActivation"
-                                            >I confirm my account deactivation</label
+                                            >네, 탈퇴하겠습니다.</label
                                             >
                                         </div>
                                         <button type="submit" class="btn btn-danger deactivate-account">Deactivate Account</button>
@@ -308,36 +309,7 @@
                 <!-- / Content -->
 
                 <!-- Footer -->
-                <footer class="content-footer footer bg-footer-theme">
-                    <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
-                        <div class="mb-2 mb-md-0">
-                            ©
-                            <script>
-                                document.write(new Date().getFullYear());
-                            </script>
-                            , made with ❤️ by
-                            <a href="https://themeselection.com" target="_blank" class="footer-link fw-bolder">ThemeSelection</a>
-                        </div>
-                        <div>
-                            <a href="https://themeselection.com/license/" class="footer-link me-4" target="_blank">License</a>
-                            <a href="https://themeselection.com/" target="_blank" class="footer-link me-4">More Themes</a>
 
-                            <a
-                                    href="https://themeselection.com/demo/sneat-bootstrap-html-admin-template/documentation/"
-                                    target="_blank"
-                                    class="footer-link me-4"
-                            >Documentation</a
-                            >
-
-                            <a
-                                    href="https://github.com/themeselection/sneat-html-admin-template-free/issues"
-                                    target="_blank"
-                                    class="footer-link me-4"
-                            >Support</a
-                            >
-                        </div>
-                    </div>
-                </footer>
                 <!-- / Footer -->
 
                 <div class="content-backdrop fade"></div>
@@ -352,7 +324,7 @@
 </div>
 <!-- / Layout wrapper -->
 
-
+<jsp:include page="../common/footer.jsp"/>
 
 <!-- Core JS -->
 <!-- build:js assets/vendor/js/core.js -->
@@ -367,10 +339,10 @@
 <!-- Vendors JS -->
 
 <!-- Main JS -->
-<script src="../../resources/js/main.js"></script>
+<script src="/resources/resources/js/main.js"></script>
 
 <!-- Page JS -->
-<script src="../../resources/js/pages-account-settings-account.js"></script>
+<script src="/resources/resources/js/pages-account-settings-account.js"></script>
 
 <!-- Place this tag in your head or just before your close body tag. -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>
