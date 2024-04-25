@@ -57,7 +57,7 @@ public class LoginController {
 
         log.info("==============================");
 
-        return "/member/login";
+        return "/login/login";
     }
 /*
     @RequestMapping(value="/login", method={RequestMethod.POST})
