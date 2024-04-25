@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.fullstack4.springmvc.mapper.ProductMapper">
+
+    <select id="listAll" resultType="org.fullstack4.springmvc.domain.ProductVO">
+        select pro_idx, pro_name, pro_writer, pro_price, pro_reg_date, pro_content, pro_category1, pro_category2, pro_category3, pro_modify_date
+        from bec_product
+        order by pro_idx ASC
+    </select>
+
+</mapper>
