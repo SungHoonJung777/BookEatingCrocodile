@@ -12,14 +12,16 @@
     <title>Title</title>
 </head>
 <body>
-<form action="/bbs/fileUpload" method="post" enctype="multipart/form-data">
-    <div>
-        <span>파일업로드</span>
-        <input type="file" name="file" id="file" >
-    </div>
-    <div>
-        <input type="submit" value="제출">
-    </div>
-</form>
+    <form action="/bbs/fileUpload" method="post" enctype="multipart/form-data">
+        <div>
+            <span>파일업로드</span>
+            <input type="file" name="file" id="file">
+        </div>
+        <div>
+            <input type="submit" value="제출">
+        </div>
+    </form>
+
+
 </body>
 </html>

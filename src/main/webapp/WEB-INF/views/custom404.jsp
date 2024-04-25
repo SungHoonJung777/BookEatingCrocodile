@@ -1,16 +1,18 @@
 <%--
   Created by IntelliJ IDEA.
-  User: ssfu7
+  User: db400tea
   Date: 2024-04-17
-  Time: PM 2:58
+  Time: 오후 2:57
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="utf-8" %>
+<%@ page trimDirectiveWhitespaces="true" %>
 <html>
 <head>
-    <title>Title</title>
+    <meta charset="utf-8">
+    <title>페이지를 찾을 수 없습니다.(404)</title>
 </head>
 <body>
-    <h1>040404040404040404040404040400404 : 페이지 없다</h1>
+    <h1>404 : 페이지를 찾을 수 없습니다.</h1>
 </body>
 </html>
