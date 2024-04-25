@@ -56,7 +56,7 @@ public void list(@Valid PageRequestDTO pageRequestDTO,
                  Model model) {
     log.info("========================");
     log.info("BbsController >> list() START");
-
+    System.out.println("dd");
     if (bindingResult.hasErrors()) {
         log.info("BbsController >> list Error");
         redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
