@@ -53,6 +53,7 @@ public class MemberController {
         log.info("============================");
     }
 
+/*
     @PostMapping("/join")
     public String joinPOST(@Valid MemberDTO memberDTO,
                              BindingResult bindingResult,
@@ -96,6 +97,7 @@ public class MemberController {
             return "redirect:/member/join";
         }
     }
+*/
 
     @GetMapping("/modify")
     public void modifyGET(@RequestParam(name="user_id", defaultValue = "") String user_id,
@@ -110,7 +112,7 @@ public class MemberController {
         log.info("============================");
     }
 
-    @PostMapping("/modify")
+/*    @PostMapping("/modify")
     public String modifyPOST(@Valid MemberDTO memberDTO,
                              BindingResult bindingResult,
                              RedirectAttributes redirectAttributes) {
@@ -134,7 +136,7 @@ public class MemberController {
             return "redirect:/member/modify?user_id=" + memberDTO.getUser_id();
         }
 
-    }
+    }*/
 
     @PostMapping("/delete")
     public String leavePOST(@RequestParam(name="user_id", defaultValue = "") String user_id,

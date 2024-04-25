@@ -7,7 +7,8 @@ import org.fullstack4.springmvc.dto.*;
 import org.fullstack4.springmvc.service.BbsReplyServiceIf;
 import org.fullstack4.springmvc.service.BbsServiceIf;
 import org.fullstack4.springmvc.service.BbsServiceImpl;
-import org.fullstack4.springmvc.service.LoginServiceIf;
+
+import org.fullstack4.springmvc.service.LoginService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -30,7 +31,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class BbsController {
     private final BbsServiceIf bbsServiceIf;
-    private final LoginServiceIf loginServiceIf;
+    private final LoginService loginService;
     private final BbsReplyServiceIf bbsReplyServiceIf;
 
 //    public BbsController(BbsServiceIf bbsServiceIf) { @RequiredArgsConstructor가 이거 해주는거야!
@@ -90,6 +91,7 @@ public void list(@Valid PageRequestDTO pageRequestDTO,
 
     }
 
+/*
     @GetMapping("/regist")
     public String registGET(HttpServletRequest req,
                             Model model
@@ -140,6 +142,7 @@ public void list(@Valid PageRequestDTO pageRequestDTO,
 
 
 
+*/
 
 
     @PostMapping("/regist")

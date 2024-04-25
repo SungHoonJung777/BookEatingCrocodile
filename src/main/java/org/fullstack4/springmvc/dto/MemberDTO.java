@@ -6,6 +6,7 @@ import org.checkerframework.checker.units.qual.N;
 
 import javax.validation.constraints.*;
 import java.time.LocalDate;
+import java.util.Date;
 
 @Log4j2
 @Data
@@ -13,6 +14,21 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Builder
 public class MemberDTO {
+
+    private String member_id;
+    private String member_pwd;
+    private String member_name;
+    private String member_email;
+    private String member_addr1;
+    private String member_addr2;
+    private String member_phone;
+    private String member_zonecode;
+    private int mileage;
+    private Date member_reg_date;
+    private String member_type;
+
+
+/*
     @NotBlank
     private String user_id;
     @NotBlank
@@ -38,5 +54,6 @@ public class MemberDTO {
     private LocalDate pwd_change_date;
     private LocalDate leave_date;
     private String interest;
+*/
 
 }

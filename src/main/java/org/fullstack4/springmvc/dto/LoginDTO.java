@@ -13,10 +13,13 @@ import javax.validation.constraints.NotBlank;
 @Builder
 
 public class LoginDTO {
-    @NotBlank
+
     private String user_id;
-    @NotBlank
     private String pwd;
     private String save_id;
     private String auto_login;
+
+
+
+
 }

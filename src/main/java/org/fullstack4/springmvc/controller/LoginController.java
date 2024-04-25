@@ -4,7 +4,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.fullstack4.springmvc.dto.LoginDTO;
 import org.fullstack4.springmvc.dto.MemberDTO;
-import org.fullstack4.springmvc.service.LoginServiceIf;
+import org.fullstack4.springmvc.service.LoginService;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,23 +22,20 @@ import java.net.URLEncoder;
 @Log4j2
 @Controller
 @RequiredArgsConstructor
-@RequestMapping(value="/login")
+@RequestMapping(value="/member")
 public class LoginController {
-    private final LoginServiceIf loginServiceIf;
+    private final LoginService loginService;
 
-    @RequestMapping(value="/login", method={RequestMethod.GET})
-    public String loginGET(HttpServletRequest req,
-                         LoginDTO loginDTO,
-                         MemberDTO memberDTO,
-                         Model model) {
+    @GetMapping("/login")
+    public String loginGET(HttpServletRequest request, MemberDTO memberDTO, Model model) {
         log.info("==============================");
         log.info("LoginController >> loginGET()");
 
         String auto_user_id = "";
 
-        HttpSession session = req.getSession();
+        HttpSession session = request.getSession();
 
-        Cookie[] cookies = req.getCookies();
+        /*Cookie[] cookies = request.getCookies();
         for (Cookie c : cookies) {
             if (c.getName().equals("auto_user_id")) {
                 auto_user_id = c.getValue();
@@ -45,7 +43,7 @@ public class LoginController {
         }
 
         if (auto_user_id != null) {
-            MemberDTO loginMemberDTO = loginServiceIf.login_cookie(auto_user_id);
+            MemberDTO loginMemberDTO = loginService.login_cookie(auto_user_id);
             if (loginMemberDTO != null) {
                 model.addAttribute("member", loginMemberDTO);
                 session.setAttribute("user_id", auto_user_id);
@@ -54,14 +52,14 @@ public class LoginController {
                 return "redirect:/bbs/list";
             }
         }
-
-        model.addAttribute("acc_url", req.getHeader("referer"));
+*/
+        model.addAttribute("acc_url", request.getHeader("referer"));
 
         log.info("==============================");
 
-        return "/login/login";
+        return "/member/login";
     }
-
+/*
     @RequestMapping(value="/login", method={RequestMethod.POST})
     public String loginPOST(@Valid LoginDTO loginDTO,
                             BindingResult bindingResult,
@@ -176,5 +174,5 @@ public class LoginController {
         log.info("==============================");
 
         return "redirect:/bbs/list";
-    }
+    }*/
 }

@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 @Log4j2
 @Service
 @RequiredArgsConstructor
-public class LoginServiceImpl implements LoginServiceIf{
+public class LoginServiceImpl implements LoginService{
 
     private final LoginMapper loginXmlMapper;
     private final ModelMapper modelMapper;
