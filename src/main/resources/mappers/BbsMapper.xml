@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.fullstack4.demo.mapper.BbsMapper">
+    <insert id="regist">
+        insert into tbl_bbs(user_id,title,content,display_date,read_cnt,reg_date, interest)
+        values (#{user_id} , #{title} , #{content} , #{display_date}, #{read_cnt} , now() , #{interest})
+    </insert>
+
+    <select id="list" resultType="org.fullstack4.demo.domain.BbsVO">
+        select * from tbl_bbs;
+    </select>
+
+
+    <select id="view" resultType="org.fullstack4.demo.domain.BbsVO">
+        select * from tbl_bbs where idx = #{idx};
+    </select>
+
+    <update id="modify">
+        update tbl_bbs set user_id = #{user_id} , title = #{title} , content = #{content} , modify_date = now() , interest = #{interest}
+        where idx = #{idx}
+    </update>
+
+    <!-- 검색 조건문 -->
+    <sql id="criteria">
+        <trim prefix="where (" suffix=")" prefixOverrides="OR">
+            <foreach collection="typeArr" item="type">
+                <trim prefix="OR">
+                    <choose>
+                        <when test="type == 'T'.toString()">
+                            title like concat('%',#{keyword},'%')
+                        </when>
+<!--                        <when test="type == 'C'.toString()">
+                            content like concat('%',#{keyword},'%')
+                        </when>-->
+                        <when test="type == 'W'.toString()">
+                            user_id like concat('%',#{keyword},'%' )
+                        </when>
+                    </choose>
+                </trim>
+            </foreach>
+        </trim>
+
+    </sql>
+
+
+    <select id="getListPaging" resultType="org.fullstack4.demo.domain.BbsVO">
+
+        select * from tbl_bbs
+        <!-- limit ((${pageNum}-1)*${amount}), ${amount} -->
+        <if test="keyword != null">
+            <include refid="criteria"></include>
+        </if>
+        <if test="startDate != null">
+            <if test="endDate !=null">
+                and reg_date between #{startDate} and #{endDate}
+            </if>
+        </if>
+        limit #{skip},#{amount}
+
+    </select>
+
+    <!-- 게시물 총 개숫 -->
+    <select id="getTotal" resultType="int">
+
+        select count(*) from tbl_bbs
+        <if test="keyword != null">
+
+           <include refid="criteria"></include>
+
+        </if>
+    </select>
+
+
+    <!-- 게시물 목록(페이징) -->
+
+</mapper>
