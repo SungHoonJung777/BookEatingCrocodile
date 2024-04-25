@@ -113,7 +113,7 @@
                     </div>
                     <div class="xans-element- xans-layout xans-layout-footer ">
                         <p class="address">
-                            <span>(주)천재교과서</span><span>대표: 박정과,  임형진</span> <br/><span>주소: 서울특별시 금천구 가산디지털1로 16, 11층 18~20층 (가산동)</span>	<span>고객센터: 02-3282-8705</span><br/><span>사업자 등록번호: 119-81-70643</span><span>통신판매신고번호: 제 2016-서울금천-1306호</span><span><a href="#none" onclick="window.open('http://www.ftc.go.kr/bizCommPop.do?wrkr_no=1198170643', 'bizCommPop', 'width=750, height=950;');return false;">[사업자정보확인]</a></span><span>신고기관명: 서울금천구청</span><br/><span>호스팅서비스 제공자: 카페24(주)</span> <span>전자우편: mt@chunjae.co.kr</span><br/></p>
+                            <span>책먹는 악어</span><span>대표: 정성훈</span> <br/><span>주소: 서울특별시 금천구 디지털로9길 23 11층</span>	<span>고객센터: 02-1234-5678</span><br/><span>사업자 등록번호: 123-45-67890</span><span>통신판매신고번호: 제 2016-서울금천-1306호</span><span><a href="#none" onclick="window.open('http://www.ftc.go.kr/bizCommPop.do?wrkr_no=1198170643', 'bizCommPop', 'width=750, height=950;');return false;">[사업자정보확인]</a></span><span>신고기관명: 서울금천구청</span><br/><span>호스팅서비스 제공자: (주)천재교육</span> <span>전자우편: hong@gmail.com</span><br/></p>
                         <p class="copyright">Copyright © 2004 By CHUNJAETEXTBOOK Co.,Ltd All Rights Reserved.</p>
                     </div>
 
