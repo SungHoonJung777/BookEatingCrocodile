@@ -22,7 +22,7 @@ import java.net.URLEncoder;
 @Log4j2
 @Controller
 @RequiredArgsConstructor
-@RequestMapping(value="/member")
+@RequestMapping(value="/login")
 public class LoginController {
     private final LoginService loginService;
 
