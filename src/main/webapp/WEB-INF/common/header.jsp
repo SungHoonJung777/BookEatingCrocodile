@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 
     <head>
         <meta charset="utf-8">
@@ -26,24 +26,20 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
         <!-- Libraries Stylesheet -->
-        <link href="/resources/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
-        <link href="/resources/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+        <link href="/resources/resources/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+        <link href="/resources/resources/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
 
 
         <!-- Customized Bootstrap Stylesheet -->
-        <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/resources/resources/css/bootstrap.min.css" rel="stylesheet">
 
         <!-- Template Stylesheet -->
-        <link href="/resources/css/style.css" rel="stylesheet">
+        <link href="/resources/resources/css/style.css" rel="stylesheet">
     </head>
     <body>
     <div class="container-fluid fixed-top">
         <div class="container topbar bg-primary d-none d-lg-block">
             <div class="d-flex justify-content-between">
-                <div class="top-info ps-2">
-                    <small class="me-3"><i class="fas fa-map-marker-alt me-2 text-secondary"></i> <a href="#" class="text-white">123 Street, New York</a></small>
-                    <small class="me-3"><i class="fas fa-envelope me-2 text-secondary"></i><a href="#" class="text-white">Email@Example.com</a></small>
-                </div>
                 <div class="top-link pe-2">
                     <a href="#" class="text-white"><small class="text-white mx-2">Privacy Policy</small>/</a>
                     <a href="#" class="text-white"><small class="text-white mx-2">Terms of Use</small>/</a>
@@ -53,7 +49,7 @@
         </div>
         <div class="container px-0">
             <nav class="navbar navbar-light bg-white navbar-expand-xl">
-                <a href="index.html" class="navbar-brand"><h1 class="text-primary display-6">Fruitables</h1></a>
+                <img src="/resources/resources/img/BEClogo.png"style="width: 15%" onclick="location='/main/main'"/>
                 <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                     <span class="fa fa-bars text-primary"></span>
                 </button>
@@ -65,13 +61,13 @@
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                             <div class="dropdown-menu m-0 bg-secondary rounded-0">
-                                <a href="cart.html" class="dropdown-item">Cart</a>
-                                <a href="chackout.html" class="dropdown-item">Chackout</a>
-                                <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                                <a href="404.html" class="dropdown-item">404 Page</a>
+                                <a href="#" class="dropdown-item">Cart</a>
+                                <a href="#" class="dropdown-item">Chackout</a>
+                                <a href="#" class="dropdown-item">Testimonial</a>
+                                <a href="#" class="dropdown-item">404 Page</a>
                             </div>
                         </div>
-                        <a href="contact.html" class="nav-item nav-link">Contact</a>
+                        <a href="#" class="nav-item nav-link">Contact</a>
                     </div>
                     <div class="d-flex m-3 me-0">
                         <button class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fas fa-search text-primary"></i></button>
@@ -89,12 +85,12 @@
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="/resources/lib/easing/easing.min.js"></script>
-    <script src="/resources/lib/waypoints/waypoints.min.js"></script>
-    <script src="/resources/lib/lightbox/js/lightbox.min.js"></script>
-    <script src="/resources/lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="/resources/resources/lib/easing/easing.min.js"></script>
+    <script src="/resources/resources/lib/waypoints/waypoints.min.js"></script>
+    <script src="/resources/resources/lib/lightbox/js/lightbox.min.js"></script>
+    <script src="/resources/resources/lib/owlcarousel/owl.carousel.min.js"></script>
 
     <!-- Template Javascript -->
-    <script src="/resources/js/main.js"></script>
+    <script src="/resources/resources/js/main.js"></script>
     </body>
 </html>

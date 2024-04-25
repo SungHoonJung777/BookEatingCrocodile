@@ -10,15 +10,17 @@
 <a href="hello-servlet">Hello Servlet</a><br>
 </body>
 </html-->
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="ko">
 <head>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <title>Hello, world!</title>
 </head>
 <body>
-  <jsp:include page="WEB-INF/common/header.jsp"></jsp:include>
+<jsp:include page="WEB-INF/common/header.jsp"></jsp:include>
+<jsp:include page="WEB-INF/common/footer.jsp"></jsp:include>
 </body>
 </html>
