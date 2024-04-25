@@ -32,18 +32,18 @@ public class MemberController {
         log.info("========================");
         log.info("MemberController >> view()");
 
-        HttpSession session = req.getSession();
-        String user_id = String.valueOf(session.getAttribute("user_id"));
-
-        MemberDTO memberDTO = memberServiceIf.view(user_id);
-
-        log.info("user_id : " + user_id);
-        log.info("========================");
-
-
-        //이거 안해주면 jsp에 값 안넘어온다ㅣ@
-        model.addAttribute("user_id", user_id);
-        model.addAttribute("memberDTO", memberDTO);
+//        HttpSession session = req.getSession();
+//        String user_id = String.valueOf(session.getAttribute("user_id"));
+//
+//        MemberDTO memberDTO = memberServiceIf.view(user_id);
+//
+//        log.info("user_id : " + user_id);
+//        log.info("========================");
+//
+//
+//        //이거 안해주면 jsp에 값 안넘어온다ㅣ@
+//        model.addAttribute("user_id", user_id);
+//        model.addAttribute("memberDTO", memberDTO);
     }
 
     @GetMapping("/join")
