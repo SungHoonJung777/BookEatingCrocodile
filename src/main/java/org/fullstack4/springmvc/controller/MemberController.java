@@ -105,9 +105,6 @@ public class MemberController {
         log.info("============================");
         log.info("MemberController >> modifyGET()");
 
-        log.info("user_id : " + user_id);
-
-        model.addAttribute("memberDTO", memberServiceIf.view(user_id));
 
         log.info("============================");
     }
