@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 //@Primary 이거 있는 애가 동작함
 @Qualifier("event")
 public class EventSampleDAOImpl implements SampleDAO{
+
 }
