@@ -1,5 +1,6 @@
 package org.fullstack4.springmvc.mapper;
 
+import org.apache.ibatis.annotations.Param;
 import org.fullstack4.springmvc.domain.MemberVO;
 import org.fullstack4.springmvc.domain.ProductVO;
 import org.fullstack4.springmvc.dto.MemberDTO;
@@ -9,6 +10,7 @@ import java.util.List;
 
 public interface MemberMapper {
     int regist(MemberVO memberVO);
+
     int modify(MemberVO memberVO);
     MemberVO view(String member_id);
 
@@ -18,4 +20,12 @@ public interface MemberMapper {
     int getIdCount(String nickname);
 
     List<ProductVO> getCartList(String m_id);
+
+
+    ////
+
+    int idCheck(String memberId);
+    MemberVO login_info(String id, String pwd);
+
+
 }

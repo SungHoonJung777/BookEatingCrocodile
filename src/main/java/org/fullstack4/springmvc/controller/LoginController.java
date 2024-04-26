@@ -33,9 +33,10 @@ public class LoginController {
 
         String auto_user_id = "";
 
+/*
         HttpSession session = request.getSession();
 
-        /*Cookie[] cookies = request.getCookies();
+       Cookie[] cookies = request.getCookies();
         for (Cookie c : cookies) {
             if (c.getName().equals("auto_user_id")) {
                 auto_user_id = c.getValue();
@@ -53,54 +54,32 @@ public class LoginController {
             }
         }
 */
+
         model.addAttribute("acc_url", request.getHeader("referer"));
 
         log.info("==============================");
 
         return "/login/login";
     }
-/*
-    @RequestMapping(value="/login", method={RequestMethod.POST})
-    public String loginPOST(@Valid LoginDTO loginDTO,
-                            BindingResult bindingResult,
-                            @RequestParam(name="acc_url", defaultValue = "/bbs/list", required = false) String acc_url, //null이어도 되는데 없으면 여기로 갈거야
-                            Model model,
-                            RedirectAttributes redirectAttributes,
-                            HttpServletRequest req,
-                            HttpServletResponse res) {
 
-        String rtn_url = "";
-        try {
-            rtn_url = URLEncoder.encode(acc_url, "UTF-8");
-        } catch (Exception e) {
-
-        }
-
-        if (bindingResult.hasErrors()) {
-            redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
-            return "redirect:/login/login";
-        }
+    @PostMapping("login")
+    public String loginPOST( Model model ,HttpServletRequest request ,HttpServletResponse response , String id, String pwd,   RedirectAttributes redirectAttributes) {
         log.info("==============================");
         log.info("LoginController >> loginPOST()");
-        log.info("acc_url : " + rtn_url);
-        log.info("memberDTO : " + loginDTO.toString());
-
-
-
-        MemberDTO loginMemberDTO = loginServiceIf.login_info(loginDTO.getUser_id(), loginDTO.getPwd()); //db에서 갖고온 dto
+        MemberDTO loginMemberDTO = loginService.login_info(id ,pwd);
         log.info("loginMemberDTO : " + loginMemberDTO);
 
 
 
         if (loginMemberDTO != null) {
-            HttpSession session = req.getSession(); // ()랑 (false)의 차이는? 로그아웃할 때 false 넣고 invalid 하면 깔끔하게 날라감.
+            HttpSession session = request.getSession(); // ()랑 (false)의 차이는? 로그아웃할 때 false 넣고 invalid 하면 깔끔하게 날라감.
             //() : 만약 세션이 형성이 안되어있으면 세션을 바로 생성해서 리턴. 있으면 있는 생성정보를 리턴.
             //(false) : 없더라도 생성안함. 그냥 세션만 리턴(null)
-            session.setAttribute("user_id", loginDTO.getUser_id());
+            session.setAttribute("member_id", loginMemberDTO.getMember_id());
             session.setAttribute("loginInfo", loginMemberDTO);
             log.info(session.getAttribute("loginInfo"));
             model.addAttribute("loginInfo", loginMemberDTO);
-            if (req.getParameter("save_id") != null && req.getParameter("save_id").equals("Y")) {
+            /*if (request.getParameter("save_id") != null && request.getParameter("save_id").equals("Y")) {
                 Cookie cookie1 = new Cookie("save_id", "checked");
                 cookie1.setDomain("");
                 cookie1.setPath("/");
@@ -139,15 +118,18 @@ public class LoginController {
 //                cookie2.setPath("/");
 //                cookie2.setMaxAge(60*60*24);
 //                res.addCookie(cookie2);
-            }
-            return "redirect:"+ acc_url;
+            }*/
+            return "redirect:/login/list";
         }
         else {
+
             redirectAttributes.addFlashAttribute("error_login", "사용자 정보가 일치하지 않습니다.");
             return "redirect:/login/login";
         }
     }
 
+
+/*
     @RequestMapping(value="/logout")
     public String logout(HttpServletRequest req,
                          HttpServletResponse res) {

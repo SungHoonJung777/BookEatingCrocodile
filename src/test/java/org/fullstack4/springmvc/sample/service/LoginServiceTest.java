@@ -5,7 +5,10 @@ import org.fullstack4.springmvc.domain.MemberVO;
 import org.fullstack4.springmvc.dto.MemberDTO;
 import org.fullstack4.springmvc.mapper.LoginMapper;
 import org.fullstack4.springmvc.service.LoginService;
+<<<<<<< HEAD
 
+=======
+>>>>>>> a4e4ff86f94e27ce52df6aac7459ad121e6c91cd
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.modelmapper.ModelMapper;

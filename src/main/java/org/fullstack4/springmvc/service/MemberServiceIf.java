@@ -19,4 +19,8 @@ public interface MemberServiceIf {
     int getIdCount(String nickname);
 
     List<ProductDTO> getCartList(String m_id);
+
+
+    //
+    int idCheck(String memberId);
 }

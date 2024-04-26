@@ -23,11 +23,12 @@ public class MemberServiceImpl implements MemberServiceIf{
     public int regist(MemberDTO memberDTO) {
         log.info("========================================================");
         log.info("MemberServiceImpl >> regist(memberDTO) : " + memberDTO.toString());
-
+        memberDTO.setMileage(5000);
         MemberVO memberVO = modelMapper.map(memberDTO, MemberVO.class);
-        int result = memberMapper.regist(memberVO);
 
         log.info("MemberServiceImpl >> memberVO : " + memberVO.toString());
+
+        int result = memberMapper.regist(memberVO);
         log.info("MemberServiceImpl >> registResult : " + result);
         log.info("========================================================");
 
@@ -101,5 +102,10 @@ public class MemberServiceImpl implements MemberServiceIf{
         return cartList;
     }
 
+    @Override
+    public int idCheck(String memberId) {
+        int rResult = memberMapper.idCheck(memberId);
 
+        return rResult;
+    }
 }

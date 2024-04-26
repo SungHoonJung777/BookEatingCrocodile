@@ -5,7 +5,9 @@ import lombok.extern.log4j.Log4j2;
 import org.fullstack4.springmvc.domain.MemberVO;
 import org.fullstack4.springmvc.dto.MemberDTO;
 import org.fullstack4.springmvc.mapper.LoginMapper;
+import org.fullstack4.springmvc.mapper.MemberMapper;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
@@ -14,7 +16,8 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class LoginServiceImpl implements LoginService{
 
-    private final LoginMapper loginXmlMapper;
+    @Autowired
+    private MemberMapper memberMapper;
     private final ModelMapper modelMapper;
 
 
@@ -24,12 +27,13 @@ public class LoginServiceImpl implements LoginService{
         log.info("LoginServiceImpl >> login_info(id, pwd) : " + id + ", " + pwd);
         MemberVO memberVO = null;
         if (id != null && id != "" && pwd != "" && pwd != null) {
-            memberVO = loginXmlMapper.login_info(id, pwd); //쿼리를 날려서 value를 memberVO 객체에 넣는다
+            System.out.println("#####"+ id + pwd);
+            memberVO = memberMapper.login_info(id, pwd);
             log.info("LoginServiceImpl >> login_info(id, pwd) >> memberVO : " + memberVO.toString());
         }
 
         MemberDTO memberDTO = null;
-        if (memberVO != null && memberVO.getMember_pwd().equals(pwd)) { //db에서 갖고온 객체가 존재할 때만 매핑
+        if (memberVO != null && memberVO.getMember_pwd().equals(pwd)) {
             memberDTO = modelMapper.map(memberVO, MemberDTO.class);
             log.info("LoginServiceImpl >> login_info(id, pwd) >> memberDTO : " + memberDTO.toString());
         }
@@ -37,7 +41,7 @@ public class LoginServiceImpl implements LoginService{
         return memberDTO;
     }
 
-    @Override
+/*    @Override
     public MemberDTO login_cookie(String id) {
         log.info("LoginServiceImpl >> login_cookie(id) : " + id);
         MemberVO memberVO = loginXmlMapper.login_cookie(id);
@@ -46,5 +50,5 @@ public class LoginServiceImpl implements LoginService{
              memberDTO = modelMapper.map(memberVO, MemberDTO.class);
         }
         return memberDTO;
-    }
+    }*/
 }
