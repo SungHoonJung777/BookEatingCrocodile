@@ -25,25 +25,25 @@ public class CommonException {
 //    }
 
     //범용 Exception
-    @ResponseBody
-    @ExceptionHandler(Exception.class)
-    public String except(Exception e) {
-        log.info("===============================");
-        log.info(e.getMessage());
-
-        StringBuilder sb = new StringBuilder("<ul>");
-        sb.append("<li>" + e.getMessage() + "</li>");
-
-        Arrays.stream(e.getStackTrace())
-                .forEach(el -> {sb.append("<li>" + el + "</li>");});
-        sb.append("</ul>");
-
-        log.info("================================");
-
-        // ui 이쁘게 만든 에러 보여주는 페이지로 보내주면 돼
-
-        return sb.toString();
-    }
+//    @ResponseBody
+//    @ExceptionHandler(Exception.class)
+//    public String except(Exception e) {
+//        log.info("===============================");
+//        log.info(e.getMessage());
+//
+//        StringBuilder sb = new StringBuilder("<ul>");
+//        sb.append("<li>" + e.getMessage() + "</li>");
+//
+//        Arrays.stream(e.getStackTrace())
+//                .forEach(el -> {sb.append("<li>" + el + "</li>");});
+//        sb.append("</ul>");
+//
+//        log.info("================================");
+//
+//        // ui 이쁘게 만든 에러 보여주는 페이지로 보내주면 돼
+//
+//        return sb.toString();
+//    }
 
     @ExceptionHandler(NoHandlerFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
