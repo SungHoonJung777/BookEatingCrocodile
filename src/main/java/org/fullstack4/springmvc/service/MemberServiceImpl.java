@@ -2,16 +2,9 @@ package org.fullstack4.springmvc.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.fullstack4.springmvc.domain.MemberImageVO;
 import org.fullstack4.springmvc.domain.MemberVO;
 import org.fullstack4.springmvc.dto.CartDTO;
 import org.fullstack4.springmvc.dto.MemberDTO;
-<<<<<<< HEAD
-=======
-import org.fullstack4.springmvc.dto.MemberImageDTO;
-import org.fullstack4.springmvc.dto.ProductDTO;
-import org.fullstack4.springmvc.mapper.MemberImageMapper;
->>>>>>> 8e87c59e050ef967060f4df4c526b13d7b1c4ed3
 import org.fullstack4.springmvc.mapper.MemberMapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -30,12 +23,11 @@ public class MemberServiceImpl implements MemberServiceIf{
     public int regist(MemberDTO memberDTO) {
         log.info("========================================================");
         log.info("MemberServiceImpl >> regist(memberDTO) : " + memberDTO.toString());
-        memberDTO.setMileage(5000);
+
         MemberVO memberVO = modelMapper.map(memberDTO, MemberVO.class);
+        int result = memberMapper.regist(memberVO);
 
         log.info("MemberServiceImpl >> memberVO : " + memberVO.toString());
-
-        int result = memberMapper.regist(memberVO);
         log.info("MemberServiceImpl >> registResult : " + result);
         log.info("========================================================");
 
@@ -49,8 +41,6 @@ public class MemberServiceImpl implements MemberServiceIf{
         return memberDTO;
     }
 
-
-
     @Override
     public int modify(MemberDTO memberDTO) {
         log.info("========================================================");
@@ -63,12 +53,6 @@ public class MemberServiceImpl implements MemberServiceIf{
         log.info("MemberServiceImpl >> modifyResult : " + result);
         log.info("========================================================");
 
-        return result;
-    }
-
-    @Override
-    public int modifyImage(String member_id, String member_img) {
-        int result = memberMapper.modifyImage(member_id, member_img);
         return result;
     }
 
@@ -118,15 +102,8 @@ public class MemberServiceImpl implements MemberServiceIf{
     }
 
     @Override
-<<<<<<< HEAD
     public void cartout(String cart_id){
         memberMapper.cartout(cart_id);
     }
-=======
-    public int idCheck(String memberId) {
-        int rResult = memberMapper.idCheck(memberId);
->>>>>>> 8e87c59e050ef967060f4df4c526b13d7b1c4ed3
 
-        return rResult;
-    }
 }
