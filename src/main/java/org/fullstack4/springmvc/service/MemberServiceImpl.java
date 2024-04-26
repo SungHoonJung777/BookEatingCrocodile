@@ -34,8 +34,8 @@ public class MemberServiceImpl implements MemberServiceIf{
     }
 
     @Override
-    public MemberDTO view(String user_id) {
-        MemberVO memberVO = memberMapper.view(user_id);
+    public MemberDTO view(String member_id) {
+        MemberVO memberVO = memberMapper.view(member_id);
         MemberDTO memberDTO = modelMapper.map(memberVO, MemberDTO.class);
         return memberDTO;
     }
@@ -56,12 +56,12 @@ public class MemberServiceImpl implements MemberServiceIf{
     }
 
     @Override
-    public int delete(String user_id) {
+    public int delete(String member_id) {
         log.info("========================================================");
-        log.info("MemberServiceImpl >> delete(idx) : " + user_id);
+        log.info("MemberServiceImpl >> delete(idx) : " + member_id);
 
 
-        int result = memberMapper.delete(user_id);
+        int result = memberMapper.delete(member_id);
 
         log.info("MemberServiceImpl >> deleteResult : " + result);
         log.info("========================================================");
@@ -80,11 +80,11 @@ public class MemberServiceImpl implements MemberServiceIf{
     }
 
     @Override
-    public int getIdCount(String user_id) {
+    public int getIdCount(String member_id) {
         log.info("========================================================");
-        log.info("MemberServiceImpl >> getOneByUserId(email) : " + user_id);
+        log.info("MemberServiceImpl >> getOneByUserId(email) : " + member_id);
 
-        int result = memberMapper.getIdCount(user_id);
+        int result = memberMapper.getIdCount(member_id);
 
         log.info("========================================================");
         return result;

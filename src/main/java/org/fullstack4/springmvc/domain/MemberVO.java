@@ -3,6 +3,7 @@ package org.fullstack4.springmvc.domain;
 import lombok.*;
 import lombok.extern.log4j.Log4j2;
 
+import java.util.Date;
 import java.time.LocalDate;
 
 @Log4j2
@@ -12,20 +13,15 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Builder
 public class MemberVO {
-    private String user_id;
-    private String name;
-    private String pwd;
-    private String email;
-    private String jumin;
-    private String addr1;
-    private String addr2;
-    private LocalDate birthday;
-    private String job_code;
+    private String member_id;
+    private String member_name;
+    private String member_pwd;
+    private String member_email;
+    private String member_zonecode;
+    private String member_addr1;
+    private String member_addr2;
+    private String member_phone;
     private int mileage;
-    private String user_state;
-    private LocalDate reg_date;
-    private LocalDate modify_date;
-    private LocalDate pwd_change_date;
-    private LocalDate leave_date;
-    private String interest;
+    private LocalDate member_reg_date;
+    private String member_type;
 }

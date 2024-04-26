@@ -32,7 +32,7 @@ public class MemberServiceTests {
 
     @Test
     public void testView() {
-        String user_id = "id1";
+        String user_id = "abc01";
         MemberDTO memberDTO = memberServiceIf.view(user_id);
         log.info(memberDTO.toString());
     }
