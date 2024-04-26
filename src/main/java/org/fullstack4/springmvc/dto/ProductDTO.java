@@ -29,4 +29,5 @@ public class ProductDTO {
     private String pro_category3;
     private LocalDate pro_reg_date;
     private LocalDate pro_modify_date;
+    private int pro_quantity;
 }

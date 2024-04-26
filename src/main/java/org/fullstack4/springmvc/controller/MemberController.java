@@ -3,6 +3,7 @@ package org.fullstack4.springmvc.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.fullstack4.springmvc.dto.MemberDTO;
+import org.fullstack4.springmvc.dto.ProductDTO;
 import org.fullstack4.springmvc.service.MemberServiceIf;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.List;
 
 @Log4j2
 @Controller
@@ -149,6 +151,13 @@ public class MemberController {
         } else {
             return "redirect:/member/view?user_id=" + user_id;
         }
+    }
+    @GetMapping("/cart")
+    public void cartGET(HttpSession session,
+                        Model model) {
+        String m_id = (String)session.getAttribute("m_id");
+        List<ProductDTO> cartList = memberServiceIf.getCartList("cheolsu");
+        model.addAttribute("cartList", cartList);
     }
 
 }

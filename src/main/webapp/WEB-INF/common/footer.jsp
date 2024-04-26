@@ -103,8 +103,8 @@
     </style>
 </head>
 <body>
-<div class="fixed-bottom">
-    <hr>
+<hr>
+<div class="container-fluid text-white-50 footer pt-5 mt-5">
     <div id="footer">
         <div class="inner">
             <div class="footer-info">

@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.fullstack4.springmvc.domain.MemberVO;
 import org.fullstack4.springmvc.dto.MemberDTO;
+import org.fullstack4.springmvc.dto.ProductDTO;
 import org.fullstack4.springmvc.mapper.MemberMapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -88,6 +89,16 @@ public class MemberServiceImpl implements MemberServiceIf{
 
         log.info("========================================================");
         return result;
+    }
+
+    @Override
+    public List<ProductDTO> getCartList(String m_id){
+        List<ProductDTO> cartList = memberMapper.getCartList(m_id).stream()
+                .map(vo->modelMapper.map(vo, ProductDTO.class))
+                .collect(Collectors.toList());
+        log.info("m_id : "+m_id);
+        log.info("cartList : "+cartList);
+        return cartList;
     }
 
 
