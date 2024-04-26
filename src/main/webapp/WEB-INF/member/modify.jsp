@@ -92,32 +92,16 @@
                                     <input type="hidden" value="${member.member_id}" name="member_id">
                                     <div class="card-body">
                                         <div class="d-flex align-items-start align-items-sm-center gap-4">
-                                            <img
-                                                    src="../../resources/img/avatars/1.png"
-                                                    alt="user-avatar"
-                                                    class="d-block rounded"
-                                                    height="100"
-                                                    width="100"
-                                                    id="uploadedAvatar"
-                                            />
+                                            <img src="/resources/resources/uploads/img/${member.member_img}" alt="user-avatar" class="d-block rounded" height="100" width="100" id="preview"  />
                                             <div class="button-wrapper">
                                                 <label for="upload" class="btn btn-primary me-2 mb-4" tabindex="0">
                                                     <span class="d-none d-sm-block">Upload new photo</span>
                                                     <i class="bx bx-upload d-block d-sm-none"></i>
-                                                    <input
-                                                            type="file"
-                                                            id="upload"
-                                                            class="account-file-input"
-                                                            hidden
-                                                            accept="image/png, image/jpeg"
-                                                    />
+                                                    <input type="file" id="upload" name="upload" class="account-file-input" hidden  accept="image/png, image/jpeg" onchange="readURL(this)" />
                                                 </label>
-                                                <button type="button" class="btn btn-outline-secondary account-image-reset mb-4">
-                                                    <i class="bx bx-reset d-block d-sm-none"></i>
-                                                    <span class="d-none d-sm-block">Reset</span>
-                                                </button>
 
-                                                <p class="text-muted mb-0">JPG GIF 또는 PNG 파일만 업로드 가능합니다. 최대 사이즈는 800K 입니다.</p>
+
+                                                <p class="text-muted mb-0">JPG 또는 PNG 파일만 업로드 가능합니다. 최대 사이즈는 800K 입니다.</p>
                                             </div>
                                         </div>
                                     </div>
@@ -212,8 +196,23 @@
 
 
 </div>
+<jsp:include page="../common/footer.jsp"/>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
+
+    //프로필 사진 미리보기
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('preview').src = e.target.result;
+            };
+            reader.readAsDataURL(input.files[0]);
+        } else {
+            document.getElementById('preview').src = "";
+        }
+    }
+
 
     // 주소 api
     function address() {
