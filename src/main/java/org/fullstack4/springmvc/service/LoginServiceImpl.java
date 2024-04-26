@@ -29,7 +29,7 @@ public class LoginServiceImpl implements LoginService{
         }
 
         MemberDTO memberDTO = null;
-        if (memberVO != null && memberVO.getPwd().equals(pwd)) { //db에서 갖고온 객체가 존재할 때만 매핑
+        if (memberVO != null && memberVO.getMember_pwd().equals(pwd)) { //db에서 갖고온 객체가 존재할 때만 매핑
             memberDTO = modelMapper.map(memberVO, MemberDTO.class);
             log.info("LoginServiceImpl >> login_info(id, pwd) >> memberDTO : " + memberDTO.toString());
         }

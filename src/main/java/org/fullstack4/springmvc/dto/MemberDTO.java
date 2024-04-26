@@ -24,7 +24,7 @@ public class MemberDTO {
     private String member_phone;
     private String member_zonecode;
     private int mileage;
-    private Date member_reg_date;
+    private LocalDate member_reg_date;
     private String member_type;
 
 
