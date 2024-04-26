@@ -221,7 +221,7 @@
 <!-- Page JS -->
 
 <!-- Place this tag in your head or just before your close body tag. -->
-<script async defer src="https://buttons.github.io/buttons.js"></script
+<script async defer src="https://buttons.github.io/buttons.js"></script>
 <script>
     document.querySelector("#loginBtn").addEventListener("click", function (){
        let frm = document.querySelector("#frm");

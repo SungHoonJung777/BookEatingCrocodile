@@ -39,6 +39,13 @@
 
     <!-- Template Stylesheet -->
     <link href="/resources/resources/css/style.css" rel="stylesheet">
+
+    <!-- sidebars css -->
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/sidebars/">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
+
+    <link href="/resources/resources/css/product.css" rel="stylesheet">
+
 </head>
 
 <body>
@@ -50,58 +57,7 @@
 <!-- Spinner End -->
 
 
-<!-- Navbar start -->
-<div class="container-fluid fixed-top">
-    <div class="container topbar bg-primary d-none d-lg-block">
-        <div class="d-flex justify-content-between">
-            <div class="top-info ps-2">
-                <small class="me-3"><i class="fas fa-map-marker-alt me-2 text-secondary"></i> <a href="#" class="text-white">123 Street, New York</a></small>
-                <small class="me-3"><i class="fas fa-envelope me-2 text-secondary"></i><a href="#" class="text-white">Email@Example.com</a></small>
-            </div>
-            <div class="top-link pe-2">
-                <a href="#" class="text-white"><small class="text-white mx-2">Privacy Policy</small>/</a>
-                <a href="#" class="text-white"><small class="text-white mx-2">Terms of Use</small>/</a>
-                <a href="#" class="text-white"><small class="text-white ms-2">Sales and Refunds</small></a>
-            </div>
-        </div>
-    </div>
-    <div class="container px-0">
-        <nav class="navbar navbar-light bg-white navbar-expand-xl">
-            <a href="index.html" class="navbar-brand"><h1 class="text-primary display-6">Fruitables</h1></a>
-            <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-                <span class="fa fa-bars text-primary"></span>
-            </button>
-            <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
-                <div class="navbar-nav mx-auto">
-                    <a href="index.html" class="nav-item nav-link">Home</a>
-                    <a href="shop.html" class="nav-item nav-link active">Shop</a>
-                    <a href="shop-detail.html" class="nav-item nav-link">Shop Detail</a>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-                        <div class="dropdown-menu m-0 bg-secondary rounded-0">
-                            <a href="cart.html" class="dropdown-item">Cart</a>
-                            <a href="chackout.html" class="dropdown-item">Chackout</a>
-                            <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                            <a href="404.html" class="dropdown-item">404 Page</a>
-                        </div>
-                    </div>
-                    <a href="contact.html" class="nav-item nav-link">Contact</a>
-                </div>
-                <div class="d-flex m-3 me-0">
-                    <button class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fas fa-search text-primary"></i></button>
-                    <a href="#" class="position-relative me-4 my-auto">
-                        <i class="fa fa-shopping-bag fa-2x"></i>
-                        <span class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1" style="top: -5px; left: 15px; height: 20px; min-width: 20px;">3</span>
-                    </a>
-                    <a href="#" class="my-auto">
-                        <i class="fas fa-user fa-2x"></i>
-                    </a>
-                </div>
-            </div>
-        </nav>
-    </div>
-</div>
-<!-- Navbar End -->
+<jsp:include page="/WEB-INF/common/header.jsp"></jsp:include>
 
 
 <!-- Modal Search Start -->
@@ -139,7 +95,7 @@
 <!-- Fruits Shop Start-->
 <div class="container-fluid fruite py-5">
     <div class="container py-5">
-        <h1 class="mb-4">Fresh fruits shop</h1>
+        <h1 class="mb-4">book shop</h1>
         <div class="row g-4">
             <div class="col-lg-12">
                 <div class="row g-4">
@@ -151,73 +107,170 @@
                     </div>
                     <div class="col-6"></div>
                     <div class="col-xl-3">
-                        <div class="bg-light ps-3 py-3 rounded d-flex justify-content-between mb-4">
-                            <label for="fruits">Default Sorting:</label>
-                            <select id="fruits" name="fruitlist" class="border-0 form-select-sm bg-light me-3" form="fruitform">
-                                <option value="volvo">Nothing</option>
-                                <option value="saab">Popularity</option>
-                                <option value="opel">Organic</option>
-                                <option value="audi">Fantastic</option>
-                            </select>
-                        </div>
+                        <form name="frmSort" id="frmSort" >
+                            <div class="bg-light ps-3 py-3 rounded d-flex justify-content-between mb-4">
+                                <label for="sortMethod">정렬 순서:</label>
+                                <select id="sortMethod" name="sortMethod" onchange="goList()" class="border-0 form-select-sm bg-light me-3">
+                                    <option value="">선택</option>
+                                    <option value="pro_reg_date||DESC">최신순</option>
+                                    <option value="pro_reg_date||ASC">오래된순</option>
+                                    <option value="pro_price||DESC">가격높은순</option>
+                                    <option value="pro_price||ASC">가격낮은순</option>
+                                </select>
+                            </div>
+                        </form>
                     </div>
                 </div>
                 <div class="row g-4">
                     <div class="col-lg-3">
                         <div class="row g-4">
-                            <div class="col-lg-12">
+                            <div class="col-lg-12 sidebar_menu" >
                                 <div class="mb-3">
                                     <h4>Categories</h4>
-                                    <ul class="list-unstyled fruite-categorie">
-                                        <li>
-                                            <div class="d-flex justify-content-between fruite-name">
-                                                <a href="#"><i class="fas fa-apple-alt me-2"></i>유아</a>
-                                                <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed " data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">유아</button>
-                                                <%--<span>(3)</span>--%>
-                                            </div>
+                                    <ul class="list-unstyled ps-0 fruite-categorie oneDepth M01">
+                                        <li class="mb-1 "><a class="nav-link" href="/product/main/pro_category1?=">유아</a>
+                                            <ul class="twoDepth M02">
+                                                <li><a href="#">한글</a></li>
+                                                <li><a href="#">영어</a></li>
+                                                <li><a href="#">수학</a></li>
+                                            </ul>
                                         </li>
-
-                                        <li class="mb-1">
-                                            <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
-                                                Home
-                                            </button>
-                                            <div class="collapse show" id="home-collapse">
-                                                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                                                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Overview</a></li>
-                                                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Updates</a></li>
-                                                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Reports</a></li>
-                                                </ul>
-                                            </div>
+                                    </ul>
+                                    <ul class="list-unstyled ps-0 fruite-categorie oneDepth M01">
+                                        <li class="mb-1 "><a class="nav-link" href="#">초등</a>
+                                            <ul class="M02">
+                                                <li class=""><a href="#">1학년</a>
+                                                    <ul class="M03">
+                                                        <li><a href="#">국어</a></li>
+                                                        <li><a href="#">영어</a></li>
+                                                        <li><a href="#">수학</a></li>
+                                                        <li><a href="#">사회</a></li>
+                                                        <li><a href="#">과학</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li><a href="#">2학년</a>
+                                                    <ul class="M03">
+                                                        <li><a href="#">국어</a></li>
+                                                        <li><a href="#">영어</a></li>
+                                                        <li><a href="#">수학</a></li>
+                                                        <li><a href="#">사회</a></li>
+                                                        <li><a href="#">과학</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li><a href="#">3학년</a>
+                                                    <ul class="M03">
+                                                        <li><a href="#">국어</a></li>
+                                                        <li><a href="#">영어</a></li>
+                                                        <li><a href="#">수학</a></li>
+                                                        <li><a href="#">사회</a></li>
+                                                        <li><a href="#">과학</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li><a href="#">4학년</a>
+                                                    <ul class="M03">
+                                                        <li><a href="#">국어</a></li>
+                                                        <li><a href="#">영어</a></li>
+                                                        <li><a href="#">수학</a></li>
+                                                        <li><a href="#">사회</a></li>
+                                                        <li><a href="#">과학</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li><a href="#">5학년</a>
+                                                    <ul class="M03">
+                                                        <li><a href="#">국어</a></li>
+                                                        <li><a href="#">영어</a></li>
+                                                        <li><a href="#">수학</a></li>
+                                                        <li><a href="#">사회</a></li>
+                                                        <li><a href="#">과학</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li><a href="#">6학년</a>
+                                                    <ul class="M03">
+                                                        <li><a href="#">국어</a></li>
+                                                        <li><a href="#">영어</a></li>
+                                                        <li><a href="#">수학</a></li>
+                                                        <li><a href="#">사회</a></li>
+                                                        <li><a href="#">과학</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
                                         </li>
-
-
-                                        <li>
-                                            <div class="d-flex justify-content-between fruite-name">
-                                                <a href="#"><i class="fas fa-apple-alt me-2"></i>초등</a>
-                                                <span>(5)</span>
-                                            </div>
+                                    </ul>
+                                    <ul class="list-unstyled ps-0 fruite-categorie M01">
+                                        <li class="mb-1 "><a class="nav-link" href="#">중등</a>
+                                            <ul class="M02">
+                                                <li class=""><a href="#">1학년</a>
+                                                    <ul class="M03">
+                                                        <li><a href="#">국어</a></li>
+                                                        <li><a href="#">영어</a></li>
+                                                        <li><a href="#">수학</a></li>
+                                                        <li><a href="#">사회</a></li>
+                                                        <li><a href="#">과학</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li><a href="#">2학년</a>
+                                                    <ul class="M03">
+                                                        <li><a href="#">국어</a></li>
+                                                        <li><a href="#">영어</a></li>
+                                                        <li><a href="#">수학</a></li>
+                                                        <li><a href="#">사회</a></li>
+                                                        <li><a href="#">과학</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li><a href="#">3학년</a>
+                                                    <ul class="M03">
+                                                        <li><a href="#">국어</a></li>
+                                                        <li><a href="#">영어</a></li>
+                                                        <li><a href="#">수학</a></li>
+                                                        <li><a href="#">사회</a></li>
+                                                        <li><a href="#">과학</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
                                         </li>
-                                        <li>
-                                            <div class="d-flex justify-content-between fruite-name">
-                                                <a href="#"><i class="fas fa-apple-alt me-2"></i>중등</a>
-                                                <span>(2)</span>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="d-flex justify-content-between fruite-name">
-                                                <a href="#"><i class="fas fa-apple-alt me-2"></i>Banana</a>
-                                                <span>(8)</span>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="d-flex justify-content-between fruite-name">
-                                                <a href="#"><i class="fas fa-apple-alt me-2"></i>Pumpkin</a>
-                                                <span>(5)</span>
-                                            </div>
+                                    </ul>
+                                    <ul class="list-unstyled ps-0 fruite-categorie oneDepth M01">
+                                        <li class="mb-1 "><a class="nav-link" href="#">고등</a>
+                                            <ul class="twoDepth M02">
+                                                <li class=""><a href="#">1학년</a>
+                                                    <ul class="M03">
+                                                        <li><a href="#">국어</a></li>
+                                                        <li><a href="#">영어</a></li>
+                                                        <li><a href="#">수학</a></li>
+                                                        <li><a href="#">사회</a></li>
+                                                        <li><a href="#">과학</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li><a href="#">2학년</a>
+                                                    <ul class="M03">
+                                                        <li><a href="#">국어</a></li>
+                                                        <li><a href="#">영어</a></li>
+                                                        <li><a href="#">수학</a></li>
+                                                        <li><a href="#">사회</a></li>
+                                                        <li><a href="#">과학</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li><a href="#">3학년</a>
+                                                    <ul class="M03">
+                                                        <li><a href="#">국어</a></li>
+                                                        <li><a href="#">영어</a></li>
+                                                        <li><a href="#">수학</a></li>
+                                                        <li><a href="#">사회</a></li>
+                                                        <li><a href="#">과학</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
                                         </li>
                                     </ul>
                                 </div>
                             </div>
+
+
+
+
+
+
+
                             <div class="col-lg-12">
                                 <div class="mb-3">
                                     <h4 class="mb-2">Price</h4>
@@ -326,37 +379,69 @@
                     <div class="col-lg-9">
                         <div class="row g-4 justify-content-center">
 
-                            <c:forEach items="${productList}" var="list">
-                                <div class="col-md-6 col-lg-6 col-xl-4">
-                                    <div class="rounded position-relative fruite-item">
-                                        <div class="fruite-img">
-                                            <img src="/resources/resources/img/fruite-item-5.jpg" class="img-fluid w-100 rounded-top" alt="">
-                                        </div>
-                                        <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruits</div>
-                                        <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                            <h4>${list.pro_name}</h4>
-                                            <p>${list.pro_content}...</p>
-                                            <div class="d-flex justify-content-between flex-lg-wrap">
-                                                <p class="text-dark fs-5 fw-bold mb-0">${list.pro_price}원</p>
-                                                <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                            <c:choose>
+                               <c:when test="${responseDTO.dtoList != null}">
+                                    <c:forEach items="${responseDTO.dtoList}" var="list">
+                                        <div class="col-md-6 col-lg-6 col-xl-4">
+                                            <div class="rounded position-relative fruite-item">
+                                                <a href="/product/view?pro_idx=${list.pro_idx}">
+                                                    <div class="fruite-img">
+                                                        <img src="/resources/resources/img/fruite-item-5.jpg" class="img-fluid w-100 rounded-top" alt="">
+                                                    </div>
+                                                    <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruits</div>
+                                                    <div class="p-4 border border-secondary border-top-0 rounded-bottom">
+                                                        <h4>${list.pro_name}</h4>
+                                                        <p>${list.pro_content}...</p>
+                                                        <div class="d-flex justify-content-between flex-lg-wrap">
+                                                            <p class="text-dark fs-5 fw-bold mb-0">${list.pro_price}원</p>
+                                                            <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                                                        </div>
+                                                    </div>
+                                                </a>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                            </c:forEach>
-
+                                    </c:forEach>
+                                </c:when>
+                                <c:otherwise>
+                                    <div>등록된 책이 존재하지 않습니다.</div>
+                                </c:otherwise>
+                            </c:choose>
 
                             <div class="col-12">
-                                <div class="pagination d-flex justify-content-center mt-5">
-                                    <a href="#" class="rounded">&laquo;</a>
-                                    <a href="#" class="active rounded">1</a>
-                                    <a href="#" class="rounded">2</a>
-                                    <a href="#" class="rounded">3</a>
-                                    <a href="#" class="rounded">4</a>
-                                    <a href="#" class="rounded">5</a>
-                                    <a href="#" class="rounded">6</a>
-                                    <a href="#" class="rounded">&raquo;</a>
-                                </div>
+                                <nav aria-label="Page navigation example pagination ">
+                                    <ul class="pagination d-flex justify-content-center mt-5">
+                                        <li class="page-item<c:if test="${responseDTO.prev_page_flag ne true}"> disabled</c:if>">
+                                            <a class="page-link rounded"
+                                               data-num="<c:choose><c:when test="${responseDTO.prev_page_flag}">${responseDTO.page_block_start-1}</c:when>
+                                                <c:otherwise>1</c:otherwise></c:choose>"
+                                               href="<c:choose><c:when test="${responseDTO.prev_page_flag}">${responseDTO.linkParams}&page=${responseDTO.page_block_start-10}</c:when>
+                                                <c:otherwise>#</c:otherwise></c:choose>" aria-label="Previous">
+                                                <span aria-hidden="true">&laquo;</span>
+                                            </a>
+                                        </li>
+
+                                        <c:forEach begin="${responseDTO.page_block_start}" end="${responseDTO.page_block_end}" var="page_num">
+                                            <li class="page-item<c:if test="${responseDTO.page == page_num}"> active</c:if>">
+                                                <a class="page-link rounded" data-num="${page_num}"
+                                                   href="<c:choose><c:when test="${responseDTO.page == page_num}">#</c:when>
+                                                    <c:otherwise>${responseDTO.linkParams}&page=${page_num}</c:otherwise>
+                                                    </c:choose>">${page_num}
+                                                </a>
+                                            </li>
+                                        </c:forEach>
+
+                                        <li class="page-item<c:if test="${responseDTO.next_page_flag ne true}"> disabled</c:if>">
+                                            <a class="page-link rounded"
+                                               data-num="<c:choose><c:when test="${responseDTO.next_page_flag}">${responseDTO.page_block_end+1}</c:when>
+                                                <c:otherwise>${responseDTO.page_block_end}</c:otherwise></c:choose>"
+                                               href="<c:choose><c:when test="${responseDTO.next_page_flag}">${responseDTO.linkParams}&page=${responseDTO.page_block_end+1}</c:when>
+                                                <c:otherwise>#</c:otherwise>
+                                            </c:choose>" aria-label="Next">
+                                                <span aria-hidden="true">&raquo;</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
                             </div>
                         </div>
                     </div>
@@ -367,103 +452,32 @@
 </div>
 <!-- Fruits Shop End-->
 
+<jsp:include page="/WEB-INF/common/footer.jsp"></jsp:include>
 
-<!-- Footer Start -->
-<div class="container-fluid bg-dark text-white-50 footer pt-5 mt-5">
-    <div class="container py-5">
-        <div class="pb-4 mb-4" style="border-bottom: 1px solid rgba(226, 175, 24, 0.5) ;">
-            <div class="row g-4">
-                <div class="col-lg-3">
-                    <a href="#">
-                        <h1 class="text-primary mb-0">Fruitables</h1>
-                        <p class="text-secondary mb-0">Fresh products</p>
-                    </a>
-                </div>
-                <div class="col-lg-6">
-                    <div class="position-relative mx-auto">
-                        <input class="form-control border-0 w-100 py-3 px-4 rounded-pill" type="number" placeholder="Your Email">
-                        <button type="submit" class="btn btn-primary border-0 border-secondary py-3 px-4 position-absolute rounded-pill text-white" style="top: 0; right: 0;">Subscribe Now</button>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="d-flex justify-content-end pt-3">
-                        <a class="btn  btn-outline-secondary me-2 btn-md-square rounded-circle" href=""><i class="fab fa-twitter"></i></a>
-                        <a class="btn btn-outline-secondary me-2 btn-md-square rounded-circle" href=""><i class="fab fa-facebook-f"></i></a>
-                        <a class="btn btn-outline-secondary me-2 btn-md-square rounded-circle" href=""><i class="fab fa-youtube"></i></a>
-                        <a class="btn btn-outline-secondary btn-md-square rounded-circle" href=""><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row g-5">
-            <div class="col-lg-3 col-md-6">
-                <div class="footer-item">
-                    <h4 class="text-light mb-3">Why People Like us!</h4>
-                    <p class="mb-4">typesetting, remaining essentially unchanged. It was
-                        popularised in the 1960s with the like Aldus PageMaker including of Lorem Ipsum.</p>
-                    <a href="" class="btn border-secondary py-2 px-4 rounded-pill text-primary">Read More</a>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="d-flex flex-column text-start footer-item">
-                    <h4 class="text-light mb-3">Shop Info</h4>
-                    <a class="btn-link" href="">About Us</a>
-                    <a class="btn-link" href="">Contact Us</a>
-                    <a class="btn-link" href="">Privacy Policy</a>
-                    <a class="btn-link" href="">Terms & Condition</a>
-                    <a class="btn-link" href="">Return Policy</a>
-                    <a class="btn-link" href="">FAQs & Help</a>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="d-flex flex-column text-start footer-item">
-                    <h4 class="text-light mb-3">Account</h4>
-                    <a class="btn-link" href="">My Account</a>
-                    <a class="btn-link" href="">Shop details</a>
-                    <a class="btn-link" href="">Shopping Cart</a>
-                    <a class="btn-link" href="">Wishlist</a>
-                    <a class="btn-link" href="">Order History</a>
-                    <a class="btn-link" href="">International Orders</a>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="footer-item">
-                    <h4 class="text-light mb-3">Contact</h4>
-                    <p>Address: 1429 Netus Rd, NY 48247</p>
-                    <p>Email: Example@gmail.com</p>
-                    <p>Phone: +0123 4567 8910</p>
-                    <p>Payment Accepted</p>
-                    <img src="/resources/resources/img/payment.png" class="img-fluid" alt="">
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Footer End -->
-
-<!-- Copyright Start -->
-<div class="container-fluid copyright bg-dark py-4">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                <span class="text-light"><a href="#"><i class="fas fa-copyright text-light me-2"></i>Your Site Name</a>, All right reserved.</span>
-            </div>
-            <div class="col-md-6 my-auto text-center text-md-end text-white">
-                <!--/*** This template is free as long as you keep the below author’s credit link/attribution link/backlink. ***/-->
-                <!--/*** If you'd like to use the template without the below author’s credit link/attribution link/backlink, ***/-->
-                <!--/*** you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". ***/-->
-                Designed By <a class="border-bottom" href="https://htmlcodex.com">HTML Codex</a> Distributed By <a class="border-bottom" href="https://themewagon.com">ThemeWagon</a>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Copyright End -->
 
 
 
 <!-- Back to Top -->
 <a href="#" class="btn btn-primary border-3 border-primary rounded-circle back-to-top"><i class="fa fa-arrow-up"></i></a>
 
+<script>
+    function goList() {
+
+        const frm = document.getElementById("frmSort");
+        let sortMethod = document.getElementById("sortMethod");
+
+        if(sortMethod.value != null && sortMethod.value != "") {
+            alert(sortMethod.value);
+
+            /*
+                    frm.method = "GET";
+                    frm.action = "/product/main";
+                    frm.submit();
+            */
+        }
+
+    }
+</script>
 
 <!-- JavaScript Libraries -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
@@ -479,6 +493,7 @@
 <script src="/resources/resources/assets/dist/js/bootstrap.bundle.min.js"></script>
 
 <script src="/resources/resources/js/sidebars.js"></script>
+
 
 </body>
 

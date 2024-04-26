@@ -211,7 +211,7 @@
               />
               <span id="trueId" style="display: none; color: green; ">가입 가능한 아이디 입니다.</span>
               <span id="warnId" style="display: none; color: red;">이미 가입 된 아이디 입니다.</span>
-              <span id="final_idChk" style="display: none; color: red"" >아이디는 영문자와 숫자만 입력 가능합니다.</span>
+              <span id="final_idChk" style="display: none; color: red" >아이디는 영문자와 숫자만 입력 가능합니다.</span>
             </div>
             <div class="mb-3">
               <label for="email" class="form-label">이메일</label>
@@ -221,7 +221,7 @@
 
             </div>
             <div style="margin-top: 20px;">
-              <span id="final_mailChk" style="display: none; margin-top: 20px; margin-bottom: 10px; color: red"" >이메일 형식으로 입력해주세요.</span>
+              <span id="final_mailChk" style="display: none; margin-top: 20px; margin-bottom: 10px; color: red" >이메일 형식으로 입력해주세요.</span>
             </div>
             <div>
               <button type="button" name="emailBtn" id="emailBtn" class="btn btn-primary d-grid w-20" style="margin-bottom: 10px;">인증번호 발급</button>
@@ -242,7 +242,7 @@
               </div>
             </div>
             <div>
-              <span id="final_pwdChk" style="display: none; margin-bottom: 10px; color: red"">비밀번호는 특수문자 포함 8자리 이상입니다.</span>
+              <span id="final_pwdChk" style="display: none; margin-bottom: 10px; color: red">비밀번호는 특수문자 포함 8자리 이상입니다.</span>
             </div>
             <div class="mb-3 form-password-toggle">
               <label class="form-label" for="password">비밀번호 확인</label>

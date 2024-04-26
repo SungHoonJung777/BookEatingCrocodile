@@ -30,4 +30,7 @@ public class ProductDTO {
     private LocalDate pro_reg_date;
     private LocalDate pro_modify_date;
     private int pro_quantity;
+
+    private int pro_sale_price;
+
 }

@@ -1,0 +1,92 @@
+
+/*상품 메인페이지 사이드바 css*/
+.sidebar_menu {
+  border-left: 5px solid #72ab09;
+  color: #131e03 !important;
+  font-size: 20px;
+
+}
+
+.sidebar_menu a {
+  display: block;
+}
+
+.M01 {
+  margin-left: 10px;
+  width: 100px;
+}
+
+.M01>li, .M02>li, .M03>li {
+  position: relative;
+  width: 100%;
+  height: 50px;
+
+  text-align: center;
+  line-height: 50px;
+  list-style: none;
+
+}
+
+.M01>li:hover .M02 {
+  left: 100px;
+}
+
+.M01>li a:hover {
+  display: block;
+  background-color: #ececec;
+  border-radius: 10px;
+}
+
+.M02, .M03 {
+  width: 100px;
+  position: absolute;
+  top: 0;
+  left: -9999px;
+  background-color: #ececec;
+  border-radius: 10px;
+}
+
+.M02>li:hover .M03 {
+  left: 67px;
+}
+
+.M02>li a:hover {
+  display: block;
+  background-color: #f8f8f8;
+  border-radius: 10px;
+}
+
+.M03>li a:hover {
+  display: block;
+  background-color: #ececec;
+  border-radius: 10px;
+}
+
+/*상품 상세 view 페이지 */
+div.pro_view_title {
+  border-bottom: 4px solid #6b6b6b;
+  margin-bottom: 40px;
+}
+
+div.pro_view_titleP {
+  margin-top: 15px;
+  margin-bottom: 30px;
+}
+
+span.pro_view_titleV {
+  margin-left: 8px;
+
+}
+
+div.book_video {
+  margin-bottom: 80px;
+  text-align: center;
+}
+
+div.book_content1 {
+  margin-top: 50px;
+}
+
+a.payBtn {
+  margin-left: 15px;
+}

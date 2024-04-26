@@ -31,7 +31,7 @@ public class PageRequestDTO {
     @Builder.Default
     @PositiveOrZero
     @Min(value=1)
-    private int page_size = 10; //한 화면에 보여줄 리스트 갯수
+    private int page_size = 9; //한 화면에 보여줄 리스트 갯수
     @Builder.Default
     @PositiveOrZero
     @Min(value=1)

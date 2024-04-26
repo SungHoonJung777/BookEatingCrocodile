@@ -4,10 +4,52 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.fullstack4.springmvc.mapper.ProductMapper">
 
-    <select id="listAll" resultType="org.fullstack4.springmvc.domain.ProductVO">
+<!--    <sql id="sort">
+        <if test="sort == null">
+            ORDER BY pro_idx DESC
+        </if>
+        <if test="sort == 'bno'">
+            ORDER BY pro_idx DESC
+        </if>
+
+
+        <if test="sort == 'recent_Date'">
+            ORDER BY reg_date DESC
+        </if>
+
+        &lt;!&ndash; 오래된순 조회 &ndash;&gt;
+        <if test="sort == 'old_date'">
+            ORDER BY reg_date ASC
+        </if>
+
+
+        <if test="sort == 'likeCount'">
+        </if>
+    </sql>-->
+
+    <select id="pro_listAll" resultType="org.fullstack4.springmvc.domain.ProductVO">
         select pro_idx, pro_name, pro_writer, pro_price, pro_reg_date, pro_content, pro_category1, pro_category2, pro_category3, pro_modify_date
         from bec_product
         order by pro_idx ASC
+    </select>
+
+    <select id="pro_view" resultType="org.fullstack4.springmvc.domain.ProductVO">
+        select pro_idx, pro_name, pro_writer, pro_price, pro_amount, pro_content, pro_image, pro_company, pro_video, pro_category1, pro_category2, pro_category3, pro_reg_date, pro_modify_date, floor(pro_price - pro_price*(pro_sale/100)) AS pro_sale_price
+        from bec_product
+        where pro_idx = #{pro_idx}
+    </select>
+
+
+
+    <select id="productTotalCount" resultType="int">
+        select count(*) from bec_product
+    </select>
+
+    <select id="productListByPage" resultType="org.fullstack4.springmvc.domain.ProductVO">
+        select pro_idx, pro_name, pro_writer, pro_price, pro_sale, pro_amount, pro_content, pro_image, pro_company, pro_video, pro_category1, pro_category2, pro_category3, pro_reg_date, pro_modify_date
+        from bec_product
+        order by pro_reg_date DESC
+        limit #{page_skip_count}, #{page_size}
     </select>
 
 </mapper>
