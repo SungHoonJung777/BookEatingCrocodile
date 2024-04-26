@@ -2,16 +2,14 @@ package org.fullstack4.springmvc.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.fullstack4.springmvc.dto.CartDTO;
 import org.fullstack4.springmvc.dto.MemberDTO;
 import org.fullstack4.springmvc.dto.ProductDTO;
 import org.fullstack4.springmvc.service.MemberServiceIf;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
@@ -34,16 +32,18 @@ public class MemberController {
         log.info("========================");
         log.info("MemberController >> view()");
 
-        String member_id = "abc01";
-        MemberDTO memberDTO = memberServiceIf.view(member_id);
-        log.info("member_id : " + member_id);
-        log.info("========================");
-        model.addAttribute("member", memberDTO);
-
 //        HttpSession session = req.getSession();
 //        String user_id = String.valueOf(session.getAttribute("user_id"));
-
-
+//
+//        MemberDTO memberDTO = memberServiceIf.view(user_id);
+//
+//        log.info("user_id : " + user_id);
+//        log.info("========================");
+//
+//
+//        //이거 안해주면 jsp에 값 안넘어온다ㅣ@
+//        model.addAttribute("user_id", user_id);
+//        model.addAttribute("memberDTO", memberDTO);
     }
 
     @GetMapping("/join")
@@ -100,64 +100,84 @@ public class MemberController {
 */
 
     @GetMapping("/modify")
-    public void modifyGET(//@RequestParam(name="member_id", defaultValue = "") String member_id,
+    public void modifyGET(@RequestParam(name="user_id", defaultValue = "") String user_id,
                           Model model) {
         log.info("============================");
         log.info("MemberController >> modifyGET()");
 
-        String member_id = "abc01";
-        model.addAttribute("member", memberServiceIf.view(member_id));
 
         log.info("============================");
     }
 
-    @PostMapping("/modify")
+/*    @PostMapping("/modify")
     public String modifyPOST(@Valid MemberDTO memberDTO,
                              BindingResult bindingResult,
                              RedirectAttributes redirectAttributes) {
         log.info("============================");
         log.info("MemberController >> modifyPOST()");
 
-//        if (bindingResult.hasErrors()) {
-//            log.info("Errors");
-//            redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
-//            redirectAttributes.addFlashAttribute("memberDTO", memberDTO);
-//
-//            return "redirect:/member/modify?user_id=" + memberDTO.getUser_id();
-//        }
-//
+        if (bindingResult.hasErrors()) {
+            log.info("Errors");
+            redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
+            redirectAttributes.addFlashAttribute("memberDTO", memberDTO);
+
+            return "redirect:/member/modify?user_id=" + memberDTO.getUser_id();
+        }
+
         int result = memberServiceIf.modify(memberDTO);
         log.info("modifyResult : " + result);
         log.info("============================");
         if (result > 0) {
-            return "redirect:/member/view?" + memberDTO.getMember_id();
+            return "redirect:/member/view?" + memberDTO.getUser_id();
         } else {
-            return "redirect:/member/modify?user_id=" + memberDTO.getMember_id();
+            return "redirect:/member/modify?user_id=" + memberDTO.getUser_id();
         }
-    }
+
+    }*/
 
     @PostMapping("/delete")
-    public String leavePOST(@RequestParam(name="member_id", defaultValue = "") String member_id,
+    public String leavePOST(@RequestParam(name="user_id", defaultValue = "") String user_id,
                             HttpServletRequest req) {
         log.info("============================");
         log.info("MemberController >> leavePOST()");
         log.info("============================");
-        int result = memberServiceIf.delete(member_id);
+        int result = memberServiceIf.delete(user_id);
         if (result > 0) {
             HttpSession session = req.getSession();
             session.invalidate();
             return "redirect:/bbs/list";
         } else {
-            return "redirect:/member/view?user_id=" + member_id;
+            return "redirect:/member/view?user_id=" + user_id;
         }
     }
     @GetMapping("/cart")
     public void cartGET(HttpSession session,
                         Model model) {
         String m_id = (String)session.getAttribute("m_id");
-        List<ProductDTO> cartList = memberServiceIf.getCartList("cheolsu");
+        List<CartDTO> cartList = memberServiceIf.getCartList("cheolsu");
+        System.out.println(cartList);
         model.addAttribute("cartList", cartList);
     }
-    
+    @ResponseBody
+    @RequestMapping(value = "/cartout", method = RequestMethod.POST)
+    public void cartoutPOST(@RequestParam(name = "cart_idx", defaultValue="") String cart_idx) {
+        memberServiceIf.cartout(cart_idx);
+    }
+    @GetMapping("/checkout")
+    public void checkout(HttpSession session,
+                        Model model) {
+        String m_id = (String)session.getAttribute("m_id");
+        List<CartDTO> cartList = memberServiceIf.getCartList("cheolsu");
+
+        String pro_idx = "";
+        for(int i = 0; i < cartList.size(); i++){
+            if(i == 0) {
+                pro_idx = pro_idx + cartList.get(i).getPro_idx();
+            }else{
+                pro_idx = pro_idx+", " +cartList.get(i).getPro_idx();
+            }
+        }
+        model.addAttribute("cartList", cartList);
+    }
 
 }

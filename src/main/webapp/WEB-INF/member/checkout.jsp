@@ -106,8 +106,8 @@
                                         </th>
                                         <td class="py-5">${list.pro_name}</td>
                                         <td class="py-5">${list.pro_price}</td>
-                                        <td class="py-5">2 </td>
-                                        <td class="py-5">${list.pro_price*2}</td>
+                                        <td class="py-5">${list.pro_quantity}</td>
+                                        <td class="py-5">${list.pro_price*list.pro_quantity}</td>
                                     </tr>
                                 </c:forEach>
                                 <tr>

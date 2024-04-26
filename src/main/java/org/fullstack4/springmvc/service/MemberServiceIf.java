@@ -1,6 +1,7 @@
 package org.fullstack4.springmvc.service;
 
 import org.fullstack4.springmvc.dto.BbsDTO;
+import org.fullstack4.springmvc.dto.CartDTO;
 import org.fullstack4.springmvc.dto.MemberDTO;
 import org.fullstack4.springmvc.dto.ProductDTO;
 
@@ -18,5 +19,7 @@ public interface MemberServiceIf {
     int getEmailCount(String email);
     int getIdCount(String nickname);
 
-    List<ProductDTO> getCartList(String m_id);
+    List<CartDTO> getCartList(String m_id);
+
+    void cartout(String cart_id);
 }

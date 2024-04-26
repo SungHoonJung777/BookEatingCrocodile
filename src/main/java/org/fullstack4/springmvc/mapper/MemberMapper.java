@@ -1,5 +1,6 @@
 package org.fullstack4.springmvc.mapper;
 
+import org.fullstack4.springmvc.domain.CartVO;
 import org.fullstack4.springmvc.domain.MemberVO;
 import org.fullstack4.springmvc.domain.ProductVO;
 import org.fullstack4.springmvc.dto.MemberDTO;
@@ -17,5 +18,7 @@ public interface MemberMapper {
     int getEmailCount(String email);
     int getIdCount(String nickname);
 
-    List<ProductVO> getCartList(String m_id);
+    List<CartVO> getCartList(String m_id);
+
+    void cartout(String cart_id);
 }

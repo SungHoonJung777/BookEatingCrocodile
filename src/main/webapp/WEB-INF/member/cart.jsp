@@ -50,49 +50,46 @@
                     <tbody>
                     <c:forEach items="${cartList}" var="list" varStatus="i">
                     <tr>
-                        <th scope="row" rowspan="2" class="align-middle">
+                        <th  class="align-middle">
                             <div class="d-flex justify-content-center">
-                                <input type="checkbox" class="form-check-input mt-0" id="checkbox${i.count}" name="chkbox" onclick="checkproduct(${i.count});">
+                                <input type="checkbox" class="form-check-input mt-0" id="checkbox${i.count}" name="chkbox" onclick="checkproduct();">
                             </div>
                         </th>
-                        <th scope="row" rowspan="2">
+                        <th scope="row">
                             <div class="d-flex align-items-center">
-                                <img src="img/vegetable-item-3.png" class="img-fluid me-5 rounded-circle" style="width: 80px; height: 80px;" alt="">
+                                <img src="" class="img-fluid me-5 rounded-circle" style="width: 80px; height: 80px;" alt="">
                             </div>
                         </th>
                         <td>
-                            <p class="mb-0 mt-4">${list.pro_name}</p>
+                            <p class="mb-0 mt-4">${list.pro_title}</p>
                         </td>
-                        <td rowspan="2">
+                        <td>
                             <p class="mb-0 mt-4">${list.pro_price}</p>
                         </td>
-                        <td rowspan="2">
+                        <td>
                             <div class="input-group quantity mt-4" style="width: 100px;">
                                 <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-minus rounded-circle bg-light border" onclick="minus(${i.count}, ${list.pro_price});">
+                                    <button class="btn btn-sm btn-minus rounded-circle bg-light border" onclick="minus(${i.count}, ${list.pro_price})">
                                         <i class="fa fa-minus"></i>
                                     </button>
                                 </div>
-                                <input type="text" class="form-control form-control-sm text-center border-0" value="1" id="product${i.count}" name="quantity" readonly>
+                                <input type="text" class="form-control form-control-sm text-center border-0" value="${list.pro_quantity}" id="product${i.count}">
                                 <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-plus rounded-circle bg-light border" onclick="plus(${i.count}, ${list.pro_amount}, ${list.pro_price})">
+                                    <button class="btn btn-sm btn-plus rounded-circle bg-light border" onclick="plus(${i.count}, 500, ${list.pro_price})">
                                         <i class="fa fa-plus"></i>
                                     </button>
                                 </div>
                             </div>
                         </td>
-                        <td rowspan="2">
-                            <p class="mb-0 mt-4" id="total${i.count}" name="total">${list.pro_price}</p>
+                        <td>
+                            <p class="mb-0 mt-4" id="total${i.count}" name="total">${list.pro_price*list.pro_quantity}</p>
                         </td>
-                        <td rowspan="2">
-                            <button class="btn btn-md rounded-circle bg-light border mt-4" >
+                        <td>
+                            <button class="btn btn-md rounded-circle bg-light border mt-4" onclick="cartout(${list.cart_idx})">
                                 <i class="fa fa-times text-danger"></i>
                             </button>
                         </td>
-                    </tr>
-                    <tr>
-                        <td>남은 재고량 : ${list.pro_amount}</td>
-                    </tr>
+
                     </c:forEach>
                     </tbody>
                 </table>
@@ -135,18 +132,17 @@
         if(parseInt(quantity)-1 > 0){
             document.getElementById("product"+idx).value = parseInt(quantity)-1;
             document.getElementById("total"+idx).innerHTML =parseInt(price)*(parseInt(quantity)-1);
-        }if(document.getElementById("checkbox"+idx).checked) {
-            checkproduct(idx);
         }
+        checkproduct(idx);
     }
     function plus(idx, amount, price){
         let quantity = document.getElementById("product"+idx).value;
         if(parseInt(quantity)+1 <= amount){
             document.getElementById("product"+idx).value = parseInt(quantity)+1;
             document.getElementById("total"+idx).innerHTML = parseInt(price)*(parseInt(quantity)+1);
-        }if(document.getElementById("checkbox"+idx).checked) {
-            checkproduct(idx);
         }
+        checkproduct();
+
     }
     function checkAll(el){
         let checkBoxes  = document.getElementsByName("chkbox");
@@ -168,27 +164,42 @@
             document.getElementById("total_price").innerHTML = 0;
         }
     }
-    function checkproduct(idx){
-        let product_total = document.getElementById("total");
-        let product_price = document.getElementById("total"+idx);
-        let shipping = document.getElementById("shipping");
-        let total_price = document.getElementById("total_price");
-        let ckbox = document.getElementById("checkbox"+idx);
-        if(ckbox.checked == true) {
-            product_total.innerHTML = parseInt(product_total.innerHTML)+parseInt(product_price.innerHTML);
-            shipping.innerHTML = "3000";
-            total_price.innerHTML = parseInt(product_total.innerHTML) + 3000;
+    function checkproduct(){
+        let totalval = document.getElementsByName("chkbox");
+        let total_price = 0;
+        let count = 0;
+        let uncheck = 0;
+        totalval.forEach((row, index) => {
+            count = count +1;
+            if(row.checked){
+                total_price = total_price+parseInt(document.getElementById("total"+(index+1)).innerHTML);
+            }else{
+                uncheck = uncheck + 1;
+            }
+        })
+        document.getElementById("total").innerHTML = total_price;
+        if(uncheck == count) {
+            document.getElementById("shipping").innerHTML = 0;
         }else{
-            product_total.innerHTML = parseInt(product_total.innerHTML)-parseInt(product_price.innerHTML);
-            if(product_total.innerHTML == "0"){
-                shipping.innerHTML = "0";
-                total_price.innerHTML = "0";
-            }
-            else{
-                shipping.innerHTML = "3000";
-                total_price.innerHTML = parseInt(product_total.innerHTML) + 3000;
-            }
+            document.getElementById("shipping").innerHTML = 3000;
         }
+        document.getElementById("total_price").value = total_price;
+    }
+    function cartout(cart_idx) {
+        $.ajax({
+            type: "POST",            // HTTP method type(GET, POST) 형식이다.
+            url: "/member/cartout",      // 컨트롤러에서 대기중인 URL 주소이다.
+            data: {
+                cart_idx:cart_idx
+            },            // Json 형식의 데이터이다.
+            success: function (result) { // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+                alert("삭제되었습니다");
+                window.location.reload();
+            },
+            error: function (error) { // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+                console.log(error);
+            }
+        });
     }
 </script>
 </body>
