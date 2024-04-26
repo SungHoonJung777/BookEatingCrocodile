@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: ryuri
@@ -89,7 +90,7 @@
                                 </div>
                                 <div class="user-profile-header d-flex flex-column flex-sm-row text-sm-start text-center mb-4">
                                     <div class="flex-shrink-0 mt-n2 mx-sm-0 mx-auto">
-                                        <img src="/resources/resources/assets/img/avatars/1.png" alt="user image" class="d-block h-auto ms-0 ms-sm-4 rounded user-profile-img">
+                                               <img src="/resources/resources/uploads/img/${member.member_img}"  alt="user image" height="100" width="100" class="d-block h-auto ms-0 ms-sm-4 rounded user-profile-img">
                                     </div>
                                     <div class="flex-grow-1 mt-3 mt-sm-5">
                                         <div class="d-flex align-items-md-end align-items-sm-start align-items-center justify-content-md-between justify-content-start mx-4 flex-md-row flex-column gap-4">

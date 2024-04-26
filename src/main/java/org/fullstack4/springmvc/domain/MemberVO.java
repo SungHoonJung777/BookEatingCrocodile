@@ -24,4 +24,5 @@ public class MemberVO {
     private int mileage;
     private LocalDate member_reg_date;
     private String member_type;
+    private String member_img;
 }

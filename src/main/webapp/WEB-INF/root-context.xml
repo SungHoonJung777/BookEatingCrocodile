@@ -79,6 +79,27 @@
 
     <mybatis:scan base-package="org.fullstack4.springmvc.mapper"></mybatis:scan>
     <!--MyBatis 설정 부분-->
+    <!-- navermail설정 -->
+    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host" value="smtp.gmail.com"/> <!-- 메이서버 호스트 -->
+        <property name="port" value="587"/> <!-- 메이서버 포트번호 -->
+        <property name="username" value="ssfu777@gmail.com"/>
+        <property name="password" value="sawt cqdg npon xedh"/>
+        <!-- 보안연결 SSL과 관련된 설정 -->
+        <property name="javaMailProperties">
+            <props>
+                <prop key="mail.transport.protocol">smtp</prop>
+                <prop key="mail.smtp.auth">true</prop>
+                <!-- gmail의 경우 보안문제 업데이트로 인해 SSLSocketFactory를 추가해야 smtp 사용 가능. -->
+                <prop key="mail.smtp.socketFactory.class">javax.net.ssl.SSLSocketFactory</prop>
+                <prop key="mail.smtp.starttls.enable">true</prop>
+                <prop key="mail.debug">true</prop>
+                <prop key="mail.smtp.starttls.enable">true</prop>
+                <prop key="mail.smtp.ssl.trust">smtp.gmail.com</prop>
+                <prop key="mail.smtp.ssl.protocols">TLSv1.2</prop>
+            </props>
+        </property>
+    </bean>
 
     <!--이 경로 밑에 컴포넌트화 할 수 있는 애들을 싹 다 뒤져서 빈으로 알아서 등록해줘 -->
     <context:component-scan base-package="org.fullstack4.springmvc.config"/>
