@@ -4,7 +4,7 @@ import lombok.extern.log4j.Log4j2;
 import org.fullstack4.springmvc.domain.MemberVO;
 import org.fullstack4.springmvc.dto.MemberDTO;
 import org.fullstack4.springmvc.mapper.LoginMapper;
-import org.fullstack4.springmvc.service.LoginServiceIf;
+import org.fullstack4.springmvc.service.LoginService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.modelmapper.ModelMapper;
@@ -17,7 +17,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @ContextConfiguration(locations = "file:src/main/webapp/WEB-INF/root-context.xml")
 public class LoginServiceTest {
     @Autowired
-    private LoginServiceIf loginServiceIf;
+    private LoginService loginServiceIf;
 
 
     @Test

@@ -9,11 +9,11 @@ import java.util.List;
 public interface MemberServiceIf {
     int regist(MemberDTO memberDTO);
 
-    MemberDTO view(String user_id);
+    MemberDTO view(String member_id);
 
     int modify(MemberDTO memberDTO);
 
-    int delete(String user_id);
+    int delete(String member_id);
 
     int getEmailCount(String email);
     int getIdCount(String nickname);

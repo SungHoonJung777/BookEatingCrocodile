@@ -34,18 +34,16 @@ public class MemberController {
         log.info("========================");
         log.info("MemberController >> view()");
 
+        String member_id = "abc01";
+        MemberDTO memberDTO = memberServiceIf.view(member_id);
+        log.info("member_id : " + member_id);
+        log.info("========================");
+        model.addAttribute("member", memberDTO);
+
 //        HttpSession session = req.getSession();
 //        String user_id = String.valueOf(session.getAttribute("user_id"));
-//
-//        MemberDTO memberDTO = memberServiceIf.view(user_id);
-//
-//        log.info("user_id : " + user_id);
-//        log.info("========================");
-//
-//
-//        //이거 안해주면 jsp에 값 안넘어온다ㅣ@
-//        model.addAttribute("user_id", user_id);
-//        model.addAttribute("memberDTO", memberDTO);
+
+
     }
 
     @GetMapping("/join")
@@ -102,54 +100,55 @@ public class MemberController {
 */
 
     @GetMapping("/modify")
-    public void modifyGET(@RequestParam(name="user_id", defaultValue = "") String user_id,
+    public void modifyGET(//@RequestParam(name="member_id", defaultValue = "") String member_id,
                           Model model) {
         log.info("============================");
         log.info("MemberController >> modifyGET()");
 
+        String member_id = "abc01";
+        model.addAttribute("member", memberServiceIf.view(member_id));
 
         log.info("============================");
     }
 
-/*    @PostMapping("/modify")
+    @PostMapping("/modify")
     public String modifyPOST(@Valid MemberDTO memberDTO,
                              BindingResult bindingResult,
                              RedirectAttributes redirectAttributes) {
         log.info("============================");
         log.info("MemberController >> modifyPOST()");
 
-        if (bindingResult.hasErrors()) {
-            log.info("Errors");
-            redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
-            redirectAttributes.addFlashAttribute("memberDTO", memberDTO);
-
-            return "redirect:/member/modify?user_id=" + memberDTO.getUser_id();
-        }
-
+//        if (bindingResult.hasErrors()) {
+//            log.info("Errors");
+//            redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
+//            redirectAttributes.addFlashAttribute("memberDTO", memberDTO);
+//
+//            return "redirect:/member/modify?user_id=" + memberDTO.getUser_id();
+//        }
+//
         int result = memberServiceIf.modify(memberDTO);
         log.info("modifyResult : " + result);
         log.info("============================");
         if (result > 0) {
-            return "redirect:/member/view?" + memberDTO.getUser_id();
+            return "redirect:/member/view?" + memberDTO.getMember_id();
         } else {
-            return "redirect:/member/modify?user_id=" + memberDTO.getUser_id();
+            return "redirect:/member/modify?user_id=" + memberDTO.getMember_id();
         }
-
-    }*/
+    }
 
     @PostMapping("/delete")
-    public String leavePOST(@RequestParam(name="user_id", defaultValue = "") String user_id,
+    public String leavePOST(@RequestParam(name="member_id", defaultValue = "") String member_id,
                             HttpServletRequest req) {
         log.info("============================");
         log.info("MemberController >> leavePOST()");
         log.info("============================");
-        int result = memberServiceIf.delete(user_id);
+        int result = memberServiceIf.delete(member_id);
         if (result > 0) {
             HttpSession session = req.getSession();
             session.invalidate();
             return "redirect:/bbs/list";
         } else {
-            return "redirect:/member/view?user_id=" + user_id;
+            return "redirect:/member/view?user_id=" + member_id;
         }
     }
     @GetMapping("/cart")

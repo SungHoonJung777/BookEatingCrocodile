@@ -48,11 +48,15 @@
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="/resources/resources/assets/js/config.js"></script>
+    <style>
+        #body {
+            margin-top: 180px;
+        }
+    </style>
 </head>
 <jsp:include page="../common/header.jsp"/>
-<body>
+<body id="body">
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <!-- Layout wrapper -->
 <div class="layout-wrapper layout-content-navbar">
     <div class="layout-container">
@@ -81,7 +85,7 @@
                         <div class="col-12">
                             <div class="card mb-4">
                                 <div class="user-profile-header-banner">
-                                    <img src="/resources/resources/assets/img/pages/profile-banner.png" alt="Banner image" class="rounded-top">
+                                    <img src="/resources/resources/assets/img/pages/profile-banner.png" alt="Banner image" class="rounded-top" style="width: 100%">
                                 </div>
                                 <div class="user-profile-header d-flex flex-column flex-sm-row text-sm-start text-center mb-4">
                                     <div class="flex-shrink-0 mt-n2 mx-sm-0 mx-auto">
@@ -90,11 +94,11 @@
                                     <div class="flex-grow-1 mt-3 mt-sm-5">
                                         <div class="d-flex align-items-md-end align-items-sm-start align-items-center justify-content-md-between justify-content-start mx-4 flex-md-row flex-column gap-4">
                                             <div class="user-profile-info">
-                                                <h4>유저아이디</h4>
+                                                <h4>${member.member_id}</h4>
                                                 <ul class="list-inline mb-0 d-flex align-items-center flex-wrap justify-content-sm-start justify-content-center gap-2">
 
                                                     <li class="list-inline-item fw-medium">
-                                                        <i class="bx bx-calendar-alt"></i> 회원 등록날짜 April 2021
+                                                        <i class="bx bx-calendar-alt"></i> registed ${member.member_reg_date}
                                                     </li>
                                                 </ul>
                                             </div>
@@ -125,13 +129,13 @@
                                 <div class="card-body">
                                     <small class="text-muted text-uppercase">About</small>
                                     <ul class="list-unstyled mb-4 mt-3">
-                                        <li class="d-flex align-items-center mb-3"><i class="bx bx-user"></i><span class="fw-medium mx-2">이름:</span> <span>유저이름</span></li>
-                                        <li class="d-flex align-items-center mb-3"><i class="bx bx-flag"></i><span class="fw-medium mx-2">주소:</span> <span>유저주소</span></li>
+                                        <li class="d-flex align-items-center mb-3"><i class="bx bx-user"></i><span class="fw-medium mx-2">이름:</span> <span>${member.member_name}</span></li>
+                                        <li class="d-flex align-items-center mb-3"><i class="bx bx-flag"></i><span class="fw-medium mx-2">주소:</span> <span>${member.member_addr1} ${member.member_addr2}</span></li>
                                     </ul>
                                     <small class="text-muted text-uppercase">Contacts</small>
                                     <ul class="list-unstyled mb-4 mt-3">
-                                        <li class="d-flex align-items-center mb-3"><i class="bx bx-phone"></i><span class="fw-medium mx-2">전화번호:</span> <span>유저 전화번호</span></li>
-                                        <li class="d-flex align-items-center mb-3"><i class="bx bx-envelope"></i><span class="fw-medium mx-2">이메일:</span> <span>유저이메일</span></li>
+                                        <li class="d-flex align-items-center mb-3"><i class="bx bx-phone"></i><span class="fw-medium mx-2">전화번호:</span> <span>${member.member_phone}</span></li>
+                                        <li class="d-flex align-items-center mb-3"><i class="bx bx-envelope"></i><span class="fw-medium mx-2">이메일:</span> <span>${member.member_email}</span></li>
                                     </ul>
 
                                 </div>
@@ -165,25 +169,6 @@
 
 
 <jsp:include page="../common/footer.jsp"/>
-<!-- Core JS -->
-<!-- build:js assets/vendor/js/core.js -->
-<script src="../../resources/vendor/libs/jquery/jquery.js"></script>
-<script src="../../resources/vendor/libs/popper/popper.js"></script>
-<script src="../../resources/vendor/js/bootstrap.js"></script>
-<script src="../../resources/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
 
-<script src="../../resources/vendor/js/menu.js"></script>
-<!-- endbuild -->
-
-<!-- Vendors JS -->
-
-<!-- Main JS -->
-<script src="../../resources/js/main.js"></script>
-
-<!-- Page JS -->
-<script src="../../resources/js/pages-account-settings-account.js"></script>
-
-<!-- Place this tag in your head or just before your close body tag. -->
-<script async defer src="https://buttons.github.io/buttons.js"></script>
 </body>
 </html>

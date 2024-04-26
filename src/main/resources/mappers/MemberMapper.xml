@@ -3,31 +3,37 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.fullstack4.springmvc.mapper.MemberMapper">
+
+    <sql id="pwdNull">
+        <if test="member_pwd != null">
+            , member_pwd = #{member_pwd}
+        </if>
+    </sql>
+
     <insert id="regist">
         insert into tbl_member ( user_id, pwd, name, email, birthday, interest, addr1, addr2, reg_date )
         values( #{user_id}, #{pwd}, #{name}, #{email}, #{birthday}, #{interest}, #{addr1}, #{addr2}, now())
     </insert>
 
     <update id="modify">
-        update tbl_member set pwd=#{pwd},
-                           name=#{name},
-                           email=#{email},
-                           interest=#{interest},
-                           addr1=#{addr1},
-                           addr2=#{addr2},
-                           birthday=#{birthday}
-        where user_id=#{user_id}
+        update bec_member set  member_name=#{member_name},
+                           member_phone=#{member_phone},
+                           member_zonecode=#{member_zonecode},
+                           member_addr1=#{member_addr1},
+                           member_addr2=#{member_addr2}
+        <include refid="pwdNull"/>
+        where member_id=#{member_id}
     </update>
 
     <select id="view" resultType="org.fullstack4.springmvc.domain.MemberVO">
-        select user_id, pwd, name, email, birthday, interest, addr1, addr2
-        from tbl_member
-        where user_id=#{user_id}
+        select member_id, member_pwd, member_name, member_email, member_zonecode, member_addr1, member_addr2, member_phone, member_reg_date, member_type
+        from bec_member
+        where member_id=#{member_id}
     </select>
 
     <delete id="delete">
-        delete from tbl_member
-        where user_id=#{user_id}
+        delete from bec_member
+        where member_id=#{member_id}
     </delete>
 
     <select id="getEmailCount" resultType="Integer">

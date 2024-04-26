@@ -49,11 +49,16 @@
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="/resources/resources/assets/js/config.js"></script>
+    <style>
+        #body {
+            margin-top: 180px;
+        }
+    </style>
+
 </head>
 
-<body>
+<body id="body">
 <jsp:include page="../common/header.jsp"/>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <!-- Layout wrapper -->
 <div class="layout-wrapper layout-content-navbar">
     <div class="layout-container">
@@ -76,206 +81,96 @@
                         <div class="col-md-12">
                             <ul class="nav nav-pills flex-column flex-md-row mb-3">
                                 <li class="nav-item">
-                                    <a class="nav-link active" href="javascript:void(0);"><i class="bx bx-user me-1"></i> Account</a>
+                                   <i class="bx bx-user me-1"></i> Account
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="pages-account-settings-notifications.html"
-                                    ><i class="bx bx-bell me-1"></i> Notifications</a
-                                    >
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="pages-account-settings-connections.html"
-                                    ><i class="bx bx-link-alt me-1"></i> Connections</a
-                                    >
-                                </li>
+
                             </ul>
                             <div class="card mb-4">
                                 <h5 class="card-header">Profile Details</h5>
                                 <!-- Account -->
-                                <div class="card-body">
-                                    <div class="d-flex align-items-start align-items-sm-center gap-4">
-                                        <img
-                                                src="../../resources/img/avatars/1.png"
-                                                alt="user-avatar"
-                                                class="d-block rounded"
-                                                height="100"
-                                                width="100"
-                                                id="uploadedAvatar"
-                                        />
-                                        <div class="button-wrapper">
-                                            <label for="upload" class="btn btn-primary me-2 mb-4" tabindex="0">
-                                                <span class="d-none d-sm-block">Upload new photo</span>
-                                                <i class="bx bx-upload d-block d-sm-none"></i>
-                                                <input
-                                                        type="file"
-                                                        id="upload"
-                                                        class="account-file-input"
-                                                        hidden
-                                                        accept="image/png, image/jpeg"
-                                                />
-                                            </label>
-                                            <button type="button" class="btn btn-outline-secondary account-image-reset mb-4">
-                                                <i class="bx bx-reset d-block d-sm-none"></i>
-                                                <span class="d-none d-sm-block">Reset</span>
-                                            </button>
+                                <form id="formAccountSettings" method="POST" action="/member/modify" enctype="multipart/form-data">
+                                    <input type="hidden" value="${member.member_id}" name="member_id">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-start align-items-sm-center gap-4">
+                                            <img
+                                                    src="../../resources/img/avatars/1.png"
+                                                    alt="user-avatar"
+                                                    class="d-block rounded"
+                                                    height="100"
+                                                    width="100"
+                                                    id="uploadedAvatar"
+                                            />
+                                            <div class="button-wrapper">
+                                                <label for="upload" class="btn btn-primary me-2 mb-4" tabindex="0">
+                                                    <span class="d-none d-sm-block">Upload new photo</span>
+                                                    <i class="bx bx-upload d-block d-sm-none"></i>
+                                                    <input
+                                                            type="file"
+                                                            id="upload"
+                                                            class="account-file-input"
+                                                            hidden
+                                                            accept="image/png, image/jpeg"
+                                                    />
+                                                </label>
+                                                <button type="button" class="btn btn-outline-secondary account-image-reset mb-4">
+                                                    <i class="bx bx-reset d-block d-sm-none"></i>
+                                                    <span class="d-none d-sm-block">Reset</span>
+                                                </button>
 
-                                            <p class="text-muted mb-0">Allowed JPG, GIF or PNG. Max size of 800K</p>
+                                                <p class="text-muted mb-0">JPG GIF 또는 PNG 파일만 업로드 가능합니다. 최대 사이즈는 800K 입니다.</p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <hr class="my-0" />
-                                <div class="card-body">
-                                    <form id="formAccountSettings" method="POST" action="">
+                                    <hr class="my-0" />
+                                    <div class="card-body">
+
                                         <div class="row">
                                             <div class="mb-3 col-md-6">
-                                                <label for="firstName" class="form-label">First Name</label>
-                                                <input
-                                                        class="form-control"
-                                                        type="text"
-                                                        id="firstName"
-                                                        name="firstName"
-                                                        value="John"
-                                                        autofocus
-                                                />
+                                                <label for="name" class="form-label">이름</label>
+                                                <input class="form-control" type="text" id="name"  name="member_name" value="${member.member_name}" />
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="lastName" class="form-label">Last Name</label>
-                                                <input class="form-control" type="text" name="lastName" id="lastName" value="Doe" />
+                                                <label class="form-label" for="phone">전화번호</label>
+
+                                                    <input type="text" id="phone" name="member_phone" class="form-control" value="${member.member_phone}" />
+
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="email" class="form-label">E-mail</label>
-                                                <input
-                                                        class="form-control"
-                                                        type="text"
-                                                        id="email"
-                                                        name="email"
-                                                        value="john.doe@example.com"
-                                                        placeholder="john.doe@example.com"
-                                                />
-                                            </div>
-                                            <div class="mb-3 col-md-6">
-                                                <label for="organization" class="form-label">Organization</label>
-                                                <input
-                                                        type="text"
-                                                        class="form-control"
-                                                        id="organization"
-                                                        name="organization"
-                                                        value="ThemeSelection"
-                                                />
-                                            </div>
-                                            <div class="mb-3 col-md-6">
-                                                <label class="form-label" for="phoneNumber">Phone Number</label>
+                                                <label class="form-label" for="zonecode">우편번호</label>
                                                 <div class="input-group input-group-merge">
-                                                    <span class="input-group-text">US (+1)</span>
-                                                    <input
-                                                            type="text"
-                                                            id="phoneNumber"
-                                                            name="phoneNumber"
-                                                            class="form-control"
-                                                            placeholder="202 555 0111"
-                                                    />
+                                                    <input readonly type="address" id="zonecode" name="member_zonecode" class="form-control" value="${member.member_zonecode}" />
                                                 </div>
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="address" class="form-label">Address</label>
-                                                <input type="text" class="form-control" id="address" name="address" placeholder="Address" />
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="state" class="form-label">State</label>
-                                                <input class="form-control" type="text" id="state" name="state" placeholder="California" />
+                                                <label class="form-label" for="addr1">주소</label>
+                                                    <input type="text" id="addr1" name="member_addr1" class="form-control" value="${member.member_addr1}" onclick="address()" />
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="zipCode" class="form-label">Zip Code</label>
-                                                <input
-                                                        type="text"
-                                                        class="form-control"
-                                                        id="zipCode"
-                                                        name="zipCode"
-                                                        placeholder="231465"
-                                                        maxlength="6"
-                                                />
+                                                <label for="addr2" class="form-label">상세주소</label>
+                                                <input type="text" class="form-control" id="addr2" name="member_addr2" value="${member.member_addr2}"/>
+                                            </div>
+                                            <div class="mt-4">
+                                                <button type="button" id="pwdModify" class="btn btn-outline-secondary">비밀번호 변경</button>
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label class="form-label" for="country">Country</label>
-                                                <select id="country" class="select2 form-select">
-                                                    <option value="">Select</option>
-                                                    <option value="Australia">Australia</option>
-                                                    <option value="Bangladesh">Bangladesh</option>
-                                                    <option value="Belarus">Belarus</option>
-                                                    <option value="Brazil">Brazil</option>
-                                                    <option value="Canada">Canada</option>
-                                                    <option value="China">China</option>
-                                                    <option value="France">France</option>
-                                                    <option value="Germany">Germany</option>
-                                                    <option value="India">India</option>
-                                                    <option value="Indonesia">Indonesia</option>
-                                                    <option value="Israel">Israel</option>
-                                                    <option value="Italy">Italy</option>
-                                                    <option value="Japan">Japan</option>
-                                                    <option value="Korea">Korea, Republic of</option>
-                                                    <option value="Mexico">Mexico</option>
-                                                    <option value="Philippines">Philippines</option>
-                                                    <option value="Russia">Russian Federation</option>
-                                                    <option value="South Africa">South Africa</option>
-                                                    <option value="Thailand">Thailand</option>
-                                                    <option value="Turkey">Turkey</option>
-                                                    <option value="Ukraine">Ukraine</option>
-                                                    <option value="United Arab Emirates">United Arab Emirates</option>
-                                                    <option value="United Kingdom">United Kingdom</option>
-                                                    <option value="United States">United States</option>
-                                                </select>
+                                                <label for="pwd" class="form-label">비밀번호</label>
+                                                <input class="form-control" disabled type="password" id="pwd" name="member_pwd" value=""/>
                                             </div>
                                             <div class="mb-3 col-md-6">
-                                                <label for="language" class="form-label">Language</label>
-                                                <select id="language" class="select2 form-select">
-                                                    <option value="">Select Language</option>
-                                                    <option value="en">English</option>
-                                                    <option value="fr">French</option>
-                                                    <option value="de">German</option>
-                                                    <option value="pt">Portuguese</option>
-                                                </select>
+                                                <label for="pwdCheck" class="form-label">비밀번호 확인</label>
+                                                <input disabled type="password" class="form-control" id="pwdCheck" name="pwdCheck" value="" />
                                             </div>
-                                            <div class="mb-3 col-md-6">
-                                                <label for="timeZones" class="form-label">Timezone</label>
-                                                <select id="timeZones" class="select2 form-select">
-                                                    <option value="">Select Timezone</option>
-                                                    <option value="-12">(GMT-12:00) International Date Line West</option>
-                                                    <option value="-11">(GMT-11:00) Midway Island, Samoa</option>
-                                                    <option value="-10">(GMT-10:00) Hawaii</option>
-                                                    <option value="-9">(GMT-09:00) Alaska</option>
-                                                    <option value="-8">(GMT-08:00) Pacific Time (US & Canada)</option>
-                                                    <option value="-8">(GMT-08:00) Tijuana, Baja California</option>
-                                                    <option value="-7">(GMT-07:00) Arizona</option>
-                                                    <option value="-7">(GMT-07:00) Chihuahua, La Paz, Mazatlan</option>
-                                                    <option value="-7">(GMT-07:00) Mountain Time (US & Canada)</option>
-                                                    <option value="-6">(GMT-06:00) Central America</option>
-                                                    <option value="-6">(GMT-06:00) Central Time (US & Canada)</option>
-                                                    <option value="-6">(GMT-06:00) Guadalajara, Mexico City, Monterrey</option>
-                                                    <option value="-6">(GMT-06:00) Saskatchewan</option>
-                                                    <option value="-5">(GMT-05:00) Bogota, Lima, Quito, Rio Branco</option>
-                                                    <option value="-5">(GMT-05:00) Eastern Time (US & Canada)</option>
-                                                    <option value="-5">(GMT-05:00) Indiana (East)</option>
-                                                    <option value="-4">(GMT-04:00) Atlantic Time (Canada)</option>
-                                                    <option value="-4">(GMT-04:00) Caracas, La Paz</option>
-                                                </select>
-                                            </div>
-                                            <div class="mb-3 col-md-6">
-                                                <label for="currency" class="form-label">Currency</label>
-                                                <select id="currency" class="select2 form-select">
-                                                    <option value="">Select Currency</option>
-                                                    <option value="usd">USD</option>
-                                                    <option value="euro">Euro</option>
-                                                    <option value="pound">Pound</option>
-                                                    <option value="bitcoin">Bitcoin</option>
-                                                </select>
-                                            </div>
+                                            <input type="hidden" name="pwdYN" id="pwdYN" value="Y">
                                         </div>
                                         <div class="mt-2">
-                                            <button type="submit" class="btn btn-primary me-2">Save changes</button>
-                                            <button type="reset" class="btn btn-outline-secondary">Cancel</button>
+                                            <button type="submit" id="btnSubmit" class="btn btn-primary me-2">Save changes</button>
+                                            <button type="reset" id="btnReset" onclick="resetFrm()" class="btn btn-outline-secondary">Cancel</button>
                                         </div>
-                                    </form>
-                                </div>
+
+                                    </div>
+                                </form>
                                 <!-- /Account -->
                             </div>
                             <div class="card">
@@ -287,7 +182,8 @@
                                             <p class="mb-0">탈퇴를 하시면 다시 조회를 하실 수 없습니다. 위 사항을 확인해 주십시오.</p>
                                         </div>
                                     </div>
-                                    <form id="formAccountDeactivation" action="/member/delete" method="post">
+                                    <form id="frmDelete" action="/member/delete" method="post" >
+                                        <input type="hidden" value="${member.member_id}" name="member_id">
                                         <div class="form-check mb-3">
                                             <input
                                                     class="form-check-input"
@@ -295,56 +191,366 @@
                                                     name="accountActivation"
                                                     id="accountActivation"
                                             />
-                                            <label class="form-check-label" for="accountActivation"
-                                            >네, 탈퇴하겠습니다.</label
-                                            >
+                                            <label class="form-check-label" for="accountActivation">네, 탈퇴하겠습니다.</label>
                                         </div>
-                                        <button type="submit" class="btn btn-danger deactivate-account">Deactivate Account</button>
+                                        <button type="button" class="btn btn-danger deactivate-account" id="btnDelete" onclick="deleteAlert()">Deactivate Account</button>
                                     </form>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- / Content -->
 
-                <!-- Footer -->
 
-                <!-- / Footer -->
 
-                <div class="content-backdrop fade"></div>
             </div>
-            <!-- Content wrapper -->
+
         </div>
-        <!-- / Layout page -->
+
     </div>
 
-    <!-- Overlay -->
-    <div class="layout-overlay layout-menu-toggle"></div>
+
+
 </div>
-<!-- / Layout wrapper -->
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
 
-<jsp:include page="../common/footer.jsp"/>
+    // 주소 api
+    function address() {
+        let zonecode = document.getElementById("zonecode");
+        let addr1 = document.getElementById("addr1");
+        new daum.Postcode({
+            oncomplete: function(data) {
+                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
+                // 예제를 참고하여 다양한 활용법을 확인해 보세요.
+                addr1.value = data.roadAddress;
+                zonecode.value= data.zonecode;
+            }
+        }).open();
+    }
 
-<!-- Core JS -->
-<!-- build:js assets/vendor/js/core.js -->
-<script src="../../resources/vendor/libs/jquery/jquery.js"></script>
-<script src="../../resources/vendor/libs/popper/popper.js"></script>
-<script src="../../resources/vendor/js/bootstrap.js"></script>
-<script src="../../resources/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+    // 탈퇴 체크박스
+    function deleteAlert() {
+        let check = document.getElementById("accountActivation");
+        let frm = document.getElementById("frmDelete");
+        if (!check.checked){
+            window.alert("체크사항을 확인해 주세요.");
+        }
+        else {
+            let confirmYN = window.confirm("정말 탈퇴하시겠습니까?");
+            if (confirmYN) {
+                document.getElementById("frmDelete").submit();
+            }
+        }
+    }
 
-<script src="../../resources/vendor/js/menu.js"></script>
-<!-- endbuild -->
 
-<!-- Vendors JS -->
+    //비밀번호 재확인
+    let pwd = document.getElementById("pwd");
+    let pwdChk = document.getElementById("pwdCheck");
+    let frm = document.getElementById("formAccountSettings");
+    let pwdYN = document.getElementById("pwdYN")
 
-<!-- Main JS -->
-<script src="/resources/resources/js/main.js"></script>
+    document.getElementById("pwdModify").addEventListener("click", () => {
 
-<!-- Page JS -->
-<script src="/resources/resources/js/pages-account-settings-account.js"></script>
+        pwd.disabled = false;
+        pwdChk.disabled = false;
 
-<!-- Place this tag in your head or just before your close body tag. -->
-<script async defer src="https://buttons.github.io/buttons.js"></script>
+        pwdYN.value = "N";
+        console.log(pwdYN);
+
+    });
+
+
+
+
+    //비밀번호 맞지 않을 시, 전화번호 형식 안맞을 시, 이름 형식 안맞을 시, 빈칸일 시 제출 못함
+
+    document.getElementById("btnSubmit").addEventListener("click", (e) => {
+        let phone = document.getElementById("phone").value;
+        let regPhone=  /^01([0|1|6|7|8|9])-([0-9]{3,4})-([0-9]{4})$/;
+        let name = document.querySelector("#name");
+        
+        
+        e.preventDefault();
+        if (pwd.value === pwdChk.value) {
+            pwdYN.value = "Y";
+            console.log(pwdYN);
+        }
+
+        if (pwdYN.value === "N") {
+            alert("안맞음");
+            return false;
+        }
+        if (!regPhone.test(phone)) {
+            alert("안맞음");
+            return false;
+        }
+
+
+        else {
+            alert("맞음");
+            frm.submit();
+        }
+
+    });
+
+
+    //초기화 버튼
+    function resetFrm() {
+        location.href = "/member/modify";
+    }
+
+
+
+
+
+    //
+    //
+
+    // let id = document.querySelector("#idn");
+    // let pwd = document.querySelector("#password");
+    // let pwd2 = document.querySelector("#password2");
+    // let birthY = document.querySelector("#selectborn1");
+    // let birthM = document.querySelector("#selectborn2");
+    // let birthD = document.querySelector("#selectborn3");
+    // let tel = document.querySelector("#telnumber");
+    // let email = document.querySelector("#email");
+    // let interest = document.querySelector("#interest");
+    // let grade = document.querySelector("#grade");
+    // let emailSelect = document.querySelector("#emailSelect");
+    // let typing = document.querySelector("#typing");
+    // let frm = document.querySelector("#frm");
+    //
+    // // 밸리데이션체크 준비
+    // let nameChk = document.querySelector("#nameChk");
+    // let idChk = document.querySelector("#idChk");
+    // let pwdChk = document.querySelector("#pwdChk");
+    // let pwd2Chk = document.querySelector("#pwd2Chk");
+    // let birthChk = document.querySelector("#birthChk");
+    // let telChk = document.querySelector("#telChk");
+    // let emailChk = document.querySelector("#emailChk");
+    //
+    // // 이름 체크
+    // name.addEventListener("keyup", ()=> {
+    //     noSpaceForm(name);
+    //     characterCheck(name);
+    //     numberCheck(name);
+    // });
+    // name.addEventListener("change", () => {
+    //     noSpaceForm(name);
+    //     characterCheck(name);
+    //     numberCheck(name);
+    // });
+    //
+    //
+    // //공백체크
+    // function noSpaceForm(obj) { // 공백사용못하게
+    //     var regExp = /\s/;  // 공백체크
+    //     if(regExp.test(obj.value)) { //공백 체크
+    //         alert("이름에는 공백을 사용할수 없습니다.");
+    //         obj.focus();
+    //         obj.value = obj.value.replace(/\s| /gi,''); // 공백제거
+    //         return false;
+    //     }
+    // }
+    //
+    // // 특수문자 입력 방지
+    // function characterCheck(obj){
+    //     var regExp = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+┼<>@\#$%&\'\"\\\(\=]/gi;
+    //     // 허용할 특수문자는 여기서 삭제하면 됨
+    //     // 지금은 띄어쓰기도 특수문자 처리됨 참고하셈
+    //     if( regExp.test(obj.value) ){
+    //         alert("이름에 특수문자를  없습니다.");
+    //         obj.focus();
+    //         obj.value = obj.value.substring( 0 , obj.value.length - 1 ); // 입력한 특수문자 한자리 지움
+    //     }
+    // }
+    //
+    // //숫자 입력 방지
+    // function numberCheck(obj) {
+    //     var regExp = /\d/;
+    //     if (regExp.test(obj.value)) {
+    //         alert("이름에 숫자를 넣을 수 없습니다.");
+    //         obj.focus();
+    //         obj.value = obj.value.substring(0, obj.value.length - 1);
+    //     }
+    // }
+    //
+    // //한글 잘 써넣기
+    // function hanCheck(obj) {
+    //     var regExp = /[ㄱ-ㅎㅏ-ㅣ]/gi;
+    //     if (regExp.test(obj.value)) {
+    //         alert("정규 한글 표현만 가능합니다.");
+    //         obj.value = obj.value.substring(0, obj.value-length - 1);
+    //     }
+    // }
+    //
+    // var regularHanCheck = /[ㄱ-ㅎ|ㅏ-ㅣ]/gi;
+    // var hanCheck = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힇]/;
+    // var expCheck = /[~!@#\#$%<>^&*]/;
+    // var numCheck = /[0-9]/;
+    // var engCheck = /[a-zA-Z]/;
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    // document.querySelector("#btnRegist").addEventListener("click", (e) => {
+    //     let name = document.querySelector("#iname");
+    //     let id = document.querySelector("#idn");
+    //     let pwd = document.querySelector("#password");
+    //     let pwd2 = document.querySelector("#password2");
+    //     let birthY = document.querySelector("#selectborn1");
+    //     let birthM = document.querySelector("#selectborn2");
+    //     let birthD = document.querySelector("#selectborn3");
+    //     let tel = document.querySelector("#telnumber");
+    //     let email = document.querySelector("#email");
+    //     let interest = document.querySelector("#interest");
+    //     let grade = document.querySelector("#grade");
+    //     let radio = document.querySelectorAll("input[type='radio']");
+    //     let cc1 = document.querySelector("#cc1");
+    //     let cc2 = document.querySelector("#cc2");
+    //
+    //
+    //     e.preventDefault();
+    //
+    //     //이름 비어있을 때
+    //     if (name == null || name.value.length == 0) {
+    //         nameChk.style.display = "block";
+    //         name.focus();
+    //         return false;
+    //     }
+    //     //아이디 비어있을 때
+    //     if (id == null || id.value.length == 0) {
+    //         idChk.style.display = "block";
+    //         id.focus();
+    //         return false;
+    //     }
+    //
+    //     //비밀번호 비어있을 때
+    //     if (pwd == null || pwd.value.length == 0) {
+    //         alert("비밀번호를 입력하세요. ");
+    //         pwd.focus();
+    //         return false;
+    //     }
+    //
+    //
+    //     //비밀번호 재입력 비어있을 때
+    //     if (pwd2 == null || pwd2.value.length == 0) {
+    //         alert("비밀번호 재입력을 확인해 주세요.");
+    //         pwd2.focus();
+    //         return false;
+    //     }
+    //     // 생년월일 비어있을 때
+    //     if (birthY == null || birthY.value.length == 0) {
+    //         alert("생년월일을 선택해 주세요.");
+    //         birthY.focus();
+    //         return false;
+    //     }
+    //     if (birthM == null || birthM.value.length == 0) {
+    //         alert("생년월일을 선택해 주세요.");
+    //         birthM.focus();
+    //         return false;
+    //     }
+    //     if (birthD == null || birthD.value.length == 0) {
+    //         alert("생년월일을 선택해 주세요.");
+    //         birthD.focus();
+    //         return false;
+    //     }
+    //     // 휴대번호 비어있을 때
+    //     if (tel == null || tel.value.length == 0) {
+    //         telChk.style.display = "block";
+    //         tel.focus();
+    //         return false;
+    //     }
+    //
+    //     // 이메일 비어있을 때
+    //     if (email == null || email.value.length == 0) {
+    //         emailChk.style.display = "block";
+    //         email.focus();
+    //         return false;
+    //     }
+    //
+    //     //관심분야 비어있을 때
+    //     if (interest == null || interest.value.length == 0) {
+    //         alert("관심사항을 선택해 주세요.");
+    //         interest.focus();
+    //         return false;
+    //     }
+    //
+    //     // 학년 비어있을 때
+    //     if (grade == null || grade.value.length == 0) {
+    //         alert("학년을 선택해 주세요.");
+    //         grade.focus();
+    //         return false;
+    //     }
+    //     //성별 체크
+    //     var cnt = 0;
+    //     for (var i=0; i<radio.length; i++) {
+    //         if (radio[i].checked == true) {
+    //             cnt++;
+    //         }
+    //     }
+    //     if (cnt < 1) {
+    //         alert("성별을 선택해 주세요.");
+    //         return false;
+    //     }
+    //
+    //     //필수항목 체크
+    //     if (!cc1.checked || !cc2.checked) {
+    //         alert("필수 항목을 체크해 주세요.");
+    //         return false;
+    //     }
+    //
+    //     // 이름 정규 한글 표현
+    //     if (regularHanCheck.test(name.value)) {
+    //         alert("이름은 정규 한글 표현만 가능합니다.");
+    //         return false;
+    //     }
+    //
+    //     //이름 영문 또는 한글만 가능
+    //     if (engCheck.test(name.value) && hanCheck.test(name.value)) {
+    //         alert("이름은 영어 또는 한글 둘 중 하나만 사용 가능합니다.");
+    //         return false;
+    //     }
+    //
+    //
+    //
+    //
+    //     // 비밀번호 벨리데이션 체크
+    //     if (!(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{10,16}$/.test(pwd.value))) {
+    //         pwdChk.style.display = "block";
+    //         pwd.focus();
+    //         return false;
+    //     }
+    //
+    //     // 비밀번호 재입력 확인
+    //     if (!(pwd.value === pwd2.value)) {
+    //         pwd2Chk.style.display = "block";
+    //         pwd2.focus();
+    //         return false;
+    //     }
+    //
+    //
+    //
+    //
+    //     else {
+    //         alert("T ClASS 회원가입이 완료되었습니다.");
+    //         frm.submit();
+    //     }
+    //
+    // }, false);
+    //
+    //
+
+
+
+
+
+</script>
 </body>
 </html>
