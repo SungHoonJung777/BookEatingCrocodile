@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.fullstack4.springmvc.mapper.MemberImageMapper">
+    <insert id="regist">
+        insert into bec_member_image(member_id, orgFile, saveFile)
+        values(#{arg0}, #{arg1}, #{arg2})
+    </insert>
+
+
+    <select id="viewImg" resultType="org.fullstack4.springmvc.domain.MemberImageVO">
+        select saveFile from bec_member_image where member_id=#{member_id}
+        ORDER BY img_idx desc
+        LIMIT 1
+    </select>
+
+
+</mapper>
