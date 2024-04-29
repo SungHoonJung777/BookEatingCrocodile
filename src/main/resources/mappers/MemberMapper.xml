@@ -5,10 +5,12 @@
 <mapper namespace="org.fullstack4.springmvc.mapper.MemberMapper">
 
     <sql id="pwdNull">
-        <if test="member_pwd != null">
+        <if test="member_pwd != null and member_pwd != ''">
             , member_pwd = #{member_pwd}
         </if>
     </sql>
+
+
 
     <insert id="regist">
         insert into tbl_member ( user_id, pwd, name, email, birthday, interest, addr1, addr2, reg_date )
@@ -20,8 +22,7 @@
                            member_phone=#{member_phone},
                            member_zonecode=#{member_zonecode},
                            member_addr1=#{member_addr1},
-                           member_addr2=#{member_addr2},
-                           member_img=#{member_img}
+                           member_addr2=#{member_addr2}
         <include refid="pwdNull"/>
         where member_id=#{member_id}
     </update>
@@ -59,5 +60,36 @@
         FROM bec_product as bp
         inner join bec_cart AS bc ON bp.pro_idx = bc.pro_idx
         WHERE member_id = #{m_id}
+    </select>
+
+    <select id="getQnaList" resultType="org.fullstack4.springmvc.domain.QnaVO">
+        select qna_idx, member_id, qna_title, qna_content, qna_secret, qna_answer_YN, qna_category, qna_answer, qna_reg_date, qna_answer_date
+        from bec_qna
+        where member_id = #{arg0} and qna_category=#{arg1}
+        order by qna_idx desc
+    </select>
+
+    <select id="getOrderList" resultType="org.fullstack4.springmvc.domain.OrderVO">
+        SELECT order_idx, o.pro_idx AS pro_idx, member_id, order_price, order_status, order_addr, order_date, pro_name
+        FROM
+            bec_order AS o
+                INNER JOIN bec_product AS p ON o.pro_idx = p.pro_idx
+        WHERE member_id=#{member_id}
+        ORDER BY order_date desc
+    </select>
+
+    <update id="orderDelete">
+        update bec_order
+        set order_status='주문취소'
+        where order_idx=#{order_idx}
+    </update>
+
+    <select id="getReviewList" resultType="org.fullstack4.springmvc.domain.ReviewVO">
+        SELECT review_idx, r.pro_idx AS pro_idx, member_id, review_title, review_content, review_star, review_reg_date, review_reg_date, pro_name
+        FROM
+            bec_review AS r
+                INNER JOIN bec_product AS p ON r.pro_idx = p.pro_idx
+        WHERE member_id=#{member_id}
+        ORDER BY review_idx desc
     </select>
 </mapper>

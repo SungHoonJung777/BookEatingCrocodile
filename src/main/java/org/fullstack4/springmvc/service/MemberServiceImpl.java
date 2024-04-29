@@ -4,9 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.fullstack4.springmvc.domain.MemberImageVO;
 import org.fullstack4.springmvc.domain.MemberVO;
-import org.fullstack4.springmvc.dto.MemberDTO;
-import org.fullstack4.springmvc.dto.MemberImageDTO;
-import org.fullstack4.springmvc.dto.ProductDTO;
+import org.fullstack4.springmvc.dto.*;
 import org.fullstack4.springmvc.mapper.MemberImageMapper;
 import org.fullstack4.springmvc.mapper.MemberMapper;
 import org.modelmapper.ModelMapper;
@@ -110,6 +108,41 @@ public class MemberServiceImpl implements MemberServiceIf{
         log.info("m_id : "+m_id);
         log.info("cartList : "+cartList);
         return cartList;
+    }
+
+    @Override
+    public List<QnaDTO> getQnaList(String member_id, String qna_category) {
+        List<QnaDTO> qnaList = memberMapper.getQnaList(member_id, qna_category).stream()
+                .map(vo->modelMapper.map(vo, QnaDTO.class))
+                .collect(Collectors.toList());
+
+        log.info("impl qnaList : "+qnaList);
+        return qnaList;
+
+
+    }
+
+    @Override
+    public List<OrderDTO> getOrderList(String member_id) {
+        List<OrderDTO> orderList = memberMapper.getOrderList(member_id).stream()
+                .map(vo->modelMapper.map(vo, OrderDTO.class))
+                .collect(Collectors.toList());
+        log.info("impl orderList : "+orderList);
+        return orderList;
+    }
+
+    @Override
+    public int orderDelete(int order_idx) {
+        int result = memberMapper.orderDelete(order_idx);
+        return result;
+    }
+
+    @Override
+    public List<ReviewDTO> getReviewList(String member_id) {
+        List<ReviewDTO> reviewList = memberMapper.getReviewList(member_id).stream()
+                .map(vo->modelMapper.map(vo, ReviewDTO.class))
+                .collect(Collectors.toList());
+        return reviewList;
     }
 
 

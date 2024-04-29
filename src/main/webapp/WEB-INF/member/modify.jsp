@@ -20,7 +20,7 @@
     <meta name="description" content="" />
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="/resources/resources/assets/img/favicon/favicon.ico" />
+
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -53,6 +53,7 @@
         #body {
             margin-top: 180px;
         }
+
     </style>
 
 </head>
@@ -60,7 +61,8 @@
 <body id="body">
 <jsp:include page="../common/header.jsp"/>
 <!-- Layout wrapper -->
-<div class="layout-wrapper layout-content-navbar">
+<%--<div class="layout-wrapper layout-content-navbar">--%>
+<div class="container">
     <div class="layout-container">
         <!-- Menu -->
 
@@ -92,7 +94,7 @@
                                     <input type="hidden" value="${member.member_id}" name="member_id">
                                     <div class="card-body">
                                         <div class="d-flex align-items-start align-items-sm-center gap-4">
-                                            <img src="/resources/resources/uploads/img/${member.member_img}" alt="user-avatar" class="d-block rounded" height="100" width="100" id="preview"  />
+                                            <img src="/resources/resources/uploads/img/member/${member.member_img}" alt="user-avatar" class="d-block rounded"  height="100" width="100" id="preview"  />
                                             <div class="button-wrapper">
                                                 <label for="upload" class="btn btn-primary me-2 mb-4" tabindex="0">
                                                     <span class="d-none d-sm-block">Upload new photo</span>

@@ -1,10 +1,9 @@
 package org.fullstack4.springmvc.mapper;
 
-import org.fullstack4.springmvc.domain.MemberImageVO;
-import org.fullstack4.springmvc.domain.MemberVO;
-import org.fullstack4.springmvc.domain.ProductVO;
+import org.fullstack4.springmvc.domain.*;
 import org.fullstack4.springmvc.dto.MemberDTO;
 import org.fullstack4.springmvc.dto.ProductDTO;
+import org.springframework.core.annotation.Order;
 
 import java.util.List;
 
@@ -23,4 +22,10 @@ public interface MemberMapper {
     int getIdCount(String nickname);
 
     List<ProductVO> getCartList(String m_id);
+
+    List<QnaVO> getQnaList(String member_id, String qna_category);
+    List<OrderVO> getOrderList(String member_id);
+
+    int orderDelete(int order_idx);
+    List<ReviewVO> getReviewList(String member_id);
 }
