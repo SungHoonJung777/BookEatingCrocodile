@@ -23,7 +23,6 @@ public interface MemberServiceIf {
     List<CartDTO> getCartList(String m_id);
 
     void cartout(String cart_id);
-    List<ProductDTO> getCartList(String m_id);
 
     List<QnaDTO> getQnaList(String member_id, String qna_category);
     List<OrderDTO> getOrderList(String member_id);

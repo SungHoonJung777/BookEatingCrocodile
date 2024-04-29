@@ -56,8 +56,8 @@
         from tbl_member
         where user_id = #{user_id}
     </select>
-    <select id="getCartList" resultType="org.fullstack4.springmvc.domain.ProductVO">
-        SELECT bp.pro_name as pro_name, bp.pro_price as pro_price, bp.pro_amount as pro_amount
+    <select id="getCartList" resultType="org.fullstack4.springmvc.domain.CartVO">
+        SELECT bc.pro_title, bp.pro_price, bp.pro_amount, bc.pro_quantity
         FROM bec_product as bp
         inner join bec_cart AS bc ON bp.pro_idx = bc.pro_idx
         WHERE member_id = #{m_id}

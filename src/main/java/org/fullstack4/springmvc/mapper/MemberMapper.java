@@ -26,7 +26,6 @@ public interface MemberMapper {
     void cartout(String cart_id);
 
     MemberVO login_info(String id, String pwd);
-    List<ProductVO> getCartList(String m_id);
 
     List<QnaVO> getQnaList(String member_id, String qna_category);
     List<OrderVO> getOrderList(String member_id);
