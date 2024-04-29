@@ -46,11 +46,11 @@
 
 <body>
 <jsp:include page="/WEB-INF/common/header.jsp"></jsp:include>
-<%--<!-- Spinner Start -->
+
 <div id="spinner" class="show w-100 vh-100 bg-white position-fixed translate-middle top-50 start-50  d-flex align-items-center justify-content-center">
     <div class="spinner-grow text-primary" role="status"></div>
 </div>
-<!-- Spinner End -->--%>
+
 
 
 <!-- Modal Search Start -->
@@ -95,15 +95,12 @@
                 <span class="pro_view_titleV">${product.pro_company}</span>
                 <span class="pro_view_titleV">${product.pro_reg_date}</span>
             </div>
-
         </div>
-
         <div class="row g-4 mb-5">
             <div class="col-lg-8 col-xl-9">
                 <div class="row g-4">
                     <div class="col-lg-6">
                         <div class="border rounded">
-
                             <div class="bookImg">
                                 <img src="/resources/resources/img/books/${product.pro_image}" width="100%" height="100%">
                             </div>
@@ -113,17 +110,13 @@
                         <h4 class="fw-bold mb-3">${product.pro_name}</h4>
                         <div class="book_content1">
                             <h5 class="fw-bold mb-3 text-danger text-decoration-line-through">정가 : <fmt:formatNumber value="${product.pro_price}" pattern="#,###"/>원</h5>
-
                             <h3 class="fw-bold mb-3">할인가 : <fmt:formatNumber value="${product.pro_sale_price}" pattern="#,###"/>원</h3>
-
                         </div>
-
                         <div class="book_content1">
                             <h5>마일리지 : </h5>
                             <h5>배송료 : 3,000원</h5>
                         </div>
-
-                        <div class="d-flex mb-4 book_content1">
+                        <div class="d-flex mb-4">
                             <i class="fa fa-star text-secondary"></i>
                             <i class="fa fa-star text-secondary"></i>
                             <i class="fa fa-star text-secondary"></i>
@@ -131,8 +124,7 @@
                             <i class="fa fa-star"></i>
                         </div>
 
-
-                        <div class="input-group quantity mb-5" style="width: 100px; margin-top: 15px">
+                        <div class="input-group quantity mb-5" style="width: 100px; margin-top: 15px;">
                             <div class="input-group-btn">
                                 <button class="btn btn-sm btn-minus rounded-circle bg-light border" >
                                     <i class="fa fa-minus"></i>
@@ -145,11 +137,8 @@
                                 </button>
                             </div>
                         </div>
-
-
                         <a href="/member/cart?member_id=${sessionScope.member_id}" class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary payBtn"><i class="fa fa-shopping-bag me-2 text-primary"></i> 장바구니</a>
                         <a href="#" class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary payBtn"><i class="fas fa-copyright me-2 text-primary"></i> 바로구매</a>
-
 
                     </div>
                     <div class="col-lg-12">
@@ -166,32 +155,32 @@
                                         aria-controls="nav-QnA" aria-selected="false">Q&A</button>
                             </div>
                         </nav>
-
                         <div class="tab-content mb-5">
-
                             <div class="tab-pane active" id="nav-about" role="tabpanel" aria-labelledby="nav-about-tab">
                                 <br>
                                 <h4>출판사 제공 북트레일러</h4>
                                 <br>
-                                <div class="book_video">
-
-                                    <iframe src="${product.pro_video}" width="90%" height="500px"></iframe>
+                                <div class="px-2">
+                                    <div class="row g-4">
+                                        <div class="book_video">
+                                            <iframe src="${product.pro_video}" width="90%" height="500px"></iframe>
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <h4>책 소개</h4>
 
                                 <p>${pro_content}</p>
-
                             </div>
-
                             <div class="tab-pane" id="nav-mission" role="tabpanel" aria-labelledby="nav-mission-tab">
                                 <c:choose>
                                     <c:when test="${reviewVO != null}">
                                         <c:forEach var="review" items="${reviewVO}">
                                             <div class="d-flex">
                                                 <img src="img/avatar.jpg" class="img-fluid rounded-circle p-3" style="width: 100px; height: 100px;" alt="">
+                                                <div class="">
                                                     <p class="mb-2" style="font-size: 14px;">${review.review_reg_date}</p>
-                                                    <div class="justify-content-between">
+                                                    <div class="d-flex justify-content-between">
                                                         <h5>${review.member_id}</h5>
                                                         <div class="d-flex mb-3">
                                                             <i class="fa fa-star text-secondary"></i>
@@ -200,10 +189,10 @@
                                                             <i class="fa fa-star text-secondary"></i>
                                                             <i class="fa fa-star"></i>
                                                         </div>
-                                                        <h4>${review.review_title}</h4>
-
                                                     </div>
+                                                    <h5>${review.review_title}</h5>
                                                     <p>${review.review_content}</p>
+                                                </div>
                                             </div>
                                         </c:forEach>
                                     </c:when>
@@ -211,13 +200,8 @@
                                         <p>리뷰가 없습니다.</p>
                                     </c:otherwise>
                                 </c:choose>
+
                             </div>
-
-
-                            <div class="tab-pane" id="nav-QnA" role="tabpanel" aria-labelledby="nav-QnA-tab">
-                                <h2>룰루</h2>
-                            </div>
-
                             <div class="tab-pane" id="nav-vision" role="tabpanel">
                                 <p class="text-dark">Tempor erat elitr rebum at clita. Diam dolor diam ipsum et tempor sit. Aliqu diam
                                     amet diam et eos labore. 3</p>
@@ -226,10 +210,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
-
-
-
                     <form action="#">
                         <h4 class="mb-5 fw-bold">Leave a Reply</h4>
                         <div class="row g-4">
@@ -270,10 +250,12 @@
             <div class="col-lg-4 col-xl-3">
                 <div class="row g-4 fruite">
                     <div class="col-lg-12">
-                        <div class="input-group w-100 mx-auto d-flex mb-4">
-                            <input type="search" class="form-control p-3" placeholder="keywords" aria-describedby="search-icon-1">
-                            <span id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></span>
-                        </div>
+                        <form id="frmSearch" name="frmSearch" action="/product/main" method="get">
+                            <div class="input-group w-100 mx-auto d-flex mb-4">
+                                <input type="search" name="search_word" id="search_word" class="form-control p-3" placeholder="keywords" aria-describedby="search-icon-1">
+                                <span id="search-icon-1" class="input-group-text p-3" onclick="searchProducts();"><i class="fa fa-search"></i></span>
+                            </div>
+                        </form>
                         <div class="mb-4">
                             <h4>Categories</h4>
                             <ul class="list-unstyled fruite-categorie">
@@ -437,8 +419,34 @@
 
 <!-- Back to Top -->
 <a href="#" class="btn btn-primary border-3 border-primary rounded-circle back-to-top"><i class="fa fa-arrow-up"></i></a>
-
 <jsp:include page="/WEB-INF/common/footer.jsp"></jsp:include>
+
+
+<script>
+    // 페이지 로딩 시작 시 스피너 보여주기
+    document.getElementById('spinner').style.display = 'flex';
+
+    // 페이지 로딩 완료 시 스피너 숨기기
+    window.onload = function() {
+        document.getElementById('spinner').style.display = 'none';
+    };
+
+    //검색창
+    function searchProducts() {
+        var search_word = document.getElementById('search_word').value;
+        window.location.href = '/product/main?search_word=' + encodeURIComponent(search_word);
+
+
+        //엔터키로 검색 가능
+        document.getElementById('search_word').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                searchProducts();
+            }
+        });
+
+    }
+</script>
 
 <!-- JavaScript Libraries -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
