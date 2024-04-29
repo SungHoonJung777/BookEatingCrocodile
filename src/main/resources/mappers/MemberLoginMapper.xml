@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.fullstack4.springmvc.mapper.memberLogin.MemberLoginMapper"> <!--클래스가 있는 풀패키지 정보-->
+
+
+    <select id="login_info" resultType="org.fullstack4.springmvc.domain.MemberVO">
+        select *
+        from bec_member
+        where member_id=#{arg0} and member_pwd = #{arg1}
+    </select>
+    <select id="pwdFind" resultType="int">
+        select count(*)
+        from bec_member
+        where member_id=#{arg0} and member_email = #{arg1} and member_phone = #{arg2}
+    </select>
+
+    <update id="pwdChange">
+        UPDATE bec_member set member_pwd = concat('crocodile', #{arg1} )
+        where member_id = #{arg0}
+    </update>
+<!--    <select id="login_cookie" resultType="org.fullstack4.springmvc.domain.MemberVO">
+        select user_id, name, pwd, jumin, addr1, addr2, birthday, job_code, mileage, user_state
+             , reg_date, leave_date, pwd_change_date
+        from tbl_member
+        where user_id=#{user_id}
+    </select>-->
+
+</mapper>

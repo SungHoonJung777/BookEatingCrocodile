@@ -44,7 +44,7 @@
 
     <bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
         <property name="driverClassName" value="org.mariadb.jdbc.Driver"/>
-        <property name="jdbcUrl" value="jdbc:mariadb://localhost:3306/bec"/>
+        <property name="jdbcUrl" value="jdbc:mariadb://localhost:3308/bec"/>
         <!--  절대 회사에서 localhost 쓰지 말것,, 웹서버 = db서버가 같은 머신 상에 존재하는 것 => db 뚫리면 웹 뚫리고 웹 뚫리면 db 뚫림!-->
         <property name="username" value="root"/>
         <property name="password" value="1234"/>
@@ -96,8 +96,8 @@
 
     <mybatis:scan base-package="org.fullstack4.springmvc.mapper"></mybatis:scan>
     <!--MyBatis 설정 부분-->
-    <!-- navermail설정 -->
     <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+
         <property name="host" value="smtp.gmail.com"/> <!-- 메이서버 호스트 -->
         <property name="port" value="587"/> <!-- 메이서버 포트번호 -->
         <property name="username" value="ssfu777@gmail.com"/>
@@ -107,13 +107,12 @@
             <props>
                 <prop key="mail.transport.protocol">smtp</prop>
                 <prop key="mail.smtp.auth">true</prop>
-                <!-- gmail의 경우 보안문제 업데이트로 인해 SSLSocketFactory를 추가해야 smtp 사용 가능. -->
                 <prop key="mail.smtp.socketFactory.class">javax.net.ssl.SSLSocketFactory</prop>
                 <prop key="mail.smtp.starttls.enable">true</prop>
                 <prop key="mail.debug">true</prop>
-                <prop key="mail.smtp.starttls.enable">true</prop>
                 <prop key="mail.smtp.ssl.trust">smtp.gmail.com</prop>
                 <prop key="mail.smtp.ssl.protocols">TLSv1.2</prop>
+
             </props>
         </property>
     </bean>

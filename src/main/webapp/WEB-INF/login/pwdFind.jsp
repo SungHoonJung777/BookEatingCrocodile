@@ -1,8 +1,9 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: ssfu7
-  Date: 2024-04-25
-  Time: PM 3:08
+  Date: 2024-04-28
+  Time: PM 6:20
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
@@ -21,7 +22,12 @@
 -->
 <!-- beautify ignore:start -->
 <html
-
+        lang="en"
+        class="light-style customizer-hide"
+        dir="ltr"
+        data-theme="theme-default"
+        data-assets-path="../assets/"
+        data-template="vertical-menu-template-free"
 >
 <head>
     <meta charset="utf-8"/>
@@ -29,46 +35,34 @@
             name="viewport"
             content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
     />
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <title>Login Basic - Pages | Sneat - Bootstrap 5 HTML Admin Template - Pro</title>
+
+    <title>Forgot Password Basic - Pages | Sneat - Bootstrap 5 HTML Admin Template - Pro</title>
 
     <meta name="description" content=""/>
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="../assets/img/favicon/favicon.ico"/>
-
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com"/>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-    <link
-            href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
-            rel="stylesheet"
-    />
+    <link rel="icon" type="image/x-icon" href="/resources/resources/assets/img/favicon/favicon.ico"/>
 
     <!-- Icons. Uncomment required icon fonts -->
-    <link rel="stylesheet" href="/resources/resources/assets/vendor/fonts/boxicons.css"/>
+    <link rel="stylesheet" href="/resources/resources/assets/vendor/fonts/boxicons.css" />
 
     <!-- Core CSS -->
-    <link rel="stylesheet" href="/resources/resources/assets/vendor/css/core.css" class="template-customizer-core-css"/>
-    <link rel="stylesheet" href="/resources/resources/assets/vendor/css/theme-default.css"
-          class="template-customizer-theme-css"/>
-    <link rel="stylesheet" href="/resources/resources/assets/css/demo.css"/>
+    <link rel="stylesheet" href="/resources/resources/assets/vendor/css/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="/resources/resources/assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="/resources/resources/assets/css/demo.css" />
 
     <!-- Vendors CSS -->
-    <link rel="stylesheet" href="/resources/resources/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css"/>
+    <link rel="stylesheet" href="/resources/resources/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
 
     <!-- Page CSS -->
     <!-- Page -->
-    <link rel="stylesheet" href="/resources/resources/assets/vendor/css/pages/page-auth.css"/>
+    <link rel="stylesheet" href="/resources/resources/assets/vendor/css/pages/page-auth.css" />
     <!-- Helpers -->
     <script src="/resources/resources/assets/vendor/js/helpers.js"></script>
 
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
-    <script src="resources/assets/js/config.js"></script>
-
+    <script src="/resources/resources/assets/js/config.js"></script>
 </head>
 
 <body>
@@ -76,8 +70,8 @@
 
 <div class="container-xxl">
     <div class="authentication-wrapper authentication-basic container-p-y">
-        <div class="authentication-inner">
-            <!-- Register -->
+        <div class="authentication-inner py-4">
+            <!-- Forgot Password -->
             <div class="card">
                 <div class="card-body">
                     <!-- Logo -->
@@ -142,61 +136,67 @@
                         </a>
                     </div>
                     <!-- /Logo -->
-                    <h4 class="mb-2">Welcome to Sneat! 👋</h4>asdasdasd
-                    <p class="mb-4">Please sign-in to your account and start the adventure</p>
-                    <span style=" margin-top: 20px; margin-bottom: 20px; color: red; " >${error_login}</span>
+                    <h4 class="mb-2">Forgot Password? 🔒</h4>
+                    <p class="mb-4">Enter your email and we'll send you instructions to reset your password</p>
+                    <c:choose>
+                        <c:when test="${not empty success_login || success_login ne '' || success_login ne null} ">
+                            <span id="success_login" style=" margin-top: 20px; margin-bottom: 10px;" >${success_login}</span>
+                        </c:when>
+                        <c:when test="${not empty error_login || error_login ne '' || error_login ne null}">
+                            <span id="error_login" style="color: red; margin-top: 20px; margin-bottom: 10px; color: red" >${error_login}</span>
+                        </c:when>
+                    </c:choose>
 
-                    <form id="formAuthentication" class="mb-3" id="frm" name="frm" >
+                    <span id="success_login" style=" margin-top: 20px; margin-bottom: 10px; color: blue; " >${success_login}</span>
+                    <span id="error_login" style="color: red;  margin-top: 20px; margin-bottom: 10px; color: red" >${error_login}</span>
+                    <form id="formAuthentication" class="mb-3" name="frm">
                         <div class="mb-3">
-                            <label for="member_id" class="form-label">Email or Username</label>
+                            <label for="member_id" class="form-label">ID</label>
                             <input
                                     type="text"
                                     class="form-control"
                                     id="member_id"
-                                    name="id"
-                                    placeholder="Enter your email or username"
+                                    name="member_id"
+                                    placeholder="가입하신 아이디를 입력해주세요."
                                     autofocus
                             />
                         </div>
-                        <div class="mb-3 form-password-toggle">
-                            <div class="d-flex justify-content-between">
-                                <label class="form-label" for="pwd">Password</label>
-                                <a href="/login/pwdFind">
-                                    <small>Forgot Password?</small>
-                                </a>
-                            </div>
-                            <div class="input-group input-group-merge">
-                                <input
-                                        type="password"
-                                        id="pwd"
-                                        class="form-control"
-                                        name="pwd"
-                                        placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-                                        aria-describedby="password"
-                                />
-                                <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
-                            </div>
-                        </div>
+                        <span id="final_idChk" style="display: none; color: red" >아이디를 입력해주세요.</span>
                         <div class="mb-3">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="remember-me"/>
-                                <label class="form-check-label" for="remember-me"> Remember Me </label>
-                            </div>
+                            <label for="member_email" class="form-label">Email</label>
+                            <input
+                                    type="text"
+                                    class="form-control"
+                                    id="member_email"
+                                    name="member_email"
+                                    placeholder="가입하신 이메일을 입력해주세요."
+                                    autofocus
+                            />
                         </div>
+                        <span id="final_mailChk" style="display: none; margin-top: 20px; margin-bottom: 10px; color: red" >이메일을 입력해주세요.</span>
                         <div class="mb-3">
-                            <button class="btn btn-primary d-grid w-100" id="loginBtn" type="button">로그인</button>
+                            <label for="member_phone" class="form-label">Phone</label>
+                            <input
+                                    type="text"
+                                    class="form-control"
+                                    id="member_phone"
+                                    name="member_phone"
+                                    placeholder="가입하신 핸드폰 번호를 입력해주세요."
+                                    autofocus
+                            />
                         </div>
+                        <span id="final_phoneChk" style="display: none; color: red; margin-bottom: 10px;">핸드폰 번호를 입력해주세요.</span>
+                        <button type="button" id="pwdFindBtn"  class="btn btn-primary d-grid w-100">Send Reset Link</button>
                     </form>
-
-                    <p class="text-center">
-                        <span>New on our platform?</span>
-                        <a href="/memberJoin/join">
-                            <span>Create an account</span>
+                    <div class="text-center">
+                        <a href="/login/login" class="d-flex align-items-center justify-content-center">
+                            <i class="bx bx-chevron-left scaleX-n1-rtl bx-sm"></i>
+                            Back to login
                         </a>
-                    </p>
+                    </div>
                 </div>
             </div>
-            <!-- /Register -->
+            <!-- /Forgot Password -->
         </div>
     </div>
 </div>
@@ -206,32 +206,66 @@
 
 <!-- Core JS -->
 <!-- build:js assets/vendor/js/core.js -->
-<script src="resources/assets/vendor/libs/jquery/jquery.js"></script>
-<script src="resources/assets/vendor/libs/popper/popper.js"></script>
-<script src="resources/assets/vendor/js/bootstrap.js"></script>
-<script src="resources/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+<script src="/resources/resources/assets/vendor/libs/jquery/jquery.js"></script>
+<script src="/resources/resources/assets/vendor/libs/popper/popper.js"></script>
+<script src="/resources/resources/assets/vendor/js/bootstrap.js"></script>
+<script src="/resources/resources/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
 
-<script src="resources/assets/vendor/js/menu.js"></script>
+<script src="/resources/resources/assets/vendor/js/menu.js"></script>
 <!-- endbuild -->
 
 <!-- Vendors JS -->
 
 <!-- Main JS -->
-<script src="resources/assets/js/main.js"></script>
+<script src="/resources/resources/assets/js/main.js"></script>
 
 <!-- Page JS -->
+<script>
+    let frm = document.querySelector("form");
+    let idCheck = false;
+    let emailCheck = false;
+    let phoneCheck = false;
+    document.querySelector("#pwdFindBtn").addEventListener("click", function (){
+        let id = document.querySelector("#member_id").value;
+        let email = document.querySelector("#member_email").value;
+        let phone = document.querySelector("#member_phone").value;
 
+        //ID 공백 체크
+        if(id == ""){
+            document.querySelector("#final_idChk").style.display = 'block';
+            idCheck = false;
+        } else {
+            document.querySelector("#final_idChk").style.display = 'none';
+            idCheck = true;
+        }
+
+        //이메일 공백 체크
+        if(email == ""){
+            document.querySelector("#final_mailChk").style.display = 'block';
+            emailCheck = false;
+        } else {
+            document.querySelector("#final_mailChk").style.display = 'none';
+            emailCheck = true;
+        }
+
+        //핸드폰 공백 체크
+        if(phone == ""){
+            document.querySelector("#final_phoneChk").style.display = 'block';
+            phoneCheck = false;
+        } else {
+            document.querySelector("#final_phoneChk").style.display = 'none';
+            phoneCheck = true;
+        }
+
+        if(idCheck&&emailCheck&&phoneCheck){
+            frm.method = "post";
+            frm.action = "/login/pwdFind";
+            frm.submit();
+        }
+        return false;
+    });
+</script>
 <!-- Place this tag in your head or just before your close body tag. -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>
-<script>
-    document.querySelector("#loginBtn").addEventListener("click", function (){
-       let frm = document.querySelector("form");
-       frm.method = "post";
-       frm.action = "/login/login";
-       frm.submit();
-    });
-
-
-</script>
 </body>
 </html>
