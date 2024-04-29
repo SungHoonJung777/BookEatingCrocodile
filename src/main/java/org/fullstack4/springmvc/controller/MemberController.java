@@ -5,17 +5,32 @@ import lombok.extern.log4j.Log4j2;
 import org.fullstack4.springmvc.dto.CartDTO;
 import org.fullstack4.springmvc.dto.MemberDTO;
 import org.fullstack4.springmvc.dto.ProductDTO;
+import org.fullstack4.springmvc.dto.*;
+import org.fullstack4.springmvc.service.BbsServiceIf;
+import org.fullstack4.springmvc.service.MemberImageServiceIf;
 import org.fullstack4.springmvc.service.MemberServiceIf;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.Random;
+import java.io.File;
 import java.util.List;
+import java.util.UUID;
 
 @Log4j2
 @Controller
@@ -23,6 +38,12 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MemberController {
     private final MemberServiceIf memberServiceIf;
+    private final MemberImageServiceIf memberImageServiceIf;
+    private final BbsServiceIf bbsServiceIf;
+
+    @Autowired
+    private JavaMailSender mailSender;
+
 
     @GetMapping("/view")
     public void view(//@RequestParam(name="user_id", defaultValue = "") String user_id,
@@ -32,27 +53,80 @@ public class MemberController {
         log.info("========================");
         log.info("MemberController >> view()");
 
-//        HttpSession session = req.getSession();
-//        String user_id = String.valueOf(session.getAttribute("user_id"));
-//
+        String member_id = "abc01";
+        MemberDTO memberDTO = memberServiceIf.view(member_id);
+
+        MemberImageDTO memberImageDTO = memberImageServiceIf.viewImg(memberDTO.getMember_id());
+
+
+        log.info("member_id : " + member_id);
+        HttpSession session = req.getSession();
+        String user_id = String.valueOf(session.getAttribute("user_id"));
+
 //        MemberDTO memberDTO = memberServiceIf.view(user_id);
 //
 //        log.info("user_id : " + user_id);
 //        log.info("========================");
-//
+        model.addAttribute("member", memberDTO);
+        model.addAttribute("memberImage", memberImageDTO);
+
 //
 //        //이거 안해주면 jsp에 값 안넘어온다ㅣ@
 //        model.addAttribute("user_id", user_id);
 //        model.addAttribute("memberDTO", memberDTO);
     }
 
+
     @GetMapping("/join")
-    public void joinGET() {
+    public String joinGET() {
         log.info("============================");
         log.info("MemberController >> joinGET()");
         log.info("============================");
+        String url = "/member/joinForm";
+        return url;
     }
+    @GetMapping("/email")
+    @ResponseBody
+    public String  emailGET(String email) throws Exception{
+        log.info("============================");
+        log.info("MemberController >> emailGET()");
+        log.info(email);
+        log.info("============================");
+        Random random = new Random();
+        int checkNum = random.nextInt(888888) + 111111;
+        log.info("인증번호 " + checkNum);
 
+        /* 이메일 보내기 */
+        String setFrom = "sshu777@naver.com";
+        String toMail = email;
+        String title = "회원가입 인증 이메일 입니다.";
+        String content =
+                "홈페이지를 방문해주셔서 감사합니다." +
+                        "<br><br>" +
+                        "인증 번호는 " + checkNum + "입니다." +
+                        "<br>" +
+                        "해당 인증번호를 인증번호 확인란에 기입하여 주세요.";
+
+       /* try {
+
+            MimeMessage message = mailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");
+            helper.setFrom(setFrom);
+            helper.setTo(toMail);
+            helper.setSubject(title);
+            helper.setText(content,true);
+
+            mailSender.send(message);
+
+
+        }catch(Exception e) {
+            e.printStackTrace();
+        }*/
+
+        String num = Integer.toString(checkNum);
+
+        return num;
+    }
 /*
     @PostMapping("/join")
     public String joinPOST(@Valid MemberDTO memberDTO,
@@ -100,54 +174,102 @@ public class MemberController {
 */
 
     @GetMapping("/modify")
-    public void modifyGET(@RequestParam(name="user_id", defaultValue = "") String user_id,
+    public void modifyGET(//@RequestParam(name="member_id", defaultValue = "") String member_id,
                           Model model) {
         log.info("============================");
         log.info("MemberController >> modifyGET()");
 
+        String member_id = "abc01";
+
+        model.addAttribute("member", memberServiceIf.view(member_id));
+        model.addAttribute("memberImage", memberImageServiceIf.viewImg(memberServiceIf.view(member_id).getMember_id()));
 
         log.info("============================");
     }
 
-/*    @PostMapping("/modify")
+    @PostMapping("/modify")
     public String modifyPOST(@Valid MemberDTO memberDTO,
+                             MemberImageDTO memberImageDTO,
                              BindingResult bindingResult,
-                             RedirectAttributes redirectAttributes) {
+                             RedirectAttributes redirectAttributes,
+                             @RequestParam("upload") MultipartFile file) {
         log.info("============================");
         log.info("MemberController >> modifyPOST()");
 
-        if (bindingResult.hasErrors()) {
-            log.info("Errors");
-            redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
-            redirectAttributes.addFlashAttribute("memberDTO", memberDTO);
+        if (file != null && !file.isEmpty()) {
+            String uploadFolder = "D:\\java4\\BEC\\src\\main\\webapp\\resources\\uploads\\img\\member";
+            String orgFile = file.getOriginalFilename(); //원래 파일의 이름
+            long size = file.getSize();
+            String fileExt = orgFile.substring(orgFile.lastIndexOf("."), orgFile.length()); // 확장자명
+            //엑셀.파.일xxx.xls --> 제일 마지막 인덱스의 . 에서부터 파일이름 끝에를 파싱
 
-            return "redirect:/member/modify?user_id=" + memberDTO.getUser_id();
+            log.info("============================");
+            log.info("uploadFolder : " + uploadFolder);
+            log.info("fileRealName : " + orgFile);
+            log.info("size : " + size);
+            log.info("fileExt : " + fileExt);
+
+
+            //새로운 파일명 생성
+            UUID uuid = UUID.randomUUID();
+            String[] uuids = uuid.toString().split("-");
+            String newName = uuids[0];
+
+            log.info("uuid : " + uuid);
+            log.info("uuids : " + uuids);
+            log.info("newName : " + newName);
+
+            String saveFileName = newName + fileExt;
+
+            File saveFile = new File(uploadFolder + "\\" + newName + fileExt);
+
+            try {
+                file.transferTo(saveFile);
+            } catch (IllegalStateException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            int resultMemImg = memberServiceIf.modifyImage(memberDTO.getMember_id(), saveFileName);
+            int resultImg = memberImageServiceIf.regist(memberDTO.getMember_id(), orgFile, saveFileName);
         }
 
+//        if (bindingResult.hasErrors()) {
+//            log.info("Errors");
+//            redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
+//            redirectAttributes.addFlashAttribute("memberDTO", memberDTO);
+//
+//            return "redirect:/member/modify?user_id=" + memberDTO.getUser_id();
+//        }
+//
+
         int result = memberServiceIf.modify(memberDTO);
+
+
         log.info("modifyResult : " + result);
         log.info("============================");
         if (result > 0) {
-            return "redirect:/member/view?" + memberDTO.getUser_id();
+            return "redirect:/member/view?" + memberDTO.getMember_id();
         } else {
-            return "redirect:/member/modify?user_id=" + memberDTO.getUser_id();
+            return "redirect:/member/modify?user_id=" + memberDTO.getMember_id();
         }
-
-    }*/
+    }
 
     @PostMapping("/delete")
-    public String leavePOST(@RequestParam(name="user_id", defaultValue = "") String user_id,
+    public String leavePOST(@RequestParam(name="member_id", defaultValue = "") String member_id,
                             HttpServletRequest req) {
         log.info("============================");
         log.info("MemberController >> leavePOST()");
         log.info("============================");
-        int result = memberServiceIf.delete(user_id);
+        int result = memberServiceIf.delete(member_id);
         if (result > 0) {
             HttpSession session = req.getSession();
             session.invalidate();
+
             return "redirect:/bbs/list";
         } else {
-            return "redirect:/member/view?user_id=" + user_id;
+            return "redirect:/member/view?user_id=" + member_id;
         }
     }
     @GetMapping("/cart")
@@ -180,4 +302,87 @@ public class MemberController {
         model.addAttribute("cartList", cartList);
     }
 
+    @GetMapping("/buy")
+    public void buyList(HttpSession session,
+                        @Valid PageRequestDTO pageRequestDTO,
+                        Model model) {
+        log.info("============================");
+        log.info("MemberController >> buyList()");
+        String member_id = (String)session.getAttribute("member_id");
+        List<OrderDTO> orderList = memberServiceIf.getOrderList("abc01");
+
+        //PageResponseDTO<BbsDTO> responseDTO = bbsServiceIf.bbsListByPage(pageRequestDTO);
+
+        model.addAttribute("orderList", orderList);
+        log.info("MemberController >> buyList() END");
+        log.info("============================");
+    }
+
+
+    @GetMapping("/one")
+    public void oneList(HttpSession session,
+                        @Valid PageRequestDTO pageRequestDTO,
+                        Model model) {
+        log.info("============================");
+        log.info("MemberController >> qnaList()");
+        String member_id = (String)session.getAttribute("member_id");
+        List<QnaDTO> qnaList = memberServiceIf.getQnaList("abc01", "one");
+
+        //PageResponseDTO<BbsDTO> responseDTO = bbsServiceIf.bbsListByPage(pageRequestDTO);
+
+        model.addAttribute("qnaList", qnaList);
+       // model.addAttribute("responseDTO", responseDTO);
+
+        log.info(qnaList);
+        log.info("MemberController >> qnaList() END");
+        log.info("========================");
+        log.info("============================");
+    }
+
+
+    @GetMapping("/qna")
+    public void qnaList(HttpSession session,
+                        @Valid PageRequestDTO pageRequestDTO,
+                        Model model) {
+        log.info("============================");
+        log.info("MemberController >> qnaList()");
+        String member_id = (String)session.getAttribute("member_id");
+        List<QnaDTO> qnaList = memberServiceIf.getQnaList("abc01", "qna");
+
+        //PageResponseDTO<BbsDTO> responseDTO = bbsServiceIf.bbsListByPage(pageRequestDTO);
+
+        model.addAttribute("qnaList", qnaList);
+        // model.addAttribute("responseDTO", responseDTO);
+
+        log.info(qnaList);
+        log.info("MemberController >> qnaList() END");
+        log.info("========================");
+        log.info("============================");
+    }
+
+    @PostMapping("/orderDelete")
+    public String orderDelete(@RequestParam(name="order_idx", defaultValue = "0") int order_idx,
+                            HttpServletRequest req) {
+        log.info("============================");
+        log.info("MemberController >> orderDelete()");
+        log.info("============================");
+        int result = memberServiceIf.orderDelete(order_idx);
+        if (result > 0) {
+            return "redirect:/member/buy";
+        } else {
+            return "redirect:/member/buy";
+        }
+    }
+
+    @GetMapping("/review")
+    public void review(HttpSession session,
+                       @Valid PageRequestDTO pageRequestDTO,
+                       Model model) {
+        String member_id = (String)session.getAttribute("member_id");
+        List<ReviewDTO> reviewList = memberServiceIf.getReviewList("abc01");
+
+        //PageResponseDTO<BbsDTO> responseDTO = bbsServiceIf.bbsListByPage(pageRequestDTO);
+
+        model.addAttribute("reviewList", reviewList);
+    }
 }
