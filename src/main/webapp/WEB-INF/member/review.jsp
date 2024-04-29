@@ -118,7 +118,45 @@
                                                 <td class="text-nowrap">${status.count}</td>
                                                 <td class="text-nowrap"><a class="" href="product/view?pro_idx=${dto.pro_idx}">${dto.pro_name}</a></td>
                                                 <td class="text-nowrap">${dto.review_title}</td>
-                                                <td class="text-nowrap">${dto.review_star}</td>
+                                                <td class="text-nowrap">
+                                                    <c:choose>
+                                                        <c:when test="${dto.review_star eq '1'}">
+                                                            <i class="fa fa-star text-secondary"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                        </c:when>
+                                                        <c:when test="${dto.review_star eq '2'}">
+                                                            <i class="fa fa-star text-secondary"></i>
+                                                            <i class="fa fa-star text-secondary"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                        </c:when>
+                                                        <c:when test="${dto.review_star eq '3'}">
+                                                            <i class="fa fa-star text-secondary"></i>
+                                                            <i class="fa fa-star text-secondary"></i>
+                                                            <i class="fa fa-star text-secondary"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                        </c:when>
+                                                        <c:when test="${dto.review_star eq '4'}">
+                                                            <i class="fa fa-star text-secondary"></i>
+                                                            <i class="fa fa-star text-secondary"></i>
+                                                            <i class="fa fa-star text-secondary"></i>
+                                                            <i class="fa fa-star text-secondary"></i>
+                                                            <i class="fa fa-star"></i>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <i class="fa fa-star text-secondary"></i>
+                                                            <i class="fa fa-star text-secondary"></i>
+                                                            <i class="fa fa-star text-secondary"></i>
+                                                            <i class="fa fa-star text-secondary"></i>
+                                                            <i class="fa fa-star text-secondary"></i>
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                </td>
                                                 <td>
                                                 <div class="dropdown">
                                                     <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
