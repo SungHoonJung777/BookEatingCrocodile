@@ -59,6 +59,13 @@ public class PageRequestDTO {
     private String search_date1;
     private String search_date2;
 
+    private String pro_category1;
+    private String pro_category2;
+    private String pro_category3;
+
+    private String sortField;
+    private String sortDir; //오름차순, 내림차순
+
     public void setTotal_count(int total_count) {
         this.total_count = total_count;
     }

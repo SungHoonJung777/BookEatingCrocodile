@@ -4,11 +4,11 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.fullstack4.springmvc.mapper.ReviewMapper">
 
-<select id="review_listAll" resultType="org.fullstack4.springmvc.domain.ReviewVO">
-    select review_idx, pro_idx, member_id, review_content, review_title, review_star, review_reg_date
-    from bec_review
-    where review_idx = #{review_idx}
-</select>
+    <select id="review_list" resultType="org.fullstack4.springmvc.domain.ReviewVO">
+        select review_idx, pro_idx, member_id, review_content, review_title, review_star, review_reg_date
+        from bec_review
+        where pro_idx = #{pro_idx}
+    </select>
 
 
 </mapper>

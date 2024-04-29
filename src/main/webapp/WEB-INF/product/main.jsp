@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <html>
 <head>
     <meta charset="utf-8">
@@ -51,9 +52,9 @@
 <body>
 
 <!-- Spinner Start -->
-<%--<div id="spinner" class="show w-100 vh-100 bg-white position-fixed translate-middle top-50 start-50  d-flex align-items-center justify-content-center">
+<div id="spinner" class="show w-100 vh-100 bg-white position-fixed translate-middle top-50 start-50  d-flex align-items-center justify-content-center spinner">
     <div class="spinner-grow text-primary" role="status"></div>
-</div>--%>
+</div>
 <!-- Spinner End -->
 
 
@@ -100,11 +101,14 @@
             <div class="col-lg-12">
                 <div class="row g-4">
                     <div class="col-xl-3">
-                        <div class="input-group w-100 mx-auto d-flex">
-                            <input type="search" class="form-control p-3" placeholder="keywords" aria-describedby="search-icon-1">
-                            <span id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></span>
-                        </div>
+                            <form id="frmSearch" name="frmSearch" action="/product/main" method="get">
+                                <div class="input-group w-100 mx-auto d-flex">
+                                    <input type="search" name="search_word" id="search_word" class="form-control p-3" placeholder="keywords" aria-describedby="search-icon-1">
+                                    <span id="search-icon-1" class="input-group-text p-3" onclick="searchProducts();"><i class="fa fa-search"></i></span>
+                                </div>
+                            </form>
                     </div>
+
                     <div class="col-6"></div>
                     <div class="col-xl-3">
                         <form name="frmSort" id="frmSort" >
@@ -121,142 +125,145 @@
                         </form>
                     </div>
                 </div>
+
+
                 <div class="row g-4">
                     <div class="col-lg-3">
                         <div class="row g-4">
                             <div class="col-lg-12 sidebar_menu" >
                                 <div class="mb-3">
                                     <h4>Categories</h4>
+                                    <div class="empty" ></div>
                                     <ul class="list-unstyled ps-0 fruite-categorie oneDepth M01">
-                                        <li class="mb-1 "><a class="nav-link" href="/product/main/pro_category1?=">유아</a>
+                                        <li class="mb-1 "><a class="nav-link fas fa-apple-alt" href="/product/main?pro_category1=유아">유아</a>
                                             <ul class="twoDepth M02">
-                                                <li><a href="#">한글</a></li>
-                                                <li><a href="#">영어</a></li>
-                                                <li><a href="#">수학</a></li>
+                                                <li><a href="/product/main?pro_category1=유아&pro_category3=한글">한글</a></li>
+                                                <li><a href="/product/main?pro_category1=유아&pro_category3=영어">영어</a></li>
+                                                <li><a href="/product/main?pro_category1=유아&pro_category3=수학">수학</a></li>
                                             </ul>
                                         </li>
                                     </ul>
                                     <ul class="list-unstyled ps-0 fruite-categorie oneDepth M01">
-                                        <li class="mb-1 "><a class="nav-link" href="#">초등</a>
+                                        <li class="mb-1 "><a class="nav-link fas fa-apple-alt" href="/product/main?pro_category1=초등">초등</a>
                                             <ul class="M02">
-                                                <li class=""><a href="#">1학년</a>
+                                                <li><a href="/product/main?pro_category1=초등&pro_category2=1">1학년</a>
                                                     <ul class="M03">
-                                                        <li><a href="#">국어</a></li>
-                                                        <li><a href="#">영어</a></li>
-                                                        <li><a href="#">수학</a></li>
-                                                        <li><a href="#">사회</a></li>
-                                                        <li><a href="#">과학</a></li>
+                                                        <li><a href="/product/main?pro_category1=초등&pro_category2=1&pro_category3=국어">국어</a></li>
+                                                        <li><a href="/product/main?pro_category1=초등&pro_category2=1&pro_category3=영어">영어</a></li>
+                                                        <li><a href="/product/main?pro_category1=초등&pro_category2=1&pro_category3=수학">수학</a></li>
+                                                        <li><a href="/product/main?pro_category1=초등&pro_category2=1&pro_category3=사회">사회</a></li>
+                                                        <li><a href="/product/main?pro_category1=초등&pro_category2=1&pro_category3=과학">과학</a></li>
                                                     </ul>
                                                 </li>
-                                                <li><a href="#">2학년</a>
+                                                <li><a href="/product/main?pro_category1=초등&pro_category2=2">2학년</a>
                                                     <ul class="M03">
-                                                        <li><a href="#">국어</a></li>
-                                                        <li><a href="#">영어</a></li>
-                                                        <li><a href="#">수학</a></li>
-                                                        <li><a href="#">사회</a></li>
-                                                        <li><a href="#">과학</a></li>
+                                                        <li><a href="/product/main?pro_category1=초등&pro_category2=2&pro_category3=국어">국어</a></li>
+                                                        <li><a href="/product/main?pro_category1=초등&pro_category2=2&pro_category3=영어">영어</a></li>
+                                                        <li><a href="/product/main?pro_category1=초등&pro_category2=2&pro_category3=수학">수학</a></li>
+                                                        <li><a href="/product/main?pro_category1=초등&pro_category2=2&pro_category3=사회">사회</a></li>
+                                                        <li><a href="/product/main?pro_category1=초등&pro_category2=2&pro_category3=과학">과학</a></li>
                                                     </ul>
                                                 </li>
-                                                <li><a href="#">3학년</a>
+                                                <li><a href="/product/main?pro_category1=초등&pro_category2=3">3학년</a>
                                                     <ul class="M03">
-                                                        <li><a href="#">국어</a></li>
-                                                        <li><a href="#">영어</a></li>
-                                                        <li><a href="#">수학</a></li>
-                                                        <li><a href="#">사회</a></li>
-                                                        <li><a href="#">과학</a></li>
+                                                        <li><a href="/product/main?pro_category1=초등&pro_category2=3&pro_category3=국어">국어</a></li>
+                                                        <li><a href="/product/main?pro_category1=초등&pro_category2=3&pro_category3=영어">영어</a></li>
+                                                        <li><a href="/product/main?pro_category1=초등&pro_category2=3&pro_category3=수학">수학</a></li>
+                                                        <li><a href="/product/main?pro_category1=초등&pro_category2=3&pro_category3=사회">사회</a></li>
+                                                        <li><a href="/product/main?pro_category1=초등&pro_category2=3&pro_category3=과학">과학</a></li>
                                                     </ul>
                                                 </li>
-                                                <li><a href="#">4학년</a>
+                                                <li><a href="/product/main?pro_category1=초등&pro_category2=4">4학년</a>
                                                     <ul class="M03">
-                                                        <li><a href="#">국어</a></li>
-                                                        <li><a href="#">영어</a></li>
-                                                        <li><a href="#">수학</a></li>
-                                                        <li><a href="#">사회</a></li>
-                                                        <li><a href="#">과학</a></li>
+                                                        <li><a href="/product/main?pro_category1=초등&pro_category2=4&pro_category3=국어">국어</a></li>
+                                                        <li><a href="/product/main?pro_category1=초등&pro_category2=4&pro_category3=영어">영어</a></li>
+                                                        <li><a href="/product/main?pro_category1=초등&pro_category2=4&pro_category3=수학">수학</a></li>
+                                                        <li><a href="/product/main?pro_category1=초등&pro_category2=4&pro_category3=사회">사회</a></li>
+                                                        <li><a href="/product/main?pro_category1=초등&pro_category2=4&pro_category3=과학">과학</a></li>
                                                     </ul>
                                                 </li>
-                                                <li><a href="#">5학년</a>
+                                                <li><a href="/product/main?pro_category1=초등&pro_category2=5">5학년</a>
                                                     <ul class="M03">
-                                                        <li><a href="#">국어</a></li>
-                                                        <li><a href="#">영어</a></li>
-                                                        <li><a href="#">수학</a></li>
-                                                        <li><a href="#">사회</a></li>
-                                                        <li><a href="#">과학</a></li>
+                                                        <li><a href="/product/main?pro_category1=초등&pro_category2=5&pro_category3=국어">국어</a></li>
+                                                        <li><a href="/product/main?pro_category1=초등&pro_category2=5&pro_category3=영어">영어</a></li>
+                                                        <li><a href="/product/main?pro_category1=초등&pro_category2=5&pro_category3=수학">수학</a></li>
+                                                        <li><a href="/product/main?pro_category1=초등&pro_category2=5&pro_category3=사회">사회</a></li>
+                                                        <li><a href="/product/main?pro_category1=초등&pro_category2=5&pro_category3=과학">과학</a></li>
                                                     </ul>
                                                 </li>
-                                                <li><a href="#">6학년</a>
+                                                <li><a href="/product/main?pro_category1=초등&pro_category2=6">6학년</a>
                                                     <ul class="M03">
-                                                        <li><a href="#">국어</a></li>
-                                                        <li><a href="#">영어</a></li>
-                                                        <li><a href="#">수학</a></li>
-                                                        <li><a href="#">사회</a></li>
-                                                        <li><a href="#">과학</a></li>
+                                                        <li><a href="/product/main?pro_category1=초등&pro_category2=6&pro_category3=국어">국어</a></li>
+                                                        <li><a href="/product/main?pro_category1=초등&pro_category2=6&pro_category3=영어">영어</a></li>
+                                                        <li><a href="/product/main?pro_category1=초등&pro_category2=6&pro_category3=수학">수학</a></li>
+                                                        <li><a href="/product/main?pro_category1=초등&pro_category2=6&pro_category3=사회">사회</a></li>
+                                                        <li><a href="/product/main?pro_category1=초등&pro_category2=6&pro_category3=과학">과학</a></li>
                                                     </ul>
                                                 </li>
                                             </ul>
                                         </li>
                                     </ul>
                                     <ul class="list-unstyled ps-0 fruite-categorie M01">
-                                        <li class="mb-1 "><a class="nav-link" href="#">중등</a>
+                                        <li class="mb-1 "><a class="nav-link fas fa-apple-alt" href="/product/main?pro_category1=중등">중등</a>
                                             <ul class="M02">
-                                                <li class=""><a href="#">1학년</a>
+                                                <li class=""><a href="/product/main?pro_category1=중등&pro_category2=1">1학년</a>
                                                     <ul class="M03">
-                                                        <li><a href="#">국어</a></li>
-                                                        <li><a href="#">영어</a></li>
-                                                        <li><a href="#">수학</a></li>
-                                                        <li><a href="#">사회</a></li>
-                                                        <li><a href="#">과학</a></li>
+                                                        <li><a href="/product/main?pro_category1=중등&pro_category2=1&pro_category3=국어">국어</a></li>
+                                                        <li><a href="/product/main?pro_category1=중등&pro_category2=1&pro_category3=영어">영어</a></li>
+                                                        <li><a href="/product/main?pro_category1=중등&pro_category2=1&pro_category3=수학">수학</a></li>
+                                                        <li><a href="/product/main?pro_category1=중등&pro_category2=1&pro_category3=사회">사회</a></li>
+                                                        <li><a href="/product/main?pro_category1=중등&pro_category2=1&pro_category3=과학">과학</a></li>
                                                     </ul>
                                                 </li>
-                                                <li><a href="#">2학년</a>
+                                                <li><a href="/product/main?pro_category1=중등&pro_category2=2">2학년</a>
                                                     <ul class="M03">
-                                                        <li><a href="#">국어</a></li>
-                                                        <li><a href="#">영어</a></li>
-                                                        <li><a href="#">수학</a></li>
-                                                        <li><a href="#">사회</a></li>
-                                                        <li><a href="#">과학</a></li>
+                                                        <li><a href="/product/main?pro_category1=중등&pro_category2=2&pro_category3=국어">국어</a></li>
+                                                        <li><a href="/product/main?pro_category1=중등&pro_category2=2&pro_category3=영어">영어</a></li>
+                                                        <li><a href="/product/main?pro_category1=중등&pro_category2=2&pro_category3=수학">수학</a></li>
+                                                        <li><a href="/product/main?pro_category1=중등&pro_category2=2&pro_category3=사회">사회</a></li>
+                                                        <li><a href="/product/main?pro_category1=중등&pro_category2=2&pro_category3=과학">과학</a></li>
                                                     </ul>
                                                 </li>
-                                                <li><a href="#">3학년</a>
+                                                <li><a href="/product/main?pro_category1=중등&pro_category2=3">3학년</a>
                                                     <ul class="M03">
-                                                        <li><a href="#">국어</a></li>
-                                                        <li><a href="#">영어</a></li>
-                                                        <li><a href="#">수학</a></li>
-                                                        <li><a href="#">사회</a></li>
-                                                        <li><a href="#">과학</a></li>
+                                                        <li><a href="/product/main?pro_category1=중등&pro_category2=3&pro_category3=국어">국어</a></li>
+                                                        <li><a href="/product/main?pro_category1=중등&pro_category2=3&pro_category3=영어">영어</a></li>
+                                                        <li><a href="/product/main?pro_category1=중등&pro_category2=3&pro_category3=수학">수학</a></li>
+                                                        <li><a href="/product/main?pro_category1=중등&pro_category2=3&pro_category3=사회">사회</a></li>
+                                                        <li><a href="/product/main?pro_category1=중등&pro_category2=3&pro_category3=과학">과학</a></li>
                                                     </ul>
                                                 </li>
                                             </ul>
                                         </li>
                                     </ul>
                                     <ul class="list-unstyled ps-0 fruite-categorie oneDepth M01">
-                                        <li class="mb-1 "><a class="nav-link" href="#">고등</a>
+                                        <li class="mb-1 "><a class="nav-link fas fa-apple-alt" href="/product/main?pro_category1=고등">고등</a>
                                             <ul class="twoDepth M02">
-                                                <li class=""><a href="#">1학년</a>
+                                                <li class=""><a href="/product/main?pro_category1=고등&pro_category2=1">1학년</a>
                                                     <ul class="M03">
-                                                        <li><a href="#">국어</a></li>
-                                                        <li><a href="#">영어</a></li>
-                                                        <li><a href="#">수학</a></li>
-                                                        <li><a href="#">사회</a></li>
-                                                        <li><a href="#">과학</a></li>
+                                                        <li><a href="/product/main?pro_category1=고등&pro_category2=1&pro_category3=국어">국어</a></li>
+                                                        <li><a href="/product/main?pro_category1=고등&pro_category2=1&pro_category3=영어">영어</a></li>
+                                                        <li><a href="/product/main?pro_category1=고등&pro_category2=1&pro_category3=수학">수학</a></li>
+                                                        <li><a href="/product/main?pro_category1=고등&pro_category2=1&pro_category3=사회">사회</a></li>
+                                                        <li><a href="/product/main?pro_category1=고등&pro_category2=1&pro_category3=과학">과학</a></li>
                                                     </ul>
                                                 </li>
-                                                <li><a href="#">2학년</a>
+                                                <li><a href="/product/main?pro_category1=고등&pro_category2=2">2학년</a>
                                                     <ul class="M03">
-                                                        <li><a href="#">국어</a></li>
-                                                        <li><a href="#">영어</a></li>
-                                                        <li><a href="#">수학</a></li>
-                                                        <li><a href="#">사회</a></li>
-                                                        <li><a href="#">과학</a></li>
+                                                        <li><a href="/product/main?pro_category1=고등&pro_category2=2&pro_category3=국어">국어</a></li>
+                                                        <li><a href="/product/main?pro_category1=고등&pro_category2=2&pro_category3=영어">영어</a></li>
+                                                        <li><a href="/product/main?pro_category1=고등&pro_category2=2&pro_category3=수학">수학</a></li>
+                                                        <li><a href="/product/main?pro_category1=고등&pro_category2=2&pro_category3=사회">사회</a></li>
+                                                        <li><a href="/product/main?pro_category1=고등&pro_category2=2&pro_category3=과학">과학</a></li>
                                                     </ul>
                                                 </li>
-                                                <li><a href="#">3학년</a>
+                                                <li><a href="/product/main?pro_category1=고등&pro_category2=3">3학년</a>
                                                     <ul class="M03">
-                                                        <li><a href="#">국어</a></li>
-                                                        <li><a href="#">영어</a></li>
-                                                        <li><a href="#">수학</a></li>
-                                                        <li><a href="#">사회</a></li>
-                                                        <li><a href="#">과학</a></li>
+                                                        <li><a href="/product/main?pro_category1=고등&pro_category2=3&pro_category3=국어">국어</a></li>
+                                                        <li><a href="/product/main?pro_category1=고등&pro_category2=3&pro_category3=영어">영어</a></li>
+                                                        <li><a href="/product/main?pro_category1=고등&pro_category2=3&pro_category3=수학">수학</a></li>
+                                                        <li><a href="/product/main?pro_category1=고등&pro_category2=3&pro_category3=사회">사회</a></li>
+                                                        <li><a href="/product/main?pro_category1=고등&pro_category2=3&pro_category3=과학">과학</a></li>
                                                     </ul>
                                                 </li>
                                             </ul>
@@ -264,11 +271,6 @@
                                     </ul>
                                 </div>
                             </div>
-
-
-
-
-
 
 
                             <div class="col-lg-12">
@@ -278,102 +280,7 @@
                                     <output id="amount" name="amount" min-velue="0" max-value="500" for="rangeInput">0</output>
                                 </div>
                             </div>
-                            <div class="col-lg-12">
-                                <div class="mb-3">
-                                    <h4>Additional</h4>
-                                    <div class="mb-2">
-                                        <input type="radio" class="me-2" id="Categories-1" name="Categories-1" value="Beverages">
-                                        <label for="Categories-1"> Organic</label>
-                                    </div>
-                                    <div class="mb-2">
-                                        <input type="radio" class="me-2" id="Categories-2" name="Categories-1" value="Beverages">
-                                        <label for="Categories-2"> Fresh</label>
-                                    </div>
-                                    <div class="mb-2">
-                                        <input type="radio" class="me-2" id="Categories-3" name="Categories-1" value="Beverages">
-                                        <label for="Categories-3"> Sales</label>
-                                    </div>
-                                    <div class="mb-2">
-                                        <input type="radio" class="me-2" id="Categories-4" name="Categories-1" value="Beverages">
-                                        <label for="Categories-4"> Discount</label>
-                                    </div>
-                                    <div class="mb-2">
-                                        <input type="radio" class="me-2" id="Categories-5" name="Categories-1" value="Beverages">
-                                        <label for="Categories-5"> Expired</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-12">
-                                <h4 class="mb-3">Featured products</h4>
-                                <div class="d-flex align-items-center justify-content-start">
-                                    <div class="rounded me-4" style="width: 100px; height: 100px;">
-                                        <img src="/resources/resources/img/featur-1.jpg" class="img-fluid rounded" alt="">
-                                    </div>
-                                    <div>
-                                        <h6 class="mb-2">Big Banana</h6>
-                                        <div class="d-flex mb-2">
-                                            <i class="fa fa-star text-secondary"></i>
-                                            <i class="fa fa-star text-secondary"></i>
-                                            <i class="fa fa-star text-secondary"></i>
-                                            <i class="fa fa-star text-secondary"></i>
-                                            <i class="fa fa-star"></i>
-                                        </div>
-                                        <div class="d-flex mb-2">
-                                            <h5 class="fw-bold me-2">2.99 $</h5>
-                                            <h5 class="text-danger text-decoration-line-through">4.11 $</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="d-flex align-items-center justify-content-start">
-                                    <div class="rounded me-4" style="width: 100px; height: 100px;">
-                                        <img src="/resources/resources/img/featur-2.jpg" class="img-fluid rounded" alt="">
-                                    </div>
-                                    <div>
-                                        <h6 class="mb-2">Big Banana</h6>
-                                        <div class="d-flex mb-2">
-                                            <i class="fa fa-star text-secondary"></i>
-                                            <i class="fa fa-star text-secondary"></i>
-                                            <i class="fa fa-star text-secondary"></i>
-                                            <i class="fa fa-star text-secondary"></i>
-                                            <i class="fa fa-star"></i>
-                                        </div>
-                                        <div class="d-flex mb-2">
-                                            <h5 class="fw-bold me-2">2.99 $</h5>
-                                            <h5 class="text-danger text-decoration-line-through">4.11 $</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="d-flex align-items-center justify-content-start">
-                                    <div class="rounded me-4" style="width: 100px; height: 100px;">
-                                        <img src="/resources/resources/img/featur-3.jpg" class="img-fluid rounded" alt="">
-                                    </div>
-                                    <div>
-                                        <h6 class="mb-2">Big Banana</h6>
-                                        <div class="d-flex mb-2">
-                                            <i class="fa fa-star text-secondary"></i>
-                                            <i class="fa fa-star text-secondary"></i>
-                                            <i class="fa fa-star text-secondary"></i>
-                                            <i class="fa fa-star text-secondary"></i>
-                                            <i class="fa fa-star"></i>
-                                        </div>
-                                        <div class="d-flex mb-2">
-                                            <h5 class="fw-bold me-2">2.99 $</h5>
-                                            <h5 class="text-danger text-decoration-line-through">4.11 $</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="d-flex justify-content-center my-4">
-                                    <a href="#" class="btn border border-secondary px-4 py-3 rounded-pill text-primary w-100">Vew More</a>
-                                </div>
-                            </div>
-                            <div class="col-lg-12">
-                                <div class="position-relative">
-                                    <img src="/resources/resources/img/banner-fruits.jpg" class="img-fluid w-100 rounded" alt="">
-                                    <div class="position-absolute" style="top: 50%; right: 10px; transform: translateY(-50%);">
-                                        <h3 class="text-secondary fw-bold">Fresh <br> Fruits <br> Banner</h3>
-                                    </div>
-                                </div>
-                            </div>
+
                         </div>
                     </div>
                     <div class="col-lg-9">
@@ -382,19 +289,27 @@
                             <c:choose>
                                <c:when test="${responseDTO.dtoList != null}">
                                     <c:forEach items="${responseDTO.dtoList}" var="list">
-                                        <div class="col-md-6 col-lg-6 col-xl-4">
+                                        <div class="col-md-6 col-lg-6 col-xl-4 ">
                                             <div class="rounded position-relative fruite-item">
                                                 <a href="/product/view?pro_idx=${list.pro_idx}">
                                                     <div class="fruite-img">
-                                                        <img src="/resources/resources/img/fruite-item-5.jpg" class="img-fluid w-100 rounded-top" alt="">
+                                                        <img src="/resources/resources/img/books/${list.pro_image}" class="img-fluid w-100 rounded-top book_img_size" alt="책 이미지"/>
                                                     </div>
-                                                    <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruits</div>
-                                                    <div class="p-4 border border-secondary border-top-0 rounded-bottom">
+                                                    <div class="p-4 border border-top-0 rounded-bottom book_intro_box">
+                                                        <div class="d-flex mb-2">
+                                                            <i class="fa fa-star text-secondary"></i>
+                                                            <i class="fa fa-star text-secondary"></i>
+                                                            <i class="fa fa-star text-secondary"></i>
+                                                            <i class="fa fa-star text-secondary"></i>
+                                                            <i class="fa fa-star"></i>
+                                                        </div>
                                                         <h4>${list.pro_name}</h4>
                                                         <p>${list.pro_content}...</p>
+
                                                         <div class="d-flex justify-content-between flex-lg-wrap">
-                                                            <p class="text-dark fs-5 fw-bold mb-0">${list.pro_price}원</p>
-                                                            <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                                                            <p class="text-dark fs-5 fw-bold mb-0"><fmt:formatNumber value="${list.pro_sale_price}" pattern="#,###"/>원</p>
+                                                            <div class="empty" ></div>
+                                                            <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary cart_add_box"><i class="fa fa-shopping-bag me-2 text-primary"></i> 장바구니에 추가</a>
                                                         </div>
                                                     </div>
                                                 </a>
@@ -461,22 +376,45 @@
 <a href="#" class="btn btn-primary border-3 border-primary rounded-circle back-to-top"><i class="fa fa-arrow-up"></i></a>
 
 <script>
+    //정렬 필터
     function goList() {
+        var sortMethod = document.getElementById('sortMethod').value;
+        var baseUrl = window.location.pathname;
+        // URL에 추가할 쿼리 스트링을 생성
+        var queryString = '?';
 
-        const frm = document.getElementById("frmSort");
-        let sortMethod = document.getElementById("sortMethod");
-
-        if(sortMethod.value != null && sortMethod.value != "") {
-            alert(sortMethod.value);
-
-            /*
-                    frm.method = "GET";
-                    frm.action = "/product/main";
-                    frm.submit();
-            */
+        //쿼리스트링에 추가
+        if (sortMethod) {
+            var [sortField, sortDir] = sortMethod.split('||');
+            queryString += 'sortField=' + encodeURIComponent(sortField) + '&sortDir=' + encodeURIComponent(sortDir);
         }
 
+        window.location.href = baseUrl + queryString;
     }
+
+    //검색창
+    function searchProducts() {
+            var search_word = document.getElementById('search_word').value;
+            window.location.href = '/product/main?search_word=' + encodeURIComponent(search_word);
+
+
+        //엔터키로 검색 가능
+        document.getElementById('search_word').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                searchProducts();
+            }
+        });
+
+    }
+
+    // 페이지 로딩 시작 시 스피너 보여주기
+    document.getElementById('spinner').style.display = 'flex';
+
+    // 페이지 로딩 완료 시 스피너 숨기기
+    window.onload = function() {
+        document.getElementById('spinner').style.display = 'none';
+    };
 </script>
 
 <!-- JavaScript Libraries -->

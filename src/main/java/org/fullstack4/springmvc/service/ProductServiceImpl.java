@@ -2,9 +2,7 @@ package org.fullstack4.springmvc.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.fullstack4.springmvc.domain.BbsVO;
 import org.fullstack4.springmvc.domain.ProductVO;
-import org.fullstack4.springmvc.dto.BbsDTO;
 import org.fullstack4.springmvc.dto.PageRequestDTO;
 import org.fullstack4.springmvc.dto.PageResponseDTO;
 import org.fullstack4.springmvc.dto.ProductDTO;
@@ -36,6 +34,8 @@ public class ProductServiceImpl implements ProductServiceIf {
         ProductDTO productDTO = modelMapper.map(productVO, ProductDTO.class);
         return productDTO;
     }
+
+
     @Override
     public int productTotalCount(PageRequestDTO requestDTO) {
 
@@ -59,5 +59,13 @@ public class ProductServiceImpl implements ProductServiceIf {
 
         return responseDTO;
     }
+
+/*
+    @Override
+    public List<ProductDTO> findProductsByCategories(String pro_category1, String pro_category2, String pro_category3) {
+
+        return productMapper.findProductsByCategories(pro_category1, pro_category2, pro_category3);
+    }
+*/
 
 }

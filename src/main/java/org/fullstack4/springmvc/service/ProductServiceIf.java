@@ -1,6 +1,5 @@
 package org.fullstack4.springmvc.service;
 
-import org.fullstack4.springmvc.dto.BbsDTO;
 import org.fullstack4.springmvc.dto.PageRequestDTO;
 import org.fullstack4.springmvc.dto.PageResponseDTO;
 import org.fullstack4.springmvc.dto.ProductDTO;
@@ -15,4 +14,6 @@ public interface ProductServiceIf {
     int productTotalCount(PageRequestDTO requestDTO);
 
     PageResponseDTO<ProductDTO> productListByPage(PageRequestDTO pageRequestDTO);
+
+
 }

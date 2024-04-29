@@ -26,7 +26,7 @@ public class ProductVO {
     private String pro_video;
     private String pro_category1;
     private String pro_category2;
-    private String pro_category;
+    private String pro_category3;
     private LocalDate pro_reg_date;
     private LocalDate pro_modify_date;
     private int pro_quantity;

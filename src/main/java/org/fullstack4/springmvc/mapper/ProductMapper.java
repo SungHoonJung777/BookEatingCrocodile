@@ -3,7 +3,6 @@ package org.fullstack4.springmvc.mapper;
 import org.fullstack4.springmvc.domain.ProductVO;
 import org.fullstack4.springmvc.dto.PageRequestDTO;
 
-
 import java.util.List;
 
 public interface ProductMapper {
@@ -15,4 +14,6 @@ public interface ProductMapper {
     int productTotalCount(PageRequestDTO requestDTO);
 
     List<ProductVO> productListByPage(PageRequestDTO pageRequestDTO);
+
+
 }

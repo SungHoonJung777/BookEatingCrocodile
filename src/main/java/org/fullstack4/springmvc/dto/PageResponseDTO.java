@@ -32,7 +32,12 @@ public class PageResponseDTO<E> {
 
     private String linkParams;
 
+    private String pro_category1;
+    private String pro_category2;
+    private String pro_category3;
 
+    private String sortField;
+    private String sortDir; //오름차순, 내림차순
 
     PageResponseDTO() {} //빈으로 등록되기 위해 기본생성자 필요
 

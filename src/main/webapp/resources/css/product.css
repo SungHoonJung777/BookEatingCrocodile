@@ -48,6 +48,7 @@
 
 .M02>li:hover .M03 {
   left: 67px;
+
 }
 
 .M02>li a:hover {
@@ -58,8 +59,39 @@
 
 .M03>li a:hover {
   display: block;
-  background-color: #ececec;
+  background-color: #f8f8f8;
   border-radius: 10px;
+}
+
+img.book_img_size {
+  width: 300px;
+  height: 360px;
+}
+
+div.book_intro_box {
+  width: 304px;
+  height: 300px;
+}
+
+a.cart_add_box {
+  background-color: #fff;
+}
+
+div.empty {
+  width: 10px;
+  height: 10px;
+}
+
+div.book_intro_box {
+  background-color: #f3f3f3;
+}
+
+a.fa-apple-alt:before {
+  margin-right: 3px;
+}
+
+div.spinner {
+  display: none;
 }
 
 /*상품 상세 view 페이지 */

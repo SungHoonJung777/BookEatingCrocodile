@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface ReviewMapper {
 
- List<ReviewVO> review_listAll();
+ List<ReviewVO> review_list(int pro_idx);
 
 }

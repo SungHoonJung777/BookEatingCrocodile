@@ -8,6 +8,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+
+
+
 <html>
 <head>
     <meta charset="utf-8">
@@ -107,9 +112,9 @@
                     <div class="col-lg-6">
                         <h4 class="fw-bold mb-3">${product.pro_name}</h4>
                         <div class="book_content1">
-                            <h5 class="fw-bold mb-3 text-danger text-decoration-line-through">정가 : ${product.pro_price}</h5>
+                            <h5 class="fw-bold mb-3 text-danger text-decoration-line-through">정가 : <fmt:formatNumber value="${product.pro_price}" pattern="#,###"/>원</h5>
 
-                            <h3 class="fw-bold mb-3">할인가 : ${product.pro_sale_price}</h3>
+                            <h3 class="fw-bold mb-3">할인가 : <fmt:formatNumber value="${product.pro_sale_price}" pattern="#,###"/>원</h3>
 
                         </div>
 
@@ -142,7 +147,7 @@
                         </div>
 
 
-                        <a href="#" class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary payBtn"><i class="fa fa-shopping-bag me-2 text-primary"></i> 장바구니</a>
+                        <a href="/member/cart?member_id=${sessionScope.member_id}" class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary payBtn"><i class="fa fa-shopping-bag me-2 text-primary"></i> 장바구니</a>
                         <a href="#" class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary payBtn"><i class="fas fa-copyright me-2 text-primary"></i> 바로구매</a>
 
 
@@ -174,47 +179,41 @@
                                 </div>
 
                                 <h4>책 소개</h4>
-                                <p>${product.pro_content}</p>
+
+                                <p>${pro_content}</p>
 
                             </div>
+
                             <div class="tab-pane" id="nav-mission" role="tabpanel" aria-labelledby="nav-mission-tab">
-                                <div class="d-flex">
-                                    <img src="img/avatar.jpg" class="img-fluid rounded-circle p-3" style="width: 100px; height: 100px;" alt="">
-                                    <div class="">
-                                        <p class="mb-2" style="font-size: 14px;">April 12, 2024</p>
-                                        <div class="d-flex justify-content-between">
-                                            <h5>Jason Smith</h5>
-                                            <div class="d-flex mb-3">
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star"></i>
+                                <c:choose>
+                                    <c:when test="${reviewVO != null}">
+                                        <c:forEach var="review" items="${reviewVO}">
+                                            <div class="d-flex">
+                                                <img src="img/avatar.jpg" class="img-fluid rounded-circle p-3" style="width: 100px; height: 100px;" alt="">
+                                                    <p class="mb-2" style="font-size: 14px;">${review.review_reg_date}</p>
+                                                    <div class="justify-content-between">
+                                                        <h5>${review.member_id}</h5>
+                                                        <div class="d-flex mb-3">
+                                                            <i class="fa fa-star text-secondary"></i>
+                                                            <i class="fa fa-star text-secondary"></i>
+                                                            <i class="fa fa-star text-secondary"></i>
+                                                            <i class="fa fa-star text-secondary"></i>
+                                                            <i class="fa fa-star"></i>
+                                                        </div>
+                                                        <h4>${review.review_title}</h4>
+
+                                                    </div>
+                                                    <p>${review.review_content}</p>
                                             </div>
-                                        </div>
-                                        <p>The generated Lorem Ipsum is therefore always free from repetition injected humour, or non-characteristic
-                                            words etc. Susp endisse ultricies nisi vel quam suscipit </p>
-                                    </div>
-                                </div>
-                                <div class="d-flex">
-                                    <img src="img/avatar.jpg" class="img-fluid rounded-circle p-3" style="width: 100px; height: 100px;" alt="">
-                                    <div class="">
-                                        <p class="mb-2" style="font-size: 14px;">April 12, 2024</p>
-                                        <div class="d-flex justify-content-between">
-                                            <h5>Sam Peters</h5>
-                                            <div class="d-flex mb-3">
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                            </div>
-                                        </div>
-                                        <p class="text-dark">The generated Lorem Ipsum is therefore always free from repetition injected humour, or non-characteristic
-                                            words etc. Susp endisse ultricies nisi vel quam suscipit </p>
-                                    </div>
-                                </div>
+                                        </c:forEach>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <p>리뷰가 없습니다.</p>
+                                    </c:otherwise>
+                                </c:choose>
                             </div>
+
+
                             <div class="tab-pane" id="nav-QnA" role="tabpanel" aria-labelledby="nav-QnA-tab">
                                 <h2>룰루</h2>
                             </div>
@@ -225,11 +224,12 @@
                                 <p class="mb-0">Diam dolor diam ipsum et tempor sit. Aliqu diam amet diam et eos labore.
                                     Clita erat ipsum et lorem et sit</p>
                             </div>
-
                         </div>
-
-
                     </div>
+                </div>
+
+
+
                     <form action="#">
                         <h4 class="mb-5 fw-bold">Leave a Reply</h4>
                         <div class="row g-4">

@@ -4,29 +4,6 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.fullstack4.springmvc.mapper.ProductMapper">
 
-<!--    <sql id="sort">
-        <if test="sort == null">
-            ORDER BY pro_idx DESC
-        </if>
-        <if test="sort == 'bno'">
-            ORDER BY pro_idx DESC
-        </if>
-
-
-        <if test="sort == 'recent_Date'">
-            ORDER BY reg_date DESC
-        </if>
-
-        &lt;!&ndash; 오래된순 조회 &ndash;&gt;
-        <if test="sort == 'old_date'">
-            ORDER BY reg_date ASC
-        </if>
-
-
-        <if test="sort == 'likeCount'">
-        </if>
-    </sql>-->
-
     <select id="pro_listAll" resultType="org.fullstack4.springmvc.domain.ProductVO">
         select pro_idx, pro_name, pro_writer, pro_price, pro_reg_date, pro_content, pro_category1, pro_category2, pro_category3, pro_modify_date
         from bec_product
@@ -41,15 +18,52 @@
 
 
 
-    <select id="productTotalCount" resultType="int">
-        select count(*) from bec_product
+    <select id="productListByPage" resultType="org.fullstack4.springmvc.domain.ProductVO">
+        SELECT pro_idx, pro_name, pro_writer, pro_price, pro_sale, pro_amount, pro_content, pro_image, pro_company, pro_video, pro_category1, pro_category2, pro_category3, pro_reg_date, pro_modify_date, floor(pro_price - pro_price*(pro_sale/100)) AS pro_sale_price
+        FROM bec_product
+        WHERE 1=1
+        <if test="pro_category1 != null and pro_category1 != ''">
+            AND pro_category1 = #{pro_category1}
+        </if>
+        <if test="pro_category2 != null and pro_category2 != ''">
+            AND pro_category2 = #{pro_category2}
+        </if>
+        <if test="pro_category3 != null and pro_category3 != ''">
+            AND pro_category3 = #{pro_category3}
+        </if>
+        <if test="search_word != null and search_word != ''">
+            AND (pro_name LIKE CONCAT('%', #{search_word}, '%') OR pro_content LIKE CONCAT('%', #{search_word}, '%'))
+        </if>
+        <choose>
+            <when test="sortField != null and sortDir != null">
+                ORDER BY ${sortField} ${sortDir}
+            </when>
+            <otherwise>
+                ORDER BY pro_reg_date DESC
+            </otherwise>
+        </choose>
+        LIMIT #{page_skip_count}, #{page_size}
     </select>
 
-    <select id="productListByPage" resultType="org.fullstack4.springmvc.domain.ProductVO">
-        select pro_idx, pro_name, pro_writer, pro_price, pro_sale, pro_amount, pro_content, pro_image, pro_company, pro_video, pro_category1, pro_category2, pro_category3, pro_reg_date, pro_modify_date
-        from bec_product
-        order by pro_reg_date DESC
-        limit #{page_skip_count}, #{page_size}
+
+    <select id="productTotalCount" resultType="int">
+        SELECT COUNT(*)
+        FROM bec_product
+        WHERE 1=1
+        <if test="pro_category1 != null and pro_category1 != ''">
+            AND pro_category1 = #{pro_category1}
+        </if>
+        <if test="pro_category2 != null and pro_category2 != ''">
+            AND pro_category2 = #{pro_category2}
+        </if>
+        <if test="pro_category3 != null and pro_category3 != ''">
+            AND pro_category3 = #{pro_category3}
+        </if>
+        <if test="search_word != null and search_word != ''">
+            AND (pro_name LIKE CONCAT('%', #{search_word}, '%') OR pro_content LIKE CONCAT('%', #{search_word}, '%'))
+        </if>
     </select>
+
+
 
 </mapper>

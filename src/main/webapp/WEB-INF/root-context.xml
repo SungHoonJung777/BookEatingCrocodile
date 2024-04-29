@@ -25,11 +25,28 @@
     Cookie cookie = new Cookie("aaa", "vvv");
     cookie.~~ 여기에 들어가는게 property 이런거 설정하는게 property
     -->
+<!--    <bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+        <property name="driverClassName" value="org.mariadb.jdbc.Driver"/>
+        <property name="jdbcUrl" value="jdbc:mariadb://10.41.1.171:3308/bec"/>
+        &lt;!&ndash;  절대 회사에서 localhost 쓰지 말것,, 웹서버 = db서버가 같은 머신 상에 존재하는 것 => db 뚫리면 웹 뚫리고 웹 뚫리면 db 뚫림!&ndash;&gt;
+        <property name="username" value="user"/>
+        <property name="password" value="1234"/>
+
+        &lt;!&ndash;여기부터 hicaricp에 대한 설정&ndash;&gt;
+        <property name="dataSourceProperties">
+            <props>
+                <prop key="cachePrepStmts">true</prop> &lt;!&ndash;캐시에 올려놓고 쓸거야. 속도 향상을 위해서 &ndash;&gt;
+                <prop key="prepStmtCacheSize">250</prop> &lt;!&ndash;캐시 사이즈는 250 &ndash;&gt;
+                <prop key="prepStmtCacheSqlLimit">2048</prop>
+            </props>
+        </property>
+    </bean>-->
+
     <bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
         <property name="driverClassName" value="org.mariadb.jdbc.Driver"/>
-        <property name="jdbcUrl" value="jdbc:mariadb://10.41.1.171:3306/bec"/>
+        <property name="jdbcUrl" value="jdbc:mariadb://localhost:3306/bec"/>
         <!--  절대 회사에서 localhost 쓰지 말것,, 웹서버 = db서버가 같은 머신 상에 존재하는 것 => db 뚫리면 웹 뚫리고 웹 뚫리면 db 뚫림!-->
-        <property name="username" value="user"/>
+        <property name="username" value="root"/>
         <property name="password" value="1234"/>
 
         <!--여기부터 hicaricp에 대한 설정-->

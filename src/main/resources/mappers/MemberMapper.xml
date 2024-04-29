@@ -57,23 +57,25 @@
         from tbl_member
         where user_id = #{user_id}
     </select>
-<<<<<<< HEAD
+
+<!--
     <select id="getCartList" resultType="org.fullstack4.springmvc.domain.CartVO">
         SELECT bc.cart_idx, bc.pro_title, bp.pro_price, bc.pro_quantity
-=======
+    </select>
+-->
 
     <select id="getCartList" resultType="org.fullstack4.springmvc.domain.ProductVO">
         SELECT bp.pro_name as pro_name, bp.pro_price as pro_price, bp.pro_amount as pro_amount
->>>>>>> 8e87c59e050ef967060f4df4c526b13d7b1c4ed3
+
         FROM bec_product as bp
         inner join bec_cart AS bc ON bp.pro_idx = bc.pro_idx
         WHERE member_id = #{m_id}
     </select>
-<<<<<<< HEAD
+
     <delete id="cartout">
         delete from bec_cart where cart_idx = #{cart_idx}
     </delete>
-=======
+
 
 
 
@@ -87,5 +89,5 @@
         where member_id=#{arg0} and member_pwd = #{arg1}
     </select>
 
->>>>>>> 8e87c59e050ef967060f4df4c526b13d7b1c4ed3
+
 </mapper>
