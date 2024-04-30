@@ -17,8 +17,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.List;
+import java.util.stream.Stream;
 
 @Log4j2
 @Controller
@@ -85,8 +88,26 @@ public class FaqController {
     }
 
     @GetMapping("/delete")
-    public String deleteAdminGET(int qna_idx) {
-        qnaServiceIf.deleteQna(qna_idx);
+    public String deleteAdminGET(
+                                 @RequestParam(name="qna_idx", required=false) String idxList) {
+
+//        log.info("faqDeleteController");
+//        if (qna_idx > 0) {
+//            qnaServiceIf.deleteQna(qna_idx);
+//            log.info("하나 삭제할게");
+//        }
+//        log.info(idxList);
+//        if (idxList != null && idxList.length > 0) {
+//
+//        }
+//
+//        delete from bec_qna where idx in (idxList)
+        //체크박스 삭제
+        String[] arrIdx = idxList.split(",");
+        Integer[] newArr = Stream.of(arrIdx).mapToInt(Integer::parseInt).boxed().toArray(Integer[]::new);
+          qnaServiceIf.deleteQnaCommu(newArr);
+
+          log.info("idxList : " + idxList);
         return "redirect:/faq/view";
     }
 

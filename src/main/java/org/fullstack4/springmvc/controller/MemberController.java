@@ -47,22 +47,23 @@ public class MemberController {
 
 
     @GetMapping("/view")
-    public void view(//@RequestParam(name="user_id", defaultValue = "") String user_id,
-                     //idx가 빈값이면 value에 0을 넣어줘. 근데 이건 String "0"임. 왜? 자바에서 request의 리턴타입은 무조건 String이라서!
+    public void view(HttpSession session,
                      HttpServletRequest req,
                      Model model ) {
         log.info("========================");
         log.info("MemberController >> view()");
 
-        String member_id = "abc01";
-        MemberDTO memberDTO = memberServiceIf.view(member_id);
 
-        MemberImageDTO memberImageDTO = memberImageServiceIf.viewImg(memberDTO.getMember_id());
+
+        String member_id = String.valueOf(session.getAttribute("member_id"));
+
+        MemberDTO memberDTO = memberServiceIf.view("abc01");
+
+        MemberImageDTO memberImageDTO = memberImageServiceIf.viewImg("abc01");
 
 
         log.info("member_id : " + member_id);
-        HttpSession session = req.getSession();
-        String user_id = String.valueOf(session.getAttribute("user_id"));
+
 
 //        MemberDTO memberDTO = memberServiceIf.view(user_id);
 //
@@ -175,15 +176,15 @@ public class MemberController {
 */
 
     @GetMapping("/modify")
-    public void modifyGET(//@RequestParam(name="member_id", defaultValue = "") String member_id,
+    public void modifyGET(HttpSession session,
                           Model model) {
         log.info("============================");
         log.info("MemberController >> modifyGET()");
 
-        String member_id = "abc01";
+        String member_id = String.valueOf(session.getAttribute("member_id"));
 
-        model.addAttribute("member", memberServiceIf.view(member_id));
-        model.addAttribute("memberImage", memberImageServiceIf.viewImg(memberServiceIf.view(member_id).getMember_id()));
+        model.addAttribute("member", memberServiceIf.view("abc01"));
+        model.addAttribute("memberImage", memberImageServiceIf.viewImg("abc01"));
 
         log.info("============================");
     }
@@ -197,40 +198,7 @@ public class MemberController {
         log.info("============================");
         log.info("MemberController >> modifyPOST()");
 
-//        if (file != null && !file.isEmpty()) {
-//            String uploadFolder = "D:\\java4\\BEC\\src\\main\\webapp\\resources\\uploads\\img\\member";
-//            String orgFile = file.getOriginalFilename(); //원래 파일의 이름
-//            long size = file.getSize();
-//            String fileExt = orgFile.substring(orgFile.lastIndexOf("."), orgFile.length()); // 확장자명
-//            //엑셀.파.일xxx.xls --> 제일 마지막 인덱스의 . 에서부터 파일이름 끝에를 파싱
-//
-//            log.info("============================");
-//            log.info("uploadFolder : " + uploadFolder);
-//            log.info("fileRealName : " + orgFile);
-//            log.info("size : " + size);
-//            log.info("fileExt : " + fileExt);
-//
-//
-//            //새로운 파일명 생성
-//            UUID uuid = UUID.randomUUID();
-//            String[] uuids = uuid.toString().split("-");
-//            String newName = uuids[0];
-//
-//            log.info("uuid : " + uuid);
-//            log.info("uuids : " + uuids);
-//            log.info("newName : " + newName);
-//
-//            String saveFileName = newName + fileExt;
-//
-//            File saveFile = new File(uploadFolder + "\\" + newName + fileExt);
-//
-//            try {
-//                file.transferTo(saveFile);
-//            } catch (IllegalStateException e) {
-//                e.printStackTrace();
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
+
         String saveFileName = FileUtil.createFile(file);
         int resultMemImg = memberServiceIf.modifyImage(memberDTO.getMember_id(), saveFileName);
         //int resultImg = memberImageServiceIf.regist(memberDTO.getMember_id(), orgFile, saveFileName);
@@ -266,6 +234,7 @@ public class MemberController {
         log.info("============================");
         log.info("MemberController >> leavePOST()");
         log.info("============================");
+
         int result = memberServiceIf.delete(member_id);
         if (result > 0) {
             HttpSession session = req.getSession();
