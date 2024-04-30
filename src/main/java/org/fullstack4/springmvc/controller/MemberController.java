@@ -57,9 +57,9 @@ public class MemberController {
 
         String member_id = String.valueOf(session.getAttribute("member_id"));
 
-        MemberDTO memberDTO = memberServiceIf.view("abc01");
+        MemberDTO memberDTO = memberServiceIf.view(member_id);
 
-        MemberImageDTO memberImageDTO = memberImageServiceIf.viewImg("abc01");
+//        MemberImageDTO memberImageDTO = memberImageServiceIf.viewImg(memberDTO.getMember_id());
 
 
         log.info("member_id : " + member_id);
@@ -70,7 +70,7 @@ public class MemberController {
 //        log.info("user_id : " + user_id);
 //        log.info("========================");
         model.addAttribute("member", memberDTO);
-        model.addAttribute("memberImage", memberImageDTO);
+//        model.addAttribute("memberImage", memberImageDTO);
 
 //
 //        //이거 안해주면 jsp에 값 안넘어온다ㅣ@
@@ -183,8 +183,7 @@ public class MemberController {
 
         String member_id = String.valueOf(session.getAttribute("member_id"));
 
-        model.addAttribute("member", memberServiceIf.view("abc01"));
-        model.addAttribute("memberImage", memberImageServiceIf.viewImg("abc01"));
+        model.addAttribute("member", memberServiceIf.view(member_id));
 
         log.info("============================");
     }
@@ -295,7 +294,7 @@ public class MemberController {
         log.info("============================");
         log.info("MemberController >> buyList()");
         String member_id = (String)session.getAttribute("member_id");
-        List<OrderDTO> orderList = memberServiceIf.getOrderList("abc01");
+        List<OrderDTO> orderList = memberServiceIf.getOrderList(member_id);
 
         //PageResponseDTO<BbsDTO> responseDTO = bbsServiceIf.bbsListByPage(pageRequestDTO);
 
@@ -312,7 +311,7 @@ public class MemberController {
         log.info("============================");
         log.info("MemberController >> qnaList()");
         String member_id = (String)session.getAttribute("member_id");
-        PageResponseDTO<QnaDTO> qnaList = memberServiceIf.getQnaList("abc01", "one", pageRequestDTO);
+        PageResponseDTO<QnaDTO> qnaList = memberServiceIf.getQnaList(member_id, "one", pageRequestDTO);
 
         //PageResponseDTO<BbsDTO> responseDTO = bbsServiceIf.bbsListByPage(pageRequestDTO);
 
@@ -333,7 +332,7 @@ public class MemberController {
         log.info("============================");
         log.info("MemberController >> qnaList()");
         String member_id = (String)session.getAttribute("member_id");
-        PageResponseDTO<QnaDTO> qnaList = memberServiceIf.getQnaList("abc01", "qna", pageRequestDTO);
+        PageResponseDTO<QnaDTO> qnaList = memberServiceIf.getQnaList(member_id, "qna", pageRequestDTO);
 
         //PageResponseDTO<BbsDTO> responseDTO = bbsServiceIf.bbsListByPage(pageRequestDTO);
 
@@ -365,7 +364,7 @@ public class MemberController {
                        @Valid PageRequestDTO pageRequestDTO,
                        Model model) {
         String member_id = (String)session.getAttribute("member_id");
-        List<ReviewDTO> reviewList = memberServiceIf.getReviewList("abc01");
+        List<ReviewDTO> reviewList = memberServiceIf.getReviewList(member_id);
 
         //PageResponseDTO<BbsDTO> responseDTO = bbsServiceIf.bbsListByPage(pageRequestDTO);
 

@@ -114,12 +114,12 @@
                                     </c:if>
                                     <button type="reset" class="btn btn-secondary" onclick="location.href='/member/one'">목록으로</button>
 <%--                                   <c:if test="${sessionScope.loginInfo.member_id eq 'admin'} ">--%>
-                                        <c:if test="${qnaDTO.qna_answer_YN eq 'Y'}">
-                                            <button type="button" class="btn btn-primary" onclick="location.href='/one/adminWrite?qna_idx=${qnaDTO.qna_idx}'">답변수정</button>
-                                        </c:if>
-                                        <c:if test="${qnaDTO.qna_answer_YN eq 'N'}">
-                                        <button type="button" class="btn btn-primary" onclick="location.href='/one/adminWrite?qna_idx=${qnaDTO.qna_idx}'">답변달기</button>
-                                        </c:if>
+<%--                                        <c:if test="${qnaDTO.qna_answer_YN eq 'Y'}">--%>
+<%--                                            <button type="button" class="btn btn-primary" onclick="location.href='/one/adminWrite?qna_idx=${qnaDTO.qna_idx}'">답변수정</button>--%>
+<%--                                        </c:if>--%>
+<%--                                        <c:if test="${qnaDTO.qna_answer_YN eq 'N'}">--%>
+<%--                                        <button type="button" class="btn btn-primary" onclick="location.href='/one/adminWrite?qna_idx=${qnaDTO.qna_idx}'">답변달기</button>--%>
+<%--                                        </c:if>--%>
 <%--                                  </c:if>--%>
                                 </div>
 
@@ -145,7 +145,7 @@
                                         <textarea style="resize:none;" class="form-control" readonly rows="10" name="qna_answer" id="qna_answer" >${qnaDTO.qna_answer}</textarea>
 
                                     </div>
-                                    <button type="button" id="adminDelete" class="btn btn-primary" >답변삭제</button>
+<%--                                    <button type="button" id="adminDelete" class="btn btn-primary" >답변삭제</button>--%>
                                 </div>
                             </div>
                         </c:if>
