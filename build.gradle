@@ -100,6 +100,12 @@ dependencies {
   implementation group: 'javax.mail', name: 'mail', version: '1.4.7'
   // https://mvnrepository.com/artifact/org.springframework/spring-context-support
   implementation group: 'org.springframework', name: 'spring-context-support', version: '5.3.24'
+  // https://mvnrepository.com/artifact/net.coobird/thumbnailator
+  implementation group: 'net.coobird', name: 'thumbnailator', version: '0.4.13'
+// https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
+  implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.12.1'
+  // https://mvnrepository.com/artifact/com.fasterxml.jackson.dataformat/jackson-dataformat-xml
+  implementation group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-xml', version: '2.12.1'
 
 }
 

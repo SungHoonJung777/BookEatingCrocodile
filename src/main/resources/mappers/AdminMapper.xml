@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.fullstack4.springmvc.mapper.admin.AdminMapper"> <!--클래스가 있는 풀패키지 정보-->
+
+    <!-- 검색 조건문 -->
+    <sql id="criteria">
+
+            <foreach collection="typeArr" item="type">
+                <trim prefix="AND">
+                    <choose>
+                        <when test="type == 'T'.toString()">
+                             member_name like concat('%',#{keyword},'%')
+                        </when>
+                        <when test="type == 'W'.toString()">
+                              member_id like concat('%',#{keyword},'%' )
+                        </when>
+                    </choose>
+                </trim>
+            </foreach>
+    </sql>
+
+    <sql id="product">
+        <trim prefix="where (" suffix=")" prefixOverrides="OR">
+            <foreach collection="typeArr" item="type">
+                <trim prefix="OR">
+                    <choose>
+                        <when test="type == 'T'.toString()">
+                            pro_name like concat('%',#{keyword},'%')
+                        </when>
+                        <when test="type == 'W'.toString()">
+                            pro_writer like concat('%',#{keyword},'%' )
+                        </when>
+                        <when test="type == 'C'.toString()">
+                            pro_company like concat('%',#{keyword},'%' )
+                        </when>
+                    </choose>
+                </trim>
+            </foreach>
+        </trim>
+    </sql>
+
+    <sql id="order">
+        <trim prefix="where (" suffix=")" prefixOverrides="OR">
+            <foreach collection="typeArr" item="type">
+                <trim prefix="OR">
+                    <choose>
+                        <when test="type == 'T'.toString()">
+                            member_id like concat('%',#{keyword},'%')
+                        </when>
+                        <when test="type == 'W'.toString()">
+                            order_status like concat('%',#{keyword},'%' )
+                        </when>
+                    </choose>
+                </trim>
+            </foreach>
+        </trim>
+    </sql>
+
+    <select id="getMemberCount" resultType="int">
+        select count(*)
+        from bec_member
+        where member_type = 'b'
+
+    </select>
+
+    <select id="getTotalOrder" resultType="int">
+        select sum(order_price)
+        from bec_order
+    </select>
+
+    <select id="getProductCount" resultType="int">
+        select count(*)
+        from bec_product
+    </select>
+
+    <select id="getQnaAnswer" resultType="int">
+        select count(*)
+        from bec_qna
+        where qna_answer_YN = 'N'
+    </select>
+
+    <select id="getMemberList" resultType="org.fullstack4.springmvc.domain.MemberVO">
+        select * from bec_member  where member_type = 'b'
+
+        <if test="keyword != null">
+            <include refid="criteria"></include>
+        </if>
+
+        limit #{skip},#{amount}
+    </select>
+
+    <select id="getMemberCountKeyword" resultType="int">
+        select count(*)
+        from bec_member
+        where member_type = 'b'
+        <if test="keyword != null">
+            <include refid="criteria"></include>
+        </if>
+    </select>
+
+    <delete id="deleteMember">
+        delete from bec_member where member_id=#{member_id}
+    </delete>
+
+    <select id="getProductList" resultType="org.fullstack4.springmvc.domain.ProductVO">
+        select * from bec_product
+        <if test="keyword != null">
+            <include refid="product"></include>
+        </if>
+
+        limit #{skip},#{amount}
+    </select>
+    <select id="getProductCountKeyword" resultType="int">
+        select count(*)
+        from bec_product
+        <if test="keyword != null">
+            <include refid="product"></include>
+        </if>
+    </select>
+
+    <select id="getProductDetail" resultType="org.fullstack4.springmvc.domain.ProductVO">
+        select * from bec_product where pro_idx = #{idx}
+    </select>
+
+    <update id="productModify">
+        UPDATE bec_product SET
+                               pro_name = #{pro_name},
+                               pro_writer = #{pro_writer},
+                               pro_company = #{pro_company},
+                               pro_video = #{pro_video},
+                               pro_price = #{pro_price},
+                               pro_sale = #{pro_sale},
+                               pro_amount = #{pro_amount},
+                               pro_content = #{pro_content},
+                               pro_image = #{pro_image},
+                               pro_category1 = #{pro_category1},
+                               pro_category2 = #{pro_category2},
+                               pro_category3 = #{pro_category3},
+                               pro_modify_date = now()
+        WHERE pro_idx = #{pro_idx}
+    </update>
+
+
+    <delete id="deleteProduct">
+        delete from bec_product where pro_idx=#{idx}
+    </delete>
+
+    <insert id="insertProduct">
+        insert into bec_product (
+            pro_name,
+            pro_writer,
+            pro_company,
+            pro_video,
+            pro_price,
+            pro_sale,
+            pro_amount,
+            pro_content,
+            pro_image,
+            pro_category1,
+            pro_category2,
+            pro_category3,
+            pro_reg_date
+        )
+        values (
+                   #{pro_name},
+                   #{pro_writer},
+                   #{pro_company},
+                   #{pro_video},
+                   #{pro_price},
+                   #{pro_sale},
+                   #{pro_amount},
+                   #{pro_content},
+                   #{pro_image},
+                   #{pro_category1},
+                   #{pro_category2},
+                   #{pro_category3},
+                   now()
+               )
+    </insert>
+
+
+    <select id="getOrderList" resultType="org.fullstack4.springmvc.domain.OrderVO">
+        select * from bec_order
+        <if test="keyword != null">
+            <include refid="order"></include>
+        </if>
+    </select>
+    <select id="getOrderCountKeyword" resultType="int">
+        select count(*)
+        from bec_order
+        <if test="keyword != null">
+            <include refid="order"></include>
+        </if>
+    </select>
+
+
+    <select id="getDeleveryList" resultType="org.fullstack4.springmvc.domain.MemberVO">
+        select * from bec_member  where member_type = 'c'
+
+        <if test="keyword != null">
+            <include refid="criteria"></include>
+        </if>
+
+        limit #{skip},#{amount}
+    </select>
+
+    <select id="getDeleveryCountKeyword" resultType="int">
+        select count(*)
+        from bec_member
+        where member_type = 'c'
+        <if test="keyword != null">
+            <include refid="criteria"></include>
+        </if>
+    </select>
+
+</mapper>
