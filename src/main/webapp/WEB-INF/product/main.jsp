@@ -101,9 +101,13 @@
             <div class="col-lg-12">
                 <div class="row g-4">
                     <div class="col-xl-3">
-                            <form id="frmSearch" name="frmSearch" action="/product/main" method="get">
+                            <form id="frmSearch" name="frmSearch" method="get">
+                              <%--  <input type="hidden" name="sortField" value="${responseDTO.sortField}">
+                                <input type="hidden" name="sortDir" value="${responseDTO.sortDir}">--%>
+
+
                                 <div class="input-group w-100 mx-auto d-flex">
-                                    <input type="search" name="search_word" id="search_word" class="form-control p-3" placeholder="keywords" aria-describedby="search-icon-1">
+                                    <input type="search" name="search_word" id="search_word" class="form-control p-3" placeholder="keywords" aria-describedby="search-icon-1" value="${responseDTO.search_word}">
                                     <span id="search-icon-1" class="input-group-text p-3" onclick="searchProducts();"><i class="fa fa-search"></i></span>
                                 </div>
                             </form>
@@ -112,58 +116,24 @@
                     <div class="col-6"></div>
                     <div class="col-xl-3">
                         <form name="frmSort" id="frmSort" method="get">
-                            <input type="hidden" name="pro_category1" value="${responseDTO.pro_category1}">
-                            <input type="hidden" name="pro_category2" value="${responseDTO.pro_category2}">
-                            <input type="hidden" name="pro_category3" value="${responseDTO.pro_category3}">
-                            <input type="hidden" name="search_word" value="${responseDTO.search_word}">
-                            <%--<input type="hidden" name="page_size" value="${responseDTO.page_size}">
-                            <input type="hidden" name="page" value="${responseDTO.page}">
-                            <input type="hidden" name="search_date1" value="${responseDTO.search_date1}">
-                            <input type="hidden" name="search_date2" value="${responseDTO.search_date2}">--%>
+<%--                            <input type="hidden" name="pro_category1" value="${responseDTO.pro_category1}">--%>
+<%--                            <input type="hidden" name="pro_category2" value="${responseDTO.pro_category2}">--%>
+<%--                            <input type="hidden" name="pro_category3" value="${responseDTO.pro_category3}">--%>
+<%--                            <input type="hidden" name="search_word" value="${responseDTO.search_word}">--%>
+<%--                            <input type="hidden" name="page_size" value="${responseDTO.page_size}">--%>
+<%--                            <input type="hidden" name="page" value="${responseDTO.page}">--%>
+
 
 
                             <div class="bg-light ps-3 py-3 rounded d-flex justify-content-between mb-4">
                                 <label for="sortMethod">정렬 순서:</label>
                                 <select id="sortMethod" name="sortMethod" onchange="goList()" class="border-0 form-select-sm bg-light me-3">
                                     <option value="">선택</option>
-                                    <c:choose>
-                                        <c:when test="${responseDTO.sortField eq 'pro_reg_date' && responseDTO.sortDir eq 'DESC'}">
-                                            <option value="pro_reg_date||DESC" selected>최신순</option>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <option value="pro_reg_date||DESC">최신순</option>
-                                        </c:otherwise>
-                                    </c:choose>
-                                    <c:choose>
-                                        <c:when test="${responseDTO.sortField eq 'pro_reg_date' && responseDTO.sortDir eq 'ASC'}">
-                                            <option value="pro_reg_date||ASC" selected>오래된순</option>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <option value="pro_reg_date||ASC">오래된순</option>
-                                        </c:otherwise>
-                                    </c:choose>
-                                    <c:choose>
-                                        <c:when test="${responseDTO.sortField eq 'pro_price' && responseDTO.sortDir eq 'DESC'}">
-                                            <option value="pro_price||DESC" selected>가격높은순</option>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <option value="pro_price||DESC">가격높은순</option>
-                                        </c:otherwise>
-                                    </c:choose>
-                                    <c:choose>
-                                        <c:when test="${responseDTO.sortField eq 'pro_price' && responseDTO.sortDir eq 'ASC'}">
-                                            <option value="pro_price||ASC" selected>가격낮은순</option>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <option value="pro_price||ASC">가격낮은순</option>
-                                        </c:otherwise>
-                                    </c:choose>
+                                    <option value="pro_reg_date||DESC" <c:if test="${responseDTO.sortField eq 'pro_reg_date' && responseDTO.sortDir eq 'DESC'}"> selected</c:if>>최신순</option>
+                                    <option value="pro_reg_date||ASC" <c:if test="${responseDTO.sortField eq 'pro_reg_date' && responseDTO.sortDir eq 'ASC'}"> selected</c:if>>오래된순</option>
+                                    <option value="pro_price||DESC" <c:if test="${responseDTO.sortField eq 'pro_price' && responseDTO.sortDir eq 'DESC'}"> selected</c:if>>가격높은순</option>
+                                    <option value="pro_price||ASC" <c:if test="${responseDTO.sortField eq 'pro_price' && responseDTO.sortDir eq 'ASC'}"> selected</c:if>>가격낮은순</option>
                                 </select>
-
-
-
-
-
                             </div>
                         </form>
                     </div>
@@ -177,136 +147,137 @@
                                 <div class="mb-3">
                                     <h4>Categories</h4>
                                     <div class="empty"></div>
-                                    <ul class="list-unstyled ps-0 fruite-categorie M01">
-                                        <li class="mb-1 "><a class="nav-link fas fa-apple-alt" href="/product/main?pro_category1=유아">유아</a>
-                                            <ul class="twoDepth M02">
-                                                <li><a href="/product/main?pro_category1=유아&pro_category3=한글">한글</a></li>
-                                                <li><a href="/product/main?pro_category1=유아&pro_category3=영어">영어</a></li>
-                                                <li><a href="/product/main?pro_category1=유아&pro_category3=수학">수학</a></li>
+                                    <ul class="list-unstyled ps-0 fruite-categorie M01" >
+                                        <li class="mb-1 filters" data-category1="유아"><a class="nav-link fas fa-apple-alt" href="#">유아</a>
+                                            <ul class="M02">
+                                                <li class="filters" data-category1="유아" data-category3="한글"><a href="#">한글</a></li>
+                                                <li class="filters" data-category1="유아" data-category3="영어"><a href="#">영어</a></li>
+                                                <li class="filters" data-category1="유아" data-category3="수학"><a href="#">수학</a></li>
                                             </ul>
+
                                         </li>
                                     </ul>
                                     <ul class="list-unstyled ps-0 fruite-categorie M01">
-                                        <li class="mb-1 "><a class="nav-link fas fa-apple-alt" href="/product/main?pro_category1=초등">초등</a>
+                                        <li class="mb-1 filters" data-category1="초등"><a class="nav-link fas fa-apple-alt" href="#">초등</a>
                                             <ul class="M02">
-                                                <li><a href="/product/main?pro_category1=초등&pro_category2=1">1학년</a>
+                                                <li class="filters" data-category1="초등" data-category2="1"><a href="#">1학년</a>
                                                     <ul class="M03">
-                                                        <li><a href="/product/main?pro_category1=초등&pro_category2=1&pro_category3=국어">국어</a></li>
-                                                        <li><a href="/product/main?pro_category1=초등&pro_category2=1&pro_category3=영어">영어</a></li>
-                                                        <li><a href="/product/main?pro_category1=초등&pro_category2=1&pro_category3=수학">수학</a></li>
-                                                        <li><a href="/product/main?pro_category1=초등&pro_category2=1&pro_category3=사회">사회</a></li>
-                                                        <li><a href="/product/main?pro_category1=초등&pro_category2=1&pro_category3=과학">과학</a></li>
+                                                        <li class="filters" data-category1="초등" data-category2="1" data-category3="국어"><a href="#">국어</a></li>
+                                                        <li class="filters" data-category1="초등" data-category2="1" data-category3="영어"><a href="#">영어</a></li>
+                                                        <li class="filters" data-category1="초등" data-category2="1" data-category3="수학"><a href="#">수학</a></li>
+                                                        <li class="filters" data-category1="초등" data-category2="1" data-category3="사회"><a href="#">사회</a></li>
+                                                        <li class="filters" data-category1="초등" data-category2="1" data-category3="과학"><a href="#">과학</a></li>
                                                     </ul>
                                                 </li>
-                                                <li><a href="/product/main?pro_category1=초등&pro_category2=2">2학년</a>
+                                                <li class="filters" data-category1="초등" data-category2="2"><a href="#">2학년</a>
                                                     <ul class="M03">
-                                                        <li><a href="/product/main?pro_category1=초등&pro_category2=2&pro_category3=국어">국어</a></li>
-                                                        <li><a href="/product/main?pro_category1=초등&pro_category2=2&pro_category3=영어">영어</a></li>
-                                                        <li><a href="/product/main?pro_category1=초등&pro_category2=2&pro_category3=수학">수학</a></li>
-                                                        <li><a href="/product/main?pro_category1=초등&pro_category2=2&pro_category3=사회">사회</a></li>
-                                                        <li><a href="/product/main?pro_category1=초등&pro_category2=2&pro_category3=과학">과학</a></li>
+                                                        <li class="filters" data-category1="초등" data-category2="2" data-category3="국어"><a href="#">국어</a></li>
+                                                        <li class="filters" data-category1="초등" data-category2="2" data-category3="영어"><a href="#">영어</a></li>
+                                                        <li class="filters" data-category1="초등" data-category2="2" data-category3="수학"><a href="#">수학</a></li>
+                                                        <li class="filters" data-category1="초등" data-category2="2" data-category3="사회"><a href="#">사회</a></li>
+                                                        <li class="filters" data-category1="초등" data-category2="2" data-category3="과학"><a href="#">과학</a></li>
                                                     </ul>
                                                 </li>
-                                                <li><a href="/product/main?pro_category1=초등&pro_category2=3">3학년</a>
+                                                <li class="filters" data-category1="초등" data-category2="3"><a href="#">3학년</a>
                                                     <ul class="M03">
-                                                        <li><a href="/product/main?pro_category1=초등&pro_category2=3&pro_category3=국어">국어</a></li>
-                                                        <li><a href="/product/main?pro_category1=초등&pro_category2=3&pro_category3=영어">영어</a></li>
-                                                        <li><a href="/product/main?pro_category1=초등&pro_category2=3&pro_category3=수학">수학</a></li>
-                                                        <li><a href="/product/main?pro_category1=초등&pro_category2=3&pro_category3=사회">사회</a></li>
-                                                        <li><a href="/product/main?pro_category1=초등&pro_category2=3&pro_category3=과학">과학</a></li>
+                                                        <li class="filters" data-category1="초등" data-category2="3" data-category3="국어"><a href="#">국어</a></li>
+                                                        <li class="filters" data-category1="초등" data-category2="3" data-category3="영어"><a href="#">영어</a></li>
+                                                        <li class="filters" data-category1="초등" data-category2="3" data-category3="수학"><a href="#">수학</a></li>
+                                                        <li class="filters" data-category1="초등" data-category2="3" data-category3="사회"><a href="#">사회</a></li>
+                                                        <li class="filters" data-category1="초등" data-category2="3" data-category3="과학"><a href="#">과학</a></li>
                                                     </ul>
                                                 </li>
-                                                <li><a href="/product/main?pro_category1=초등&pro_category2=4">4학년</a>
+                                                <li class="filters" data-category1="초등" data-category2="4"><a href="#">4학년</a>
                                                     <ul class="M03">
-                                                        <li><a href="/product/main?pro_category1=초등&pro_category2=4&pro_category3=국어">국어</a></li>
-                                                        <li><a href="/product/main?pro_category1=초등&pro_category2=4&pro_category3=영어">영어</a></li>
-                                                        <li><a href="/product/main?pro_category1=초등&pro_category2=4&pro_category3=수학">수학</a></li>
-                                                        <li><a href="/product/main?pro_category1=초등&pro_category2=4&pro_category3=사회">사회</a></li>
-                                                        <li><a href="/product/main?pro_category1=초등&pro_category2=4&pro_category3=과학">과학</a></li>
+                                                        <li class="filters" data-category1="초등" data-category2="4" data-category3="국어"><a href="#">국어</a></li>
+                                                        <li class="filters" data-category1="초등" data-category2="4" data-category3="영어"><a href="#">영어</a></li>
+                                                        <li class="filters" data-category1="초등" data-category2="4" data-category3="수학"><a href="#">수학</a></li>
+                                                        <li class="filters" data-category1="초등" data-category2="4" data-category3="사회"><a href="#">사회</a></li>
+                                                        <li class="filters" data-category1="초등" data-category2="4" data-category3="과학"><a href="#">과학</a></li>
                                                     </ul>
                                                 </li>
-                                                <li><a href="/product/main?pro_category1=초등&pro_category2=5">5학년</a>
+                                                <li class="filters" data-category1="초등" data-category2="5"><a href="#">5학년</a>
                                                     <ul class="M03">
-                                                        <li><a href="/product/main?pro_category1=초등&pro_category2=5&pro_category3=국어">국어</a></li>
-                                                        <li><a href="/product/main?pro_category1=초등&pro_category2=5&pro_category3=영어">영어</a></li>
-                                                        <li><a href="/product/main?pro_category1=초등&pro_category2=5&pro_category3=수학">수학</a></li>
-                                                        <li><a href="/product/main?pro_category1=초등&pro_category2=5&pro_category3=사회">사회</a></li>
-                                                        <li><a href="/product/main?pro_category1=초등&pro_category2=5&pro_category3=과학">과학</a></li>
+                                                        <li class="filters" data-category1="초등" data-category2="5" data-category3="국어"><a href="#">국어</a></li>
+                                                        <li class="filters" data-category1="초등" data-category2="5" data-category3="영어"><a href="#">영어</a></li>
+                                                        <li class="filters" data-category1="초등" data-category2="5" data-category3="수학"><a href="#">수학</a></li>
+                                                        <li class="filters" data-category1="초등" data-category2="5" data-category3="사회"><a href="#">사회</a></li>
+                                                        <li class="filters" data-category1="초등" data-category2="5" data-category3="과학"><a href="#">과학</a></li>
                                                     </ul>
                                                 </li>
-                                                <li><a href="/product/main?pro_category1=초등&pro_category2=6">6학년</a>
+                                                <li class="filters" data-category1="초등" data-category2="6"><a href="#">6학년</a>
                                                     <ul class="M03">
-                                                        <li><a href="/product/main?pro_category1=초등&pro_category2=6&pro_category3=국어">국어</a></li>
-                                                        <li><a href="/product/main?pro_category1=초등&pro_category2=6&pro_category3=영어">영어</a></li>
-                                                        <li><a href="/product/main?pro_category1=초등&pro_category2=6&pro_category3=수학">수학</a></li>
-                                                        <li><a href="/product/main?pro_category1=초등&pro_category2=6&pro_category3=사회">사회</a></li>
-                                                        <li><a href="/product/main?pro_category1=초등&pro_category2=6&pro_category3=과학">과학</a></li>
-                                                    </ul>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                    <ul class="list-unstyled ps-0 fruite-categorie M01">
-                                        <li class="mb-1 "><a class="nav-link fas fa-apple-alt" href="/product/main?pro_category1=중등">중등</a>
-                                            <ul class="M02">
-                                                <li class=""><a href="/product/main?pro_category1=중등&pro_category2=1">1학년</a>
-                                                    <ul class="M03">
-                                                        <li><a href="/product/main?pro_category1=중등&pro_category2=1&pro_category3=국어">국어</a></li>
-                                                        <li><a href="/product/main?pro_category1=중등&pro_category2=1&pro_category3=영어">영어</a></li>
-                                                        <li><a href="/product/main?pro_category1=중등&pro_category2=1&pro_category3=수학">수학</a></li>
-                                                        <li><a href="/product/main?pro_category1=중등&pro_category2=1&pro_category3=사회">사회</a></li>
-                                                        <li><a href="/product/main?pro_category1=중등&pro_category2=1&pro_category3=과학">과학</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li><a href="/product/main?pro_category1=중등&pro_category2=2">2학년</a>
-                                                    <ul class="M03">
-                                                        <li><a href="/product/main?pro_category1=중등&pro_category2=2&pro_category3=국어">국어</a></li>
-                                                        <li><a href="/product/main?pro_category1=중등&pro_category2=2&pro_category3=영어">영어</a></li>
-                                                        <li><a href="/product/main?pro_category1=중등&pro_category2=2&pro_category3=수학">수학</a></li>
-                                                        <li><a href="/product/main?pro_category1=중등&pro_category2=2&pro_category3=사회">사회</a></li>
-                                                        <li><a href="/product/main?pro_category1=중등&pro_category2=2&pro_category3=과학">과학</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li><a href="/product/main?pro_category1=중등&pro_category2=3">3학년</a>
-                                                    <ul class="M03">
-                                                        <li><a href="/product/main?pro_category1=중등&pro_category2=3&pro_category3=국어">국어</a></li>
-                                                        <li><a href="/product/main?pro_category1=중등&pro_category2=3&pro_category3=영어">영어</a></li>
-                                                        <li><a href="/product/main?pro_category1=중등&pro_category2=3&pro_category3=수학">수학</a></li>
-                                                        <li><a href="/product/main?pro_category1=중등&pro_category2=3&pro_category3=사회">사회</a></li>
-                                                        <li><a href="/product/main?pro_category1=중등&pro_category2=3&pro_category3=과학">과학</a></li>
+                                                        <li class="filters" data-category1="초등" data-category2="6" data-category3="국어"><a href="#">국어</a></li>
+                                                        <li class="filters" data-category1="초등" data-category2="6" data-category3="영어"><a href="#">영어</a></li>
+                                                        <li class="filters" data-category1="초등" data-category2="6" data-category3="수학"><a href="#">수학</a></li>
+                                                        <li class="filters" data-category1="초등" data-category2="6" data-category3="사회"><a href="#">사회</a></li>
+                                                        <li class="filters" data-category1="초등" data-category2="6" data-category3="과학"><a href="#">과학</a></li>
                                                     </ul>
                                                 </li>
                                             </ul>
                                         </li>
                                     </ul>
                                     <ul class="list-unstyled ps-0 fruite-categorie M01">
-                                        <li class="mb-1 "><a class="nav-link fas fa-apple-alt" href="/product/main?pro_category1=고등">고등</a>
+                                        <li class="mb-1 filters" data-category1="중등"><a class="nav-link fas fa-apple-alt" href="#">중등</a>
                                             <ul class="M02">
-                                                <li class=""><a href="/product/main?pro_category1=고등&pro_category2=1">1학년</a>
+                                                <li class="filters" data-category1="중등" data-category2="1"><a href="#">1학년</a>
                                                     <ul class="M03">
-                                                        <li><a href="/product/main?pro_category1=고등&pro_category2=1&pro_category3=국어">국어</a></li>
-                                                        <li><a href="/product/main?pro_category1=고등&pro_category2=1&pro_category3=영어">영어</a></li>
-                                                        <li><a href="/product/main?pro_category1=고등&pro_category2=1&pro_category3=수학">수학</a></li>
-                                                        <li><a href="/product/main?pro_category1=고등&pro_category2=1&pro_category3=사회">사회</a></li>
-                                                        <li><a href="/product/main?pro_category1=고등&pro_category2=1&pro_category3=과학">과학</a></li>
+                                                        <li class="filters" data-category1="중등" data-category2="1" data-category3="국어"><a href="#">국어</a></li>
+                                                        <li class="filters" data-category1="중등" data-category2="1" data-category3="영어"><a href="#">영어</a></li>
+                                                        <li class="filters" data-category1="중등" data-category2="1" data-category3="수학"><a href="#">수학</a></li>
+                                                        <li class="filters" data-category1="중등" data-category2="1" data-category3="사회"><a href="#">사회</a></li>
+                                                        <li class="filters" data-category1="중등" data-category2="1" data-category3="과학"><a href="#">과학</a></li>
                                                     </ul>
                                                 </li>
-                                                <li><a href="/product/main?pro_category1=고등&pro_category2=2">2학년</a>
+                                                <li class="filters" data-category1="중등" data-category2="2"><a href="#">2학년</a>
                                                     <ul class="M03">
-                                                        <li><a href="/product/main?pro_category1=고등&pro_category2=2&pro_category3=국어">국어</a></li>
-                                                        <li><a href="/product/main?pro_category1=고등&pro_category2=2&pro_category3=영어">영어</a></li>
-                                                        <li><a href="/product/main?pro_category1=고등&pro_category2=2&pro_category3=수학">수학</a></li>
-                                                        <li><a href="/product/main?pro_category1=고등&pro_category2=2&pro_category3=사회">사회</a></li>
-                                                        <li><a href="/product/main?pro_category1=고등&pro_category2=2&pro_category3=과학">과학</a></li>
+                                                        <li class="filters" data-category1="중등" data-category2="2" data-category3="국어"><a href="#">국어</a></li>
+                                                        <li class="filters" data-category1="중등" data-category2="2" data-category3="영어"><a href="#">영어</a></li>
+                                                        <li class="filters" data-category1="중등" data-category2="2" data-category3="수학"><a href="#">수학</a></li>
+                                                        <li class="filters" data-category1="중등" data-category2="2" data-category3="사회"><a href="#">사회</a></li>
+                                                        <li class="filters" data-category1="중등" data-category2="2" data-category3="과학"><a href="#">과학</a></li>
                                                     </ul>
                                                 </li>
-                                                <li><a href="/product/main?pro_category1=고등&pro_category2=3">3학년</a>
+                                                <li class="filters" data-category1="중등" data-category2="3"><a href="#">3학년</a>
                                                     <ul class="M03">
-                                                        <li><a href="/product/main?pro_category1=고등&pro_category2=3&pro_category3=국어">국어</a></li>
-                                                        <li><a href="/product/main?pro_category1=고등&pro_category2=3&pro_category3=영어">영어</a></li>
-                                                        <li><a href="/product/main?pro_category1=고등&pro_category2=3&pro_category3=수학">수학</a></li>
-                                                        <li><a href="/product/main?pro_category1=고등&pro_category2=3&pro_category3=사회">사회</a></li>
-                                                        <li><a href="/product/main?pro_category1=고등&pro_category2=3&pro_category3=과학">과학</a></li>
+                                                        <li class="filters" data-category1="중등" data-category2="3" data-category3="국어"><a href="#">국어</a></li>
+                                                        <li class="filters" data-category1="중등" data-category2="3" data-category3="영어"><a href="#">영어</a></li>
+                                                        <li class="filters" data-category1="중등" data-category2="3" data-category3="수학"><a href="#">수학</a></li>
+                                                        <li class="filters" data-category1="중등" data-category2="3" data-category3="사회"><a href="#">사회</a></li>
+                                                        <li class="filters" data-category1="중등" data-category2="3" data-category3="과학"><a href="#">과학</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                    <ul class="list-unstyled ps-0 fruite-categorie M01">
+                                        <li class="mb-1 filters" data-category1="고등"><a class="nav-link fas fa-apple-alt" href="#">고등</a>
+                                            <ul class="M02" >
+                                                <li class="filters" data-category1="고등" data-category2="1"><a href="#">1학년</a>
+                                                    <ul class="M03">
+                                                        <li class="filters" data-category1="고등" data-category2="1" data-category3="국어"><a href="#">국어</a></li>
+                                                        <li class="filters" data-category1="고등" data-category2="1" data-category3="영어"><a href="#">영어</a></li>
+                                                        <li class="filters" data-category1="고등" data-category2="1" data-category3="수학"><a href="#">수학</a></li>
+                                                        <li class="filters" data-category1="고등" data-category2="1" data-category3="사회"><a href="#">사회</a></li>
+                                                        <li class="filters" data-category1="고등" data-category2="1" data-category3="과학"><a href="#">과학</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li class="filters" data-category1="고등" data-category2="2"><a href="#">2학년</a>
+                                                    <ul class="M03">
+                                                        <li class="filters" data-category1="고등" data-category2="2" data-category3="국어"><a href="#">국어</a></li>
+                                                        <li class="filters" data-category1="고등" data-category2="2" data-category3="영어"><a href="#">영어</a></li>
+                                                        <li class="filters" data-category1="고등" data-category2="2" data-category3="수학"><a href="#">수학</a></li>
+                                                        <li class="filters" data-category1="고등" data-category2="2" data-category3="사회"><a href="#">사회</a></li>
+                                                        <li class="filters" data-category1="고등" data-category2="2" data-category3="과학"><a href="#">과학</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li class="filters" data-category1="고등" data-category2="3"><a href="#">3학년</a>
+                                                    <ul class="M03">
+                                                        <li class="filters" data-category1="고등" data-category2="3" data-category3="국어"><a href="#">국어</a></li>
+                                                        <li class="filters" data-category1="고등" data-category2="3" data-category3="영어"><a href="#">영어</a></li>
+                                                        <li class="filters" data-category1="고등" data-category2="3" data-category3="수학"><a href="#">수학</a></li>
+                                                        <li class="filters" data-category1="고등" data-category2="3" data-category3="사회"><a href="#">사회</a></li>
+                                                        <li class="filters" data-category1="고등" data-category2="3" data-category3="과학"><a href="#">과학</a></li>
                                                     </ul>
                                                 </li>
                                             </ul>
@@ -396,8 +367,6 @@
                                 </c:otherwise>
                             </c:choose>
 
-                            <form name="frmPaging" id="frmPaging" method="get">
-
                                 <div class="col-12">
                                     <nav aria-label="Page navigation example pagination ">
                                         <ul class="pagination d-flex justify-content-center mt-5" onclick="goPaging()">
@@ -434,7 +403,6 @@
                                         </ul>
                                     </nav>
                                 </div>
-                            </form>
                         </div>
 
                     </div>
@@ -454,6 +422,56 @@
 <a href="#" class="btn btn-primary border-3 border-primary rounded-circle back-to-top"><i class="fa fa-arrow-up"></i></a>
 
 <script>
+    //카테고리 이동 필터
+    function filterCategory(element) {
+        event.preventDefault();
+        event.stopPropagation();
+        console.log(element);
+        let category1 = element.dataset.category1;
+        let category2 = element.dataset.category2;
+        let category3 = element.dataset.category3;
+        console.log(category1);console.log(category2);console.log(category3);
+
+        let frm = document.createElement("form");
+        frm.id = "frmQuery";
+        frm.action ="/product/main";
+        frm.method="get";
+
+        if (category1) {
+            let input1 = document.createElement("input");
+            input1.name = "pro_category1";
+            input1.value = category1;
+            input1.type="hidden";
+            frm.append(input1);
+        }
+        if (category2) {
+            let input2 = document.createElement("input");
+            input2.name = "pro_category2";
+            input2.value = category2;
+            input2.type="hidden";
+            frm.append(input2);
+        }
+        if (category3) {
+            let input3 = document.createElement("input");
+            input3.name = "pro_category3";
+            input3.value = category3;
+            input3.type="hidden";
+            frm.append(input3);
+        }
+
+        document.body.append(frm);
+        document.getElementById("frmQuery").submit();
+    }
+
+    let filters = document.querySelectorAll(".filters");
+    for (let filter of filters) {
+        filter.addEventListener("click", (e) => {
+           filterCategory(filter);
+        });
+    }
+
+
+
     //정렬 필터
     function goList() {
         const frmSort = document.getElementById("frmSort");
@@ -464,9 +482,10 @@
 
     //검색창
     function searchProducts() {
-            let search_word = document.getElementById('search_word').value;
-            window.location.href = '/product/main?search_word=' + encodeURIComponent(search_word);
+            /*let search_word = document.getElementById('search_word').value;
+            window.location.href = '/product/main?search_word=' + encodeURIComponent(search_word);*/
 
+        const frmSearch = document.getElementById("frmSearch");
 
         //엔터키로 검색 가능
         document.getElementById('search_word').addEventListener('keypress', function(e) {
@@ -476,7 +495,11 @@
             }
         });
 
+        frmSearch.submit();
+
     }
+
+
 
 
     // 페이지 로딩 시작 시 스피너 보여주기

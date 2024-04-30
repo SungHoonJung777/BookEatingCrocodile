@@ -68,10 +68,10 @@
         </if>
         <choose>
             <when test="sortField != null and sortDir != null">
-                ORDER BY ${sortField} ${sortDir}
+                ORDER BY #{sortField} #{sortDir}
             </when>
             <otherwise>
-                ORDER BY BP.pro_reg_date DESC
+                ORDER BY pro_reg_date DESC
             </otherwise>
         </choose>
     </select>
