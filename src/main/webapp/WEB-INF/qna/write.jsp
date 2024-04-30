@@ -16,7 +16,7 @@
             content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
     />
 
-    <title>FAQ</title>
+    <title>1:1 게시판</title>
 
     <meta name="description" content="" />
 
@@ -80,50 +80,35 @@
                 <!-- Content -->
 
                 <div class="container-xxl flex-grow-1 container-p-y">
-                    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">커뮤니티 /</span> FAQ</h4>
+                    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">커뮤니티 /</span> QnA</h4>
 
                     <div class="row">
                         <div class="col-xl">
-
                             <div class="card mb-4">
                                 <div class="card-header d-flex justify-content-between align-items-center">
-                                    <h5 class="mb-0">FAQ</h5>
+                                    <h5 class="mb-0">상품 문의</h5>
                                     <small class="text-muted float-end">등록하기</small>
                                 </div>
-                                <form action="/faq/write" method="post">
-                                    <input type="hidden" value="faq" name="qna_category">
-                                    <input type="hidden" value="admin" name="member_id">
                                 <div class="card-body">
-                                    <div class="mb-3"></div>
-                                    <div class="mb-3">
-
-                                        <input type="hidden"  class="form-control" id="qna_title" name="qna_title" value="faq 제목"/>
-
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label class="form-label" for="basic-default-company">문의 내용</label>
-                                        <textarea style="resize:none;" class="form-control" rows="10"  name="qna_content" id="qna_content" >${qnaDTO.qna_content}</textarea>
-                                        <div id="div_err_qna_content" style="display: none"></div>
-                                    </div>
-
-                                </div>
-                                <div class="card-body">
-
-                                        <input type="hidden" name="qna_idx" value="${qnaDTO.qna_idx}">
+                                    <form action="/qna/write" method="post">
+                                        <input type="hidden" name="member_id" value="abc01">
+                                        <input type="hidden" name="qna_category" value="qna">
                                         <div class="mb-3"></div>
-
                                         <div class="mb-3">
-                                            <label class="form-label" for="basic-default-company">답변 내용</label>
-                                            <textarea class="form-control" rows="20" cols="10" name="qna_answer" id="qna_answer" >${qnaDTO.qna_answer}</textarea>
-                                            <div id="div_err_qna_answer" style="display: none"></div>
+                                            <label class="form-label" for="basic-default-fullname">문의 제목</label>
+                                            <input type="text" class="form-control" id="qna_title" name="qna_title" value="${qnaDTO.qna_title}"/>
+                                            <div id="div_err_qna_title" style="display: none"></div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label" for="basic-default-company">문의 내용</label>
+                                            <textarea class="form-control" rows="20" cols="10" name="qna_content" id="qna_content" valeue="${qnaDTO.qna_content}"></textarea>
+                                            <div id="div_err_qna_content" style="display: none"></div>
                                         </div>
 
                                         <button type="submit" class="btn btn-primary">등록하기</button>
-                                        <button type="reset" class="btn btn-secondary" onclick="location.href='/faq/view'">게시글로 돌아가기</button>
-
+                                        <button type="reset" class="btn btn-secondary" onclick="location.href='/qna/main'">목록으로</button>
+                                    </form>
                                 </div>
-                                </form>
                             </div>
                         </div>
                     </div>

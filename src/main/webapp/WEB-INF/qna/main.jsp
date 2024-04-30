@@ -16,7 +16,7 @@
             content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
     />
 
-    <title>1:1 게시판</title>
+    <title>QnA 게시판</title>
 
     <meta name="description" content="" />
 
@@ -68,7 +68,7 @@
 
     <div class="layout-container layout-content-navbar">
         <!-- Menu -->
-        <jsp:include page="nav.jsp"/>
+
 
         <!-- / Menu -->
 
@@ -80,16 +80,18 @@
                 <!-- Content -->
 
                 <div class="container-xxl flex-grow-1 container-p-y">
-                    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">마이페이지 /</span> 1:1 문의</h4>
+                    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">커뮤니티 /</span> QnA</h4>
 
                     <div class="row">
+                        <form action="/qna/delete" method="get">
                         <div class="col-md-12">
                             <ul class="nav nav-pills flex-column flex-md-row mb-3">
                                 <li class="nav-item">
-                                    <i class="bx bx-user me-1"></i> 1:1
+                                     QnA
                                 </li>
 
                             </ul>
+
                             <div class="card mb-4">
                                 <!-- Notifications -->
                                 <h5 class="card-header">상품 문의/답변</h5>
@@ -100,28 +102,33 @@
                                     <div class="error"></div>
 
                                 </div>
+
                                 <div class="table-responsive">
                                     <table class="table no-wrap">
                                         <thead>
+
                                         <tr>
-                                            <td colspan="5"></td>
-                                            <td ><button class="btn btn-sm btn-primary" onclick="location.href='/one/write'">글 등록</button></td>
-                                        </tr>
-                                        <tr>
+<%--                                            <c:if test="관리자">--%>
+                                            <th><input type="checkbox"  id="chkAll" name="chkAll"  />
+                                                <label for="chkAll"><span></span>전체선택</label></th>
+<%--                                            </c:if>--%>
                                             <th>번호</th>
-                                            <th>주문번호</th>
+                                            <th>문의 제목</th>
                                             <th>작성자</th>
                                             <th>답변상태</th>
                                             <th>등록일</th>
-                                            <th>수정/삭제</th>
                                         </tr>
                                         </thead>
                                         <tbody class="table-border-bottom-0">
 
                                         <c:forEach items="${qnaList.dtoList}" var="dto" varStatus="status">
                                             <tr>
+<%--                                                <c:if test="관리자">--%>
+                                                <td><input type="checkbox"  id="${dto.qna_idx }" name="qna_idx" value="${dto.qna_idx }" />
+                                                    <label for="${dto.qna_idx }"><span></span></label></td>
+<%--                                                </c:if>--%>
                                                 <td class="text-nowrap">${qnaList.total_count - ((qnaList.page-1)*qnaList.page_size + (status.count-1))}</td>
-                                                <td class="text-nowrap"><a href="/one/view?qna_idx=${dto.qna_idx}">${dto.qna_title}</a></td>
+                                                <td class="text-nowrap"><a href="/qna/view?qna_idx=${dto.qna_idx}">${dto.qna_title}</a></td>
                                                 <td class="text-nowrap">${dto.member_id}</td>
 
 
@@ -130,38 +137,29 @@
 
                                                         <td class="text-nowrap"><span class="badge bg-label-success me-1">답변완료</span></td>
                                                         <td class="text-nowrap">${fn:substring(dto.qna_reg_date, 0, 10)} ${fn:substring(dto.qna_reg_date, 11, 20)}</td>
-                                                        <td class="text-nowrap"></td>
+
                                                     </c:when>
                                                     <c:otherwise>
 
                                                         <td> <span class="badge bg-label-warning me-1">답변대기</span></td>
                                                         <td class="text-nowrap">${fn:substring(dto.qna_reg_date, 0, 10)} ${fn:substring(dto.qna_reg_date, 11, 20)}</td>
-                                                        <td class="text-nowrap">
-                                                            <div class="dropdown">
-                                                                <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                                                    <i class="bx bx-dots-vertical-rounded"></i>
-                                                                </button>
-                                                                <div class="dropdown-menu">
-                                                                    <a class="dropdown-item" href="/one/modify?qna_idx=${dto.qna_idx}"><i class="bx bx-edit-alt me-2"></i> Edit</a>
-                                                                    <a class="dropdown-item" id="deleteA" href="/one/delete"><i class="bx bx-trash me-2"></i> Delete</a>
-                                                                </div>
-                                                            </div>
-                                                        </td>
+
                                                     </c:otherwise>
                                                 </c:choose>
 
                                             </tr>
                                             <c:if test="${dto.qna_answer_YN eq 'Y'}">
                                                 <tr>
+                                                    <td></td>
                                                     <td class="text-nowrap"><span class="badge bg-label-info me-1">답변</span></td>
                                                     <td class="text-nowrap">
                                                         <c:set var="answer" value="${dto.qna_answer}" />
                                                         <c:choose>
                                                             <c:when  test="${fn:length(answer) > 10}">
-                                                                <a href="/one/view?qna_idx=${dto.qna_idx}"><strong>${fn:substring(answer, 0, 10)}</strong></a>
+                                                                <a href="/qna/view?qna_idx=${dto.qna_idx}"><strong>${fn:substring(answer, 0, 10)}</strong></a>
                                                             </c:when>
                                                             <c:otherwise>
-                                                                <a href="/one/view?qna_idx=${dto.qna_idx}"><strong>${dto.qna_answer}</strong></a>
+                                                                <a href="/qna/view?qna_idx=${dto.qna_idx}"><strong>${dto.qna_answer}</strong></a>
                                                             </c:otherwise>
                                                         </c:choose>
 
@@ -170,7 +168,7 @@
                                                     <td class="text-nowrap"><strong>관리자</strong></td>
                                                     <td></td>
                                                     <td><strong>${fn:substring(dto.qna_answer_date, 0, 10)} ${fn:substring(dto.qna_answer_date, 11, 20)}</strong></td>
-                                                    <td></td>
+
                                                 </tr>
                                             </c:if>
 
@@ -182,14 +180,30 @@
                                     </table>
                                 </div>
 
-
-
-
-
                                 <!-- /Account -->
                             </div>
 
                         </div>
+
+                        <div class="row">
+                            <div class="col">
+                            </div>
+                            <div class="col">
+                            </div>
+                            <div class="col">
+                            </div>
+                            <div class="col">
+                            </div>
+                            <div class="col">
+                            </div>
+                            <div class="col">
+                                <button class="btn btn-sm btn-primary" onclick="location.href='/qna/write'">글 등록</button>
+<%--                                <c:if test="관리자">--%>
+                                <button type="submit" class="btn btn-sm btn-danger" id="btnDelete" >삭제</button>
+<%--                                </c:if>--%>
+                            </div>
+                        </div>
+                    </form>
                         <div class="col">
                             <div class="demo-inline-spacing">
                                 <!-- Basic Square Pagination -->
@@ -242,7 +256,39 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
 
+    let frm = document.querySelector("#frm");
+    let chkAll = document.querySelector("#chkAll");
+    // 체크박스 전체 선택/해제
+    chkAll.addEventListener("click", (e) =>  {
+        var check = document.querySelectorAll("input[type ='checkbox']");
 
+        check.forEach((checkbox) => {
+            checkbox.checked = chkAll.checked;
+        });
+    });
+
+    // 삭제 버튼 눌렀을 때
+    document.querySelector("#btnDelete").addEventListener("click", (e) => {
+        var check = document.querySelectorAll("input[type ='checkbox']:checked");
+        console.log(check);
+        if (check.length == 0) {
+            alert("하나 이상 선택하세요.");
+            e.preventDefault();
+            return false;
+        } else {
+            let deleteOk = confirm("삭제 하시겠습니까?");
+            if (deleteOk) {
+
+                console.log(check);
+                frm.submit();
+
+            }
+            else {
+                e.preventDefault();
+                return false;
+            }
+        }
+    });
 </script>
 </body>
 </html>

@@ -17,4 +17,7 @@ public interface QnaMapper {
     int registAdmin(QnaAdminDTO qnaAdminDTO);
     int deleteAdmin(int qna_idx);
     int registFaq(QnaVO qnaVO);
+    List<QnaVO> getQna(String qna_category, PageRequestDTO pageRequestDTO);
+    int totalQnaCommu(String qna_category, PageRequestDTO requestDTO);
+    int deleteQnaCommu(Integer[] idxList);
 }

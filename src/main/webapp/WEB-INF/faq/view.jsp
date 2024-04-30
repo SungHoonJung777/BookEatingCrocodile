@@ -10,7 +10,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <meta
             name="viewport"
             content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
@@ -18,29 +18,30 @@
 
     <title>FAQ</title>
 
-    <meta name="description" content="" />
+    <meta name="description" content=""/>
 
     <!-- Favicon -->
     <%--    <link rel="icon" type="image/x-icon" href="/resources/resources/assets/img/favicon/favicon.ico" />--%>
 
     <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
     <link
             href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
             rel="stylesheet"
     />
 
     <!-- Icons. Uncomment required icon fonts -->
-    <link rel="stylesheet" href="/resources/resources/assets/vendor/fonts/boxicons.css" />
+    <link rel="stylesheet" href="/resources/resources/assets/vendor/fonts/boxicons.css"/>
 
     <!-- Core CSS -->
-    <link rel="stylesheet" href="/resources/resources/assets/vendor/css/core.css" class="template-customizer-core-css" />
-    <link rel="stylesheet" href="/resources/resources/vendor/css/theme-default.css" class="template-customizer-theme-css" />
-    <link rel="stylesheet" href="/resources/resources/assets/css/demo.css" />
+    <link rel="stylesheet" href="/resources/resources/assets/vendor/css/core.css" class="template-customizer-core-css"/>
+    <link rel="stylesheet" href="/resources/resources/vendor/css/theme-default.css"
+          class="template-customizer-theme-css"/>
+    <link rel="stylesheet" href="/resources/resources/assets/css/demo.css"/>
 
     <!-- Vendors CSS -->
-    <link rel="stylesheet" href="/resources/resources/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="/resources/resources/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css"/>
 
     <!-- Page CSS -->
 
@@ -54,6 +55,7 @@
         #body {
             margin-top: 180px;
         }
+
         .hiddenRow {
             padding: 0 !important;
         }
@@ -80,11 +82,8 @@
                 <!-- Content -->
 
                 <div class="container-xxl flex-grow-1 container-p-y">
+                    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">커뮤니티 /</span> FAQ</h4>
 
-
-                    <h4 class="py-3 mb-4">
-                        <span class="text-muted fw-light">커뮤니티 /</span> FAQ
-                    </h4>
 
 
                     <!-- Header -->
@@ -92,36 +91,34 @@
                     <!--/ Header -->
 
                     <!-- Navbar pills -->
-                    <div class="row">
-                        <div class="col-md-12">
-                            <ul class="nav nav-pills flex-column flex-sm-row mb-4">
 
-                            </ul>
-                        </div>
-                    </div>
+
                     <!--/ Navbar pills -->
 
                     <!-- User Profile Content -->
+                    <form action="/faq/delete" method="get">
                     <div class="row">
-                        <%--                        <div class="col-xl-4 col-lg-5 col-md-5">--%>
-                        <!-- About User -->
-                        <div class="card mb-4">
-                            <div class="card-body">
 
+                            <%--                        <div class="col-xl-4 col-lg-5 col-md-5">--%>
+                            <!-- About User -->
+                            <div class="card mb-4">
+                                <h5 class="card-header">FAQ</h5>
+                                <div class="card-body">
+                                    <br>
+                                    <span>
+                                    <span class="notificationRequest"><strong>자주 묻는 질문과 답변 입니다.</strong></span></span>
+                                    <div class="error"></div>
+                                </div>
 
 
                                 <div class="table-responsive">
                                     <table class="table no-wrap striped">
                                         <thead>
-                                        <tr >
-                                            <td colspan="2"></td>
-                                            <td >
-                                                <c:if test="관리자">
-                                                    <button class="btn btn-sm btn-primary" onclick="location.href='/faq/write'">글 등록</button>
-                                                </c:if>
-                                            </td>
-                                        </tr>
                                         <tr>
+                                            <%--                                            <c:if test="관리자">--%>
+                                            <th><input type="checkbox" id="chkAll" name="chkAll"/>
+                                                <label for="chkAll"><span></span>전체선택</label></th>
+                                            <%--                                            </c:if>--%>
                                             <th>번호</th>
                                             <th>내용</th>
                                             <th></th>
@@ -131,21 +128,37 @@
 
                                         <c:forEach items="${qnaList.dtoList}" var="dto" varStatus="status">
                                             <tr class="accordion-header" id="heading${status.count}">
+
+                                                    <%--                                                <c:if test="관리자">--%>
+                                                <td><input type="checkbox" id="${dto.qna_idx }" name="qna_idx"
+                                                           value="${dto.qna_idx }"/>
+                                                    <label for="${dto.qna_idx }"><span></span></label></td>
+                                                    <%--                                                </c:if>--%>
                                                 <td class="text-nowrap">${qnaList.total_count - ((qnaList.page-1)*qnaList.page_size + (status.count-1))}</td>
-                                                <td class="text-nowrap">${dto.qna_title}</td>
+                                                <td class="text-nowrap">${dto.qna_content}</td>
                                                 <td>
-                                                    <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#accordion${status.count}" aria-expanded="false" aria-controls="accordion${status.count}"></button>
+                                                    <button type="button" class="accordion-button collapsed"
+                                                            data-bs-toggle="collapse"
+                                                            data-bs-target="#accordion${status.count}"
+                                                            aria-expanded="false"
+                                                            aria-controls="accordion${status.count}"></button>
                                                 </td>
                                             </tr>
-                                            <tr id="accordion${status.count}" class="accordion-collapse collapse" aria-labelledby="heading${status.count}" data-bs-parent="#accordionExample">
-                                                <td ><a><i class="fa-solid fa-arrow-right"></i></a></td>
-                                                <td class="text-nowrap"><strong><textarea style="resize:none;" class="form-control">${dto.qna_answer}</textarea></strong></td>
+                                            <tr id="accordion${status.count}" class="accordion-collapse collapse"
+                                                aria-labelledby="heading${status.count}"
+                                                data-bs-parent="#accordionExample">
+                                                <td><a><i class="fa-solid fa-arrow-right"></i></a></td>
+                                                <td class="text-nowrap"><strong><textarea style="resize:none;"
+                                                                                          class="form-control">${dto.qna_answer}</textarea></strong>
+                                                </td>
                                                 <td>
-<%--                                                    <c:if test="관리자">--%>
-                                                        <button type="submit" class="btn p-0  hide-arrow" onclick="location.href='/faq/modify?qna_idx=${dto.qna_idx}'"  data-bs-toggle="dropdown">
-                                                            <i class="bx bx-edit me-2"></i>
-                                                        </button>
-<%--                                                    </c:if>--%>
+                                                        <%--                                                    <c:if test="관리자">--%>
+                                                    <button type="submit" class="btn p-0  hide-arrow"
+                                                            onclick="location.href='/faq/modify?qna_idx=${dto.qna_idx}'"
+                                                            data-bs-toggle="dropdown">
+                                                        <i class="bx bx-edit me-2"></i>
+                                                    </button>
+                                                        <%--                                                    </c:if>--%>
                                                 </td>
                                             </tr>
 
@@ -155,59 +168,87 @@
                                     </table>
                                 </div>
                             </div>
-                        </div>
-                        <!--/ About User -->
-                        <!-- Profile Overview -->
+                    </div>
 
+                    <!--/ About User -->
+                    <!-- Profile Overview -->
+
+
+
+                <div class="row">
+                    <div class="col">
                     </div>
                     <div class="col">
-                        <div class="demo-inline-spacing">
-                            <!-- Basic Square Pagination -->
-                            <nav aria-label="Page navigation">
-                                <ul class="pagination pagination-round pagination-primary  d-flex justify-content-center">
-                                    <li class="page-item <c:if test="${qnaList.prev_page_flag ne true}"> disabled</c:if> first">
-                                        <a class="page-link"
-                                           data-num="<c:choose><c:when test="${qnaList.prev_page_flag}">${qnaList.page_block_start-1}</c:when><c:otherwise>1</c:otherwise></c:choose>"
-                                           href="<c:choose><c:when test="${qnaList.prev_page_flag}">${qnaList.linkParams}&page=${qnaList.page_block_start-10}</c:when><c:otherwise>#</c:otherwise></c:choose>"><i class="tf-icon bx bx-chevrons-left"></i></a>
-                                    </li>
-                                    <li class="page-item prev">
-                                        <a class="page-link" href="<c:choose><c:when test="${qnaList.page <= qnaList.page_block_start}">#</c:when><c:otherwise>${qnaList.linkParams}&page=${qnaList.page-1}</c:otherwise></c:choose>"><i class="tf-icon bx bx-chevron-left"></i></a>
-                                    </li>
-                                    <c:forEach begin="${qnaList.page_block_start}"
-                                               end="${qnaList.page_block_end}"
-                                               var="page_num">
-                                        <li class="page-item<c:if test="${qnaList.page == page_num}"> active</c:if>">
-                                            <a class="page-link" data-num="${page_num}"
-                                               href="<c:choose><c:when test="${qnaList.page == page_num}">#</c:when><c:otherwise>${qnaList.linkParams}&page=${page_num}</c:otherwise></c:choose>">${page_num}</a>
-                                        </li>
-                                    </c:forEach>
-                                    <li class="page-item prev">
-                                        <a class="page-link" href="<c:choose><c:when test="${qnaList.page >= qnaList.page_block_end}">#</c:when><c:otherwise>${qnaList.linkParams}&page=${qnaList.page + 1}</c:otherwise></c:choose>"><i class="tf-icon bx bx-chevron-right"></i></a>
-                                    </li>
-                                    <li class="page-item <c:if test="${qnaList.next_page_flag ne true}"> disabled</c:if> last">
-                                        <a class="page-link"data-num="<c:choose><c:when test="${qnaList.next_page_flag}">${qnaList.page_block_end+1}</c:when><c:otherwise>${qnaList.page_block_end}</c:otherwise></c:choose>"
-                                           href="<c:choose><c:when test="${qnaList.next_page_flag}">${qnaList.linkParams}&page=${qnaList.page_block_end+1}</c:when><c:otherwise>#</c:otherwise></c:choose>"><i class="tf-icon bx bx-chevrons-right"></i></a>
-                                    </li>
-                                </ul>
-                            </nav>
-                            <!--/ Basic Square Pagination -->
-                        </div>
+                    </div>
+                    <div class="col">
+                    </div>
+                    <div class="col">
+                    </div>
+                    <div class="col">
+                    </div>
+                    <div class="col">
+                        <%--                                <c:if test="관리자">--%>
+                        <button class="btn btn-sm btn-primary" onclick="location.href='/faq/write'">글 등록</button>
+                        <button type="submit" class="btn btn-sm btn-danger" id="btnDelete">삭제</button>
+                        <%--                                </c:if>--%>
                     </div>
                 </div>
-                <!--/ User Profile Content -->
-
+                </form>
+                <div class="col">
+                    <div class="demo-inline-spacing">
+                        <!-- Basic Square Pagination -->
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination pagination-round pagination-primary  d-flex justify-content-center">
+                                <li class="page-item <c:if test="${qnaList.prev_page_flag ne true}"> disabled</c:if> first">
+                                    <a class="page-link"
+                                       data-num="<c:choose><c:when test="${qnaList.prev_page_flag}">${qnaList.page_block_start-1}</c:when><c:otherwise>1</c:otherwise></c:choose>"
+                                       href="<c:choose><c:when test="${qnaList.prev_page_flag}">${qnaList.linkParams}&page=${qnaList.page_block_start-10}</c:when><c:otherwise>#</c:otherwise></c:choose>"><i
+                                            class="tf-icon bx bx-chevrons-left"></i></a>
+                                </li>
+                                <li class="page-item prev">
+                                    <a class="page-link"
+                                       href="<c:choose><c:when test="${qnaList.page <= qnaList.page_block_start}">#</c:when><c:otherwise>${qnaList.linkParams}&page=${qnaList.page-1}</c:otherwise></c:choose>"><i
+                                            class="tf-icon bx bx-chevron-left"></i></a>
+                                </li>
+                                <c:forEach begin="${qnaList.page_block_start}"
+                                           end="${qnaList.page_block_end}"
+                                           var="page_num">
+                                    <li class="page-item<c:if test="${qnaList.page == page_num}"> active</c:if>">
+                                        <a class="page-link" data-num="${page_num}"
+                                           href="<c:choose><c:when test="${qnaList.page == page_num}">#</c:when><c:otherwise>${qnaList.linkParams}&page=${page_num}</c:otherwise></c:choose>">${page_num}</a>
+                                    </li>
+                                </c:forEach>
+                                <li class="page-item prev">
+                                    <a class="page-link"
+                                       href="<c:choose><c:when test="${qnaList.page >= qnaList.page_block_end}">#</c:when><c:otherwise>${qnaList.linkParams}&page=${qnaList.page + 1}</c:otherwise></c:choose>"><i
+                                            class="tf-icon bx bx-chevron-right"></i></a>
+                                </li>
+                                <li class="page-item <c:if test="${qnaList.next_page_flag ne true}"> disabled</c:if> last">
+                                    <a class="page-link"
+                                       data-num="<c:choose><c:when test="${qnaList.next_page_flag}">${qnaList.page_block_end+1}</c:when><c:otherwise>${qnaList.page_block_end}</c:otherwise></c:choose>"
+                                       href="<c:choose><c:when test="${qnaList.next_page_flag}">${qnaList.linkParams}&page=${qnaList.page_block_end+1}</c:when><c:otherwise>#</c:otherwise></c:choose>"><i
+                                            class="tf-icon bx bx-chevrons-right"></i></a>
+                                </li>
+                            </ul>
+                        </nav>
+                        <!--/ Basic Square Pagination -->
+                    </div>
+                </div>
             </div>
-            <!-- / Content -->
+            <!--/ User Profile Content -->
 
-            <!-- Footer -->
-
-            <!-- / Footer -->
-
-            <div class="content-backdrop fade"></div>
         </div>
-        <!-- Content wrapper -->
+        <!-- / Content -->
+
+        <!-- Footer -->
+
+        <!-- / Footer -->
+
+        <div class="content-backdrop fade"></div>
     </div>
-    <!-- / Layout page -->
+    <!-- Content wrapper -->
+</div>
+<!-- / Layout page -->
 </div>
 
 <!-- Overlay -->
@@ -220,7 +261,39 @@
 <script src="https://kit.fontawesome.com/be97bd8e1b.js" crossorigin="anonymous"></script>
 <script>
 
+    let frm = document.querySelector("#frm");
+    let chkAll = document.querySelector("#chkAll");
+    // 체크박스 전체 선택/해제
+    chkAll.addEventListener("click", (e) =>  {
+        var check = document.querySelectorAll("input[type ='checkbox']");
 
+        check.forEach((checkbox) => {
+            checkbox.checked = chkAll.checked;
+        });
+    });
+
+    // 삭제 버튼 눌렀을 때
+    document.querySelector("#btnDelete").addEventListener("click", (e) => {
+        var check = document.querySelectorAll("input[type ='checkbox']:checked");
+        console.log(check);
+        if (check.length == 0) {
+            alert("하나 이상 선택하세요.");
+            e.preventDefault();
+            return false;
+        } else {
+            let deleteOk = confirm("삭제 하시겠습니까?");
+            if (deleteOk) {
+
+                console.log(check);
+                frm.submit();
+
+            }
+            else {
+                e.preventDefault();
+                return false;
+            }
+        }
+    });
 </script>
 </body>
 </html>
