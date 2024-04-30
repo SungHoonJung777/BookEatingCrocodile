@@ -90,7 +90,12 @@
                                     <small class="text-muted float-end"></small>
                                 </div>
                                 <div class="card-body">
-                                    <input type="hidden" name="member_id" value="abc01">
+                                    <div class="mb-3"></div>
+                                    <div class="mb-3">
+                                        <label class="form-label"  for="basic-default-fullname">작성자</label>
+                                        <input type="text" readonly class="form-control" id="member_id" name="member_id" value="${qnaDTO.member_id}"/>
+
+                                    </div>
                                     <input type="hidden" name="qna_category" value="qna">
                                     <div class="mb-3"></div>
                                     <div class="mb-3">
@@ -108,18 +113,19 @@
                                         <textarea style="resize:none;" class="form-control" readonly name="qna_content" rows="10"  id="qna_content" >${qnaDTO.qna_content}</textarea>
 
                                     </div>
-                                    <c:if test="${qnaDTO.qna_answer_YN eq 'N'}">
+                                    <c:if test="${qnaDTO.qna_answer_YN eq 'N' and (qnaDTO.member_id eq sessionScope.member_id)}">
                                         <button type="submit" class="btn btn-primary" onclick="location.href='/qna/modify?qna_idx=${qnaDTO.qna_idx}'">수정하기</button>
+                                        <button type="button" id="deleteA" onclick="qnaDelete(${qnaDTO.qna_idx})"  class="btn btn-danger" >글 삭제</button>
 
                                     </c:if>
                                     <button type="reset" class="btn btn-secondary" onclick="location.href='/qna/main'">목록으로</button>
                                     <%--                                   <c:if test="${sessionScope.loginInfo.member_id eq 'admin'} ">--%>
                                     <c:if test="${qnaDTO.qna_answer_YN eq 'Y'}">
-                                        <button type="button" class="btn btn-primary" onclick="location.href='/qna/adminWrite?qna_idx=${qnaDTO.qna_idx}'">답변수정</button>
+<%--                                        <button type="button" class="btn btn-primary" onclick="location.href='/qna/adminWrite?qna_idx=${qnaDTO.qna_idx}'">답변수정</button>--%>
                                     </c:if>
-                                    <c:if test="${qnaDTO.qna_answer_YN eq 'N'}">
-                                        <button type="button" id="deleteA" onclick="qnaDelete(${qnaDTO.qna_idx})"  class="btn btn-danger" >글 삭제</button>
-                                        <button type="button" class="btn btn-primary" onclick="location.href='/qna/adminWrite?qna_idx=${qnaDTO.qna_idx}'">답변달기</button>
+                                    <c:if test="${qnaDTO.qna_answer_YN eq 'N' and (qnaDTO.member_id eq sessionScope.member_id)}">
+
+<%--                                        <button type="button" class="btn btn-primary" onclick="location.href='/qna/adminWrite?qna_idx=${qnaDTO.qna_idx}'">답변달기</button>--%>
                                     </c:if>
                                     <%--                                  </c:if>--%>
                                 </div>
@@ -146,7 +152,7 @@
                                             <textarea style="resize:none;" class="form-control" readonly rows="10" name="qna_answer" id="qna_answer" >${qnaDTO.qna_answer}</textarea>
 
                                         </div>
-                                        <button type="button" id="adminDelete" class="btn btn-primary" >답변삭제</button>
+<%--                                        <button type="button" id="adminDelete" class="btn btn-primary" >답변삭제</button>--%>
                                     </div>
                                 </div>
                             </c:if>

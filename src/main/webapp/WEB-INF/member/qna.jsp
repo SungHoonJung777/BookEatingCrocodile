@@ -103,17 +103,17 @@
                                 <div class="table-responsive">
                                     <table class="table no-wrap">
                                         <thead>
-                                        <tr>
-                                            <td colspan="5"></td>
-                                            <td ><button class="btn btn-sm btn-primary" onclick="location.href='/one/write'">글 등록</button></td>
-                                        </tr>
+<%--                                        <tr>--%>
+<%--                                            <td colspan="5"></td>--%>
+<%--                                            <td ><button class="btn btn-sm btn-primary" onclick="location.href='/one/write'">글 등록</button></td>--%>
+<%--                                        </tr>--%>
                                         <tr>
                                             <th>번호</th>
-                                            <th>주문번호</th>
+                                            <th>문의제목</th>
                                             <th>작성자</th>
                                             <th>답변상태</th>
                                             <th>등록일</th>
-                                            <th>수정/삭제</th>
+<%--                                            <th>수정/삭제</th>--%>
                                         </tr>
                                         </thead>
                                         <tbody class="table-border-bottom-0">
@@ -121,7 +121,7 @@
                                         <c:forEach items="${qnaList.dtoList}" var="dto" varStatus="status">
                                             <tr>
                                                 <td class="text-nowrap">${qnaList.total_count - ((qnaList.page-1)*qnaList.page_size + (status.count-1))}</td>
-                                                <td class="text-nowrap"><a href="/one/view?qna_idx=${dto.qna_idx}">${dto.qna_title}</a></td>
+                                                <td class="text-nowrap"><a href="/qna/view?qna_idx=${dto.qna_idx}">${dto.qna_title}</a></td>
                                                 <td class="text-nowrap">${dto.member_id}</td>
 
 
@@ -136,17 +136,17 @@
 
                                                         <td> <span class="badge bg-label-warning me-1">답변대기</span></td>
                                                         <td class="text-nowrap">${fn:substring(dto.qna_reg_date, 0, 10)} ${fn:substring(dto.qna_reg_date, 11, 20)}</td>
-                                                        <td class="text-nowrap">
-                                                            <div class="dropdown">
-                                                                <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                                                    <i class="bx bx-dots-vertical-rounded"></i>
-                                                                </button>
-                                                                <div class="dropdown-menu">
-                                                                    <a class="dropdown-item" href="/one/modify?qna_idx=${dto.qna_idx}"><i class="bx bx-edit-alt me-2"></i> Edit</a>
-                                                                    <a class="dropdown-item" id="deleteA" href="/one/delete"><i class="bx bx-trash me-2"></i> Delete</a>
-                                                                </div>
-                                                            </div>
-                                                        </td>
+<%--                                                        <td class="text-nowrap">--%>
+<%--                                                            <div class="dropdown">--%>
+<%--                                                                <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">--%>
+<%--                                                                    <i class="bx bx-dots-vertical-rounded"></i>--%>
+<%--                                                                </button>--%>
+<%--                                                                <div class="dropdown-menu">--%>
+<%--                                                                    <a class="dropdown-item" href="/one/modify?qna_idx=${dto.qna_idx}"><i class="bx bx-edit-alt me-2"></i> Edit</a>--%>
+<%--                                                                    <a class="dropdown-item" id="deleteA" href="/one/delete"><i class="bx bx-trash me-2"></i> Delete</a>--%>
+<%--                                                                </div>--%>
+<%--                                                            </div>--%>
+<%--                                                        </td>--%>
                                                     </c:otherwise>
                                                 </c:choose>
 
@@ -158,10 +158,10 @@
                                                         <c:set var="answer" value="${dto.qna_answer}" />
                                                         <c:choose>
                                                             <c:when  test="${fn:length(answer) > 10}">
-                                                                <a href="/one/view?qna_idx=${dto.qna_idx}"><strong>${fn:substring(answer, 0, 10)}</strong></a>
+                                                                <a href="/qna/view?qna_idx=${dto.qna_idx}"><strong>${fn:substring(answer, 0, 10)}</strong></a>
                                                             </c:when>
                                                             <c:otherwise>
-                                                                <a href="/one/view?qna_idx=${dto.qna_idx}"><strong>${dto.qna_answer}</strong></a>
+                                                                <a href="/qna/view?qna_idx=${dto.qna_idx}"><strong>${dto.qna_answer}</strong></a>
                                                             </c:otherwise>
                                                         </c:choose>
 

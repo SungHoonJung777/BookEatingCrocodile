@@ -91,7 +91,7 @@
                                 </div>
                                 <div class="card-body">
                                     <form action="/one/write" method="post">
-                                        <input type="hidden" name="member_id" value="abc01">
+                                        <input type="hidden" name="member_id" value=${sessionScope.member_id}>
                                         <input type="hidden" name="qna_category" value="one">
                                         <div class="mb-3"></div>
                                         <div class="mb-3">
