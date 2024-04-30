@@ -15,5 +15,6 @@ public interface ProductMapper {
 
     List<ProductVO> productListByPage(PageRequestDTO pageRequestDTO);
 
+/*    List<ProductVO> indexRandomList();*/
 
 }

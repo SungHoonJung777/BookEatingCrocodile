@@ -32,4 +32,5 @@ public class ProductVO {
     private int pro_quantity;
 
     private int pro_sale_price;
+    private int review_star_avg;
 }

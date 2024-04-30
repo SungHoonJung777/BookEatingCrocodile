@@ -11,4 +11,24 @@
     </select>
 
 
+    <insert id="review_regist">
+        insert into bec_review (pro_idx, member_id, review_content, review_title, review_star, review_reg_date)
+        values(#{pro_idx}, #{member_id}, #{review_content}, #{review_content}, #{review_star}, now())
+    </insert>
+
+    <delete id="review_delete">
+        delete from bec_review where review_idx = #{review_idx}
+    </delete>
+
+    <select id="review_star_num">
+        select review_star
+        from bec_review
+        where review_idx = #{review_idx}
+    </select>
+
+    <select id="review_star_avg">
+        select floor(avg(review_star))
+        from bec_review
+        where pro_idx = #{pro_idx}
+    </select>
 </mapper>

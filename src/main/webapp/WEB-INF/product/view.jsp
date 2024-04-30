@@ -42,6 +42,9 @@
     <link href="/resources/resources/css/style.css" rel="stylesheet">
 
     <link href="/resources/resources/css/product.css" rel="stylesheet">
+
+    <!-- 별점 매기기 사용 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
 </head>
 
 <body>
@@ -91,10 +94,13 @@
         <div class="pro_view_title">
             <h1>${product.pro_name}</h1>
             <div class="pro_view_titleP">
-                <span class="pro_view_titleV">${product.pro_writer}</span>
-                <span class="pro_view_titleV">${product.pro_company}</span>
-                <span class="pro_view_titleV">${product.pro_reg_date}</span>
+                <div class="d-flex">
+                    <span class="pro_view_titleV">${product.pro_writer}</span>
+                    <span class="pro_view_titleV">${product.pro_company}</span>
+                    <span class="pro_view_titleV">${product.pro_reg_date}</span>
+                </div>
             </div>
+
         </div>
         <div class="row g-4 mb-5">
             <div class="col-lg-8 col-xl-9">
@@ -108,6 +114,45 @@
                     </div>
                     <div class="col-lg-6">
                         <h4 class="fw-bold mb-3">${product.pro_name}</h4>
+                        <div class="d-flex mb-4">
+                            <c:choose>
+                                <c:when test="${review_star_avg eq '1'}">
+                                    <i class="fa fa-star text-secondary"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                </c:when>
+                                <c:when test="${review_star_avg eq '2'}">
+                                    <i class="fa fa-star text-secondary"></i>
+                                    <i class="fa fa-star text-secondary"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                </c:when>
+                                <c:when test="${review_star_avg eq '3'}">
+                                    <i class="fa fa-star text-secondary"></i>
+                                    <i class="fa fa-star text-secondary"></i>
+                                    <i class="fa fa-star text-secondary"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                </c:when>
+                                <c:when test="${review_star_avg eq '4'}">
+                                    <i class="fa fa-star text-secondary"></i>
+                                    <i class="fa fa-star text-secondary"></i>
+                                    <i class="fa fa-star text-secondary"></i>
+                                    <i class="fa fa-star text-secondary"></i>
+                                    <i class="fa fa-star"></i>
+                                </c:when>
+                                <c:otherwise>
+                                    <i class="fa fa-star text-secondary"></i>
+                                    <i class="fa fa-star text-secondary"></i>
+                                    <i class="fa fa-star text-secondary"></i>
+                                    <i class="fa fa-star text-secondary"></i>
+                                    <i class="fa fa-star text-secondary"></i>
+                                </c:otherwise>
+                            </c:choose>
+                        </div>
                         <div class="book_content1">
                             <h5 class="fw-bold mb-3 text-danger text-decoration-line-through">정가 : <fmt:formatNumber value="${product.pro_price}" pattern="#,###"/>원</h5>
                             <h3 class="fw-bold mb-3">할인가 : <fmt:formatNumber value="${product.pro_sale_price}" pattern="#,###"/>원</h3>
@@ -115,14 +160,10 @@
                         <div class="book_content1">
                             <h5>마일리지 : </h5>
                             <h5>배송료 : 3,000원</h5>
+                            <br>
+                            <p>재고량 : ${product.pro_amount}권</p>
                         </div>
-                        <div class="d-flex mb-4">
-                            <i class="fa fa-star text-secondary"></i>
-                            <i class="fa fa-star text-secondary"></i>
-                            <i class="fa fa-star text-secondary"></i>
-                            <i class="fa fa-star text-secondary"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
+
 
                         <div class="input-group quantity mb-5" style="width: 100px; margin-top: 15px;">
                             <div class="input-group-btn">
@@ -137,7 +178,7 @@
                                 </button>
                             </div>
                         </div>
-                        <a href="/member/cart?member_id=${sessionScope.member_id}" class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary payBtn"><i class="fa fa-shopping-bag me-2 text-primary"></i> 장바구니</a>
+                        <a href="/member/cart?member_id=" class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary payBtn"><i class="fa fa-shopping-bag me-2 text-primary"></i> 장바구니</a>
                         <a href="#" class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary payBtn"><i class="fas fa-copyright me-2 text-primary"></i> 바로구매</a>
 
                     </div>
@@ -173,121 +214,255 @@
                                 <p>${pro_content}</p>
                             </div>
                             <div class="tab-pane" id="nav-mission" role="tabpanel" aria-labelledby="nav-mission-tab">
-                                <c:choose>
-                                    <c:when test="${reviewVO != null}">
-                                        <c:forEach var="review" items="${reviewVO}">
-                                            <div class="d-flex">
-                                                <img src="img/avatar.jpg" class="img-fluid rounded-circle p-3" style="width: 100px; height: 100px;" alt="">
-                                                <div class="">
-                                                    <p class="mb-2" style="font-size: 14px;">${review.review_reg_date}</p>
-                                                    <div class="d-flex justify-content-between">
-                                                        <h5>${review.member_id}</h5>
-                                                        <div class="d-flex mb-3">
-                                                            <i class="fa fa-star text-secondary"></i>
-                                                            <i class="fa fa-star text-secondary"></i>
-                                                            <i class="fa fa-star text-secondary"></i>
-                                                            <i class="fa fa-star text-secondary"></i>
-                                                            <i class="fa fa-star"></i>
-                                                        </div>
-                                                    </div>
-                                                    <h5>${review.review_title}</h5>
-                                                    <p>${review.review_content}</p>
-                                                </div>
-                                            </div>
-                                        </c:forEach>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <p>리뷰가 없습니다.</p>
-                                    </c:otherwise>
-                                </c:choose>
+                                <form name="frmDelete" id="frmDelete" method="post" action="/product/reviewDelete">
 
-                            </div>
-                            <div class="tab-pane" id="nav-vision" role="tabpanel">
-                                <p class="text-dark">Tempor erat elitr rebum at clita. Diam dolor diam ipsum et tempor sit. Aliqu diam
-                                    amet diam et eos labore. 3</p>
-                                <p class="mb-0">Diam dolor diam ipsum et tempor sit. Aliqu diam amet diam et eos labore.
-                                    Clita erat ipsum et lorem et sit</p>
+                                    <c:choose>
+                                        <c:when test="${reviewVO != null}">
+                                            <c:forEach var="review" items="${reviewVO}">
+                                                <div class="d-flex">
+                                                    <input type="hidden" name="pro_idx" id="pro_idx" value="${review.pro_idx}"/>
+                                                    <input type="hidden" name="review_idx" id="review_idx" value="${review.review_idx}"/>
+                                                    <img src="img/avatar.jpg" class="img-fluid rounded-circle p-3" style="width: 100px; height: 100px;" alt="">
+                                                    <div class="d-flex">
+                                                        <div class="">
+                                                            <p class="mb-2" style="font-size: 14px;">${review.review_reg_date}</p>
+                                                            <div class="d-flex justify-content-between">
+                                                                <h5>${review.member_id}</h5>
+                                                                <div class="d-flex mb-3">
+                                                                    <c:choose>
+                                                                        <c:when test="${review.review_star eq '1'}">
+                                                                            <i class="fa fa-star text-secondary"></i>
+                                                                            <i class="fa fa-star"></i>
+                                                                            <i class="fa fa-star"></i>
+                                                                            <i class="fa fa-star"></i>
+                                                                            <i class="fa fa-star"></i>
+                                                                        </c:when>
+                                                                        <c:when test="${review.review_star eq '2'}">
+                                                                            <i class="fa fa-star text-secondary"></i>
+                                                                            <i class="fa fa-star text-secondary"></i>
+                                                                            <i class="fa fa-star"></i>
+                                                                            <i class="fa fa-star"></i>
+                                                                            <i class="fa fa-star"></i>
+                                                                        </c:when>
+                                                                        <c:when test="${review.review_star eq '3'}">
+                                                                            <i class="fa fa-star text-secondary"></i>
+                                                                            <i class="fa fa-star text-secondary"></i>
+                                                                            <i class="fa fa-star text-secondary"></i>
+                                                                            <i class="fa fa-star"></i>
+                                                                            <i class="fa fa-star"></i>
+                                                                        </c:when>
+                                                                        <c:when test="${review.review_star eq '4'}">
+                                                                            <i class="fa fa-star text-secondary"></i>
+                                                                            <i class="fa fa-star text-secondary"></i>
+                                                                            <i class="fa fa-star text-secondary"></i>
+                                                                            <i class="fa fa-star text-secondary"></i>
+                                                                            <i class="fa fa-star"></i>
+                                                                        </c:when>
+                                                                        <c:otherwise>
+                                                                            <i class="fa fa-star text-secondary"></i>
+                                                                            <i class="fa fa-star text-secondary"></i>
+                                                                            <i class="fa fa-star text-secondary"></i>
+                                                                            <i class="fa fa-star text-secondary"></i>
+                                                                            <i class="fa fa-star text-secondary"></i>
+                                                                        </c:otherwise>
+                                                                    </c:choose>
+                                                                </div>
+                                                            </div>
+                                                            <h5>${review.review_title}</h5>
+                                                            <p>${review.review_content}</p>
+
+                                                        </div>
+                                                        <button type="submit" onclick="goDelete()" id="review_delete_btn" name="review_delete_btn" class="btn border border-secondary text-primary rounded-pill px-4 py-3 review_del_btn">삭제</button>
+                                                    </div>
+                                                </div>
+
+                                            </c:forEach>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <p>리뷰가 없습니다.</p>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </form>
                             </div>
                         </div>
                     </div>
-                    <form action="#">
-                        <h4 class="mb-5 fw-bold">Leave a Reply</h4>
+                    <form name="frmReview" id="frmReview" action="/product/view" method="post">
+                        <h4 class="mb-5 fw-bold">리뷰 작성하기</h4>
                         <div class="row g-4">
-                            <div class="col-lg-6">
-                                <div class="border-bottom rounded">
-                                    <input type="text" class="form-control border-0 me-4" placeholder="Yur Name *">
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="border-bottom rounded">
-                                    <input type="email" class="form-control border-0" placeholder="Your Email *">
-                                </div>
-                            </div>
-                            <div class="col-lg-12">
-                                <div class="border-bottom rounded my-4">
-                                    <textarea name="" id="" class="form-control border-0" cols="30" rows="8" placeholder="Your Review *" spellcheck="false"></textarea>
-                                </div>
-                            </div>
-                            <div class="col-lg-12">
-                                <div class="d-flex justify-content-between py-3 mb-5">
-                                    <div class="d-flex align-items-center">
-                                        <p class="mb-0 me-3">Please rate:</p>
-                                        <div class="d-flex align-items-center" style="font-size: 12px;">
-                                            <i class="fa fa-star text-muted"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                        </div>
+                                <input type="hidden" name="pro_idx" value="${product.pro_idx}">
+                                <div class="col-lg-12">
+                                    <div class="border-bottom rounded">
+                                        <input type="text" name="review_title" id="review_title"  class="form-control border-0" placeholder="제목을 입력하세요 *">
                                     </div>
-                                    <a href="#" class="btn border border-secondary text-primary rounded-pill px-4 py-3"> Post Comment</a>
                                 </div>
-                            </div>
+                                <div class="col-lg-12">
+                                    <div class="border-bottom rounded my-4">
+                                        <textarea name="review_content" id="review_content" class="form-control border-0" cols="30" rows="8" placeholder="리뷰 내용을 입력하세요 *" spellcheck="false"></textarea>
+                                    </div>
+                                </div>
+
+                                <br>
+
+                                <div class="rating">
+
+                                    <span class="rating__result star_span"></span>
+                                    <i class="fa fa-star text-secondary first_star"></i>
+                                    <i class="rating__star far fa-star"></i>
+                                    <i class="rating__star far fa-star"></i>
+                                    <i class="rating__star far fa-star"></i>
+                                    <i class="rating__star far fa-star"></i>
+                                </div>
+                                <button type="submit" name="reviewBtn" id="reviewBtn" class="btn border border-secondary text-primary rounded-pill px-4 py-3 review_regist_btn">작성 완료</button>
+                                <input type="hidden" name="review_star" id="review_star" class="rating__input" readonly/>
                         </div>
                     </form>
                 </div>
             </div>
             <div class="col-lg-4 col-xl-3">
                 <div class="row g-4 fruite">
-                    <div class="col-lg-12">
+                    <div class="col-lg-12 ">
                         <form id="frmSearch" name="frmSearch" action="/product/main" method="get">
                             <div class="input-group w-100 mx-auto d-flex mb-4">
                                 <input type="search" name="search_word" id="search_word" class="form-control p-3" placeholder="keywords" aria-describedby="search-icon-1">
                                 <span id="search-icon-1" class="input-group-text p-3" onclick="searchProducts();"><i class="fa fa-search"></i></span>
                             </div>
                         </form>
-                        <div class="mb-4">
+                        <div class="mb-3 sidebar_menu px-3">
                             <h4>Categories</h4>
-                            <ul class="list-unstyled fruite-categorie">
-                                <li>
-                                    <div class="d-flex justify-content-between fruite-name">
-                                        <a href="#"><i class="fas fa-apple-alt me-2"></i>Apples</a>
-                                        <span>(3)</span>
-                                    </div>
+                            <div class="empty"></div>
+                            <ul class="list-unstyled ps-0 fruite-categorie M01">
+                                <li class="mb-1 "><a class="nav-link fas fa-apple-alt" href="/product/main?pro_category1=유아">유아</a>
+                                    <ul class="twoDepth M02">
+                                        <li><a href="/product/main?pro_category1=유아&pro_category3=한글">한글</a></li>
+                                        <li><a href="/product/main?pro_category1=유아&pro_category3=영어">영어</a></li>
+                                        <li><a href="/product/main?pro_category1=유아&pro_category3=수학">수학</a></li>
+                                    </ul>
                                 </li>
-                                <li>
-                                    <div class="d-flex justify-content-between fruite-name">
-                                        <a href="#"><i class="fas fa-apple-alt me-2"></i>Oranges</a>
-                                        <span>(5)</span>
-                                    </div>
+                            </ul>
+                            <ul class="list-unstyled ps-0 fruite-categorie M01">
+                                <li class="mb-1 "><a class="nav-link fas fa-apple-alt" href="/product/main?pro_category1=초등">초등</a>
+                                    <ul class="M02">
+                                        <li><a href="/product/main?pro_category1=초등&pro_category2=1">1학년</a>
+                                            <ul class="M03">
+                                                <li><a href="/product/main?pro_category1=초등&pro_category2=1&pro_category3=국어">국어</a></li>
+                                                <li><a href="/product/main?pro_category1=초등&pro_category2=1&pro_category3=영어">영어</a></li>
+                                                <li><a href="/product/main?pro_category1=초등&pro_category2=1&pro_category3=수학">수학</a></li>
+                                                <li><a href="/product/main?pro_category1=초등&pro_category2=1&pro_category3=사회">사회</a></li>
+                                                <li><a href="/product/main?pro_category1=초등&pro_category2=1&pro_category3=과학">과학</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="/product/main?pro_category1=초등&pro_category2=2">2학년</a>
+                                            <ul class="M03">
+                                                <li><a href="/product/main?pro_category1=초등&pro_category2=2&pro_category3=국어">국어</a></li>
+                                                <li><a href="/product/main?pro_category1=초등&pro_category2=2&pro_category3=영어">영어</a></li>
+                                                <li><a href="/product/main?pro_category1=초등&pro_category2=2&pro_category3=수학">수학</a></li>
+                                                <li><a href="/product/main?pro_category1=초등&pro_category2=2&pro_category3=사회">사회</a></li>
+                                                <li><a href="/product/main?pro_category1=초등&pro_category2=2&pro_category3=과학">과학</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="/product/main?pro_category1=초등&pro_category2=3">3학년</a>
+                                            <ul class="M03">
+                                                <li><a href="/product/main?pro_category1=초등&pro_category2=3&pro_category3=국어">국어</a></li>
+                                                <li><a href="/product/main?pro_category1=초등&pro_category2=3&pro_category3=영어">영어</a></li>
+                                                <li><a href="/product/main?pro_category1=초등&pro_category2=3&pro_category3=수학">수학</a></li>
+                                                <li><a href="/product/main?pro_category1=초등&pro_category2=3&pro_category3=사회">사회</a></li>
+                                                <li><a href="/product/main?pro_category1=초등&pro_category2=3&pro_category3=과학">과학</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="/product/main?pro_category1=초등&pro_category2=4">4학년</a>
+                                            <ul class="M03">
+                                                <li><a href="/product/main?pro_category1=초등&pro_category2=4&pro_category3=국어">국어</a></li>
+                                                <li><a href="/product/main?pro_category1=초등&pro_category2=4&pro_category3=영어">영어</a></li>
+                                                <li><a href="/product/main?pro_category1=초등&pro_category2=4&pro_category3=수학">수학</a></li>
+                                                <li><a href="/product/main?pro_category1=초등&pro_category2=4&pro_category3=사회">사회</a></li>
+                                                <li><a href="/product/main?pro_category1=초등&pro_category2=4&pro_category3=과학">과학</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="/product/main?pro_category1=초등&pro_category2=5">5학년</a>
+                                            <ul class="M03">
+                                                <li><a href="/product/main?pro_category1=초등&pro_category2=5&pro_category3=국어">국어</a></li>
+                                                <li><a href="/product/main?pro_category1=초등&pro_category2=5&pro_category3=영어">영어</a></li>
+                                                <li><a href="/product/main?pro_category1=초등&pro_category2=5&pro_category3=수학">수학</a></li>
+                                                <li><a href="/product/main?pro_category1=초등&pro_category2=5&pro_category3=사회">사회</a></li>
+                                                <li><a href="/product/main?pro_category1=초등&pro_category2=5&pro_category3=과학">과학</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="/product/main?pro_category1=초등&pro_category2=6">6학년</a>
+                                            <ul class="M03">
+                                                <li><a href="/product/main?pro_category1=초등&pro_category2=6&pro_category3=국어">국어</a></li>
+                                                <li><a href="/product/main?pro_category1=초등&pro_category2=6&pro_category3=영어">영어</a></li>
+                                                <li><a href="/product/main?pro_category1=초등&pro_category2=6&pro_category3=수학">수학</a></li>
+                                                <li><a href="/product/main?pro_category1=초등&pro_category2=6&pro_category3=사회">사회</a></li>
+                                                <li><a href="/product/main?pro_category1=초등&pro_category2=6&pro_category3=과학">과학</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
                                 </li>
-                                <li>
-                                    <div class="d-flex justify-content-between fruite-name">
-                                        <a href="#"><i class="fas fa-apple-alt me-2"></i>Strawbery</a>
-                                        <span>(2)</span>
-                                    </div>
+                            </ul>
+                            <ul class="list-unstyled ps-0 fruite-categorie M01">
+                                <li class="mb-1 "><a class="nav-link fas fa-apple-alt" href="/product/main?pro_category1=중등">중등</a>
+                                    <ul class="M02">
+                                        <li class=""><a href="/product/main?pro_category1=중등&pro_category2=1">1학년</a>
+                                            <ul class="M03">
+                                                <li><a href="/product/main?pro_category1=중등&pro_category2=1&pro_category3=국어">국어</a></li>
+                                                <li><a href="/product/main?pro_category1=중등&pro_category2=1&pro_category3=영어">영어</a></li>
+                                                <li><a href="/product/main?pro_category1=중등&pro_category2=1&pro_category3=수학">수학</a></li>
+                                                <li><a href="/product/main?pro_category1=중등&pro_category2=1&pro_category3=사회">사회</a></li>
+                                                <li><a href="/product/main?pro_category1=중등&pro_category2=1&pro_category3=과학">과학</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="/product/main?pro_category1=중등&pro_category2=2">2학년</a>
+                                            <ul class="M03">
+                                                <li><a href="/product/main?pro_category1=중등&pro_category2=2&pro_category3=국어">국어</a></li>
+                                                <li><a href="/product/main?pro_category1=중등&pro_category2=2&pro_category3=영어">영어</a></li>
+                                                <li><a href="/product/main?pro_category1=중등&pro_category2=2&pro_category3=수학">수학</a></li>
+                                                <li><a href="/product/main?pro_category1=중등&pro_category2=2&pro_category3=사회">사회</a></li>
+                                                <li><a href="/product/main?pro_category1=중등&pro_category2=2&pro_category3=과학">과학</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="/product/main?pro_category1=중등&pro_category2=3">3학년</a>
+                                            <ul class="M03">
+                                                <li><a href="/product/main?pro_category1=중등&pro_category2=3&pro_category3=국어">국어</a></li>
+                                                <li><a href="/product/main?pro_category1=중등&pro_category2=3&pro_category3=영어">영어</a></li>
+                                                <li><a href="/product/main?pro_category1=중등&pro_category2=3&pro_category3=수학">수학</a></li>
+                                                <li><a href="/product/main?pro_category1=중등&pro_category2=3&pro_category3=사회">사회</a></li>
+                                                <li><a href="/product/main?pro_category1=중등&pro_category2=3&pro_category3=과학">과학</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
                                 </li>
-                                <li>
-                                    <div class="d-flex justify-content-between fruite-name">
-                                        <a href="#"><i class="fas fa-apple-alt me-2"></i>Banana</a>
-                                        <span>(8)</span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="d-flex justify-content-between fruite-name">
-                                        <a href="#"><i class="fas fa-apple-alt me-2"></i>Pumpkin</a>
-                                        <span>(5)</span>
-                                    </div>
+                            </ul>
+                            <ul class="list-unstyled ps-0 fruite-categorie M01">
+                                <li class="mb-1 "><a class="nav-link fas fa-apple-alt" href="/product/main?pro_category1=고등">고등</a>
+                                    <ul class="twoDepth M02">
+                                        <li class=""><a href="/product/main?pro_category1=고등&pro_category2=1">1학년</a>
+                                            <ul class="M03">
+                                                <li><a href="/product/main?pro_category1=고등&pro_category2=1&pro_category3=국어">국어</a></li>
+                                                <li><a href="/product/main?pro_category1=고등&pro_category2=1&pro_category3=영어">영어</a></li>
+                                                <li><a href="/product/main?pro_category1=고등&pro_category2=1&pro_category3=수학">수학</a></li>
+                                                <li><a href="/product/main?pro_category1=고등&pro_category2=1&pro_category3=사회">사회</a></li>
+                                                <li><a href="/product/main?pro_category1=고등&pro_category2=1&pro_category3=과학">과학</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="/product/main?pro_category1=고등&pro_category2=2">2학년</a>
+                                            <ul class="M03">
+                                                <li><a href="/product/main?pro_category1=고등&pro_category2=2&pro_category3=국어">국어</a></li>
+                                                <li><a href="/product/main?pro_category1=고등&pro_category2=2&pro_category3=영어">영어</a></li>
+                                                <li><a href="/product/main?pro_category1=고등&pro_category2=2&pro_category3=수학">수학</a></li>
+                                                <li><a href="/product/main?pro_category1=고등&pro_category2=2&pro_category3=사회">사회</a></li>
+                                                <li><a href="/product/main?pro_category1=고등&pro_category2=2&pro_category3=과학">과학</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="/product/main?pro_category1=고등&pro_category2=3">3학년</a>
+                                            <ul class="M03">
+                                                <li><a href="/product/main?pro_category1=고등&pro_category2=3&pro_category3=국어">국어</a></li>
+                                                <li><a href="/product/main?pro_category1=고등&pro_category2=3&pro_category3=영어">영어</a></li>
+                                                <li><a href="/product/main?pro_category1=고등&pro_category2=3&pro_category3=수학">수학</a></li>
+                                                <li><a href="/product/main?pro_category1=고등&pro_category2=3&pro_category3=사회">사회</a></li>
+                                                <li><a href="/product/main?pro_category1=고등&pro_category2=3&pro_category3=과학">과학</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
                                 </li>
                             </ul>
                         </div>
@@ -423,6 +598,76 @@
 
 
 <script>
+    //별점 매기기
+    const ratingStars = [...document.getElementsByClassName("rating__star")];
+    const ratingResult = document.querySelector(".rating__result");
+
+    printRatingResult(ratingResult);
+
+    function executeRating(stars, result) {
+        const starClassActive = "rating__star fas fa-star";
+        const starClassUnactive = "rating__star far fa-star";
+        const starsLength = stars.length;
+        let i;
+
+        stars.map((star) => {
+            star.onclick = () => {
+                i = stars.indexOf(star);
+
+                if (star.className.indexOf(starClassUnactive) !== -1) {
+                    printRatingResult(result, i + 2);
+                    for (i; i >= 0; --i) stars[i].className = starClassActive;
+                } else {
+                    printRatingResult(result, i);
+                    for (i; i < starsLength; ++i) stars[i].className = starClassUnactive;
+                }
+            };
+        });
+    }
+
+    function printRatingResult(result, num = 1) {
+        /*result.textContent = (num || 1)+ "/5";*/
+        document.querySelector('.rating__input').value = (num || 1);
+        //input 태그에 num값 담기
+    }
+    executeRating(ratingStars, ratingResult);
+
+
+    //리뷰 등록하기
+    const frmReview = document.getElementById("frmReview");
+    const review_title = document.querySelector("#review_title");
+    const review_content = document.querySelector("#review_content");
+
+    document.querySelector("#reviewBtn").addEventListener("click", function(e) {
+
+        e.preventDefault();
+        e.stopPropagation();
+
+        if(review_title.value.length == "") {
+            e.preventDefault();
+            review_title.focus();
+            return alert("제목을 입력하세요.");
+        }
+
+        if(review_content.value.length == "") {
+            e.preventDefault();
+            review_content.focus();
+            return alert("내용을 입력하세요.");
+        }
+
+        frmReview.submit();
+    }, false);
+
+
+    function goDelete() {
+        const frm = document.getElementById("frmDelete");
+        let confirm_flag = confirm("해당 리뷰를 삭제하시겠습니까?");
+        if(confirm_flag) {
+            frm.submit();
+        }
+    }
+
+
     // 페이지 로딩 시작 시 스피너 보여주기
     document.getElementById('spinner').style.display = 'flex';
 

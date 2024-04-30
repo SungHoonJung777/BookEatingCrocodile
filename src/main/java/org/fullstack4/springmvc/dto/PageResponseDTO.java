@@ -52,17 +52,17 @@ public class PageResponseDTO<E> {
         this.page_skip_count = (this.page-1)*this.page_size;
         this.total_page = (this.total_count > 0 ? (int)(Math.ceil(this.total_count/(double)this.page_size)) : 1);
         this.page_block_size = requestDTO.getPage_block_size();
-//        this.page_block_start = requestDTO.getPage_block_start();
-//        this.page_block_end = requestDTO.getPage_block_end();
         this.setPage_block_start();
         this.setPage_block_end();
         this.prev_page_flag = (this.page_block_start > 1); //이전 페이지가 존재하니?
         this.next_page_flag = (this.total_page > this.page_block_end); //다음 페이지가 존재하니?
         this.dtoList = dtoList;
-        this.search_type = requestDTO.getSearch_type();
-        this.search_word = requestDTO.getSearch_word();
-        this.search_date1 = requestDTO.getSearch_date1();
-        this.search_date2 = requestDTO.getSearch_date2();
+        this.pro_category1 = requestDTO.getPro_category1();
+        this.pro_category2 = requestDTO.getPro_category2();
+        this.pro_category3 = requestDTO.getPro_category3();
+        this.sortField = requestDTO.getSortField();
+        this.sortDir = requestDTO.getSortDir();
+
 
         this.search_type_string = search_type !=null ? Arrays.toString(search_type).replace("[", "").replace("]", "") : "";
 

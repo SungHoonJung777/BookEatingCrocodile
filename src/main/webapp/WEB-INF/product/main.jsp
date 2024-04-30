@@ -111,16 +111,59 @@
 
                     <div class="col-6"></div>
                     <div class="col-xl-3">
-                        <form name="frmSort" id="frmSort" >
+                        <form name="frmSort" id="frmSort" method="get">
+                            <input type="hidden" name="pro_category1" value="${responseDTO.pro_category1}">
+                            <input type="hidden" name="pro_category2" value="${responseDTO.pro_category2}">
+                            <input type="hidden" name="pro_category3" value="${responseDTO.pro_category3}">
+                            <input type="hidden" name="search_word" value="${responseDTO.search_word}">
+                            <%--<input type="hidden" name="page_size" value="${responseDTO.page_size}">
+                            <input type="hidden" name="page" value="${responseDTO.page}">
+                            <input type="hidden" name="search_date1" value="${responseDTO.search_date1}">
+                            <input type="hidden" name="search_date2" value="${responseDTO.search_date2}">--%>
+
+
                             <div class="bg-light ps-3 py-3 rounded d-flex justify-content-between mb-4">
                                 <label for="sortMethod">정렬 순서:</label>
                                 <select id="sortMethod" name="sortMethod" onchange="goList()" class="border-0 form-select-sm bg-light me-3">
                                     <option value="">선택</option>
-                                    <option value="pro_reg_date||DESC">최신순</option>
-                                    <option value="pro_reg_date||ASC">오래된순</option>
-                                    <option value="pro_price||DESC">가격높은순</option>
-                                    <option value="pro_price||ASC">가격낮은순</option>
+                                    <c:choose>
+                                        <c:when test="${responseDTO.sortField eq 'pro_reg_date' && responseDTO.sortDir eq 'DESC'}">
+                                            <option value="pro_reg_date||DESC" selected>최신순</option>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <option value="pro_reg_date||DESC">최신순</option>
+                                        </c:otherwise>
+                                    </c:choose>
+                                    <c:choose>
+                                        <c:when test="${responseDTO.sortField eq 'pro_reg_date' && responseDTO.sortDir eq 'ASC'}">
+                                            <option value="pro_reg_date||ASC" selected>오래된순</option>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <option value="pro_reg_date||ASC">오래된순</option>
+                                        </c:otherwise>
+                                    </c:choose>
+                                    <c:choose>
+                                        <c:when test="${responseDTO.sortField eq 'pro_price' && responseDTO.sortDir eq 'DESC'}">
+                                            <option value="pro_price||DESC" selected>가격높은순</option>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <option value="pro_price||DESC">가격높은순</option>
+                                        </c:otherwise>
+                                    </c:choose>
+                                    <c:choose>
+                                        <c:when test="${responseDTO.sortField eq 'pro_price' && responseDTO.sortDir eq 'ASC'}">
+                                            <option value="pro_price||ASC" selected>가격낮은순</option>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <option value="pro_price||ASC">가격낮은순</option>
+                                        </c:otherwise>
+                                    </c:choose>
                                 </select>
+
+
+
+
+
                             </div>
                         </form>
                     </div>
@@ -133,8 +176,8 @@
                             <div class="col-lg-12 sidebar_menu" >
                                 <div class="mb-3">
                                     <h4>Categories</h4>
-                                    <div class="empty" ></div>
-                                    <ul class="list-unstyled ps-0 fruite-categorie oneDepth M01">
+                                    <div class="empty"></div>
+                                    <ul class="list-unstyled ps-0 fruite-categorie M01">
                                         <li class="mb-1 "><a class="nav-link fas fa-apple-alt" href="/product/main?pro_category1=유아">유아</a>
                                             <ul class="twoDepth M02">
                                                 <li><a href="/product/main?pro_category1=유아&pro_category3=한글">한글</a></li>
@@ -143,7 +186,7 @@
                                             </ul>
                                         </li>
                                     </ul>
-                                    <ul class="list-unstyled ps-0 fruite-categorie oneDepth M01">
+                                    <ul class="list-unstyled ps-0 fruite-categorie M01">
                                         <li class="mb-1 "><a class="nav-link fas fa-apple-alt" href="/product/main?pro_category1=초등">초등</a>
                                             <ul class="M02">
                                                 <li><a href="/product/main?pro_category1=초등&pro_category2=1">1학년</a>
@@ -236,9 +279,9 @@
                                             </ul>
                                         </li>
                                     </ul>
-                                    <ul class="list-unstyled ps-0 fruite-categorie oneDepth M01">
+                                    <ul class="list-unstyled ps-0 fruite-categorie M01">
                                         <li class="mb-1 "><a class="nav-link fas fa-apple-alt" href="/product/main?pro_category1=고등">고등</a>
-                                            <ul class="twoDepth M02">
+                                            <ul class="M02">
                                                 <li class=""><a href="/product/main?pro_category1=고등&pro_category2=1">1학년</a>
                                                     <ul class="M03">
                                                         <li><a href="/product/main?pro_category1=고등&pro_category2=1&pro_category3=국어">국어</a></li>
@@ -284,7 +327,8 @@
                         </div>
                     </div>
                     <div class="col-lg-9">
-                        <div class="row g-4 justify-content-center">
+                        <div class="row g-4">
+
 
                             <c:choose>
                                <c:when test="${responseDTO.dtoList != null}">
@@ -296,13 +340,43 @@
                                                         <img src="/resources/resources/img/books/${list.pro_image}" class="img-fluid w-100 rounded-top book_img_size" alt="책 이미지"/>
                                                     </div>
                                                     <div class="p-4 border border-top-0 rounded-bottom book_intro_box">
-                                                        <div class="d-flex mb-2">
-                                                            <i class="fa fa-star text-secondary"></i>
-                                                            <i class="fa fa-star text-secondary"></i>
-                                                            <i class="fa fa-star text-secondary"></i>
-                                                            <i class="fa fa-star text-secondary"></i>
-                                                            <i class="fa fa-star"></i>
-                                                        </div>
+                                                        <c:choose>
+                                                            <c:when test="${list.review_star_avg eq '1'}">
+                                                                <i class="fa fa-star text-secondary"></i>
+                                                                <i class="fa fa-star"></i>
+                                                                <i class="fa fa-star"></i>
+                                                                <i class="fa fa-star"></i>
+                                                                <i class="fa fa-star"></i>
+                                                            </c:when>
+                                                            <c:when test="${list.review_star_avg eq '2'}">
+                                                                <i class="fa fa-star text-secondary"></i>
+                                                                <i class="fa fa-star text-secondary"></i>
+                                                                <i class="fa fa-star"></i>
+                                                                <i class="fa fa-star"></i>
+                                                                <i class="fa fa-star"></i>
+                                                            </c:when>
+                                                            <c:when test="${list.review_star_avg eq '3'}">
+                                                                <i class="fa fa-star text-secondary"></i>
+                                                                <i class="fa fa-star text-secondary"></i>
+                                                                <i class="fa fa-star text-secondary"></i>
+                                                                <i class="fa fa-star"></i>
+                                                                <i class="fa fa-star"></i>
+                                                            </c:when>
+                                                            <c:when test="${list.review_star_avg eq '4'}">
+                                                                <i class="fa fa-star text-secondary"></i>
+                                                                <i class="fa fa-star text-secondary"></i>
+                                                                <i class="fa fa-star text-secondary"></i>
+                                                                <i class="fa fa-star text-secondary"></i>
+                                                                <i class="fa fa-star"></i>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <i class="fa fa-star text-secondary"></i>
+                                                                <i class="fa fa-star text-secondary"></i>
+                                                                <i class="fa fa-star text-secondary"></i>
+                                                                <i class="fa fa-star text-secondary"></i>
+                                                                <i class="fa fa-star text-secondary"></i>
+                                                            </c:otherwise>
+                                                        </c:choose>
                                                         <h4>${list.pro_name}</h4>
                                                         <p>${list.pro_content}...</p>
 
@@ -322,42 +396,45 @@
                                 </c:otherwise>
                             </c:choose>
 
-                            <div class="col-12">
-                                <nav aria-label="Page navigation example pagination ">
-                                    <ul class="pagination d-flex justify-content-center mt-5">
-                                        <li class="page-item<c:if test="${responseDTO.prev_page_flag ne true}"> disabled</c:if>">
-                                            <a class="page-link rounded"
-                                               data-num="<c:choose><c:when test="${responseDTO.prev_page_flag}">${responseDTO.page_block_start-1}</c:when>
-                                                <c:otherwise>1</c:otherwise></c:choose>"
-                                               href="<c:choose><c:when test="${responseDTO.prev_page_flag}">${responseDTO.linkParams}&page=${responseDTO.page_block_start-10}</c:when>
-                                                <c:otherwise>#</c:otherwise></c:choose>" aria-label="Previous">
-                                                <span aria-hidden="true">&laquo;</span>
-                                            </a>
-                                        </li>
+                            <form name="frmPaging" id="frmPaging" method="get">
 
-                                        <c:forEach begin="${responseDTO.page_block_start}" end="${responseDTO.page_block_end}" var="page_num">
-                                            <li class="page-item<c:if test="${responseDTO.page == page_num}"> active</c:if>">
-                                                <a class="page-link rounded" data-num="${page_num}"
-                                                   href="<c:choose><c:when test="${responseDTO.page == page_num}">#</c:when>
-                                                    <c:otherwise>${responseDTO.linkParams}&page=${page_num}</c:otherwise>
-                                                    </c:choose>">${page_num}
+                                <div class="col-12">
+                                    <nav aria-label="Page navigation example pagination ">
+                                        <ul class="pagination d-flex justify-content-center mt-5" onclick="goPaging()">
+                                            <li class="page-item<c:if test="${responseDTO.prev_page_flag ne true}"> disabled</c:if>">
+                                                <a class="page-link rounded"
+                                                   data-num="<c:choose><c:when test="${responseDTO.prev_page_flag}">${responseDTO.page_block_start-1}</c:when>
+                                                    <c:otherwise>1</c:otherwise></c:choose>"
+                                                   href="<c:choose><c:when test="${responseDTO.prev_page_flag}">${responseDTO.linkParams}&page=${responseDTO.page_block_start-10}</c:when>
+                                                    <c:otherwise>#</c:otherwise></c:choose>" aria-label="Previous">
+                                                    <span aria-hidden="true">&laquo;</span>
                                                 </a>
                                             </li>
-                                        </c:forEach>
 
-                                        <li class="page-item<c:if test="${responseDTO.next_page_flag ne true}"> disabled</c:if>">
-                                            <a class="page-link rounded"
-                                               data-num="<c:choose><c:when test="${responseDTO.next_page_flag}">${responseDTO.page_block_end+1}</c:when>
-                                                <c:otherwise>${responseDTO.page_block_end}</c:otherwise></c:choose>"
-                                               href="<c:choose><c:when test="${responseDTO.next_page_flag}">${responseDTO.linkParams}&page=${responseDTO.page_block_end+1}</c:when>
-                                                <c:otherwise>#</c:otherwise>
-                                            </c:choose>" aria-label="Next">
-                                                <span aria-hidden="true">&raquo;</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </nav>
-                            </div>
+                                            <c:forEach begin="${responseDTO.page_block_start}" end="${responseDTO.page_block_end}" var="page_num">
+                                                <li class="page-item<c:if test="${responseDTO.page == page_num}"> active</c:if>">
+                                                    <a class="page-link rounded" data-num="${page_num}"
+                                                       href="<c:choose><c:when test="${responseDTO.page == page_num}">#</c:when>
+                                                        <c:otherwise>${responseDTO.linkParams}&page=${page_num}</c:otherwise>
+                                                        </c:choose>">${page_num}
+                                                    </a>
+                                                </li>
+                                            </c:forEach>
+
+                                            <li class="page-item<c:if test="${responseDTO.next_page_flag ne true}"> disabled</c:if>">
+                                                <a class="page-link rounded"
+                                                   data-num="<c:choose><c:when test="${responseDTO.next_page_flag}">${responseDTO.page_block_end+1}</c:when>
+                                                    <c:otherwise>${responseDTO.page_block_end}</c:otherwise></c:choose>"
+                                                   href="<c:choose><c:when test="${responseDTO.next_page_flag}">${responseDTO.linkParams}&page=${responseDTO.page_block_end+1}</c:when>
+                                                    <c:otherwise>#</c:otherwise>
+                                                </c:choose>" aria-label="Next">
+                                                    <span aria-hidden="true">&raquo;</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </form>
                         </div>
 
                     </div>
@@ -379,23 +456,15 @@
 <script>
     //정렬 필터
     function goList() {
-        var sortMethod = document.getElementById('sortMethod').value;
-        var baseUrl = window.location.pathname;
-        // URL에 추가할 쿼리 스트링을 생성
-        var queryString = '?';
-
-        //쿼리스트링에 추가
-        if (sortMethod) {
-            var [sortField, sortDir] = sortMethod.split('||');
-            queryString += 'sortField=' + encodeURIComponent(sortField) + '&sortDir=' + encodeURIComponent(sortDir);
-        }
-
-        window.location.href = baseUrl + queryString;
+        const frmSort = document.getElementById("frmSort");
+        frmSort.submit();
     }
+
+
 
     //검색창
     function searchProducts() {
-            var search_word = document.getElementById('search_word').value;
+            let search_word = document.getElementById('search_word').value;
             window.location.href = '/product/main?search_word=' + encodeURIComponent(search_word);
 
 
@@ -408,6 +477,7 @@
         });
 
     }
+
 
     // 페이지 로딩 시작 시 스피너 보여주기
     document.getElementById('spinner').style.display = 'flex';

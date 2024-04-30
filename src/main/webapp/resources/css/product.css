@@ -110,6 +110,17 @@ span.pro_view_titleV {
 
 }
 
+div.pro_view_admin {
+  /*display: none;*/
+  margin-left: 800px;
+}
+
+div.pro_view_admin button {
+  width: 90px;
+  height: 50px;
+  margin-left: 10px;
+}
+
 div.book_video {
   margin-bottom: 80px;
   text-align: center;
@@ -121,4 +132,65 @@ div.book_content1 {
 
 a.payBtn {
   margin-left: 15px;
+}
+
+button.review_del_btn {
+  margin-top: 50px !important;
+  margin-left: 50px !important;
+  height: 55px;
+}
+
+button.review_regist_btn {
+  width: 70% !important;
+  margin-left: 30px;
+  font-size: 20px;
+}
+
+.rating__star:first-child {
+  color: gold;
+}
+
+span.star_span {
+  margin-left: 100px;
+}
+
+i.first_star {
+  color: #dabd18b2 !important;
+  font-size: 20px;
+}
+
+.rating {
+  position: relative;
+  width: 220px !important;
+  background: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: .3em;
+  padding: 5px;
+  overflow: hidden;
+  border-radius: 20px;
+  box-shadow: 0 0 2px #b3acac;
+}
+
+.rating__result {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translateY(-10px) translateX(-5px);
+  z-index: -9;
+  font: 3em Arial, Helvetica, sans-serif;
+  color: #ebebeb8e;
+  pointer-events: none;
+}
+
+.rating__star {
+  font-size: 1.3em;
+  cursor: pointer;
+  color: #dabd18b2;
+  transition: filter linear .3s;
+}
+
+.rating__star:hover {
+  filter: drop-shadow(1px 1px 4px gold);
 }

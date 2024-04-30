@@ -60,12 +60,13 @@ public class ProductServiceImpl implements ProductServiceIf {
         return responseDTO;
     }
 
-/*
-    @Override
-    public List<ProductDTO> findProductsByCategories(String pro_category1, String pro_category2, String pro_category3) {
+/*    @Override
+    public List<ProductDTO> indexRandomList() {
+        List<ProductDTO> dtoList = productMapper.indexRandomList().stream()
+                .map(vo->modelMapper.map(vo, ProductDTO.class))
+                .collect(Collectors.toList());
+        return dtoList;
+    }*/
 
-        return productMapper.findProductsByCategories(pro_category1, pro_category2, pro_category3);
-    }
-*/
 
 }

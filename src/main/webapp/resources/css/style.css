@@ -178,7 +178,7 @@
 
 /*** Hero Header ***/
 .hero-header {
-    background: linear-gradient(rgba(248, 223, 173, 0.1), rgba(248, 223, 173, 0.1)), url(../img/hero-img.jpg);
+    background: linear-gradient(rgb(221 204 172 / 34%), rgba(248, 223, 173, 0.3)), url(/resources/resources/img/index/index1.jpg);
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
