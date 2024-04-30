@@ -7,6 +7,7 @@ import org.fullstack4.springmvc.domain.MemberVO;
 import org.fullstack4.springmvc.dto.*;
 import org.fullstack4.springmvc.mapper.MemberImageMapper;
 import org.fullstack4.springmvc.mapper.MemberMapper;
+import org.fullstack4.springmvc.mapper.QnaMapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +21,7 @@ public class MemberServiceImpl implements MemberServiceIf{
 
     private final MemberMapper memberMapper;
     private final ModelMapper modelMapper;
+    private final QnaMapper qnaMapper;
     @Override
     public int regist(MemberDTO memberDTO) {
         log.info("========================================================");
@@ -115,15 +117,21 @@ public class MemberServiceImpl implements MemberServiceIf{
         memberMapper.cartout(cart_id);
     }
     @Override
-    public List<QnaDTO> getQnaList(String member_id, String qna_category) {
-        List<QnaDTO> qnaList = memberMapper.getQnaList(member_id, qna_category).stream()
+    public PageResponseDTO<QnaDTO> getQnaList(String member_id, String qna_category,PageRequestDTO pageRequestDTO) {
+        List<QnaDTO> qnaList = memberMapper.getQnaList(member_id, qna_category,pageRequestDTO).stream()
                 .map(vo->modelMapper.map(vo, QnaDTO.class))
                 .collect(Collectors.toList());
 
+        int total_count = qnaMapper.totalQna(member_id, qna_category, pageRequestDTO);
+
         log.info("impl qnaList : "+qnaList);
-        return qnaList;
 
-
+        PageResponseDTO<QnaDTO> responseDTO = PageResponseDTO.<QnaDTO>withAll()
+                .requestDTO(pageRequestDTO)
+                .dtoList(qnaList)
+                .total_count(total_count)
+                .build();
+        return responseDTO;
     }
 
     @Override

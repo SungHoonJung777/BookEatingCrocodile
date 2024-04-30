@@ -108,7 +108,7 @@
                                             <th>상품이름</th>
                                             <th>리뷰제목</th>
                                             <th>별점</th>
-                                            <th>수정/삭제</th>
+                                            <th>등록일</th>
                                         </tr>
                                         </thead>
                                         <tbody class="table-border-bottom-0">
@@ -116,7 +116,7 @@
                                         <c:forEach items="${reviewList}" var="dto" varStatus="status">
                                             <tr>
                                                 <td class="text-nowrap">${status.count}</td>
-                                                <td class="text-nowrap"><a class="" href="product/view?pro_idx=${dto.pro_idx}">${dto.pro_name}</a></td>
+                                                <td class="text-nowrap"><a class="" href="/product/view?pro_idx=${dto.pro_idx}">${dto.pro_name}</a></td>
                                                 <td class="text-nowrap">${dto.review_title}</td>
                                                 <td class="text-nowrap">
                                                     <c:choose>
@@ -158,26 +158,10 @@
                                                     </c:choose>
                                                 </td>
                                                 <td>
-                                                <div class="dropdown">
-                                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                                        <i class="bx bx-dots-vertical-rounded"></i>
-                                                    </button>
-                                                    <div class="dropdown-menu">
-                                                        <a class="dropdown-item" href="javascript:void(0);"
-                                                        ><i class="bx bx-edit-alt me-2"></i> Edit</a
-                                                        >
-                                                        <a class="dropdown-item" href="javascript:void(0);"
-                                                        ><i class="bx bx-trash me-2"></i> Delete</a
-                                                        >
-                                                    </div>
-                                                </div>
+                                                    ${fn:substring(dto.review_reg_date,0,10)} ${fn:substring(dto.review_reg_date, 11,20)}
                                                 </td>
                                             </tr>
-
-
-
                                         </c:forEach>
-
 
                                         </tbody>
                                     </table>

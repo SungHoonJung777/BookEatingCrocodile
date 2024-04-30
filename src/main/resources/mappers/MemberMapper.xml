@@ -68,6 +68,7 @@
         from bec_qna
         where member_id = #{arg0} and qna_category=#{arg1}
         order by qna_idx desc
+        limit #{arg2.page_skip_count}, #{arg2.page_size}
     </select>
 
     <select id="getOrderList" resultType="org.fullstack4.springmvc.domain.OrderVO">

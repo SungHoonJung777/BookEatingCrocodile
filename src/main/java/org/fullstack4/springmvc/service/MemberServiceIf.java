@@ -24,7 +24,7 @@ public interface MemberServiceIf {
 
     void cartout(String cart_id);
 
-    List<QnaDTO> getQnaList(String member_id, String qna_category);
+    PageResponseDTO<QnaDTO> getQnaList(String member_id, String qna_category, PageRequestDTO pageRequestDTO);
     List<OrderDTO> getOrderList(String member_id);
     int orderDelete(int order_idx);
     List<ReviewDTO> getReviewList(String member_id);
