@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: paksa
@@ -41,42 +42,64 @@
         <div class="container topbar bg-primary d-none d-lg-block">
             <div class="d-flex justify-content-between">
                 <div class="top-link pe-2">
-                    <a href="#" class="text-white"><small class="text-white mx-2">Privacy Policy</small>/</a>
-                    <a href="#" class="text-white"><small class="text-white mx-2">Terms of Use</small>/</a>
-                    <a href="#" class="text-white"><small class="text-white ms-2">Sales and Refunds</small></a>
+                    <span class="text-white"> <small class="text-white mx-2">책 먹는 악어에 오신것을 환영합니다.</small></span>
+<%--                    <a href="#" class="text-white"><small class="text-white mx-2">Privacy Policy</small>/</a>--%>
+<%--                    <a href="#" class="text-white"><small class="text-white mx-2">Terms of Use</small>/</a>--%>
+<%--                    <a href="#" class="text-white"><small class="text-white ms-2">Sales and Refunds</small></a>--%>
                 </div>
             </div>
         </div>
         <div class="container px-0">
             <nav class="navbar navbar-light bg-white navbar-expand-xl">
-                <img src="/resources/resources/img/BEClogo.png"style="width: 15%" onclick="location='/main/main'"/>
+                <img src="/resources/resources/img/BEClogo.png"style="width: 15%" onclick="location='/'"/>
                 <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                     <span class="fa fa-bars text-primary"></span>
                 </button>
                 <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
                     <div class="navbar-nav mx-auto">
-                        <a href="index.html" class="nav-item nav-link active">Home</a>
+                        <a href="/" class="nav-item nav-link active">Home</a>
                         <a href="/product/main" class="nav-item nav-link">Shop</a>
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Community</a>
                             <div class="dropdown-menu m-0 bg-secondary rounded-0">
-                                <a href="#" class="dropdown-item">FAQ</a>
-                                <a href="#" class="dropdown-item">Q&A</a>
-                                <a href="#" class="dropdown-item">Archive</a>
-                                <a href="#" class="dropdown-item">404 Page</a>
+                                <a href="/faq/view" class="dropdown-item">FAQ</a>
+                                <a href="/qna/main" class="dropdown-item">Q&A</a>
+                                <a href="#" class="dropdown-item">자료실</a>
                             </div>
                         </div>
-                        <a href="#" class="nav-item nav-link">Contact</a>
+                        <div class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Contact</a>
+                            <div class="dropdown-menu m-0 bg-secondary rounded-0">
+                                <a href="#" class="dropdown-item">인사말</a>
+                                <a href="#" class="dropdown-item">연혁</a>
+                                <a href="#" class="dropdown-item">오시는길</a>
+                            </div>
+                        </div>
                     </div>
                     <div class="d-flex m-3 me-0">
                         <button class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fas fa-search text-primary"></i></button>
-                        <a href="#" class="position-relative me-4 my-auto">
+                        <a href="/member/cart" class="position-relative me-4 my-auto">
                             <i class="fa fa-shopping-bag fa-2x"></i>
                             <span class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1" style="top: -5px; left: 15px; height: 20px; min-width: 20px;">3</span>
                         </a>
-                        <a href="#" class="my-auto">
-                            <i class="fas fa-user fa-2x"></i>
-                        </a>
+                        <div class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fas fa-user fa-2x"></i></a>
+                            <div class="dropdown-menu m-0 bg-secondary rounded-0">
+                                <c:choose>
+                                    <c:when test="${empty sessionScope.loginInfo}">
+                                        <a href="/login/login" class="dropdown-item">로그인</a>
+                                        <a href="/member/join" class="dropdown-item">회원가입</a>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <a href="#" class="dropdown-item">로그아웃</a>
+                                        <a href="/member/buy" class="dropdown-item">주문내역 조회</a>
+                                        <a href="/member/view" class="dropdown-item">마이페이지</a>
+                                    </c:otherwise>
+                                </c:choose>
+
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </nav>
