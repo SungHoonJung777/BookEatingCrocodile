@@ -65,7 +65,7 @@ public class MemberLoginController {
         return "/login/login";
     }
 
-    @PostMapping("login")
+    @PostMapping("/login")
     public String loginPOST( Model model ,HttpServletRequest request ,HttpServletResponse response , String id, String pwd,   RedirectAttributes redirectAttributes) {
         log.info("==============================");
         log.info("LoginController >> loginPOST()");
