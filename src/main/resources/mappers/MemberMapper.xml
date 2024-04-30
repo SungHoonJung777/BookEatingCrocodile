@@ -57,7 +57,7 @@
         where user_id = #{user_id}
     </select>
     <select id="getCartList" resultType="org.fullstack4.springmvc.domain.CartVO">
-        SELECT bc.pro_title, bp.pro_price, bp.pro_amount, bc.pro_quantity
+        SELECT bc.cart_idx, bc.pro_title, bp.pro_price, bp.pro_amount, bc.pro_quantity
         FROM bec_product as bp
         inner join bec_cart AS bc ON bp.pro_idx = bc.pro_idx
         WHERE member_id = #{m_id}
@@ -94,4 +94,23 @@
         WHERE member_id=#{member_id}
         ORDER BY review_idx desc
     </select>
+
+    <delete id="cartout">
+        DELETE FROM bec_cart WHERE cart_idx = #{cart_idx}
+    </delete>
+
+    <insert id="insertOrder">
+        INSERT INTO bec_order(member_id, order_total)
+        VALUES(#{member_id}, #{order_total})
+    </insert>
+    <select id="getorderidx" resultType="int">
+        SELECT b.order_idx
+        FROM bec_order b
+                 LEFT JOIN bec_order_detail d ON b.order_idx = d.order_idx
+        WHERE d.order_idx IS NULL AND b.member_id = #{member_id}
+    </select>
+    <insert id="insertOrderDetail">
+        INSERT INTO bec_order_detail(order_idx, pro_idx, pro_quantity)
+        VALUES (#{order_idx}, #{pro_idx}, #{pro_quantity})
+    </insert>
 </mapper>

@@ -16,11 +16,13 @@ import java.time.LocalDateTime;
 
 public class OrderVO {
     private int order_idx;
-    private int pro_idx;
     private String member_id;
-    private int order_price;
-    private String order_status;
-    private String order_addr;
     private LocalDateTime order_date;
-    private String pro_name;
+    private int delivery;
+    private int order_total;
+    private String deli_name;
+    private String deli_addr;
+    private String order_name;
+    private String req_term;
+    private String order_phone;
 }

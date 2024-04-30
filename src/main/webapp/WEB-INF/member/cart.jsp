@@ -157,11 +157,11 @@
             })
             document.getElementById("total").innerHTML = product_total;
             document.getElementById("shipping").innerHTML = "3000";
-            document.getElementById("total_price").innerHTML = product_total + 3000;
+            document.getElementById("total_price").value = product_total + 3000;
         }else{
             document.getElementById("total").innerHTML = "0";
             document.getElementById("shipping").innerHTML = "0";
-            document.getElementById("total_price").innerHTML = 0;
+            document.getElementById("total_price").value = 0;
         }
     }
     function checkproduct(){

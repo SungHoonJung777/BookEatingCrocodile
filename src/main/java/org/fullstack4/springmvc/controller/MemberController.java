@@ -288,6 +288,7 @@ public class MemberController {
     @RequestMapping(value = "/cartout", method = RequestMethod.POST)
     public void cartoutPOST(@RequestParam(name = "cart_idx", defaultValue="") String cart_idx) {
         memberServiceIf.cartout(cart_idx);
+        System.out.println("cart_idx : "+ cart_idx);
     }
     @GetMapping("/checkout")
     public void checkout(HttpSession session,
@@ -295,15 +296,27 @@ public class MemberController {
         String m_id = (String)session.getAttribute("m_id");
         List<CartDTO> cartList = memberServiceIf.getCartList("cheolsu");
 
-        String pro_idx = "";
-        for(int i = 0; i < cartList.size(); i++){
-            if(i == 0) {
-                pro_idx = pro_idx + cartList.get(i).getPro_idx();
-            }else{
-                pro_idx = pro_idx+", " +cartList.get(i).getPro_idx();
-            }
+        int total = 0;
+        for(int i = 0; i < cartList.size(); i++) {
+            int tmp = cartList.get(i).getPro_price()*cartList.get(i).getPro_quantity();
+            total = total+tmp;
         }
+
+        model.addAttribute("total", total);
         model.addAttribute("cartList", cartList);
+    }
+    @PostMapping("/checkout")
+    public String Postcheckout(@Valid OrderDTO orderDTO,
+
+                               HttpSession session,
+                               Model model) {
+        log.info(orderDTO);
+//        String member_id = (String)session.getAttribute("member_id");
+//        memberServiceIf.insertOrder(orderDTO);
+//        int order_idx = memberServiceIf.getorderidx(member_id);
+//        orderDTO.setOrder_idx(order_idx);
+//        memberServiceIf.insertOrderDetail(order_idx, 2, 3);
+        return"#";
     }
 
     @GetMapping("/buy")

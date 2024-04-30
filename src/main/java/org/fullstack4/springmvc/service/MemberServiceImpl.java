@@ -2,10 +2,8 @@ package org.fullstack4.springmvc.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.fullstack4.springmvc.domain.MemberImageVO;
 import org.fullstack4.springmvc.domain.MemberVO;
 import org.fullstack4.springmvc.dto.*;
-import org.fullstack4.springmvc.mapper.MemberImageMapper;
 import org.fullstack4.springmvc.mapper.MemberMapper;
 import org.fullstack4.springmvc.mapper.QnaMapper;
 import org.modelmapper.ModelMapper;
@@ -155,6 +153,24 @@ public class MemberServiceImpl implements MemberServiceIf{
                 .map(vo->modelMapper.map(vo, ReviewDTO.class))
                 .collect(Collectors.toList());
         return reviewList;
+    }
+
+    @Override
+    public void checkout(int cart_idx) {
+
+    }
+    @Override
+    public void insertOrder(OrderDTO orderDTO){
+        memberMapper.insertOrder(orderDTO);
+    }
+    @Override
+    public int getorderidx(String member_id){
+        int result = memberMapper.getorderidx(member_id);
+        return result;
+    }
+    @Override
+    public void insertOrderDetail(int order_idx, int pro_idx, int pro_quantity){
+        memberMapper.insertOrderDetail(order_idx, pro_idx, pro_quantity);
     }
 
 

@@ -28,4 +28,10 @@ public interface MemberServiceIf {
     List<OrderDTO> getOrderList(String member_id);
     int orderDelete(int order_idx);
     List<ReviewDTO> getReviewList(String member_id);
+
+    void checkout(int cart_idx);
+
+    void insertOrder(OrderDTO orderDTO);
+    int getorderidx(String member_id);
+    void insertOrderDetail(int order_idx, int pro_idx, int pro_quantity);
 }
