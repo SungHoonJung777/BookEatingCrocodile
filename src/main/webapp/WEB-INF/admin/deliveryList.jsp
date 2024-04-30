@@ -417,21 +417,24 @@
 
                                     <tr>
                                         <td>${list.member_id}</td>
-                                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>${list.order_price}원</strong></td>
+                                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>${list.order_total}원</strong></td>
                                         <c:choose>
-                                            <c:when test="${list.order_status eq '결제완료'}">
-                                                <input type="hidden" name="order_idx" id="order_idx" value="${list.order_idx}">
-                                                <td><a href="#" onclick="openPopup('${list.order_status}')"><span class="badge bg-label-success me-1" style="background-color: yellow;">${list.order_status}</span></a></td>
+                                            <c:when test="${list.delivery eq '결제완료'}">
+                                               <input type="hidden" name="order_idx" id="order_idx" value="${list.order_idx}">
+                                                <td><a href="#" onclick="openPopup('${list.delivery}')"><span class="badge bg-label-success me-1" style="background-color: yellow;">${list.delivery}</span></a></td>
                                             </c:when>
-                                            <c:when test="${list.order_status eq '배송중'}">
-                                                <td><span class="badge bg-label-primary me-1" style="background-color: yellow;">${list.order_status}</span></td>
+                                            <c:when test="${list.delivery eq '배송중'}">
+                                                <td><span class="badge bg-label-primary me-1" style="background-color: yellow;">${list.delivery}</span></td>
+                                            </c:when>
+                                            <c:when test="${list.delivery eq '배송대기'}">
+                                                <td><span class="badge bg-label-info me-1" style="background-color: yellow;">${list.delivery}</span></td>
                                             </c:when>
                                             <c:otherwise>
-                                                <td><span class="badge bg-label-warning me-1">${list.order_status}</span></td>
+                                                <td><span class="badge bg-label-warning me-1">${list.delivery}</span></td>
                                             </c:otherwise>
                                         </c:choose>
 
-                                        <td>${list.order_addr}</td>
+                                        <td>${list.deli_name}</td>
                                         <td>${list.order_date}</td>
 
 
@@ -539,7 +542,7 @@
         const pageNum = $(this).attr("href");
         moveForm.querySelector("input[name='pageNum']").value = pageNum;
         console.log(pageNum+"######");
-        moveForm.action = "/admin/memberList";
+        moveForm.action = "/admin/delivery";
         moveForm.submit();
     });
 

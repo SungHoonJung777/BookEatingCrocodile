@@ -50,7 +50,7 @@
                             member_id like concat('%',#{keyword},'%')
                         </when>
                         <when test="type == 'W'.toString()">
-                            order_status like concat('%',#{keyword},'%' )
+                            delivery like concat('%',#{keyword},'%' )
                         </when>
                     </choose>
                 </trim>
@@ -66,7 +66,7 @@
     </select>
 
     <select id="getTotalOrder" resultType="int">
-        select sum(order_price)
+        select sum(order_total)
         from bec_order
     </select>
 
@@ -186,7 +186,9 @@
         <if test="keyword != null">
             <include refid="order"></include>
         </if>
+        limit #{skip},#{amount}
     </select>
+
     <select id="getOrderCountKeyword" resultType="int">
         select count(*)
         from bec_order
@@ -214,5 +216,9 @@
             <include refid="criteria"></include>
         </if>
     </select>
+
+    <update id="deliveryRegist">
+        update bec_order set delivery_member_id = #{arg0} , delivery= '배송대기' where order_idx=#{arg1}
+    </update>
 
 </mapper>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.fullstack4.springmvc.mapper.delivery.DeliveryMapper">
+    <sql id="order">
+
+        <foreach collection="typeArr" item="type">
+            <trim prefix="AND">
+                <choose>
+                    <when test="type == 'T'.toString()">
+                        member_id like concat('%',#{keyword},'%')
+                    </when>
+    <!--                <when test="type == 'W'.toString()">
+                        member_id like concat('%',#{keyword},'%' )
+                    </when>-->
+                </choose>
+            </trim>
+        </foreach>
+    </sql>
+
+
+    <select id="getOrderListMember" resultType="org.fullstack4.springmvc.domain.OrderVO">
+        select * from bec_order where delivery_member_id = #{delivery_member_id}
+       <!-- <if test="keyword != null">
+            <include refid="order"></include>
+        </if>-->
+/*        limit #{param1},#{param2}*/
+    </select>
+
+    <select id="getOrderCountKeywordMember" resultType="int">
+        select count(*)
+        from bec_order
+        where delivery_member_id = #{delivery_member_id}
+   <!--     <if test="keyword != null">
+            <include refid="order"></include>
+        </if>-->
+    </select>
+    <update id="updateDeliveryStatus">
+        update bec_order set delivery= #{arg0} where order_idx = #{arg1}
+    </update>
+</mapper>

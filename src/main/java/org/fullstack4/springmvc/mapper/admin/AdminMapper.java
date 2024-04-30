@@ -2,6 +2,7 @@ package org.fullstack4.springmvc.mapper.admin;
 
 import org.fullstack4.springmvc.Criteria.Criteria;
 import org.fullstack4.springmvc.domain.MemberVO;
+import org.fullstack4.springmvc.domain.OrderTestVO;
 import org.fullstack4.springmvc.domain.OrderVO;
 import org.fullstack4.springmvc.domain.ProductVO;
 import org.fullstack4.springmvc.dto.MemberDTO;
@@ -40,4 +41,6 @@ public interface AdminMapper {
 
     List<MemberVO> getDeleveryList(Criteria cri);
     int getDeleveryCountKeyword(Criteria cri);
+
+    int deliveryRegist(String member_id, int idx);
 }

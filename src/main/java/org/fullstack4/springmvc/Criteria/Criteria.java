@@ -21,7 +21,7 @@ public class Criteria {
     private String typeArr[];
 
     public Criteria() {
-        this(1, 3);
+        this(1, 10);
         this.skip = 0;
     }
 

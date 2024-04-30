@@ -218,7 +218,7 @@
                 <li class="menu-header small text-uppercase"><span class="menu-header-text">배송</span></li>
                 <li class="menu-item">
                     <a
-                            href="https://github.com/themeselection/sneat-html-admin-template-free/issues"
+                            href="/admin/delivery"
                             target="_blank"
                             class="menu-link"
                     >

@@ -3,6 +3,7 @@ package org.fullstack4.springmvc.service.admin;
 import org.fullstack4.springmvc.Criteria.Criteria;
 import org.fullstack4.springmvc.dto.MemberDTO;
 import org.fullstack4.springmvc.dto.OrderDTO;
+import org.fullstack4.springmvc.dto.OrderTestDTO;
 import org.fullstack4.springmvc.dto.ProductDTO;
 
 import java.util.ArrayList;
@@ -39,4 +40,7 @@ public interface AdminService {
 
     List<MemberDTO> getDeleveryList(Criteria cri);
     int getDeleveryCountKeyword(Criteria cri);
+
+    int deliveryRegist(String member_id, int idx);
+
 }

@@ -4,10 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.fullstack4.springmvc.Criteria.Criteria;
 import org.fullstack4.springmvc.Criteria.PageMakerDTO;
-import org.fullstack4.springmvc.dto.AttachImageDTO;
-import org.fullstack4.springmvc.dto.MemberDTO;
-import org.fullstack4.springmvc.dto.OrderDTO;
-import org.fullstack4.springmvc.dto.ProductDTO;
+import org.fullstack4.springmvc.dto.*;
 import org.fullstack4.springmvc.service.admin.AdminService;
 import org.fullstack4.springmvc.service.memberLoginService.MemberLoginService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +27,7 @@ import javax.servlet.http.HttpSession;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -311,7 +309,7 @@ public class AdminController {
     public String deliveryView(Model model, Criteria cri) throws Exception{
         List<OrderDTO> orderList = adminService.getOrderList(cri);
         int total = adminService.getOrderCountKeyword(cri);
-
+        System.out.println(total+"asdasd");
         PageMakerDTO pageMakerDTO = new PageMakerDTO(cri,total);
         log.info("------------------------------------");
         log.info("OrderDTO : " + orderList);
@@ -337,6 +335,25 @@ public class AdminController {
         model.addAttribute("cri",cri);
         model.addAttribute("order_idx",idx);
         return "/admin/deleveryChoice";
+    }
+
+    @GetMapping("/deliveryRegist")
+    public void deliveryRegist(String member_id, String order_idx, HttpServletResponse response) throws Exception {
+        int idx = Integer.parseInt(order_idx);
+        int result = adminService.deliveryRegist(member_id, idx);
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html; charset=UTF-8");
+
+        PrintWriter out = response.getWriter();
+        out.println("<script>");
+        if (result > 0) {
+            out.println("alert('배송 등록이 완료되었습니다.');");
+        } else {
+            out.println("alert('배송 등록에 실패했습니다.');");
+        }
+        out.println("window.close();");
+        out.println("</script>");
+
     }
 
 
