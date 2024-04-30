@@ -25,4 +25,6 @@ public class OrderVO {
     private String order_name;
     private String req_term;
     private String order_phone;
+
+    private String delivery_member_id;
 }
