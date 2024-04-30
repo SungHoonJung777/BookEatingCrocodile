@@ -18,7 +18,7 @@ public class OrderDTO {
     private int order_idx;
     private String member_id;
     private LocalDateTime order_date;
-    private int delivery;
+    private String delivery;
     private int order_total;
     private String deli_name;
     private String deli_addr;

@@ -6,6 +6,7 @@ import org.fullstack4.springmvc.domain.BbsVO;
 import org.fullstack4.springmvc.domain.ProductVO;
 import org.fullstack4.springmvc.dto.MemberDTO;
 import org.fullstack4.springmvc.dto.OrderDTO;
+import org.fullstack4.springmvc.dto.OrderTestDTO;
 import org.fullstack4.springmvc.dto.ProductDTO;
 import org.fullstack4.springmvc.mapper.admin.AdminMapper;
 import org.modelmapper.ModelMapper;
@@ -147,6 +148,10 @@ public class AdminServiceImpl implements AdminService{
         return count;
     }
 
+    @Override
+    public int deliveryRegist(String member_id, int idx) {
+        int count = adminMapper.deliveryRegist(member_id, idx);
+        return count;
 
-
+    }
 }

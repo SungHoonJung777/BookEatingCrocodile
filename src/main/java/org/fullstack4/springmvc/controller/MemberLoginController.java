@@ -122,7 +122,7 @@ public class MemberLoginController {
 //                cookie2.setMaxAge(60*60*24);
 //                res.addCookie(cookie2);
             }*/
-            return "redirect:/login/list";
+            return "/";
         }
         else {
 
