@@ -101,7 +101,10 @@
                                                     <i class="bx bx-upload d-block d-sm-none"></i>
                                                     <input type="file" id="upload" name="upload" class="account-file-input" hidden  accept="image/png, image/jpeg" onchange="readURL(this)" />
                                                 </label>
-
+                                                <button type="button" class="btn btn-outline-secondary account-image-reset mb-4">
+                                                    <i class="bx bx-reset d-block d-sm-none"></i>
+                                                    <span class="d-none d-sm-block">Reset</span>
+                                                </button>
 
                                                 <p class="text-muted mb-0">JPG 또는 PNG 파일만 업로드 가능합니다. 최대 사이즈는 800K 입니다.</p>
                                             </div>
@@ -169,8 +172,9 @@
                                         </div>
                                     </div>
                                     <form id="frmDelete" action="/member/delete" method="post" >
-                                        <input type="hidden" value="${member.member_id}" name="member_id">
+
                                         <div class="form-check mb-3">
+                                            <input type="hidden" value="${member.member_id}" name="member_id">
                                             <input
                                                     class="form-check-input"
                                                     type="checkbox"
@@ -179,7 +183,7 @@
                                             />
                                             <label class="form-check-label" for="accountActivation">네, 탈퇴하겠습니다.</label>
                                         </div>
-                                        <button type="button" class="btn btn-danger deactivate-account" id="btnDelete" onclick="deleteAlert()">Deactivate Account</button>
+                                        <button type="button" class="btn btn-danger deactivate-account" id="btnDelete" onclick="deleteAlert()">회원탈퇴</button>
                                     </form>
                                 </div>
                             </div>
@@ -200,6 +204,16 @@
 </div>
 <jsp:include page="../common/footer.jsp"/>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="/resources/resources/assets/js/pages-account-settings-account.js"></script>
+<script src="/resources/resources/assets/js/main.js"></script>
+<!-- Core JS -->
+<!-- build:js assets/vendor/js/core.js -->
+
+<script src="/resources/resources/assets/vendor/libs/jquery/jquery.js"></script>
+<script src="/resources/resources/assets/vendor/libs/popper/popper.js"></script>
+<script src="/resources/resources/assets/vendor/js/bootstrap.js"></script>
+<script src="/resources/resources/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+<script src="/resources/resources/assets/vendor/js/menu.js"></script>
 <script>
 
     //프로필 사진 미리보기

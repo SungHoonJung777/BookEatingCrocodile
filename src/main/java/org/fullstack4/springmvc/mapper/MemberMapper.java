@@ -2,6 +2,7 @@ package org.fullstack4.springmvc.mapper;
 
 import org.fullstack4.springmvc.domain.*;
 import org.fullstack4.springmvc.dto.MemberDTO;
+import org.fullstack4.springmvc.dto.PageRequestDTO;
 import org.fullstack4.springmvc.dto.ProductDTO;
 import org.springframework.core.annotation.Order;
 
@@ -27,7 +28,7 @@ public interface MemberMapper {
 
     MemberVO login_info(String id, String pwd);
 
-    List<QnaVO> getQnaList(String member_id, String qna_category);
+    List<QnaVO> getQnaList(String member_id, String qna_category, PageRequestDTO pageRequestDTO);
     List<OrderVO> getOrderList(String member_id);
 
     int orderDelete(int order_idx);

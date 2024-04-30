@@ -117,7 +117,17 @@
                                             <tr>
                                                 <td class="text-nowrap">${status.count}</td>
                                                 <td class="text-nowrap">${fn:substring(dto.order_date,0,10)} ${fn:substring(dto.order_date, 11,20)}</td>
-                                                <td class="text-nowrap"><a class="" href="product/view?pro_idx=${dto.pro_idx}">${dto.pro_name}</a></td>
+                                                <td class="text-nowrap">
+                                                    <c:choose>
+                                                        <c:when test="${dto.order_status eq '주문취소'}">
+                                                            <a style="text-decoration: line-through; color: black" class="" href="product/view?pro_idx=${dto.pro_idx}">${dto.pro_name}</a>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <a class=""  href="/product/view?pro_idx=${dto.pro_idx}">${dto.pro_name}</a>
+                                                        </c:otherwise>
+                                                    </c:choose>
+
+                                                </td>
 
                                                 <c:choose>
                                                     <c:when test="${dto.order_status eq '배송중'}">

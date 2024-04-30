@@ -2,6 +2,7 @@ package org.fullstack4.springmvc.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.fullstack4.springmvc.common.FileUtil;
 import org.fullstack4.springmvc.dto.CartDTO;
 import org.fullstack4.springmvc.dto.MemberDTO;
 import org.fullstack4.springmvc.dto.ProductDTO;
@@ -196,45 +197,48 @@ public class MemberController {
         log.info("============================");
         log.info("MemberController >> modifyPOST()");
 
-        if (file != null && !file.isEmpty()) {
-            String uploadFolder = "D:\\java4\\BEC\\src\\main\\webapp\\resources\\uploads\\img\\member";
-            String orgFile = file.getOriginalFilename(); //원래 파일의 이름
-            long size = file.getSize();
-            String fileExt = orgFile.substring(orgFile.lastIndexOf("."), orgFile.length()); // 확장자명
-            //엑셀.파.일xxx.xls --> 제일 마지막 인덱스의 . 에서부터 파일이름 끝에를 파싱
+//        if (file != null && !file.isEmpty()) {
+//            String uploadFolder = "D:\\java4\\BEC\\src\\main\\webapp\\resources\\uploads\\img\\member";
+//            String orgFile = file.getOriginalFilename(); //원래 파일의 이름
+//            long size = file.getSize();
+//            String fileExt = orgFile.substring(orgFile.lastIndexOf("."), orgFile.length()); // 확장자명
+//            //엑셀.파.일xxx.xls --> 제일 마지막 인덱스의 . 에서부터 파일이름 끝에를 파싱
+//
+//            log.info("============================");
+//            log.info("uploadFolder : " + uploadFolder);
+//            log.info("fileRealName : " + orgFile);
+//            log.info("size : " + size);
+//            log.info("fileExt : " + fileExt);
+//
+//
+//            //새로운 파일명 생성
+//            UUID uuid = UUID.randomUUID();
+//            String[] uuids = uuid.toString().split("-");
+//            String newName = uuids[0];
+//
+//            log.info("uuid : " + uuid);
+//            log.info("uuids : " + uuids);
+//            log.info("newName : " + newName);
+//
+//            String saveFileName = newName + fileExt;
+//
+//            File saveFile = new File(uploadFolder + "\\" + newName + fileExt);
+//
+//            try {
+//                file.transferTo(saveFile);
+//            } catch (IllegalStateException e) {
+//                e.printStackTrace();
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+        String saveFileName = FileUtil.createFile(file);
+        int resultMemImg = memberServiceIf.modifyImage(memberDTO.getMember_id(), saveFileName);
+        //int resultImg = memberImageServiceIf.regist(memberDTO.getMember_id(), orgFile, saveFileName);
+    //}
 
-            log.info("============================");
-            log.info("uploadFolder : " + uploadFolder);
-            log.info("fileRealName : " + orgFile);
-            log.info("size : " + size);
-            log.info("fileExt : " + fileExt);
-
-
-            //새로운 파일명 생성
-            UUID uuid = UUID.randomUUID();
-            String[] uuids = uuid.toString().split("-");
-            String newName = uuids[0];
-
-            log.info("uuid : " + uuid);
-            log.info("uuids : " + uuids);
-            log.info("newName : " + newName);
-
-            String saveFileName = newName + fileExt;
-
-            File saveFile = new File(uploadFolder + "\\" + newName + fileExt);
-
-            try {
-                file.transferTo(saveFile);
-            } catch (IllegalStateException e) {
-                e.printStackTrace();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            int resultMemImg = memberServiceIf.modifyImage(memberDTO.getMember_id(), saveFileName);
-            int resultImg = memberImageServiceIf.regist(memberDTO.getMember_id(), orgFile, saveFileName);
+        if (file.isEmpty() || file == null) {
+            FileUtil.deleteFile(saveFileName);
         }
-
 //        if (bindingResult.hasErrors()) {
 //            log.info("Errors");
 //            redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
@@ -267,7 +271,7 @@ public class MemberController {
             HttpSession session = req.getSession();
             session.invalidate();
 
-            return "redirect:/bbs/list";
+            return "redirect:/product/main";
         } else {
             return "redirect:/member/view?user_id=" + member_id;
         }
@@ -326,7 +330,7 @@ public class MemberController {
         log.info("============================");
         log.info("MemberController >> qnaList()");
         String member_id = (String)session.getAttribute("member_id");
-        List<QnaDTO> qnaList = memberServiceIf.getQnaList("abc01", "one");
+        PageResponseDTO<QnaDTO> qnaList = memberServiceIf.getQnaList("abc01", "one", pageRequestDTO);
 
         //PageResponseDTO<BbsDTO> responseDTO = bbsServiceIf.bbsListByPage(pageRequestDTO);
 
@@ -347,7 +351,7 @@ public class MemberController {
         log.info("============================");
         log.info("MemberController >> qnaList()");
         String member_id = (String)session.getAttribute("member_id");
-        List<QnaDTO> qnaList = memberServiceIf.getQnaList("abc01", "qna");
+        PageResponseDTO<QnaDTO> qnaList = memberServiceIf.getQnaList("abc01", "qna", pageRequestDTO);
 
         //PageResponseDTO<BbsDTO> responseDTO = bbsServiceIf.bbsListByPage(pageRequestDTO);
 
