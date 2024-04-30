@@ -26,8 +26,6 @@ public class PageResponseDTO<E> {
 
     private String[] search_type;
     private String search_word;
-    private String search_date1="";
-    private String search_date2="";
     private String search_type_string;
 
     private String linkParams;
@@ -65,17 +63,30 @@ public class PageResponseDTO<E> {
 
 
         this.search_type_string = search_type !=null ? Arrays.toString(search_type).replace("[", "").replace("]", "") : "";
+        this.search_word = requestDTO.getSearch_word();
 
         StringBuilder sb = new StringBuilder("?page_size=" + this.page_size);
         if (search_type != null) {
-            sb.append("&search_type=" + search_type_string + "&search_word=" + search_word);
+            sb.append("&search_type=" + search_type_string );
         }
-        if (search_date1 != null) {
-            sb.append("&search_date1=" + search_date1);
+        if (search_word != null) {
+            sb.append("&search_word=" + search_word);
         }
-        if (search_date2 != null) {
-            sb.append("&search_date2=" + search_date2);
+        if(sortField != null) {
+            sb.append( "&sortField=" + sortField + "&sortDir=" + sortDir);
         }
+        if(pro_category1 != null) {
+            sb.append("&pro_category1=" + pro_category1);
+        }
+
+        if(pro_category2 != null) {
+            sb.append("&pro_category2=" + pro_category2);
+        }
+
+        if(pro_category3 != null) {
+            sb.append("&pro_category3=" + pro_category3);
+        }
+
 
         this.linkParams = sb.toString(); //쿼리스트링
         log.info("ResponseDTO END");
