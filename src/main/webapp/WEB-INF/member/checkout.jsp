@@ -26,7 +26,7 @@
     <div class="container-fluid py-5">
         <div class="container py-5">
             <h1 class="mb-4">Billing details</h1>
-            <form action="/member/checkout" method="post">
+            <form action="/member/checkout" method="get">
                 <div class="row g-5">
                     <div class="col-md-12 col-lg-6 col-xl-7">
                         <div class="row">
@@ -39,27 +39,27 @@
                         </div>
                         <div class="form-item">
                             <label class="form-label my-3">배송지 명<sup>*</sup></label>
-                            <input type="text" class="form-control">
+                            <input type="text" class="form-control" name="deli_name">
                         </div>
                         <div class="form-item">
                             <label class="form-label my-3" >우편번호<sup>*</sup></label>
-                            <input type="text" class="form-control" id="zonecode" name="zonecode" onclick="address()">
+                            <input type="text" class="form-control" id="zonecode" name="zonecode" onfocus="address()">
                         </div>
                         <div class="form-item">
                             <label class="form-label my-3">주소 <sup>*</sup></label>
-                            <input type="text" class="form-control" id="addr1" name="addr1" onclick="address()">
+                            <input type="text" class="form-control" id="addr1" name="addr1" onfocus="address()">
                         </div>
                         <div class="form-item">
-                            <label class="form-label my-3" name="addr2">상세주소 <sup>*</sup></label>
-                            <input type="text" class="form-control">
+                            <label class="form-label my-3">상세주소 <sup>*</sup></label>
+                            <input type="text" class="form-control" name="addr2" id="addr2">
                         </div>
                         <div class="form-item">
                             <label class="form-label my-3">전화번호<sup>*</sup></label>
-                            <input type="tel" class="form-control">
+                            <input type="tel" class="form-control" name="order_phone">
                         </div>
                         <hr>
                         <div class="form-item">
-                            <textarea name="text" class="form-control" spellcheck="false" cols="30" rows="11" placeholder="요청사항"></textarea>
+                            <textarea name="text" class="form-control" spellcheck="false" cols="30" rows="11" placeholder="요청사항" name="req_term"></textarea>
                         </div>
                     </div>
                     <div class="col-md-12 col-lg-6 col-xl-5">
@@ -85,6 +85,9 @@
                                         <td class="py-5">${list.pro_price}</td>
                                         <td class="py-5">${list.pro_quantity}</td>
                                         <td class="py-5">${list.pro_price*list.pro_quantity}</td>
+                                        <input type="hidden" name="cart_idx" value="${list.cart_idx}"/>
+                                        <input type="hidden" name="pro_idx" value="${list.pro_idx}"/>
+                                        <input type="hidden" name="pro_idx" value="${list.pro_idx}"/>
                                     </tr>
                                 </c:forEach>
                                 <tr>
@@ -152,6 +155,7 @@
             oncomplete: function (data) {
                 document.getElementById("zonecode").value = data.zonecode;
                 document.getElementById("addr1").value = data.roadAddress;
+                document.getElementById("addr2").focus();
             }
         }).open();
     }

@@ -2,11 +2,9 @@ package org.fullstack4.springmvc.mapper;
 
 import org.apache.ibatis.annotations.Param;
 import org.fullstack4.springmvc.domain.*;
-import org.fullstack4.springmvc.dto.MemberDTO;
+import org.fullstack4.springmvc.dto.CartDTO;
 import org.fullstack4.springmvc.dto.OrderDTO;
 import org.fullstack4.springmvc.dto.PageRequestDTO;
-import org.fullstack4.springmvc.dto.ProductDTO;
-import org.springframework.core.annotation.Order;
 
 import java.util.List;
 
@@ -24,7 +22,7 @@ public interface MemberMapper {
     int getEmailCount(String email);
     int getIdCount(String nickname);
 
-    List<CartVO> getCartList(String m_id);
+    List<CartVO> getCartList(@Param("m_id") String m_id, @Param("cart_idx") String cart_idx);
 
     void cartout(String cart_id);
 
@@ -38,5 +36,8 @@ public interface MemberMapper {
     //아래 결제 정보 저장 부분
     void insertOrder(OrderDTO orderDTO);
     int getorderidx(String member_id);
-    void insertOrderDetail(@Param("order_idx") int order_idx, @Param("pro_idx") int pro_idx, @Param("pro_quantity") int pro_quantity);
+    void insertOrderDetail(List<CartDTO> cartList);
+
+    void cartminus(String cartIdx);
+    void cartplus(String cartIdx);
 }

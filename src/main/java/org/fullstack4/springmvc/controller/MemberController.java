@@ -279,8 +279,8 @@ public class MemberController {
     @GetMapping("/cart")
     public void cartGET(HttpSession session,
                         Model model) {
-        String m_id = (String)session.getAttribute("m_id");
-        List<CartDTO> cartList = memberServiceIf.getCartList("cheolsu");
+        String m_id = (String)session.getAttribute("member_id");
+        List<CartDTO> cartList = memberServiceIf.getCartList(m_id, "");
         System.out.println(cartList);
         model.addAttribute("cartList", cartList);
     }
@@ -290,33 +290,55 @@ public class MemberController {
         memberServiceIf.cartout(cart_idx);
         System.out.println("cart_idx : "+ cart_idx);
     }
-    @GetMapping("/checkout")
-    public void checkout(HttpSession session,
+    @PostMapping("/checkout")
+    public void checkout(@RequestParam(name = "cart_idx", defaultValue = "") String cart_idx,
+                         HttpSession session,
                         Model model) {
-        String m_id = (String)session.getAttribute("m_id");
-        List<CartDTO> cartList = memberServiceIf.getCartList("cheolsu");
+        String m_id = (String)session.getAttribute("member_id");
+        log.info("cartIdx : "+cart_idx);
+        List<CartDTO> cartList = memberServiceIf.getCartList(m_id, cart_idx);
+        log.info("cart_idx : "+ cart_idx);
 
         int total = 0;
         for(int i = 0; i < cartList.size(); i++) {
             int tmp = cartList.get(i).getPro_price()*cartList.get(i).getPro_quantity();
             total = total+tmp;
         }
-
+        model.addAttribute("cart_idx", cart_idx);
         model.addAttribute("total", total);
         model.addAttribute("cartList", cartList);
     }
-    @PostMapping("/checkout")
+    @GetMapping("/checkout")
     public String Postcheckout(@Valid OrderDTO orderDTO,
-
+                               @RequestParam(name = "cart_idx", defaultValue = "") String cart_idx,
                                HttpSession session,
                                Model model) {
+        orderDTO.setOrder_addr();
         log.info(orderDTO);
-//        String member_id = (String)session.getAttribute("member_id");
-//        memberServiceIf.insertOrder(orderDTO);
-//        int order_idx = memberServiceIf.getorderidx(member_id);
-//        orderDTO.setOrder_idx(order_idx);
-//        memberServiceIf.insertOrderDetail(order_idx, 2, 3);
-        return"#";
+        log.info(cart_idx);
+        String member_id = (String)session.getAttribute("member_id");
+        orderDTO.setMember_id(member_id);
+        memberServiceIf.insertOrder(orderDTO);
+        int order_idx = memberServiceIf.getorderidx(member_id);
+        List<CartDTO> cartList = memberServiceIf.getCartList(member_id, cart_idx);
+        for(int i = 0; i < cartList.size(); i++) {
+            cartList.get(i).setCart_idx(order_idx);
+        }
+        memberServiceIf.insertOrderDetail(cartList);
+        log.info("cart_idx : "+ cart_idx);
+        memberServiceIf.cartout(cart_idx);
+        return"redirect:/member/cart";
+    }
+
+    @ResponseBody
+    @PostMapping("/cartminus")
+    public void cartMinus(@RequestParam(name = "cart_idx", defaultValue="") String cart_idx){
+        memberServiceIf.cartminus(cart_idx);
+    }
+    @ResponseBody
+    @PostMapping("/cartplus")
+    public void cartPlus(@RequestParam(name = "cart_idx", defaultValue="") String cart_idx){
+        memberServiceIf.cartplus(cart_idx);
     }
 
     @GetMapping("/buy")
