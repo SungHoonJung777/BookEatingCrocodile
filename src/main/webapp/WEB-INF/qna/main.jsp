@@ -83,6 +83,42 @@
                 <div class="container-xxl flex-grow-1 container-p-y">
                     <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">커뮤니티 /</span> QnA</h4>
 
+                    <form role="search" id="frmSearch">
+                        <div class="mb-3 row">
+                            <label class="col-sm-2 col-form-label">검색 범위</label>
+                            <div class="col-sm-2">
+                                <input class="form-check-input" type="checkbox" name="search_type" id="search_type1" value="t" <c:if test="${qnaList['search_type_string'].contains('t')}">checked</c:if>>
+                                <label class="form-check-label" for="search_type1">제목</label>
+                                <input class="form-check-input" type="checkbox" name="search_type" id="search_type3" value="c" <c:if test="${qnaList['search_type_string'].contains('c')}">checked</c:if>>
+                                <label class="form-check-label" for="search_type3">질문내용</label><br>
+                                <input class="form-check-input" type="checkbox" name="search_type" id="search_type2" value="u" <c:if test="${qnaList['search_type_string'] != 'null' && qnaList['search_type_string'].contains('u')}">checked</c:if>>
+                                <label for="search_type2">작성자</label>
+                            </div>
+                            <div class="col">
+                                <input class="form-check-label" type="search" name="search_word"  id="search_word" placeholder="Search" aria-label="Search" value="${qnaList.search_word}">
+                            </div>
+                        </div>
+
+                        <div class="mb-3 row">
+                            <label class="col-sm-2 col-form-label">검색 기간</label>
+                            <div class="col-sm-2">
+                                <input type="date" class="form-control" name="search_date1" id="search_date1" value="${qnaList.search_date1}">
+                            </div>
+                            <div class="col-sm-2">
+                                <span class="justify-content-center">~</span>
+                            </div>
+                            <div class="col-sm-2">
+                                <input type="date" class="form-control" name="search_date2" id="search_date2" value="${qnaList.search_date2}">
+                            </div>
+
+                            <div class="col-sm-2">
+                                <button class="btn btn-outline-success" id="btnSearch" type="submit">Search</button>
+                                <button class="btn btn-outline-success" id="btnReset" type="reset" onclick="location.href='/qna/main'">reset</button>
+                            </div>
+                        </div>
+                    </form>
+
+
                     <div class="row">
                         <form action="/qna/delete" method="get">
                             <div class="col-md-12">
@@ -307,6 +343,9 @@
             }
         }
     });
+
+    //검색버튼 눌렀을 때
+
 </script>
 </body>
 </html>

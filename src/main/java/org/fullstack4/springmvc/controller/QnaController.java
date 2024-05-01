@@ -65,14 +65,16 @@ public class QnaController {
 
     }
 
+    //Qna 게시판
     @GetMapping("/main")
     public void qnaList(HttpSession session,
                         @Valid PageRequestDTO pageRequestDTO,
                         Model model) {
         log.info("============================");
         log.info("QnaController >> qnaList()");
+        pageRequestDTO.setQna_category("qna");
         String member_id = (String)session.getAttribute("member_id");
-        PageResponseDTO<QnaDTO> qnaList = qnaServiceIf.getQna( "qna", pageRequestDTO);
+        PageResponseDTO<QnaDTO> qnaList = qnaServiceIf.getQna( pageRequestDTO);
 
         //PageResponseDTO<BbsDTO> responseDTO = bbsServiceIf.bbsListByPage(pageRequestDTO);
 

@@ -27,6 +27,8 @@ public class PageResponseDTO<E> {
     private String[] search_type;
     private String search_word;
     private String search_type_string;
+    private String search_date1="";
+    private String search_date2="";
 
     private String linkParams;
 
@@ -36,6 +38,8 @@ public class PageResponseDTO<E> {
 
     private String sortField;
     private String sortDir; //오름차순, 내림차순
+
+    private String qna_category;
 
     PageResponseDTO() {} //빈으로 등록되기 위해 기본생성자 필요
 
@@ -60,8 +64,11 @@ public class PageResponseDTO<E> {
         this.pro_category3 = requestDTO.getPro_category3();
         this.sortField = requestDTO.getSortField();
         this.sortDir = requestDTO.getSortDir();
+        this.search_date1 = requestDTO.getSearch_date1();
+        this.search_date2 = requestDTO.getSearch_date2();
+        this.qna_category = requestDTO.getQna_category();
 
-
+        this.search_type = requestDTO.getSearch_type();
         this.search_type_string = search_type !=null ? Arrays.toString(search_type).replace("[", "").replace("]", "") : "";
         this.search_word = requestDTO.getSearch_word();
 
@@ -85,6 +92,12 @@ public class PageResponseDTO<E> {
 
         if(pro_category3 != null) {
             sb.append("&pro_category3=" + pro_category3);
+        }
+        if (search_date1 != null) {
+            sb.append("&search_date1=" + search_date1);
+        }
+        if (search_date2 != null) {
+            sb.append("&search_date2=" + search_date2);
         }
 
 

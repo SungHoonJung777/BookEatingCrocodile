@@ -93,6 +93,11 @@
                                         <input type="hidden" name="member_id" value="abc01">
                                         <input type="hidden" name="qna_category" value="one">
                                         <div class="mb-3"></div>
+                                    <div class="mb-3">
+                                        <label class="form-label" for="basic-default-fullname">작성자</label>
+                                        <input type="text" readonly class="form-control" id="member_id" name="member_id"
+                                               value="${qnaDTO.member_id}"/>
+                                    </div>
                                         <div class="mb-3">
                                             <label class="form-label"  for="basic-default-fullname">문의 제목</label>
                                             <input type="text" readonly class="form-control" id="qna_title" name="qna_title" value="${qnaDTO.qna_title}"/>

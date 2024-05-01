@@ -5,8 +5,10 @@ import lombok.extern.log4j.Log4j2;
 import org.fullstack4.springmvc.Criteria.Criteria;
 import org.fullstack4.springmvc.Criteria.PageMakerDTO;
 import org.fullstack4.springmvc.dto.*;
+import org.fullstack4.springmvc.mapper.QnaMapper;
 import org.fullstack4.springmvc.service.admin.AdminService;
 import org.fullstack4.springmvc.service.memberLoginService.MemberLoginService;
+import org.fullstack4.springmvc.service.qnaService.QnaServiceIf;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -24,6 +26,7 @@ import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -41,6 +44,7 @@ public class AdminController {
     private MemberLoginService memberLoginService;
     @Autowired
     private AdminService adminService;
+    private final QnaServiceIf qnaServiceIf;
 
     @GetMapping("/login")
     public String adminLogin() throws Exception{
@@ -356,5 +360,65 @@ public class AdminController {
 
     }
 
+    @GetMapping("/qnaList")
+    public void qnaList(HttpSession session,
+                        @Valid PageRequestDTO pageRequestDTO,
+                        Model model) {
+        log.info("============================");
+        log.info("QnaController >> qnaList()");
+        pageRequestDTO.setQna_category("qna");
+        String member_id = (String)session.getAttribute("member_id");
+        PageResponseDTO<QnaDTO> qnaList = qnaServiceIf.getQna( pageRequestDTO);
 
+        //PageResponseDTO<BbsDTO> responseDTO = bbsServiceIf.bbsListByPage(pageRequestDTO);
+
+        model.addAttribute("qnaList", qnaList);
+        // model.addAttribute("responseDTO", responseDTO);
+
+        log.info(qnaList);
+        log.info("QnaController >> qnaList() END");
+        log.info("========================");
+        log.info("============================");
+    }
+    @GetMapping("/oneList")
+    public void oneList(HttpSession session,
+                        @Valid PageRequestDTO pageRequestDTO,
+                        Model model) {
+        log.info("============================");
+        log.info("QnaController >> qnaList()");
+        pageRequestDTO.setQna_category("one");
+        String member_id = (String)session.getAttribute("member_id");
+        PageResponseDTO<QnaDTO> qnaList = qnaServiceIf.getQna( pageRequestDTO);
+
+        //PageResponseDTO<BbsDTO> responseDTO = bbsServiceIf.bbsListByPage(pageRequestDTO);
+
+        model.addAttribute("qnaList", qnaList);
+        // model.addAttribute("responseDTO", responseDTO);
+
+        log.info(qnaList);
+        log.info("QnaController >> qnaList() END");
+        log.info("========================");
+        log.info("============================");
+    }
+
+    @GetMapping("/faqList")
+    public void faqList(HttpSession session,
+                        @Valid PageRequestDTO pageRequestDTO,
+                        Model model) {
+        log.info("============================");
+        log.info("MemberController >> qnaList()");
+        pageRequestDTO.setQna_category("faq");
+        String member_id = (String)session.getAttribute("member_id");
+        PageResponseDTO<QnaDTO> qnaList = qnaServiceIf.getQna( pageRequestDTO);
+
+        //PageResponseDTO<BbsDTO> responseDTO = bbsServiceIf.bbsListByPage(pageRequestDTO);
+
+        model.addAttribute("qnaList", qnaList);
+        // model.addAttribute("responseDTO", responseDTO);
+
+        log.info(qnaList);
+        log.info("MemberController >> qnaList() END");
+        log.info("========================");
+        log.info("============================");
+    }
 }

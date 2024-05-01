@@ -13,6 +13,6 @@ public interface QnaServiceIf {
     int registAdmin(QnaAdminDTO qnaAdminDTO);
     int deleteAdmin(int qna_idx);
     int registFaq(QnaDTO qnaDTO);
-    PageResponseDTO<QnaDTO> getQna(String qna_category, PageRequestDTO pageRequestDTO);
+    PageResponseDTO<QnaDTO> getQna(PageRequestDTO pageRequestDTO);
     int deleteQnaCommu(Integer[] idxList);
 }

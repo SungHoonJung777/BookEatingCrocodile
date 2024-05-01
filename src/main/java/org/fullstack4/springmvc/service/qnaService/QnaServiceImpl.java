@@ -68,12 +68,12 @@ public class QnaServiceImpl implements QnaServiceIf{
     }
 
     @Override
-    public PageResponseDTO<QnaDTO> getQna(String qna_category, PageRequestDTO pageRequestDTO) {
-        List<QnaDTO> qnaList = qnaMapper.getQna(qna_category,pageRequestDTO).stream()
+    public PageResponseDTO<QnaDTO> getQna(PageRequestDTO pageRequestDTO) {
+        List<QnaDTO> qnaList = qnaMapper.getQna(pageRequestDTO).stream()
                 .map(vo->modelMapper.map(vo, QnaDTO.class))
                 .collect(Collectors.toList());
 
-        int total_count = qnaMapper.totalQnaCommu(qna_category, pageRequestDTO);
+        int total_count = qnaMapper.totalQnaCommu(pageRequestDTO);
 
         log.info("impl qnaList : "+qnaList);
 

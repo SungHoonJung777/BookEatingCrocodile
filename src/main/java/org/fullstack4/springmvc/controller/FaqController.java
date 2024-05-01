@@ -37,8 +37,9 @@ public class FaqController {
                         Model model) {
         log.info("============================");
         log.info("MemberController >> qnaList()");
-        String member_id = (String) session.getAttribute("member_id");
-        PageResponseDTO<QnaDTO> qnaList = memberServiceIf.getQnaList("admin", "faq", pageRequestDTO);
+        pageRequestDTO.setQna_category("faq");
+        String member_id = (String)session.getAttribute("member_id");
+        PageResponseDTO<QnaDTO> qnaList = qnaServiceIf.getQna( pageRequestDTO);
 
         //PageResponseDTO<BbsDTO> responseDTO = bbsServiceIf.bbsListByPage(pageRequestDTO);
 
@@ -121,27 +122,27 @@ public class FaqController {
     }
 
     @PostMapping("/write")
-    public String registAdminPOST(@Valid QnaDTO qnaDTO,
+    public String registAdminPOST(QnaDTO qnaDTO,
                                   BindingResult bindingResult,
                                   RedirectAttributes redirectAttributes,
                                   Model model) {
 
 
         log.info("registPOST");
-
-        if (bindingResult.hasErrors()) {
-            log.info("Errors");
-            redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
-            redirectAttributes.addFlashAttribute("qnaDTO", qnaDTO);
-
-            return "redirect:/faq/write";
-        }
+//
+//        if (bindingResult.hasErrors()) {
+//            log.info("Errors");
+//            redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
+//            redirectAttributes.addFlashAttribute("qnaDTO", qnaDTO);
+//
+//            return "redirect:/faq/write";
+//        }
 
         int result = qnaServiceIf.registFaq(qnaDTO);
         if (result > 0) {
             return "redirect:/faq/view";
         } else {
-            return "redirect:/faq/view";
+            return "redirect:/faq/write";
         }
 
 

@@ -10,7 +10,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html>
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <meta
             name="viewport"
             content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
@@ -18,29 +18,30 @@
 
     <title>1:1 게시판</title>
 
-    <meta name="description" content="" />
+    <meta name="description" content=""/>
 
     <!-- Favicon -->
 
 
     <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
     <link
             href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
             rel="stylesheet"
     />
 
     <!-- Icons. Uncomment required icon fonts -->
-    <link rel="stylesheet" href="/resources/resources/assets/vendor/fonts/boxicons.css" />
+    <link rel="stylesheet" href="/resources/resources/assets/vendor/fonts/boxicons.css"/>
 
     <!-- Core CSS -->
-    <link rel="stylesheet" href="/resources/resources/assets/vendor/css/core.css" class="template-customizer-core-css" />
-    <link rel="stylesheet" href="/resources/resources/vendor/css/theme-default.css" class="template-customizer-theme-css" />
-    <link rel="stylesheet" href="/resources/resources/assets/css/demo.css" />
+    <link rel="stylesheet" href="/resources/resources/assets/vendor/css/core.css" class="template-customizer-core-css"/>
+    <link rel="stylesheet" href="/resources/resources/vendor/css/theme-default.css"
+          class="template-customizer-theme-css"/>
+    <link rel="stylesheet" href="/resources/resources/assets/css/demo.css"/>
 
     <!-- Vendors CSS -->
-    <link rel="stylesheet" href="/resources/resources/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="/resources/resources/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css"/>
 
     <!-- Page CSS -->
 
@@ -92,42 +93,52 @@
                                 <div class="card-body">
                                     <div class="mb-3"></div>
                                     <div class="mb-3">
-                                        <label class="form-label"  for="basic-default-fullname">작성자</label>
-                                        <input type="text" readonly class="form-control" id="member_id" name="member_id" value="${qnaDTO.member_id}"/>
-
+                                        <label class="form-label" for="basic-default-fullname">작성자</label>
+                                        <input type="text" readonly class="form-control" id="member_id" name="member_id"
+                                               value="${qnaDTO.member_id}"/>
                                     </div>
                                     <input type="hidden" name="qna_category" value="qna">
                                     <div class="mb-3"></div>
                                     <div class="mb-3">
-                                        <label class="form-label"  for="basic-default-fullname">문의 제목</label>
-                                        <input type="text" readonly class="form-control" id="qna_title" name="qna_title" value="${qnaDTO.qna_title}"/>
+                                        <label class="form-label" for="basic-default-fullname">문의 제목</label>
+                                        <input type="text" readonly class="form-control" id="qna_title" name="qna_title"
+                                               value="${qnaDTO.qna_title}"/>
 
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label" for="basic-default-fullname">등록일</label>
-                                        <input type="text" readonly class="form-control" id="qna_reg_date" name="qna_title" value="${fn:substring(qnaDTO.qna_reg_date, 0, 10)} ${fn:substring(qnaDTO.qna_reg_date, 11, 20)}"/>
+                                        <input type="text" readonly class="form-control" id="qna_reg_date"
+                                               name="qna_title"
+                                               value="${fn:substring(qnaDTO.qna_reg_date, 0, 10)} ${fn:substring(qnaDTO.qna_reg_date, 11, 20)}"/>
 
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label" for="basic-default-company">문의 내용</label>
-                                        <textarea style="resize:none;" class="form-control" readonly name="qna_content" rows="10"  id="qna_content" >${qnaDTO.qna_content}</textarea>
+                                        <textarea style="resize:none;" class="form-control" readonly name="qna_content"
+                                                  rows="10" id="qna_content">${qnaDTO.qna_content}</textarea>
 
                                     </div>
                                     <c:if test="${qnaDTO.qna_answer_YN eq 'N' and (qnaDTO.member_id eq sessionScope.member_id)}">
-                                        <button type="submit" class="btn btn-primary" onclick="location.href='/qna/modify?qna_idx=${qnaDTO.qna_idx}'">수정하기</button>
-                                        <button type="button" id="deleteA" onclick="qnaDelete(${qnaDTO.qna_idx})"  class="btn btn-danger" >글 삭제</button>
+                                        <button type="submit" class="btn btn-primary"
+                                                onclick="location.href='/qna/modify?qna_idx=${qnaDTO.qna_idx}'">수정하기
+                                        </button>
+                                        <button type="button" id="deleteA" onclick="qnaDelete(${qnaDTO.qna_idx})"
+                                                class="btn btn-danger">글 삭제
+                                        </button>
 
                                     </c:if>
-                                    <button type="reset" class="btn btn-secondary" onclick="location.href='/qna/main'">목록으로</button>
-                                    <%--                                   <c:if test="${sessionScope.loginInfo.member_id eq 'admin'} ">--%>
-                                    <c:if test="${qnaDTO.qna_answer_YN eq 'Y'}">
-<%--                                        <button type="button" class="btn btn-primary" onclick="location.href='/qna/adminWrite?qna_idx=${qnaDTO.qna_idx}'">답변수정</button>--%>
-                                    </c:if>
-                                    <c:if test="${qnaDTO.qna_answer_YN eq 'N' and (qnaDTO.member_id eq sessionScope.member_id)}">
+                                    <button type="reset" class="btn btn-secondary" onclick="location.href='/qna/main'">
+                                        목록으로
+                                    </button>
 
-<%--                                        <button type="button" class="btn btn-primary" onclick="location.href='/qna/adminWrite?qna_idx=${qnaDTO.qna_idx}'">답변달기</button>--%>
+                                        <c:if test="${qnaDTO.qna_answer_YN eq 'N'}">
+                                            <c:if test="${sessionScope.member_id eq 'admin'}">
+                                            <button type="button" class="btn btn-primary"
+                                                    onclick="location.href='/qna/adminWrite?qna_idx=${qnaDTO.qna_idx}'">
+                                                답변달기
+                                            </button>
+                                        </c:if>
                                     </c:if>
-                                    <%--                                  </c:if>--%>
                                 </div>
 
                             </div>
@@ -144,15 +155,24 @@
 
                                         <div class="mb-3">
                                             <label class="form-label" for="basic-default-fullname">등록일</label>
-                                            <input type="text" readonly class="form-control" id="qna_answer_date" name="qna_answer_date" value="${fn:substring(qnaDTO.qna_answer_date, 0, 10)} ${fn:substring(qnaDTO.qna_answer_date, 11, 20)}"/>
+                                            <input type="text" readonly class="form-control" id="qna_answer_date"
+                                                   name="qna_answer_date"
+                                                   value="${fn:substring(qnaDTO.qna_answer_date, 0, 10)} ${fn:substring(qnaDTO.qna_answer_date, 11, 20)}"/>
 
                                         </div>
                                         <div class="mb-3">
                                             <label class="form-label" for="basic-default-company">답변 내용</label>
-                                            <textarea style="resize:none;" class="form-control" readonly rows="10" name="qna_answer" id="qna_answer" >${qnaDTO.qna_answer}</textarea>
+                                            <textarea style="resize:none;" class="form-control" readonly rows="10"
+                                                      name="qna_answer" id="qna_answer">${qnaDTO.qna_answer}</textarea>
 
                                         </div>
-<%--                                        <button type="button" id="adminDelete" class="btn btn-primary" >답변삭제</button>--%>
+                                        <c:if test="${sessionScope.member_id eq 'admin'}">
+                                            <button type="button" id="adminDelete" class="btn btn-primary">답변삭제</button>
+                                            <button type="button" class="btn btn-primary"
+                                                    onclick="location.href='/qna/adminWrite?qna_idx=${qnaDTO.qna_idx}'">
+                                                답변수정
+                                            </button>
+                                        </c:if>
                                     </div>
                                 </div>
                             </c:if>
@@ -189,7 +209,7 @@
     document.getElementById("adminDelete").addEventListener("click", () => {
         let yn = confirm("답변을 삭제 하시겠습니까?");
         if (yn) {
-            location.href="/qna/adminDelete?qna_idx=${qnaDTO.qna_idx}";
+            location.href = "/qna/adminDelete?qna_idx=${qnaDTO.qna_idx}";
         }
 
     });
@@ -197,7 +217,7 @@
     function qnaDelete(qna_idx) {
         let yn = confirm("문의글을 삭제 하시겠습니까?");
         if (yn) {
-            location.href="/qna/delete?qna_idx="+qna_idx;
+            location.href = "/qna/delete?qna_idx=" + qna_idx;
         }
 
     }
