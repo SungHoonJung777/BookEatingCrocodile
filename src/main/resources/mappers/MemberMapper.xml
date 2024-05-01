@@ -57,10 +57,13 @@
         where user_id = #{user_id}
     </select>
     <select id="getCartList" resultType="org.fullstack4.springmvc.domain.CartVO">
-        SELECT bc.cart_idx, bc.pro_title, bp.pro_price, bp.pro_amount, bc.pro_quantity
+        SELECT bc.cart_idx, bc.pro_title, bp.pro_price, bp.pro_amount, bc.pro_quantity, bc.pro_idx
         FROM bec_product as bp
         inner join bec_cart AS bc ON bp.pro_idx = bc.pro_idx
         WHERE member_id = #{m_id}
+        <if test="cart_idx != null and cart_idx !=''">
+            AND cart_idx in (${cart_idx})
+        </if>
     </select>
 
     <select id="getQnaList" resultType="org.fullstack4.springmvc.domain.QnaVO">
@@ -96,12 +99,12 @@
     </select>
 
     <delete id="cartout">
-        DELETE FROM bec_cart WHERE cart_idx = #{cart_idx}
+        DELETE FROM bec_cart WHERE cart_idx in (${cart_idx})
     </delete>
 
     <insert id="insertOrder">
-        INSERT INTO bec_order(member_id, order_total)
-        VALUES(#{member_id}, #{order_total})
+        INSERT INTO bec_order(member_id, order_total, deli_name, deli_addr, order_name, req_term, order_phone)
+        VALUES(#{member_id}, #{order_total}, #{deli_name}, #{deli_addr}, #{order_name}, #{req_term}, #{order_phone})
     </insert>
     <select id="getorderidx" resultType="int">
         SELECT b.order_idx
@@ -109,8 +112,21 @@
                  LEFT JOIN bec_order_detail d ON b.order_idx = d.order_idx
         WHERE d.order_idx IS NULL AND b.member_id = #{member_id}
     </select>
-    <insert id="insertOrderDetail">
+    <insert id="insertOrderDetail" parameterType="list">
         INSERT INTO bec_order_detail(order_idx, pro_idx, pro_quantity)
-        VALUES (#{order_idx}, #{pro_idx}, #{pro_quantity})
+        VALUES
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.cart_idx}, #{item.pro_idx}, #{item.pro_quantity})
+        </foreach>
     </insert>
+    <update id="cartplus">
+        UPDATE bec_cart SET
+            pro_quantity = pro_quantity+1
+        WHERE cart_idx = #{cartIdx}
+    </update>
+    <update id="cartminus">
+        UPDATE bec_cart SET
+            pro_quantity = pro_quantity-1
+        WHERE cart_idx = #{cartIdx}
+    </update>
 </mapper>

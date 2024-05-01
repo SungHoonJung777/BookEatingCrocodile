@@ -27,6 +27,13 @@ public class OrderDTO {
     private String order_phone;
     private String delivery_member_id;
     public void setOrder_addr(String zonecode, String addr1, String addr2){
+
+    private String zonecode;
+    private String addr1;
+    private String addr2;
+
+    public void setOrder_addr(){
         this.deli_addr = zonecode+" "+addr1+" "+addr2;
     }
+
 }

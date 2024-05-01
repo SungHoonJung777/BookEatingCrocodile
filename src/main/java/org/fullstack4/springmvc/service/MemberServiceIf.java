@@ -20,7 +20,7 @@ public interface MemberServiceIf {
     int getEmailCount(String email);
     int getIdCount(String nickname);
 
-    List<CartDTO> getCartList(String m_id);
+    List<CartDTO> getCartList(String m_id, String cart_idx);
 
     void cartout(String cart_id);
 
@@ -33,5 +33,8 @@ public interface MemberServiceIf {
 
     void insertOrder(OrderDTO orderDTO);
     int getorderidx(String member_id);
-    void insertOrderDetail(int order_idx, int pro_idx, int pro_quantity);
+    void insertOrderDetail(List<CartDTO> cartList);
+
+    void cartplus(String cartIdx);
+    void cartminus(String cartIdx);
 }

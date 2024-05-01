@@ -101,8 +101,8 @@ public class MemberServiceImpl implements MemberServiceIf{
     }
 
     @Override
-    public List<CartDTO> getCartList(String m_id){
-        List<CartDTO> cartList = memberMapper.getCartList(m_id).stream()
+    public List<CartDTO> getCartList(String m_id, String cart_idx){
+        List<CartDTO> cartList = memberMapper.getCartList(m_id, cart_idx).stream()
                 .map(vo->modelMapper.map(vo, CartDTO.class))
                 .collect(Collectors.toList());
         log.info("m_id : "+m_id);
@@ -112,6 +112,7 @@ public class MemberServiceImpl implements MemberServiceIf{
 
     @Override
     public void cartout(String cart_id){
+        log.info("왜 안나오니cart_idx : "+cart_id);
         memberMapper.cartout(cart_id);
     }
     @Override
@@ -167,8 +168,18 @@ public class MemberServiceImpl implements MemberServiceIf{
         return result;
     }
     @Override
-    public void insertOrderDetail(int order_idx, int pro_idx, int pro_quantity){
-        memberMapper.insertOrderDetail(order_idx, pro_idx, pro_quantity);
+    public void insertOrderDetail(List<CartDTO> cartList){
+        memberMapper.insertOrderDetail(cartList);
+    }
+
+    @Override
+    public void cartplus(String cartIdx) {
+        memberMapper.cartplus(cartIdx);
+    }
+
+    @Override
+    public void cartminus(String cartIdx) {
+        memberMapper.cartminus(cartIdx);
     }
 
 
