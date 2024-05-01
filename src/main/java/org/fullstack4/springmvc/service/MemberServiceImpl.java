@@ -149,9 +149,7 @@ public class MemberServiceImpl implements MemberServiceIf{
 
     @Override
     public List<ReviewDTO> getReviewList(String member_id) {
-        List<ReviewDTO> reviewList = memberMapper.getReviewList(member_id).stream()
-                .map(vo->modelMapper.map(vo, ReviewDTO.class))
-                .collect(Collectors.toList());
+        List<ReviewDTO> reviewList = memberMapper.getReviewList(member_id);
         return reviewList;
     }
 

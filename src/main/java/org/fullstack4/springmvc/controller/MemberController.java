@@ -365,6 +365,7 @@ public class MemberController {
                        Model model) {
         String member_id = (String)session.getAttribute("member_id");
         List<ReviewDTO> reviewList = memberServiceIf.getReviewList(member_id);
+        log.info(reviewList.toString());
 
         //PageResponseDTO<BbsDTO> responseDTO = bbsServiceIf.bbsListByPage(pageRequestDTO);
 

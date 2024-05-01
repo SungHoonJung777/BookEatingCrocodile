@@ -86,7 +86,7 @@
         where order_idx=#{order_idx}
     </update>
 
-    <select id="getReviewList" resultType="org.fullstack4.springmvc.domain.ReviewVO">
+    <select id="getReviewList" resultType="org.fullstack4.springmvc.dto.ReviewDTO">
         SELECT review_idx, r.pro_idx AS pro_idx, member_id, review_title, review_content, review_star, review_reg_date, review_reg_date, pro_name
         FROM
             bec_review AS r

@@ -2,10 +2,7 @@ package org.fullstack4.springmvc.mapper;
 
 import org.apache.ibatis.annotations.Param;
 import org.fullstack4.springmvc.domain.*;
-import org.fullstack4.springmvc.dto.MemberDTO;
-import org.fullstack4.springmvc.dto.OrderDTO;
-import org.fullstack4.springmvc.dto.PageRequestDTO;
-import org.fullstack4.springmvc.dto.ProductDTO;
+import org.fullstack4.springmvc.dto.*;
 import org.springframework.core.annotation.Order;
 
 import java.util.List;
@@ -34,7 +31,7 @@ public interface MemberMapper {
     List<OrderVO> getOrderList(String member_id);
 
     int orderDelete(int order_idx);
-    List<ReviewVO> getReviewList(String member_id);
+    List<ReviewDTO> getReviewList(String member_id);
     //아래 결제 정보 저장 부분
     void insertOrder(OrderDTO orderDTO);
     int getorderidx(String member_id);

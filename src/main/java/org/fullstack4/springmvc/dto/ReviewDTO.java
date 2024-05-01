@@ -21,4 +21,5 @@ public class ReviewDTO {
     private String review_content;
     private int review_star;
     private LocalDateTime review_reg_date;
+    private String pro_name;
 }
