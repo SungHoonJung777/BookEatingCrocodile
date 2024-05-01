@@ -26,7 +26,6 @@ public class OrderDTO {
     private String req_term;
     private String order_phone;
     private String delivery_member_id;
-    public void setOrder_addr(String zonecode, String addr1, String addr2){
 
     private String zonecode;
     private String addr1;
