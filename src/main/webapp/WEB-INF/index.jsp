@@ -174,7 +174,36 @@
       </c:forEach>
     </div>
   </div>
+  <div class="container-fluid banner bg-secondary my-5" style="background-color: #0A3711;">
+    <div class="container py-5">
+      <div class="row g-4 align-items-center">
+        <div class="col-lg-6">
+          <div class="py-4">
+            <h3 class="display-3 text-white">무엇을 살까? 악악!</h3>
+            <p class="fw-normal display-3 text-dark mb-4">악악악악</p>
+            <p class="mb-4 text-dark">악악악악악악악악악악악악악악악악악악악악악악악악악악악악</p>
+            <a href="#" class="banner-btn btn border-2 border-white rounded-pill text-dark py-3 px-5" id="testBtn">테스트 하기!</a>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="position-relative">
+            <img src="/resources/resources/img/choice/mainLogin.jpg" style="background-size: 30px;" class="img-fluid w-100 rounded" alt="" >
+<%--
+            <div class="d-flex align-items-center justify-content-center bg-white rounded-circle position-absolute" style="width: 140px; height: 140px; top: 0; left: 0;">
+--%>
+
+      <%--        <div class="d-flex flex-column" style="background-image: url('/resources/resources/img/choice/logo.png');background-size: cover;">
+
+              </div>--%>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+<!-- Banner Section Start-->
+
 <!-- popular End -->
 
 
@@ -197,6 +226,10 @@
     frmSearch.submit();
 
   }
+
+  document.querySelector("#testBtn").addEventListener("click",function (){
+    location.href = '/event/choice';
+  })
 </script>
 
 <!-- JavaScript Libraries -->
