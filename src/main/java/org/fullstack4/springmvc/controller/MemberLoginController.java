@@ -79,50 +79,12 @@ public class MemberLoginController {
             //() : 만약 세션이 형성이 안되어있으면 세션을 바로 생성해서 리턴. 있으면 있는 생성정보를 리턴.
             //(false) : 없더라도 생성안함. 그냥 세션만 리턴(null)
             session.setAttribute("member_id", loginMemberDTO.getMember_id());
+            session.setAttribute("member_type",loginMemberDTO.getMember_type());
             session.setAttribute("loginInfo", loginMemberDTO);
             log.info(session.getAttribute("loginInfo"));
             model.addAttribute("loginInfo", loginMemberDTO);
-            /*if (request.getParameter("save_id") != null && request.getParameter("save_id").equals("Y")) {
-                Cookie cookie1 = new Cookie("save_id", "checked");
-                cookie1.setDomain("");
-                cookie1.setPath("/");
-                cookie1.setMaxAge(60*60*24);
-                res.addCookie(cookie1);
 
-                Cookie cookie2 = new Cookie("user_id", loginDTO.getUser_id());
-                cookie2.setDomain("");
-                cookie2.setPath("/");
-                cookie2.setMaxAge(60*60*24);
-                res.addCookie(cookie2);
-            }
-            if (req.getParameter("save_id") == null) {
-                Cookie cookie1 = new Cookie("save_id", "");
-                cookie1.setDomain("");
-                cookie1.setPath("/");
-                cookie1.setMaxAge(0);
-                res.addCookie(cookie1);
-
-                Cookie cookie2 = new Cookie("user_id", "");
-                cookie2.setDomain("");
-                cookie2.setPath("/");
-                cookie2.setMaxAge(0);
-                res.addCookie(cookie2);
-
-            }
-            if (req.getParameter("auto_login") != null && req.getParameter("auto_login").equals("Y")) {
-                Cookie cookie1 = new Cookie("auto_user_id", loginDTO.getUser_id());
-                cookie1.setDomain("");
-                cookie1.setPath("/");
-                cookie1.setMaxAge(60*60*24);
-                res.addCookie(cookie1);
-
-//                Cookie cookie2 = new Cookie("pwd", loginDTO.getPwd());
-//                cookie2.setDomain("");
-//                cookie2.setPath("/");
-//                cookie2.setMaxAge(60*60*24);
-//                res.addCookie(cookie2);
-            }*/
-            return "/";
+            return "redirect:/";
         }
         else {
 
@@ -195,7 +157,7 @@ public class MemberLoginController {
             return url;
         }
     }
-/*
+
     @RequestMapping(value="/logout")
     public String logout(HttpServletRequest req,
                          HttpServletResponse res) {
@@ -206,21 +168,11 @@ public class MemberLoginController {
             session.invalidate();
         }
 
-        Cookie cookie = new Cookie("auto_user_id", "");
-        cookie.setDomain("");
-        cookie.setPath("/");
-        cookie.setMaxAge(0);
-        res.addCookie(cookie);
 
-        Cookie cookie2 = new Cookie("pwd", "");
-        cookie2.setDomain("");
-        cookie2.setPath("/");
-        cookie2.setMaxAge(0);
-        res.addCookie(cookie2);
 
         log.info("LoginController >> logout()");
         log.info("==============================");
 
-        return "redirect:/bbs/list";
-    }*/
+        return "redirect:/";
+    }
 }

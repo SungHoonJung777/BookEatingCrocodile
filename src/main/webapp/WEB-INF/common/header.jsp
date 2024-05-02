@@ -91,7 +91,7 @@
                                         <a href="/member/join" class="dropdown-item">회원가입</a>
                                     </c:when>
                                     <c:otherwise>
-                                        <a href="#" class="dropdown-item">로그아웃</a>
+                                        <a href="/login/logout" class="dropdown-item">로그아웃</a>
                                         <a href="/member/buy" class="dropdown-item">주문내역 조회</a>
                                         <a href="/member/view" class="dropdown-item">마이페이지</a>
                                     </c:otherwise>
