@@ -9,8 +9,7 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 
 <html>
@@ -97,7 +96,7 @@
                 <div class="d-flex">
                     <span class="pro_view_titleV">${product.pro_writer}</span>
                     <span class="pro_view_titleV">${product.pro_company}</span>
-                    <span class="pro_view_titleV">${product.pro_reg_date}</span>
+                    <span class="pro_view_titleV">${fn:substring(product.pro_reg_date, 0, 10)}&nbsp;${fn:substring(product.pro_reg_date, 11, 20)}</span>
                 </div>
             </div>
 
@@ -116,40 +115,47 @@
                         <h4 class="fw-bold mb-3">${product.pro_name}</h4>
                         <div class="d-flex mb-4">
                             <c:choose>
-                                <c:when test="${review_star_avg eq '1'}">
+                                <c:when test="${product.review_star_avg eq '1'}">
                                     <i class="fa fa-star text-secondary"></i>
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
                                 </c:when>
-                                <c:when test="${review_star_avg eq '2'}">
+                                <c:when test="${product.review_star_avg eq '2'}">
                                     <i class="fa fa-star text-secondary"></i>
                                     <i class="fa fa-star text-secondary"></i>
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
                                 </c:when>
-                                <c:when test="${review_star_avg eq '3'}">
+                                <c:when test="${product.review_star_avg eq '3'}">
                                     <i class="fa fa-star text-secondary"></i>
                                     <i class="fa fa-star text-secondary"></i>
                                     <i class="fa fa-star text-secondary"></i>
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
                                 </c:when>
-                                <c:when test="${review_star_avg eq '4'}">
+                                <c:when test="${product.review_star_avg eq '4'}">
                                     <i class="fa fa-star text-secondary"></i>
                                     <i class="fa fa-star text-secondary"></i>
                                     <i class="fa fa-star text-secondary"></i>
                                     <i class="fa fa-star text-secondary"></i>
                                     <i class="fa fa-star"></i>
+                                </c:when>
+                                <c:when test="${product.review_star_avg eq '5'}">
+                                    <i class="fa fa-star text-secondary"></i>
+                                    <i class="fa fa-star text-secondary"></i>
+                                    <i class="fa fa-star text-secondary"></i>
+                                    <i class="fa fa-star text-secondary"></i>
+                                    <i class="fa fa-star text-secondary"></i>
                                 </c:when>
                                 <c:otherwise>
-                                    <i class="fa fa-star text-secondary"></i>
-                                    <i class="fa fa-star text-secondary"></i>
-                                    <i class="fa fa-star text-secondary"></i>
-                                    <i class="fa fa-star text-secondary"></i>
-                                    <i class="fa fa-star text-secondary"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
                                 </c:otherwise>
                             </c:choose>
                         </div>
@@ -191,9 +197,6 @@
                                 <button class="nav-link border-white border-bottom-0" type="button" role="tab"
                                         id="nav-mission-tab" data-bs-toggle="tab" data-bs-target="#nav-mission"
                                         aria-controls="nav-mission" aria-selected="false">Reviews</button>
-                                <button class="nav-link border-white border-bottom-0" type="button" role="tab"
-                                        id="nav-QnA-tab" data-bs-toggle="tab" data-bs-target="#nav-QnA"
-                                        aria-controls="nav-QnA" aria-selected="false">Q&A</button>
                             </div>
                         </nav>
                         <div class="tab-content mb-5">
@@ -225,54 +228,24 @@
                                                     <img src="img/avatar.jpg" class="img-fluid rounded-circle p-3" style="width: 100px; height: 100px;" alt="">
                                                     <div class="d-flex">
                                                         <div class="">
-                                                            <p class="mb-2" style="font-size: 14px;">${review.review_reg_date}</p>
-                                                            <div class="d-flex justify-content-between">
-                                                                <h5>${review.member_id}</h5>
+                                                            <p class="mb-2 text-nowrap" style="font-size: 14px;">${fn:substring(review.review_reg_date, 0, 10)} &nbsp; ${fn:substring(review.review_reg_date, 11, 20)}</p>
+                                                            <div class="d-flex">
                                                                 <div class="d-flex mb-3">
-                                                                    <c:choose>
-                                                                        <c:when test="${review.review_star eq '1'}">
-                                                                            <i class="fa fa-star text-secondary"></i>
-                                                                            <i class="fa fa-star"></i>
-                                                                            <i class="fa fa-star"></i>
-                                                                            <i class="fa fa-star"></i>
-                                                                            <i class="fa fa-star"></i>
-                                                                        </c:when>
-                                                                        <c:when test="${review.review_star eq '2'}">
-                                                                            <i class="fa fa-star text-secondary"></i>
-                                                                            <i class="fa fa-star text-secondary"></i>
-                                                                            <i class="fa fa-star"></i>
-                                                                            <i class="fa fa-star"></i>
-                                                                            <i class="fa fa-star"></i>
-                                                                        </c:when>
-                                                                        <c:when test="${review.review_star eq '3'}">
-                                                                            <i class="fa fa-star text-secondary"></i>
-                                                                            <i class="fa fa-star text-secondary"></i>
-                                                                            <i class="fa fa-star text-secondary"></i>
-                                                                            <i class="fa fa-star"></i>
-                                                                            <i class="fa fa-star"></i>
-                                                                        </c:when>
-                                                                        <c:when test="${review.review_star eq '4'}">
-                                                                            <i class="fa fa-star text-secondary"></i>
-                                                                            <i class="fa fa-star text-secondary"></i>
-                                                                            <i class="fa fa-star text-secondary"></i>
-                                                                            <i class="fa fa-star text-secondary"></i>
-                                                                            <i class="fa fa-star"></i>
-                                                                        </c:when>
-                                                                        <c:otherwise>
-                                                                            <i class="fa fa-star text-secondary"></i>
-                                                                            <i class="fa fa-star text-secondary"></i>
-                                                                            <i class="fa fa-star text-secondary"></i>
-                                                                            <i class="fa fa-star text-secondary"></i>
-                                                                            <i class="fa fa-star text-secondary"></i>
-                                                                        </c:otherwise>
-                                                                    </c:choose>
+                                                                    <i class="fa fa-star <c:if test='${review.review_star > 0}'>text-secondary</c:if>"></i>
+                                                                    <i class="fa fa-star <c:if test='${review.review_star > 1}'>text-secondary</c:if>"></i>
+                                                                    <i class="fa fa-star <c:if test='${review.review_star > 2}'>text-secondary</c:if>"></i>
+                                                                    <i class="fa fa-star <c:if test='${review.review_star > 3}'>text-secondary</c:if>"></i>
+                                                                    <i class="fa fa-star <c:if test='${review.review_star > 4}'>text-secondary</c:if>"></i>
                                                                 </div>
                                                             </div>
+                                                            <h5>${review.member_id}</h5>
                                                             <h5>${review.review_title}</h5>
                                                             <p>${review.review_content}</p>
-
+                                                            <div class="empty"></div>
                                                         </div>
-                                                        <button type="submit" onclick="goDelete()" id="review_delete_btn" name="review_delete_btn" class="btn border border-secondary text-primary rounded-pill px-4 py-3 review_del_btn">삭제</button>
+                                                        <c:if test="${sessionScope.member_id eq review.member_id || sessionScope.member_id eq 'admin'}">
+                                                            <button type="submit" onclick="goDelete()" id="review_delete_btn" name="review_delete_btn" class="btn border border-secondary text-primary rounded-pill px-4 py-3 review_del_btn">삭제</button>
+                                                        </c:if>
                                                     </div>
                                                 </div>
 
@@ -330,141 +303,143 @@
                         <div class="mb-3 sidebar_menu px-3">
                             <h4>Categories</h4>
                             <div class="empty"></div>
-                            <ul class="list-unstyled ps-0 fruite-categorie M01">
-                                <li class="mb-1 "><a class="nav-link fas fa-apple-alt" href="/product/main?pro_category1=유아">유아</a>
-                                    <ul class="twoDepth M02">
-                                        <li><a href="/product/main?pro_category1=유아&pro_category3=한글">한글</a></li>
-                                        <li><a href="/product/main?pro_category1=유아&pro_category3=영어">영어</a></li>
-                                        <li><a href="/product/main?pro_category1=유아&pro_category3=수학">수학</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                            <ul class="list-unstyled ps-0 fruite-categorie M01">
-                                <li class="mb-1 "><a class="nav-link fas fa-apple-alt" href="/product/main?pro_category1=초등">초등</a>
+                            <ul class="list-unstyled ps-0 fruite-categorie M01" >
+                                <li class="mb-1 filters" data-category1="유아"><a class="nav-link fas fa-apple-alt" href="#">유아</a>
                                     <ul class="M02">
-                                        <li><a href="/product/main?pro_category1=초등&pro_category2=1">1학년</a>
-                                            <ul class="M03">
-                                                <li><a href="/product/main?pro_category1=초등&pro_category2=1&pro_category3=국어">국어</a></li>
-                                                <li><a href="/product/main?pro_category1=초등&pro_category2=1&pro_category3=영어">영어</a></li>
-                                                <li><a href="/product/main?pro_category1=초등&pro_category2=1&pro_category3=수학">수학</a></li>
-                                                <li><a href="/product/main?pro_category1=초등&pro_category2=1&pro_category3=사회">사회</a></li>
-                                                <li><a href="/product/main?pro_category1=초등&pro_category2=1&pro_category3=과학">과학</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="/product/main?pro_category1=초등&pro_category2=2">2학년</a>
-                                            <ul class="M03">
-                                                <li><a href="/product/main?pro_category1=초등&pro_category2=2&pro_category3=국어">국어</a></li>
-                                                <li><a href="/product/main?pro_category1=초등&pro_category2=2&pro_category3=영어">영어</a></li>
-                                                <li><a href="/product/main?pro_category1=초등&pro_category2=2&pro_category3=수학">수학</a></li>
-                                                <li><a href="/product/main?pro_category1=초등&pro_category2=2&pro_category3=사회">사회</a></li>
-                                                <li><a href="/product/main?pro_category1=초등&pro_category2=2&pro_category3=과학">과학</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="/product/main?pro_category1=초등&pro_category2=3">3학년</a>
-                                            <ul class="M03">
-                                                <li><a href="/product/main?pro_category1=초등&pro_category2=3&pro_category3=국어">국어</a></li>
-                                                <li><a href="/product/main?pro_category1=초등&pro_category2=3&pro_category3=영어">영어</a></li>
-                                                <li><a href="/product/main?pro_category1=초등&pro_category2=3&pro_category3=수학">수학</a></li>
-                                                <li><a href="/product/main?pro_category1=초등&pro_category2=3&pro_category3=사회">사회</a></li>
-                                                <li><a href="/product/main?pro_category1=초등&pro_category2=3&pro_category3=과학">과학</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="/product/main?pro_category1=초등&pro_category2=4">4학년</a>
-                                            <ul class="M03">
-                                                <li><a href="/product/main?pro_category1=초등&pro_category2=4&pro_category3=국어">국어</a></li>
-                                                <li><a href="/product/main?pro_category1=초등&pro_category2=4&pro_category3=영어">영어</a></li>
-                                                <li><a href="/product/main?pro_category1=초등&pro_category2=4&pro_category3=수학">수학</a></li>
-                                                <li><a href="/product/main?pro_category1=초등&pro_category2=4&pro_category3=사회">사회</a></li>
-                                                <li><a href="/product/main?pro_category1=초등&pro_category2=4&pro_category3=과학">과학</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="/product/main?pro_category1=초등&pro_category2=5">5학년</a>
-                                            <ul class="M03">
-                                                <li><a href="/product/main?pro_category1=초등&pro_category2=5&pro_category3=국어">국어</a></li>
-                                                <li><a href="/product/main?pro_category1=초등&pro_category2=5&pro_category3=영어">영어</a></li>
-                                                <li><a href="/product/main?pro_category1=초등&pro_category2=5&pro_category3=수학">수학</a></li>
-                                                <li><a href="/product/main?pro_category1=초등&pro_category2=5&pro_category3=사회">사회</a></li>
-                                                <li><a href="/product/main?pro_category1=초등&pro_category2=5&pro_category3=과학">과학</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="/product/main?pro_category1=초등&pro_category2=6">6학년</a>
-                                            <ul class="M03">
-                                                <li><a href="/product/main?pro_category1=초등&pro_category2=6&pro_category3=국어">국어</a></li>
-                                                <li><a href="/product/main?pro_category1=초등&pro_category2=6&pro_category3=영어">영어</a></li>
-                                                <li><a href="/product/main?pro_category1=초등&pro_category2=6&pro_category3=수학">수학</a></li>
-                                                <li><a href="/product/main?pro_category1=초등&pro_category2=6&pro_category3=사회">사회</a></li>
-                                                <li><a href="/product/main?pro_category1=초등&pro_category2=6&pro_category3=과학">과학</a></li>
-                                            </ul>
-                                        </li>
+                                        <li class="filters" data-category1="유아" data-category3="한글"><a href="#">한글</a></li>
+                                        <li class="filters" data-category1="유아" data-category3="영어"><a href="#">영어</a></li>
+                                        <li class="filters" data-category1="유아" data-category3="수학"><a href="#">수학</a></li>
                                     </ul>
+
                                 </li>
                             </ul>
                             <ul class="list-unstyled ps-0 fruite-categorie M01">
-                                <li class="mb-1 "><a class="nav-link fas fa-apple-alt" href="/product/main?pro_category1=중등">중등</a>
+                                <li class="mb-1 filters" data-category1="초등"><a class="nav-link fas fa-apple-alt" href="#">초등</a>
                                     <ul class="M02">
-                                        <li class=""><a href="/product/main?pro_category1=중등&pro_category2=1">1학년</a>
+                                        <li class="filters" data-category1="초등" data-category2="1"><a href="#">1학년</a>
                                             <ul class="M03">
-                                                <li><a href="/product/main?pro_category1=중등&pro_category2=1&pro_category3=국어">국어</a></li>
-                                                <li><a href="/product/main?pro_category1=중등&pro_category2=1&pro_category3=영어">영어</a></li>
-                                                <li><a href="/product/main?pro_category1=중등&pro_category2=1&pro_category3=수학">수학</a></li>
-                                                <li><a href="/product/main?pro_category1=중등&pro_category2=1&pro_category3=사회">사회</a></li>
-                                                <li><a href="/product/main?pro_category1=중등&pro_category2=1&pro_category3=과학">과학</a></li>
+                                                <li class="filters" data-category1="초등" data-category2="1" data-category3="국어"><a href="#">국어</a></li>
+                                                <li class="filters" data-category1="초등" data-category2="1" data-category3="영어"><a href="#">영어</a></li>
+                                                <li class="filters" data-category1="초등" data-category2="1" data-category3="수학"><a href="#">수학</a></li>
+                                                <li class="filters" data-category1="초등" data-category2="1" data-category3="사회"><a href="#">사회</a></li>
+                                                <li class="filters" data-category1="초등" data-category2="1" data-category3="과학"><a href="#">과학</a></li>
                                             </ul>
                                         </li>
-                                        <li><a href="/product/main?pro_category1=중등&pro_category2=2">2학년</a>
+                                        <li class="filters" data-category1="초등" data-category2="2"><a href="#">2학년</a>
                                             <ul class="M03">
-                                                <li><a href="/product/main?pro_category1=중등&pro_category2=2&pro_category3=국어">국어</a></li>
-                                                <li><a href="/product/main?pro_category1=중등&pro_category2=2&pro_category3=영어">영어</a></li>
-                                                <li><a href="/product/main?pro_category1=중등&pro_category2=2&pro_category3=수학">수학</a></li>
-                                                <li><a href="/product/main?pro_category1=중등&pro_category2=2&pro_category3=사회">사회</a></li>
-                                                <li><a href="/product/main?pro_category1=중등&pro_category2=2&pro_category3=과학">과학</a></li>
+                                                <li class="filters" data-category1="초등" data-category2="2" data-category3="국어"><a href="#">국어</a></li>
+                                                <li class="filters" data-category1="초등" data-category2="2" data-category3="영어"><a href="#">영어</a></li>
+                                                <li class="filters" data-category1="초등" data-category2="2" data-category3="수학"><a href="#">수학</a></li>
+                                                <li class="filters" data-category1="초등" data-category2="2" data-category3="사회"><a href="#">사회</a></li>
+                                                <li class="filters" data-category1="초등" data-category2="2" data-category3="과학"><a href="#">과학</a></li>
                                             </ul>
                                         </li>
-                                        <li><a href="/product/main?pro_category1=중등&pro_category2=3">3학년</a>
+                                        <li class="filters" data-category1="초등" data-category2="3"><a href="#">3학년</a>
                                             <ul class="M03">
-                                                <li><a href="/product/main?pro_category1=중등&pro_category2=3&pro_category3=국어">국어</a></li>
-                                                <li><a href="/product/main?pro_category1=중등&pro_category2=3&pro_category3=영어">영어</a></li>
-                                                <li><a href="/product/main?pro_category1=중등&pro_category2=3&pro_category3=수학">수학</a></li>
-                                                <li><a href="/product/main?pro_category1=중등&pro_category2=3&pro_category3=사회">사회</a></li>
-                                                <li><a href="/product/main?pro_category1=중등&pro_category2=3&pro_category3=과학">과학</a></li>
+                                                <li class="filters" data-category1="초등" data-category2="3" data-category3="국어"><a href="#">국어</a></li>
+                                                <li class="filters" data-category1="초등" data-category2="3" data-category3="영어"><a href="#">영어</a></li>
+                                                <li class="filters" data-category1="초등" data-category2="3" data-category3="수학"><a href="#">수학</a></li>
+                                                <li class="filters" data-category1="초등" data-category2="3" data-category3="사회"><a href="#">사회</a></li>
+                                                <li class="filters" data-category1="초등" data-category2="3" data-category3="과학"><a href="#">과학</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="filters" data-category1="초등" data-category2="4"><a href="#">4학년</a>
+                                            <ul class="M03">
+                                                <li class="filters" data-category1="초등" data-category2="4" data-category3="국어"><a href="#">국어</a></li>
+                                                <li class="filters" data-category1="초등" data-category2="4" data-category3="영어"><a href="#">영어</a></li>
+                                                <li class="filters" data-category1="초등" data-category2="4" data-category3="수학"><a href="#">수학</a></li>
+                                                <li class="filters" data-category1="초등" data-category2="4" data-category3="사회"><a href="#">사회</a></li>
+                                                <li class="filters" data-category1="초등" data-category2="4" data-category3="과학"><a href="#">과학</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="filters" data-category1="초등" data-category2="5"><a href="#">5학년</a>
+                                            <ul class="M03">
+                                                <li class="filters" data-category1="초등" data-category2="5" data-category3="국어"><a href="#">국어</a></li>
+                                                <li class="filters" data-category1="초등" data-category2="5" data-category3="영어"><a href="#">영어</a></li>
+                                                <li class="filters" data-category1="초등" data-category2="5" data-category3="수학"><a href="#">수학</a></li>
+                                                <li class="filters" data-category1="초등" data-category2="5" data-category3="사회"><a href="#">사회</a></li>
+                                                <li class="filters" data-category1="초등" data-category2="5" data-category3="과학"><a href="#">과학</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="filters" data-category1="초등" data-category2="6"><a href="#">6학년</a>
+                                            <ul class="M03">
+                                                <li class="filters" data-category1="초등" data-category2="6" data-category3="국어"><a href="#">국어</a></li>
+                                                <li class="filters" data-category1="초등" data-category2="6" data-category3="영어"><a href="#">영어</a></li>
+                                                <li class="filters" data-category1="초등" data-category2="6" data-category3="수학"><a href="#">수학</a></li>
+                                                <li class="filters" data-category1="초등" data-category2="6" data-category3="사회"><a href="#">사회</a></li>
+                                                <li class="filters" data-category1="초등" data-category2="6" data-category3="과학"><a href="#">과학</a></li>
                                             </ul>
                                         </li>
                                     </ul>
                                 </li>
                             </ul>
                             <ul class="list-unstyled ps-0 fruite-categorie M01">
-                                <li class="mb-1 "><a class="nav-link fas fa-apple-alt" href="/product/main?pro_category1=고등">고등</a>
-                                    <ul class="twoDepth M02">
-                                        <li class=""><a href="/product/main?pro_category1=고등&pro_category2=1">1학년</a>
+                                <li class="mb-1 filters" data-category1="중등"><a class="nav-link fas fa-apple-alt" href="#">중등</a>
+                                    <ul class="M02">
+                                        <li class="filters" data-category1="중등" data-category2="1"><a href="#">1학년</a>
                                             <ul class="M03">
-                                                <li><a href="/product/main?pro_category1=고등&pro_category2=1&pro_category3=국어">국어</a></li>
-                                                <li><a href="/product/main?pro_category1=고등&pro_category2=1&pro_category3=영어">영어</a></li>
-                                                <li><a href="/product/main?pro_category1=고등&pro_category2=1&pro_category3=수학">수학</a></li>
-                                                <li><a href="/product/main?pro_category1=고등&pro_category2=1&pro_category3=사회">사회</a></li>
-                                                <li><a href="/product/main?pro_category1=고등&pro_category2=1&pro_category3=과학">과학</a></li>
+                                                <li class="filters" data-category1="중등" data-category2="1" data-category3="국어"><a href="#">국어</a></li>
+                                                <li class="filters" data-category1="중등" data-category2="1" data-category3="영어"><a href="#">영어</a></li>
+                                                <li class="filters" data-category1="중등" data-category2="1" data-category3="수학"><a href="#">수학</a></li>
+                                                <li class="filters" data-category1="중등" data-category2="1" data-category3="사회"><a href="#">사회</a></li>
+                                                <li class="filters" data-category1="중등" data-category2="1" data-category3="과학"><a href="#">과학</a></li>
                                             </ul>
                                         </li>
-                                        <li><a href="/product/main?pro_category1=고등&pro_category2=2">2학년</a>
+                                        <li class="filters" data-category1="중등" data-category2="2"><a href="#">2학년</a>
                                             <ul class="M03">
-                                                <li><a href="/product/main?pro_category1=고등&pro_category2=2&pro_category3=국어">국어</a></li>
-                                                <li><a href="/product/main?pro_category1=고등&pro_category2=2&pro_category3=영어">영어</a></li>
-                                                <li><a href="/product/main?pro_category1=고등&pro_category2=2&pro_category3=수학">수학</a></li>
-                                                <li><a href="/product/main?pro_category1=고등&pro_category2=2&pro_category3=사회">사회</a></li>
-                                                <li><a href="/product/main?pro_category1=고등&pro_category2=2&pro_category3=과학">과학</a></li>
+                                                <li class="filters" data-category1="중등" data-category2="2" data-category3="국어"><a href="#">국어</a></li>
+                                                <li class="filters" data-category1="중등" data-category2="2" data-category3="영어"><a href="#">영어</a></li>
+                                                <li class="filters" data-category1="중등" data-category2="2" data-category3="수학"><a href="#">수학</a></li>
+                                                <li class="filters" data-category1="중등" data-category2="2" data-category3="사회"><a href="#">사회</a></li>
+                                                <li class="filters" data-category1="중등" data-category2="2" data-category3="과학"><a href="#">과학</a></li>
                                             </ul>
                                         </li>
-                                        <li><a href="/product/main?pro_category1=고등&pro_category2=3">3학년</a>
+                                        <li class="filters" data-category1="중등" data-category2="3"><a href="#">3학년</a>
                                             <ul class="M03">
-                                                <li><a href="/product/main?pro_category1=고등&pro_category2=3&pro_category3=국어">국어</a></li>
-                                                <li><a href="/product/main?pro_category1=고등&pro_category2=3&pro_category3=영어">영어</a></li>
-                                                <li><a href="/product/main?pro_category1=고등&pro_category2=3&pro_category3=수학">수학</a></li>
-                                                <li><a href="/product/main?pro_category1=고등&pro_category2=3&pro_category3=사회">사회</a></li>
-                                                <li><a href="/product/main?pro_category1=고등&pro_category2=3&pro_category3=과학">과학</a></li>
+                                                <li class="filters" data-category1="중등" data-category2="3" data-category3="국어"><a href="#">국어</a></li>
+                                                <li class="filters" data-category1="중등" data-category2="3" data-category3="영어"><a href="#">영어</a></li>
+                                                <li class="filters" data-category1="중등" data-category2="3" data-category3="수학"><a href="#">수학</a></li>
+                                                <li class="filters" data-category1="중등" data-category2="3" data-category3="사회"><a href="#">사회</a></li>
+                                                <li class="filters" data-category1="중등" data-category2="3" data-category3="과학"><a href="#">과학</a></li>
                                             </ul>
                                         </li>
                                     </ul>
                                 </li>
                             </ul>
+                            <ul class="list-unstyled ps-0 fruite-categorie M01">
+                                <li class="mb-1 filters" data-category1="고등"><a class="nav-link fas fa-apple-alt" href="#">고등</a>
+                                    <ul class="M02" >
+                                        <li class="filters" data-category1="고등" data-category2="1"><a href="#">1학년</a>
+                                            <ul class="M03">
+                                                <li class="filters" data-category1="고등" data-category2="1" data-category3="국어"><a href="#">국어</a></li>
+                                                <li class="filters" data-category1="고등" data-category2="1" data-category3="영어"><a href="#">영어</a></li>
+                                                <li class="filters" data-category1="고등" data-category2="1" data-category3="수학"><a href="#">수학</a></li>
+                                                <li class="filters" data-category1="고등" data-category2="1" data-category3="사회"><a href="#">사회</a></li>
+                                                <li class="filters" data-category1="고등" data-category2="1" data-category3="과학"><a href="#">과학</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="filters" data-category1="고등" data-category2="2"><a href="#">2학년</a>
+                                            <ul class="M03">
+                                                <li class="filters" data-category1="고등" data-category2="2" data-category3="국어"><a href="#">국어</a></li>
+                                                <li class="filters" data-category1="고등" data-category2="2" data-category3="영어"><a href="#">영어</a></li>
+                                                <li class="filters" data-category1="고등" data-category2="2" data-category3="수학"><a href="#">수학</a></li>
+                                                <li class="filters" data-category1="고등" data-category2="2" data-category3="사회"><a href="#">사회</a></li>
+                                                <li class="filters" data-category1="고등" data-category2="2" data-category3="과학"><a href="#">과학</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="filters" data-category1="고등" data-category2="3"><a href="#">3학년</a>
+                                            <ul class="M03">
+                                                <li class="filters" data-category1="고등" data-category2="3" data-category3="국어"><a href="#">국어</a></li>
+                                                <li class="filters" data-category1="고등" data-category2="3" data-category3="영어"><a href="#">영어</a></li>
+                                                <li class="filters" data-category1="고등" data-category2="3" data-category3="수학"><a href="#">수학</a></li>
+                                                <li class="filters" data-category1="고등" data-category2="3" data-category3="사회"><a href="#">사회</a></li>
+                                                <li class="filters" data-category1="고등" data-category2="3" data-category3="과학"><a href="#">과학</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+
                         </div>
                     </div>
                 </div>
@@ -598,6 +573,55 @@
 
 
 <script>
+    //카테고리 이동 필터
+    function filterCategory(element) {
+        event.preventDefault();
+        event.stopPropagation();
+        console.log(element);
+        let category1 = element.dataset.category1;
+        let category2 = element.dataset.category2;
+        let category3 = element.dataset.category3;
+        console.log(category1);console.log(category2);console.log(category3);
+
+        let frm = document.createElement("form");
+        frm.id = "frmQuery";
+        frm.action ="/product/main";
+        frm.method="get";
+
+        if (category1) {
+            let input1 = document.createElement("input");
+            input1.name = "pro_category1";
+            input1.value = category1;
+            input1.type="hidden";
+            frm.append(input1);
+        }
+        if (category2) {
+            let input2 = document.createElement("input");
+            input2.name = "pro_category2";
+            input2.value = category2;
+            input2.type="hidden";
+            frm.append(input2);
+        }
+        if (category3) {
+            let input3 = document.createElement("input");
+            input3.name = "pro_category3";
+            input3.value = category3;
+            input3.type="hidden";
+            frm.append(input3);
+        }
+
+        document.body.append(frm);
+        document.getElementById("frmQuery").submit();
+    }
+
+    let filters = document.querySelectorAll(".filters");
+    for (let filter of filters) {
+        filter.addEventListener("click", (e) => {
+            filterCategory(filter);
+        });
+    }
+
+
     //별점 매기기
     const ratingStars = [...document.getElementsByClassName("rating__star")];
     const ratingResult = document.querySelector(".rating__result");

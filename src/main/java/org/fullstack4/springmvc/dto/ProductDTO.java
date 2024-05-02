@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Log4j2
 @Data
@@ -27,8 +28,8 @@ public class ProductDTO {
     private String pro_category1;
     private String pro_category2;
     private String pro_category3;
-    private LocalDate pro_reg_date;
-    private LocalDate pro_modify_date;
+    private LocalDateTime pro_reg_date;
+    private LocalDateTime pro_modify_date;
     private int pro_quantity;
 
     private int pro_sale_price;

@@ -38,12 +38,7 @@ public class ProductController {
                          BindingResult bindingResult,
                          RedirectAttributes redirectAttributes,
                          Model model,
-//                         @RequestParam(name="pro_idx", defaultValue = "0") int pro_idx,
-//                         @RequestParam(name = "pro_category1", defaultValue = "") String pro_category1,
-//                         @RequestParam(name = "pro_category2", defaultValue = "") String pro_category2,
-//                         @RequestParam(name = "pro_category3", defaultValue = "") String pro_category3,
                          @RequestParam(name = "sortMethod", defaultValue = "") String sortMethod
-//                         @RequestParam(name = "search_word", defaultValue = "") String search_word
 
 
     ) {
@@ -64,29 +59,20 @@ public class ProductController {
             sortDir = sortMethod.substring(sortMethod.indexOf("||")).replace("||", "");
         }
 
-        // 카테고리 정보를 PageRequestDTO에 설정
-//        pageRequestDTO.setPro_category1(pro_category1);
-//        pageRequestDTO.setPro_category2(pro_category2);
-//        pageRequestDTO.setPro_category3(pro_category3);
-
-
         // 정렬 정보를 PageRequestDTO에 설정
         pageRequestDTO.setSortField(sortField);
         pageRequestDTO.setSortDir(sortDir);
+
         log.info("sortField1111 :"+ sortField);
         log.info("sortDir111111 :"+ sortDir);
 
-        // 검색어 정보를 PageRequestDTO에 설정
-//        pageRequestDTO.setSearch_word(search_word);
-
-
-
-
         log.info("pageRequestDTO : "+pageRequestDTO.toString());
+
         //페이징
         PageResponseDTO<ProductDTO> responseDTO = productServiceIf.productListByPage(pageRequestDTO);
 
         log.info("search_word : " + responseDTO.getSearch_word());
+
         // 전체 상품 목록 조회
         List<ProductDTO> productDTOList = productServiceIf.pro_listAll();
 
@@ -109,7 +95,8 @@ public class ProductController {
 
     @GetMapping("/view")
     public void pro_view(@RequestParam(name="pro_idx", defaultValue = "0") int pro_idx,
-                         Model model ) {
+                         Model model,
+                         HttpSession session) {
         log.info("========================");
         log.info("ProductController >> view()");
         log.info("pro_idx : " + pro_idx);
@@ -126,12 +113,13 @@ public class ProductController {
         pro_content = (pro_content != null ? pro_content.replace("\r\n", "<br>") : "");
         pro_content = (pro_content != null ? pro_content.replace(" ", "&nbsp;") : "");
 
+        String member_id = (String)session.getAttribute("member_id");
+
         model.addAttribute("pro_idx", pro_idx);
         model.addAttribute("product", productDTO);
         model.addAttribute("pro_content", pro_content);
 
         model.addAttribute("reviewVO", reviewVOList);
-
         model.addAttribute("review_star_avg", review_star_avg);
 
         log.info("review_star_avg" +review_star_avg);

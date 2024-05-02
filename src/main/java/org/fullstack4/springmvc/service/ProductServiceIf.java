@@ -15,6 +15,8 @@ public interface ProductServiceIf {
 
     PageResponseDTO<ProductDTO> productListByPage(PageRequestDTO pageRequestDTO);
 
-/*    List<ProductDTO> indexRandomList();*/
+    List<ProductDTO> indexNewList();
+
+    List<ProductDTO> indexPopularList();
 
 }

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.fullstack4.springmvc.mapper.DataMapper">
+
+    <sql id="whereCondition">
+        <where>
+            and 1=1
+            <if test="search_type != null">
+                <foreach collection="search_type" item="type" open="(" close=")" separator=" or ">
+                    <if test="type == 't'.toString()">
+                        and comu_title like concat('%', #{search_word}, '%')
+                    </if>
+                    <if test="type == 'u'.toString()">
+                        and member_id like concat('%', #{search_word}, '%')
+                    </if>
+                </foreach>
+            </if>
+            <if test="search_date1 != null and search_date1 != 'null' and search_date1 != ''">
+                and comu_reg_date >= #{search_date1}
+            </if>
+
+            <if test="search_date2 != null and search_date2 != 'null'  and search_date2 != ''">
+                and comu_reg_date <![CDATA[<=]]> #{search_date2}
+            </if>
+
+        </where>
+    </sql>
+
+<!--    <insert id="registData">
+        insert into bec_community( member_id, comu_title, comu_content, comu_reg_date)
+        values( #{member_id}, #{comu_title}, #{comu_content}, now())
+    </insert>-->
+    <insert id="data_fileUpload">
+        insert into bec_community(member_id, comu_file, comu_title, comu_content)
+        values (#{arg0}, #{arg1}, #{arg2}, #{arg3});
+    </insert>
+
+    <select id="viewData" resultType="org.fullstack4.springmvc.domain.DataVO">
+        select comu_idx, member_id, comu_title, comu_content, comu_reg_date, comu_file
+        from bec_community
+        where comu_idx=#{comu_idx}
+    </select>
+
+    <update id="modifyData">
+        update bec_community
+        set member_id=#{arg4} comu_title=#{arg3}, comu_content=#{arg2}, comu_file=#{arg1}
+        where comu_idx=#{arg0}
+    </update>
+
+    <delete id="deleteData">
+        delete from bec_community
+        where comu_idx in (#{comu_idx})
+    </delete>
+
+    <select id="totalData" resultType="int">
+        select count(*) from bec_community
+        where comu_idx=#{arg0}
+    </select>
+
+
+    <select id="dataList" resultType="org.fullstack4.springmvc.domain.DataVO">
+        select comu_idx, member_id, comu_title, comu_content, comu_reg_date, comu_file
+        from bec_community
+        <where>
+        <if test="search_type != null">
+            <foreach collection="search_type" item="type" >
+                <choose>
+                    <when test="type == 't'.toString()">
+                        comu_title like concat('%', #{search_word},'%')
+                    </when>
+                    <when test="type == 'u'.toString()">
+                        and member_id like concat('%', #{search_word},'%' )
+                    </when>
+                    <when test="type == 'c'.toString()">
+                        and comu_content like concat('%', #{search_word},'%' )
+                    </when>
+                </choose>
+            </foreach>
+        </if>
+        <if test="search_date1 != null and search_date1 != 'null' and search_date1 != ''">
+            and comu_reg_date >= #{search_date1}
+        </if>
+        <if test="search_date2 != null and search_date2 != 'null'  and search_date2 != ''">
+            and comu_reg_date <![CDATA[<=]]> #{search_date2}
+        </if>
+        </where>
+        order by comu_idx desc
+        limit #{page_skip_count}, #{page_size}
+    </select>
+
+    <select id="totalDataSearch" resultType="int">
+        select count(*) from bec_community
+        <where>
+        <if test="search_type != null">
+            <foreach collection="search_type" item="type" >
+                <choose>
+                    <when test="type == 't'.toString()">
+                        comu_title like concat('%', #{search_word},'%')
+                    </when>
+                    <when test="type == 'u'.toString()">
+                        and member_id like concat('%', #{search_word},'%' )
+                    </when>
+                    <when test="type == 'c'.toString()">
+                        and comu_content like concat('%', #{search_word},'%' )
+                    </when>
+                </choose>
+            </foreach>
+        </if>
+        <if test="search_date1 != null and search_date1 != 'null' and search_date1 != ''">
+            and comu_reg_date >= #{search_date1}
+        </if>
+
+        <if test="search_date2 != null and search_date2 != 'null'  and search_date2 != ''">
+            and comu_reg_date <![CDATA[<=]]> #{search_date2}
+        </if>
+        </where>
+    </select>
+
+    <delete id="deleteDataList" parameterType="java.util.Arrays">
+        DELETE FROM bec_community
+        <where>
+            comu_idx IN
+            <foreach collection="array" item="item" index="index" separator="," open="(" close=")">
+                #{item}
+            </foreach>
+        </where>
+    </delete>
+
+
+
+</mapper>

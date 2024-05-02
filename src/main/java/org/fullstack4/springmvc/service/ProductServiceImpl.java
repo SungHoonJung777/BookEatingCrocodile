@@ -60,13 +60,21 @@ public class ProductServiceImpl implements ProductServiceIf {
         return responseDTO;
     }
 
-/*    @Override
-    public List<ProductDTO> indexRandomList() {
-        List<ProductDTO> dtoList = productMapper.indexRandomList().stream()
+    @Override
+    public List<ProductDTO> indexNewList() {
+        List<ProductDTO> dtoList = productMapper.indexNewList().stream()
                 .map(vo->modelMapper.map(vo, ProductDTO.class))
                 .collect(Collectors.toList());
         return dtoList;
-    }*/
+    }
+
+    @Override
+    public List<ProductDTO> indexPopularList() {
+        List<ProductDTO> dtoList = productMapper.indexPopularList().stream()
+                .map(vo->modelMapper.map(vo, ProductDTO.class))
+                .collect(Collectors.toList());
+        return dtoList;
+    }
 
 
 }

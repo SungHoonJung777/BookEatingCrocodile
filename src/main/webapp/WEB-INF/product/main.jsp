@@ -102,30 +102,24 @@
                 <div class="row g-4">
                     <div class="col-xl-3">
                             <form id="frmSearch" name="frmSearch" method="get">
-                              <%--  <input type="hidden" name="sortField" value="${responseDTO.sortField}">
-                                <input type="hidden" name="sortDir" value="${responseDTO.sortDir}">--%>
-
-
+                                <input type="hidden" name="pro_category1" value="${responseDTO.pro_category1}">
+                                <input type="hidden" name="pro_category2" value="${responseDTO.pro_category2}">
+                                <input type="hidden" name="pro_category3" value="${responseDTO.pro_category3}">
                                 <div class="input-group w-100 mx-auto d-flex">
                                     <input type="search" name="search_word" id="search_word" class="form-control p-3" placeholder="keywords" aria-describedby="search-icon-1" value="${responseDTO.search_word}">
-                                    <span id="search-icon-1" class="input-group-text p-3" onclick="searchProducts();"><i class="fa fa-search"></i></span>
+                                    <span id="search-icon-2" class="input-group-text p-3" onclick="searchProducts();"><i class="fa fa-search"></i></span>
                                 </div>
+
                             </form>
                     </div>
 
                     <div class="col-6"></div>
                     <div class="col-xl-3">
                         <form name="frmSort" id="frmSort" method="get">
-<%--                            <input type="hidden" name="pro_category1" value="${responseDTO.pro_category1}">--%>
-<%--                            <input type="hidden" name="pro_category2" value="${responseDTO.pro_category2}">--%>
-<%--                            <input type="hidden" name="pro_category3" value="${responseDTO.pro_category3}">--%>
-<%--                            <input type="hidden" name="search_word" value="${responseDTO.search_word}">--%>
-<%--                            <input type="hidden" name="page_size" value="${responseDTO.page_size}">--%>
-<%--                            <input type="hidden" name="page" value="${responseDTO.page}">--%>
-
-
-
-                            <div class="bg-light ps-3 py-3 rounded d-flex justify-content-between mb-4">
+                            <input type="hidden" name="pro_category1" value="${responseDTO.pro_category1}">
+                            <input type="hidden" name="pro_category2" value="${responseDTO.pro_category2}">
+                            <input type="hidden" name="pro_category3" value="${responseDTO.pro_category3}">
+                           <div class="bg-light ps-3 py-3 rounded d-flex justify-content-between mb-4">
                                 <label for="sortMethod">정렬 순서:</label>
                                 <select id="sortMethod" name="sortMethod" onchange="goList()" class="border-0 form-select-sm bg-light me-3">
                                     <option value="">선택</option>
@@ -299,8 +293,6 @@
                     </div>
                     <div class="col-lg-9">
                         <div class="row g-4">
-
-
                             <c:choose>
                                <c:when test="${responseDTO.dtoList != null}">
                                     <c:forEach items="${responseDTO.dtoList}" var="list">
@@ -340,12 +332,19 @@
                                                                 <i class="fa fa-star text-secondary"></i>
                                                                 <i class="fa fa-star"></i>
                                                             </c:when>
+                                                            <c:when test="${list.review_star_avg eq '5'}">
+                                                                <i class="fa fa-star text-secondary"></i>
+                                                                <i class="fa fa-star text-secondary"></i>
+                                                                <i class="fa fa-star text-secondary"></i>
+                                                                <i class="fa fa-star text-secondary"></i>
+                                                                <i class="fa fa-star text-secondary"></i>
+                                                            </c:when>
                                                             <c:otherwise>
-                                                                <i class="fa fa-star text-secondary"></i>
-                                                                <i class="fa fa-star text-secondary"></i>
-                                                                <i class="fa fa-star text-secondary"></i>
-                                                                <i class="fa fa-star text-secondary"></i>
-                                                                <i class="fa fa-star text-secondary"></i>
+                                                                <i class="fa fa-star"></i>
+                                                                <i class="fa fa-star"></i>
+                                                                <i class="fa fa-star"></i>
+                                                                <i class="fa fa-star"></i>
+                                                                <i class="fa fa-star"></i>
                                                             </c:otherwise>
                                                         </c:choose>
                                                         <h4>${list.pro_name}</h4>
@@ -471,13 +470,11 @@
     }
 
 
-
     //정렬 필터
     function goList() {
         const frmSort = document.getElementById("frmSort");
         frmSort.submit();
     }
-
 
 
     //검색창
