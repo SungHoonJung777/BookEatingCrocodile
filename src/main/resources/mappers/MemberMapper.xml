@@ -70,7 +70,14 @@
         select qna_idx, member_id, qna_title, qna_content, qna_secret, qna_answer_YN, qna_category, qna_answer, qna_reg_date, qna_answer_date
         from bec_qna
         where member_id = #{arg0} and qna_category=#{arg1}
-        order by qna_idx desc
+        <choose>
+            <when test="#{arg2.sortDir} != null and #{arg2.sortDir} == 'ASC'.toString()">
+                order by qna_idx asc
+            </when>
+            <otherwise>
+                order by qna_idx desc
+            </otherwise>
+        </choose>
         limit #{arg2.page_skip_count}, #{arg2.page_size}
     </select>
 

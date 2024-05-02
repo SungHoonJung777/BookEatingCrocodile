@@ -67,6 +67,7 @@ public class PageRequestDTO {
     private String sortDir; //오름차순, 내림차순
 
     private String qna_category;
+    private String member_id;
 
     public void setTotal_count(int total_count) {
         this.total_count = total_count;

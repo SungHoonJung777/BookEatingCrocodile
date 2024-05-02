@@ -409,6 +409,13 @@
                     <form role="search" id="frmSearch">
                         <div class="mb-3 row">
                             <label class="col-sm-2 col-form-label">검색 범위</label>
+                            <div style="display: none">
+                                <select name="sortDir" onchange="goList()" class="border-0 form-select-sm bg-light me-3">
+                                    <option value="">선택</option>
+                                    <option value="DESC" <c:if test="${qnaList.sortDir eq 'DESC'}"> selected</c:if>>최신순</option>
+                                    <option value="ASC" <c:if test="${qnaList.sortDir eq 'ASC'}"> selected</c:if>>오래된순</option>
+                                </select>
+                            </div>
                             <div class="col-sm-2">
                                 <input class="form-check-input" type="checkbox" name="search_type" id="search_type1" value="t" <c:if test="${qnaList['search_type_string'].contains('t')}">checked</c:if>>
                                 <label class="form-check-label" for="search_type1">제목</label>
@@ -440,7 +447,24 @@
                             </div>
                         </div>
                     </form>
-
+                    <form id="frmSort">
+                        <div class="bg-light ps-3 py-3 rounded d-flex justify-content-between mb-4">
+                            <div style="display: none">
+                                <input class="form-check-input" type="checkbox" name="search_type"  value="t" <c:if test="${qnaList['search_type_string'].contains('t')}">checked</c:if>>
+                                <input class="form-check-input" type="checkbox" name="search_type"  value="c" <c:if test="${qnaList['search_type_string'].contains('c')}">checked</c:if>>
+                                <input class="form-check-input" type="checkbox" name="search_type" value="u" <c:if test="${qnaList['search_type_string'] != 'null' && qnaList['search_type_string'].contains('u')}">checked</c:if>>
+                            </div>
+                            <input type="hidden" name="search_word" value="${qnaList.search_word}">
+                            <input type="hidden" name="search_date1" value="${qnaList.search_date1}">
+                            <input type="hidden"  name="search_date2"  value="${qnaList.search_date2}">
+                            <label for="sortMethod">정렬 순서:</label>
+                            <select id="sortMethod" name="sortDir" onchange="goList()" class="border-0 form-select-sm bg-light me-3">
+                                <option value="">선택</option>
+                                <option value="DESC" <c:if test="${qnaList.sortDir eq 'DESC'}"> selected</c:if>>최신순</option>
+                                <option value="ASC" <c:if test="${qnaList.sortDir eq 'ASC'}"> selected</c:if>>오래된순</option>
+                            </select>
+                        </div>
+                    </form>
 
                     <div class="row">
                         <form action="/qna/delete" method="get">
@@ -682,5 +706,13 @@
 
 <!-- Place this tag in your head or just before your close body tag. -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>
+<script>
+
+    //정렬
+    function goList() {
+        const frmSort = document.getElementById("frmSort");
+        frmSort.submit();
+    }
+</script>
 </body>
 </html>
