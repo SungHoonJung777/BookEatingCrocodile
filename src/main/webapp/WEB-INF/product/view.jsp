@@ -139,14 +139,14 @@
                                     <i class="fa fa-minus"></i>
                                 </button>
                             </div>
-                            <input type="text" class="form-control form-control-sm text-center border-0" value="1">
+                            <input type="text" class="form-control form-control-sm text-center border-0" value="1" id="quantity">
                             <div class="input-group-btn">
                                 <button class="btn btn-sm btn-plus rounded-circle bg-light border">
                                     <i class="fa fa-plus"></i>
                                 </button>
                             </div>
                         </div>
-                        <a href="/member/cart?member_id=" class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary payBtn"><i class="fa fa-shopping-bag me-2 text-primary"></i> 장바구니</a>
+                        <a href="javascript:addcart();" class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary payBtn"><i class="fa fa-shopping-bag me-2 text-primary"></i> 장바구니</a>
                         <a href="#" class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary payBtn"><i class="fas fa-copyright me-2 text-primary"></i> 바로구매</a>
 
                     </div>
@@ -258,7 +258,7 @@
                     <div class="col-lg-12 ">
                         <form id="frmSearch" name="frmSearch" action="/product/main" method="get">
                             <div class="input-group w-100 mx-auto d-flex mb-4">
-                                <input type="search" name="search_word" id="search_word" class="form-control p-3" placeholder="keywords" aria-describedby="search-icon-1">
+                                <input type="search" name="search_word" id="search_word" class="form-control p-3" placeholder="keywords" aria-describedby="quantity">
                                 <span id="search-icon-1" class="input-group-text p-3" onclick="searchProducts();"><i class="fa fa-search"></i></span>
                             </div>
                         </form>
@@ -676,6 +676,25 @@
             }
         });
 
+    }
+    function addcart(){
+        let pro_quantity = document.getElementById("quantity").value ;
+        $.ajax({
+            type: "POST",            // HTTP method type(GET, POST) 형식이다.
+            url: "/member/addcart",      // 컨트롤러에서 대기중인 URL 주소이다.
+            data: {
+                pro_idx: ${product.pro_idx},
+                pro_quantity:pro_quantity
+            },            // Json 형식의 데이터이다.
+            success: function (result) { // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+                if(confirm("장바구니에 상품이 담겼습니다 장바구니로 이동하시겠습니까?")){
+                    window.location.href="/member/cart";
+                }
+            },
+            error: function (error) { // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+                console.log(error);
+            }
+        });
     }
 
 </script>

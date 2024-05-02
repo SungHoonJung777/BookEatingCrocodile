@@ -31,6 +31,8 @@ public class OrderDTO {
     private String addr1;
     private String addr2;
 
+    private String pro_idx;
+
     public void setOrder_addr(){
         this.deli_addr = zonecode+" "+addr1+" "+addr2;
     }
