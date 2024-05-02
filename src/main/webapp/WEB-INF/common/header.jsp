@@ -90,6 +90,14 @@
                                         <a href="/login/login" class="dropdown-item">로그인</a>
                                         <a href="/member/join" class="dropdown-item">회원가입</a>
                                     </c:when>
+                                    <c:when test="${sessionScope.member_type eq 'a'}">
+                                        <a href="/login/logout" class="dropdown-item">로그아웃</a>
+                                        <a href="/admin/main" class="dropdown-item">관리자 페이지</a>
+                                    </c:when>
+                                    <c:when test="${sessionScope.member_type eq 'c'}">
+                                        <a href="/login/logout" class="dropdown-item">로그아웃</a>
+                                        <a href="/delivery/main" class="dropdown-item">배송원 페이지</a>
+                                    </c:when>
                                     <c:otherwise>
                                         <a href="/login/logout" class="dropdown-item">로그아웃</a>
                                         <a href="/member/buy" class="dropdown-item">주문내역 조회</a>
