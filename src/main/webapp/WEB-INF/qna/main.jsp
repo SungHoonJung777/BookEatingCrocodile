@@ -84,12 +84,22 @@
                     <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">커뮤니티 /</span> QnA</h4>
 
                     <form role="search" id="frmSearch">
+                        <div class="col">
+                            <label for="qna_select">문의 유형</label>
+                            <select id="qna_select" name="qna_select" onchange="goSearch()" class="border-0 form-select-sm bg-light me-3">
+                                <option value="">전체</option>
+                                <option value="상품문의" <c:if test="${qnaList.qna_select eq '상품문의'}"> selected</c:if>>상품문의</option>
+                                <option value="주문문의" <c:if test="${qnaList.qna_select eq '주문문의'}"> selected</c:if>>주문문의</option>
+                                <option value="배송문의" <c:if test="${qnaList.qna_select eq '배송문의'}"> selected</c:if>>배송문의</option>
+                                <option value="기타" <c:if test="${qnaList.qna_select eq '기타'}"> selected</c:if>>기타</option>
+                            </select>
+                        </div>
                         <div class="mb-3 row">
                             <label class="col-sm-2 col-form-label">검색 범위</label>
                             <div class="col-sm-2">
                                 <div style="display: none">
                                     <select name="sortDir" onchange="goList()" class="border-0 form-select-sm bg-light me-3">
-                                        <option value="">선택</option>
+                                        <option value="">전체</option>
                                         <option value="DESC" <c:if test="${qnaList.sortDir eq 'DESC'}"> selected</c:if>>최신순</option>
                                         <option value="ASC" <c:if test="${qnaList.sortDir eq 'ASC'}"> selected</c:if>>오래된순</option>
                                     </select>
@@ -101,6 +111,7 @@
                                 <input class="form-check-input" type="checkbox" name="search_type" id="search_type2" value="u" <c:if test="${qnaList['search_type_string'] != 'null' && qnaList['search_type_string'].contains('u')}">checked</c:if>>
                                 <label for="search_type2">작성자</label>
                             </div>
+
                             <div class="col">
                                 <input class="form-check-label" type="search" name="search_word"  id="search_word" placeholder="Search" aria-label="Search" value="${qnaList.search_word}">
                             </div>
@@ -123,6 +134,16 @@
                                 <button class="btn btn-outline-success" id="btnReset" type="reset" onclick="location.href='/qna/main'">reset</button>
                             </div>
                         </div>
+                        <div style="display: none">
+
+                            <label for="sortMethod">정렬 순서:</label>
+                            <select name="sortDir" class="border-0 form-select-sm bg-light me-3">
+                                <option value="">선택</option>
+                                <option value="DESC" <c:if test="${qnaList.sortDir eq 'DESC'}"> selected</c:if>>최신순</option>
+                                <option value="ASC" <c:if test="${qnaList.sortDir eq 'ASC'}"> selected</c:if>>오래된순</option>
+
+                            </select>
+                        </div>
 
                     </form>
 
@@ -132,6 +153,16 @@
                             <input class="form-check-input" type="checkbox" name="search_type"  value="t" <c:if test="${qnaList['search_type_string'].contains('t')}">checked</c:if>>
                             <input class="form-check-input" type="checkbox" name="search_type"  value="c" <c:if test="${qnaList['search_type_string'].contains('c')}">checked</c:if>>
                             <input class="form-check-input" type="checkbox" name="search_type" value="u" <c:if test="${qnaList['search_type_string'] != 'null' && qnaList['search_type_string'].contains('u')}">checked</c:if>>
+                            </div>
+                            <div style="display: none">
+                                <label for="qna_select">문의 유형</label>
+                                <select name="qna_select" class="border-0 form-select-sm bg-light me-3">
+                                    <option value="">전체</option>
+                                    <option value="상품문의" <c:if test="${qnaList.qna_select eq '상품문의'}"> selected</c:if>>상품문의</option>
+                                    <option value="주문문의" <c:if test="${qnaList.qna_select eq '주문문의'}"> selected</c:if>>주문문의</option>
+                                    <option value="배송문의" <c:if test="${qnaList.qna_select eq '배송문의'}"> selected</c:if>>배송문의</option>
+                                    <option value="기타" <c:if test="${qnaList.qna_select eq '기타'}"> selected</c:if>>기타</option>
+                                </select>
                             </div>
                             <input type="hidden" name="search_word" value="${qnaList.search_word}">
                             <input type="hidden" name="search_date1" value="${qnaList.search_date1}">
@@ -143,6 +174,7 @@
                                 <option value="ASC" <c:if test="${qnaList.sortDir eq 'ASC'}"> selected</c:if>>오래된순</option>
                             </select>
                         </div>
+
                     </form>
 
                     <div class="row">
@@ -157,7 +189,7 @@
 
                                 <div class="card mb-4">
                                     <!-- Notifications -->
-                                    <h5 class="card-header">상품 문의/답변</h5>
+                                    <h5 class="card-header">QnA 문의/답변</h5>
                                     <div class="card-body">
                                         <br>
                                         <span>
@@ -176,7 +208,7 @@
                                                         <label for="chkAll"><span></span>전체선택</label></th>
                                                 </c:if>
                                                 <th>번호</th>
-                                                <th>문의 제목</th>
+                                                <th>문의 유형</th>
                                                 <th>작성자</th>
                                                 <th>답변상태</th>
                                                 <th>등록일</th>
@@ -194,7 +226,7 @@
                                                     </c:if>
                                                     <td class="text-nowrap">${qnaList.total_count - ((qnaList.page-1)*qnaList.page_size + (status.count-1))}</td>
                                                     <td class="text-nowrap"><a
-                                                            href="/qna/view?qna_idx=${dto.qna_idx}">${dto.qna_title}</a>
+                                                            href="/qna/view?qna_idx=${dto.qna_idx}">${dto.qna_select}</a>
                                                     </td>
                                                     <td class="text-nowrap">${dto.member_id}</td>
 
@@ -356,6 +388,12 @@
     function goList() {
         const frmSort = document.getElementById("frmSort");
         frmSort.submit();
+    }
+
+    //문의유형
+    function goSearch() {
+        const frmSearch = document.getElementById("frmSearch");
+        frmSearch.submit();
     }
 
     // 삭제 버튼 눌렀을 때

@@ -407,6 +407,16 @@
                     <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">커뮤니티 /</span> FAQ</h4>
 
                     <form role="search" id="frmSearch">
+                        <div class="col">
+                            <label for="qna_select">문의 유형</label>
+                            <select id="qna_select" name="qna_select" onchange="goSearch()" class="border-0 form-select-sm bg-light me-3">
+                                <option value="">전체</option>
+                                <option value="상품문의" <c:if test="${qnaList.qna_select eq '상품문의'}"> selected</c:if>>상품문의</option>
+                                <option value="주문문의" <c:if test="${qnaList.qna_select eq '주문문의'}"> selected</c:if>>주문문의</option>
+                                <option value="배송문의" <c:if test="${qnaList.qna_select eq '배송문의'}"> selected</c:if>>배송문의</option>
+                                <option value="기타" <c:if test="${qnaList.qna_select eq '기타'}"> selected</c:if>>기타</option>
+                            </select>
+                        </div>
                         <div class="mb-3 row">
                             <label class="col-sm-2 col-form-label">검색 범위</label>
                             <div class="col-sm-2">
@@ -439,7 +449,7 @@
                     <!-- User Profile Content -->
                     <form action="/faq/delete" method="get">
 
-                        <div class="row">
+                        <div class="col-md-12">
 
                             <%--                        <div class="col-xl-4 col-lg-5 col-md-5">--%>
                             <!-- About User -->
@@ -630,6 +640,11 @@
             }
         }
     });
+    //문의유형
+    function goSearch() {
+        const frmSearch = document.getElementById("frmSearch");
+        frmSearch.submit();
+    }
 </script>
 <!-- / Layout wrapper -->
 

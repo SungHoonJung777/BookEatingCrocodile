@@ -80,14 +80,14 @@
                 <!-- Content -->
 
                 <div class="container-xxl flex-grow-1 container-p-y">
-                    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">마이페이지 /</span> 1:1 문의</h4>
+                    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">커뮤니티 /</span> 문의</h4>
 
                     <div class="row">
                         <div class="col-xl">
 
                             <div class="card mb-4">
                                 <div class="card-header d-flex justify-content-between align-items-center">
-                                    <h5 class="mb-0">1:1 문의</h5>
+                                    <h5 class="mb-0"> 문의</h5>
                                     <small class="text-muted float-end">등록하기</small>
                                 </div>
                                 <div class="card-body">
@@ -95,6 +95,10 @@
                                     <div class="mb-3">
                                         <label class="form-label"  for="basic-default-fullname">문의 제목</label>
                                         <input type="text" readonly class="form-control" id="qna_title" name="qna_title" value="${qnaDTO.qna_title}"/>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label"  for="basic-default-fullname">문의 제목</label>
+                                        <input type="text" readonly class="form-control" id="qna_select" name="qna_select" value="${qnaDTO.qna_select}"/>
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label" for="basic-default-fullname">등록일</label>
@@ -110,6 +114,7 @@
                                 <div class="card-body">
                                     <form action="/qna/adminWrite" method="post">
                                         <input type="hidden" name="qna_idx" value="${qnaDTO.qna_idx}">
+                                        <input type="hidden" name="qna_select" value="${qnaDTO.qna_select}">
                                         <div class="mb-3"></div>
 
                                         <div class="mb-3">

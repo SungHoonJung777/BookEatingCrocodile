@@ -86,7 +86,7 @@
                         <div class="col-xl">
                             <div class="card mb-4">
                                 <div class="card-header d-flex justify-content-between align-items-center">
-                                    <h5 class="mb-0">1:1 문의</h5>
+                                    <h5 class="mb-0">${qnaDTO.qna_select}</h5>
                                     <small class="text-muted float-end"></small>
                                 </div>
                                 <div class="card-body">

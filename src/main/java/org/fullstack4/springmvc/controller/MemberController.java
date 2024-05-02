@@ -205,9 +205,9 @@ public class MemberController {
         //int resultImg = memberImageServiceIf.regist(memberDTO.getMember_id(), orgFile, saveFileName);
     //}
 
-        if (file.isEmpty() || file == null) {
-            FileUtil.deleteFile(saveFileName);
-        }
+//        if (file.isEmpty() || file == null) {
+//            FileUtil.deleteFile(saveFileName);
+//        }
 //        if (bindingResult.hasErrors()) {
 //            log.info("Errors");
 //            redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());

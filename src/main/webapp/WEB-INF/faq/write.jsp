@@ -100,7 +100,16 @@
                                         <input type="hidden"  class="form-control" id="qna_title" name="qna_title" value="faq 제목"/>
 
                                     </div>
-
+                                    <div class="mb-3">
+                                        <label for="qna_select">문의 유형</label>
+                                        <select id="qna_select" name="qna_select" onchange="goList()" class="border-0 form-select-sm bg-light me-3">
+                                            <option value="">선택</option>
+                                            <option value="상품문의" <c:if test="${qnaDTO.qna_select eq '상품문의'}"> selected</c:if>>상품문의</option>
+                                            <option value="주문문의" <c:if test="${qnaList.qna_select eq '주문문의'}"> selected</c:if>>주문문의</option>
+                                            <option value="주문문의" <c:if test="${qnaList.qna_select eq '배송문의'}"> selected</c:if>>배송문의</option>
+                                            <option value="주문문의" <c:if test="${qnaList.qna_select eq '기타'}"> selected</c:if>>기타</option>
+                                        </select>
+                                    </div>
                                     <div class="mb-3">
                                         <label class="form-label" for="basic-default-company">문의 내용</label>
                                         <textarea style="resize:none;" class="form-control" rows="10"  name="qna_content" id="qna_content" >${qnaDTO.qna_content}</textarea>
