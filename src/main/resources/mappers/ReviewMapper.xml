@@ -27,7 +27,7 @@
     </select>
 
     <select id="review_star_avg">
-        select floor(avg(review_star))
+        select IFNULL(floor(avg(review_star)), 0)
         from bec_review
         where pro_idx = #{pro_idx}
     </select>

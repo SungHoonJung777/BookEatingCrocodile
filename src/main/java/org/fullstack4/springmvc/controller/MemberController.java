@@ -281,20 +281,32 @@ public class MemberController {
                                @RequestParam(name = "cart_idx", defaultValue = "") String cart_idx,
                                HttpSession session,
                                Model model) {
-        orderDTO.setOrder_addr();
-        log.info(orderDTO);
-        log.info(cart_idx);
         String member_id = (String)session.getAttribute("member_id");
+        
+        orderDTO.setOrder_addr();
         orderDTO.setMember_id(member_id);
-        memberServiceIf.insertOrder(orderDTO);
-        int order_idx = memberServiceIf.getorderidx(member_id);
+        //선택한 cart의 idx값 이용하여 정보 가져오는 부분
         List<CartDTO> cartList = memberServiceIf.getCartList(member_id, cart_idx);
+        int total = 0;
+        for(int i = 0; i < cartList.size(); i++) {
+            int tmp = cartList.get(i).getPro_price()*cartList.get(i).getPro_quantity();
+            total = total+tmp;
+        }
+
+        orderDTO.setOrder_total(total+3000);
+        orderDTO.setOrder_addr();
+        orderDTO.setMember_id(member_id);
+
+        memberServiceIf.insertOrder(orderDTO);//order 테이블 insert
+        int order_idx = memberServiceIf.getorderidx(member_id);//insert한ㄴ order_idx값 가져오기
         for(int i = 0; i < cartList.size(); i++) {
             cartList.get(i).setCart_idx(order_idx);
         }
-        memberServiceIf.insertOrderDetail(cartList);
-        log.info("cart_idx : "+ cart_idx);
-        memberServiceIf.cartout(cart_idx);
+        memberServiceIf.insertOrderDetail(cartList);//order_detail테이블 insert
+        for(CartDTO i : cartList) {
+            memberServiceIf.minusamount(i.getPro_idx(), i.getPro_quantity());//재고량 마이너스
+        }
+        memberServiceIf.cartout(cart_idx);//카트에서 주문 상품 제거
         return"redirect:/member/cart";
     }
 
@@ -305,8 +317,9 @@ public class MemberController {
     }
     @ResponseBody
     @PostMapping("/cartplus")
-    public void cartPlus(@RequestParam(name = "cart_idx", defaultValue="") String cart_idx){
-        memberServiceIf.cartplus(cart_idx);
+    public void cartPlus(@RequestParam(name = "cart_idx", defaultValue="") String cart_idx,
+                         @RequestParam(name = "pro_quantity", defaultValue="1") String pro_quantity){
+        memberServiceIf.cartplus(cart_idx, pro_quantity);
     }
 
     @GetMapping("/buy")
@@ -318,7 +331,7 @@ public class MemberController {
         String member_id = (String)session.getAttribute("member_id");
         List<OrderDTO> orderList = memberServiceIf.getOrderList(member_id);
 
-        //PageResponseDTO<BbsDTO> responseDTO = bbsServiceIf.bbsListByPage(pageRequestDTO);
+//        PageResponseDTO<BbsDTO> responseDTO = bbsServiceIf.bbsListByPage(pageRequestDTO);
 
         model.addAttribute("orderList", orderList);
         log.info("MemberController >> buyList() END");
@@ -392,5 +405,37 @@ public class MemberController {
         //PageResponseDTO<BbsDTO> responseDTO = bbsServiceIf.bbsListByPage(pageRequestDTO);
 
         model.addAttribute("reviewList", reviewList);
+    }
+    @ResponseBody
+    @PostMapping("/addcart")
+    public void addcart(HttpSession session,
+                        @RequestParam(value = "pro_idx",defaultValue = "") String pro_idx,
+                        @RequestParam(value = "pro_quantity",defaultValue = "1") String pro_quantity){
+        String member_id = (String)session.getAttribute("member_id");
+        int check = 0;
+        String cart_idx = "";
+        List<CartDTO> cartList = memberServiceIf.getCartList(member_id, "");
+        for(CartDTO list:cartList){
+            if(Integer.parseInt(pro_idx)==list.getPro_idx()){
+                cart_idx = String.valueOf(list.getCart_idx());
+                check+=1;
+            }
+        }
+        if(check >= 1){
+            memberServiceIf.cartplus(cart_idx, pro_quantity);
+        }else{
+            memberServiceIf.addcart(pro_idx, member_id, pro_quantity);
+        }
+
+    }
+
+    @PostMapping("/orderdetail")
+    public void orderdetail(Model model,
+                            @RequestParam(value = "order_idx", defaultValue = "") String order_idx){
+        OrderDTO orderdto = memberServiceIf.orderinfo(order_idx);
+//        String list = memberServiceIf.orderDetail(order_idx);
+
+        model.addAttribute("orderdto", orderdto);
+//        model.addAttribute("list", list);
     }
 }

@@ -57,7 +57,7 @@
         where user_id = #{user_id}
     </select>
     <select id="getCartList" resultType="org.fullstack4.springmvc.domain.CartVO">
-        SELECT bc.cart_idx, bc.pro_title, bp.pro_price, bp.pro_amount, bc.pro_quantity, bc.pro_idx
+        SELECT bc.cart_idx, bc.pro_title, round(bp.pro_price-(bp.pro_price*(pro_sale/100))) AS pro_price, bp.pro_amount, bc.pro_quantity, bc.pro_idx
         FROM bec_product as bp
         inner join bec_cart AS bc ON bp.pro_idx = bc.pro_idx
         WHERE member_id = #{m_id}
@@ -75,17 +75,20 @@
     </select>
 
     <select id="getOrderList" resultType="org.fullstack4.springmvc.domain.OrderVO">
-        SELECT order_idx, o.pro_idx AS pro_idx, member_id, order_price, order_status, order_addr, order_date, pro_name
-        FROM
-            bec_order AS o
-                INNER JOIN bec_product AS p ON o.pro_idx = p.pro_idx
-        WHERE member_id=#{member_id}
-        ORDER BY order_date desc
+        SELECT o.order_idx, order_date, delivery,
+               if (COUNT(od.pro_idx) > 1, concat(pro_name, '외', COUNT(od.pro_idx)-1, '개'), pro_name) AS req_term
+        FROM bec_order AS o
+                 INNER JOIN bec_order_detail AS od
+                            ON o.order_idx = od.order_idx
+                 INNER JOIN bec_product AS bp
+                            ON od.pro_idx = bp.pro_idx
+        WHERE member_id = #{member_id}
+        GROUP BY o.order_idx, order_date, delivery
     </select>
 
     <update id="orderDelete">
         update bec_order
-        set order_status='주문취소'
+        set delivery='주문취소'
         where order_idx=#{order_idx}
     </update>
 
@@ -121,12 +124,37 @@
     </insert>
     <update id="cartplus">
         UPDATE bec_cart SET
-            pro_quantity = pro_quantity+1
-        WHERE cart_idx = #{cartIdx}
+            pro_quantity = pro_quantity+${arg1}
+        WHERE cart_idx = #{arg0}
     </update>
     <update id="cartminus">
         UPDATE bec_cart SET
             pro_quantity = pro_quantity-1
         WHERE cart_idx = #{cartIdx}
     </update>
+    <insert id="addcart">
+        INSERT INTO bec_cart(member_id, pro_idx, pro_title, pro_price, pro_img, pro_quantity)
+        SELECT #{arg1}, pro_idx, pro_name, pro_price, pro_image, #{arg2}
+        FROM bec_product
+        WHERE pro_idx = #{arg0};
+    </insert>
+    <update id="minusamount" parameterType="list">
+        UPDATE bec_product SET
+        pro_amount = pro_amount - ${arg1}
+        WHERE pro_idx = #{arg0}
+    </update>
+    <select id="orderinfo" resultType="org.fullstack4.springmvc.dto.OrderDTO">
+        SELECT order_date, delivery, order_total, deli_name, deli_addr, order_name, req_term, order_phone
+        FROM bec_order
+        WHERE order_idx = #{orderIdx}
+    </select>
+<!--    <select id="orderDetail">-->
+<!--        SELECT od.pro_quantity, pro_name-->
+<!--             , ROUND(pro_price-(pro_price*(pro_sale/100))) AS pro_price-->
+<!--             , pro_image-->
+<!--        FROM bec_order_detail AS od-->
+<!--                 INNER JOIN bec_product AS bp-->
+<!--                            ON od.pro_idx = bp.pro_idx-->
+<!--        WHERE od.order_idx = #{orderIdx};-->
+<!--    </select>-->
 </mapper>
