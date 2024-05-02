@@ -27,7 +27,7 @@
         ifNULL( FLOOR(AVG(BR.review_star)), 0)AS review_star_avg
 
         FROM bec_product BP
-        LEFT JOIN bec_review BR ON BP.pro_idx = BR.pro_idx
+        inner JOIN bec_review BR ON BP.pro_idx = BR.pro_idx
         WHERE 1=1
         <if test="pro_category1 != null and pro_category1 != ''">
             AND BP.pro_category1 = #{pro_category1}
@@ -85,7 +85,7 @@
         SELECT
             BP.pro_idx, BP.pro_name, BP.pro_writer, BP.pro_price, BP.pro_sale, BP.pro_amount, BP.pro_content, BP.pro_image, BP.pro_company, BP.pro_video, BP.pro_category1, BP.pro_category2, BP.pro_category3, BP.pro_reg_date, BP.pro_modify_date,
             FLOOR(BP.pro_price - BP.pro_price * (BP.pro_sale / 100)) AS pro_sale_price,
-            FLOOR(AVG(BR.review_star)) AS review_star_avg
+            ifnull(FLOOR(AVG(BR.review_star)),0) AS review_star_avg
         FROM bec_product BP
         LEFT JOIN bec_review BR ON BP.pro_idx = BR.pro_idx
         GROUP BY BP.pro_idx
@@ -98,13 +98,13 @@
             BP.pro_idx, BP.pro_name, BP.pro_writer, BP.pro_price, BP.pro_sale,
             BP.pro_content, BP.pro_image, BP.pro_reg_date,
             FLOOR(BP.pro_price - BP.pro_price * (BP.pro_sale / 100)) AS pro_sale_price,
-            FLOOR(AVG(BR.review_star)) AS review_star_avg,
+            ifnull(FLOOR(AVG(BR.review_star)),0) AS review_star_avg,
             COALESCE(orders.order_count, 0) AS order_count
         FROM bec_product BP
              LEFT JOIN bec_review BR ON BP.pro_idx = BR.pro_idx
              LEFT JOIN (
-                    SELECT pro_idx, COUNT(*) AS order_count
-                    FROM bec_order
+                    SELECT pro_idx, sum(pro_quantity) AS order_count
+                    FROM bec_order_detail
                     GROUP BY pro_idx
              ) AS orders ON BP.pro_idx = orders.pro_idx
         GROUP BY

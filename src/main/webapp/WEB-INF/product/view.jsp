@@ -114,57 +114,19 @@
                     <div class="col-lg-6">
                         <h4 class="fw-bold mb-3">${product.pro_name}</h4>
                         <div class="d-flex mb-4">
-                            <c:choose>
-                                <c:when test="${product.review_star_avg eq '1'}">
-                                    <i class="fa fa-star text-secondary"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                </c:when>
-                                <c:when test="${product.review_star_avg eq '2'}">
-                                    <i class="fa fa-star text-secondary"></i>
-                                    <i class="fa fa-star text-secondary"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                </c:when>
-                                <c:when test="${product.review_star_avg eq '3'}">
-                                    <i class="fa fa-star text-secondary"></i>
-                                    <i class="fa fa-star text-secondary"></i>
-                                    <i class="fa fa-star text-secondary"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                </c:when>
-                                <c:when test="${product.review_star_avg eq '4'}">
-                                    <i class="fa fa-star text-secondary"></i>
-                                    <i class="fa fa-star text-secondary"></i>
-                                    <i class="fa fa-star text-secondary"></i>
-                                    <i class="fa fa-star text-secondary"></i>
-                                    <i class="fa fa-star"></i>
-                                </c:when>
-                                <c:when test="${product.review_star_avg eq '5'}">
-                                    <i class="fa fa-star text-secondary"></i>
-                                    <i class="fa fa-star text-secondary"></i>
-                                    <i class="fa fa-star text-secondary"></i>
-                                    <i class="fa fa-star text-secondary"></i>
-                                    <i class="fa fa-star text-secondary"></i>
-                                </c:when>
-                                <c:otherwise>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                </c:otherwise>
-                            </c:choose>
+                            <div class="d-flex mb-3">
+                                <i class="fa fa-star <c:if test='${review.review_star > 0}'>text-secondary</c:if>"></i>
+                                <i class="fa fa-star <c:if test='${review.review_star > 1}'>text-secondary</c:if>"></i>
+                                <i class="fa fa-star <c:if test='${review.review_star > 2}'>text-secondary</c:if>"></i>
+                                <i class="fa fa-star <c:if test='${review.review_star > 3}'>text-secondary</c:if>"></i>
+                                <i class="fa fa-star <c:if test='${review.review_star > 4}'>text-secondary</c:if>"></i>
+                            </div>
                         </div>
                         <div class="book_content1">
                             <h5 class="fw-bold mb-3 text-danger text-decoration-line-through">정가 : <fmt:formatNumber value="${product.pro_price}" pattern="#,###"/>원</h5>
                             <h3 class="fw-bold mb-3">할인가 : <fmt:formatNumber value="${product.pro_sale_price}" pattern="#,###"/>원</h3>
                         </div>
                         <div class="book_content1">
-                            <h5>마일리지 : </h5>
                             <h5>배송료 : 3,000원</h5>
                             <br>
                             <p>재고량 : ${product.pro_amount}권</p>

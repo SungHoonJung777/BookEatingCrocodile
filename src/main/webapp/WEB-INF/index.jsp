@@ -107,51 +107,21 @@
   <div class="container py-5">
     <h1 class="mb-0">최신 도서</h1>
     <div class="owl-carousel vegetable-carousel justify-content-center">
+
       <c:forEach var="newList" items="${indexNewList}">
         <div class="border border-primary rounded position-relative vesitable-item">
+          <a href="/product/view?pro_idx=${newList.pro_idx}">
           <div class="vesitable-img">
             <img src="/resources/resources/img/books/${newList.pro_image}" class="img-fluid w-100 rounded-top book_img_size" alt="">
           </div>
           <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">신간 도서</div>
 
           <div class="p-4 border border-top-0 rounded-bottom book_intro_box">
-            <c:choose>
-              <c:when test="${newList.review_star_avg eq '1'}">
-                <i class="fa fa-star text-secondary"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-              </c:when>
-              <c:when test="${newList.review_star_avg eq '2'}">
-                <i class="fa fa-star text-secondary"></i>
-                <i class="fa fa-star text-secondary"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-              </c:when>
-              <c:when test="${newList.review_star_avg eq '3'}">
-                <i class="fa fa-star text-secondary"></i>
-                <i class="fa fa-star text-secondary"></i>
-                <i class="fa fa-star text-secondary"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-              </c:when>
-              <c:when test="${newList.review_star_avg eq '4'}">
-                <i class="fa fa-star text-secondary"></i>
-                <i class="fa fa-star text-secondary"></i>
-                <i class="fa fa-star text-secondary"></i>
-                <i class="fa fa-star text-secondary"></i>
-                <i class="fa fa-star"></i>
-              </c:when>
-              <c:otherwise>
-                <i class="fa fa-star text-secondary"></i>
-                <i class="fa fa-star text-secondary"></i>
-                <i class="fa fa-star text-secondary"></i>
-                <i class="fa fa-star text-secondary"></i>
-                <i class="fa fa-star text-secondary"></i>
-              </c:otherwise>
-            </c:choose>
+            <i class="fa fa-star <c:if test='${review.review_star > 0}'>text-secondary</c:if>"></i>
+            <i class="fa fa-star <c:if test='${review.review_star > 1}'>text-secondary</c:if>"></i>
+            <i class="fa fa-star <c:if test='${review.review_star > 2}'>text-secondary</c:if>"></i>
+            <i class="fa fa-star <c:if test='${review.review_star > 3}'>text-secondary</c:if>"></i>
+            <i class="fa fa-star <c:if test='${review.review_star > 4}'>text-secondary</c:if>"></i>
             <h4>${newList.pro_name}</h4>
             <p>${newList.pro_content}...</p>
 
@@ -161,6 +131,7 @@
               <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary cart_add_box"><i class="fa fa-shopping-bag me-2 text-primary"></i> 장바구니에 추가</a>
             </div>
           </div>
+          </a>
         </div>
       </c:forEach>
     </div>
@@ -176,65 +147,28 @@
     <div class="owl-carousel vegetable-carousel justify-content-center">
       <c:forEach var="popularList" items="${indexPopularList}">
         <div class="border border-primary rounded position-relative vesitable-item">
-          <div class="vesitable-img">
-            <img src="/resources/resources/img/books/${popularList.pro_image}" class="img-fluid w-100 rounded-top book_img_size" alt="">
-          </div>
-          <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">인기 도서</div>
-
-          <div class="p-4 border border-top-0 rounded-bottom book_intro_box">
-            <c:choose>
-              <c:when test="${popularList.review_star_avg eq '1'}">
-                <i class="fa fa-star text-secondary"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-              </c:when>
-              <c:when test="${popularList.review_star_avg eq '2'}">
-                <i class="fa fa-star text-secondary"></i>
-                <i class="fa fa-star text-secondary"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-              </c:when>
-              <c:when test="${popularList.review_star_avg eq '3'}">
-                <i class="fa fa-star text-secondary"></i>
-                <i class="fa fa-star text-secondary"></i>
-                <i class="fa fa-star text-secondary"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-              </c:when>
-              <c:when test="${popularList.review_star_avg eq '4'}">
-                <i class="fa fa-star text-secondary"></i>
-                <i class="fa fa-star text-secondary"></i>
-                <i class="fa fa-star text-secondary"></i>
-                <i class="fa fa-star text-secondary"></i>
-                <i class="fa fa-star"></i>
-              </c:when>
-              <c:when test="${popularList.review_star_avg eq '5'}">
-                <i class="fa fa-star text-secondary"></i>
-                <i class="fa fa-star text-secondary"></i>
-                <i class="fa fa-star text-secondary"></i>
-                <i class="fa fa-star text-secondary"></i>
-                <i class="fa fa-star text-secondary"></i>
-              </c:when>
-              <c:otherwise>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-              </c:otherwise>
-            </c:choose>
-            <h4>${popularList.pro_name}</h4>
-            <p>${popularList.pro_content}...</p>
-
-            <div class="d-flex justify-content-between flex-lg-wrap">
-              <p class="text-dark fs-5 fw-bold mb-0"><fmt:formatNumber value="${popularList.pro_sale_price}" pattern="#,###"/>원</p>
-              <div class="empty2"></div>
-              <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary cart_add_box"><i class="fa fa-shopping-bag me-2 text-primary"></i> 장바구니에 추가</a>
+          <a href="/product/view?pro_idx=${popularList.pro_idx}">
+            <div class="vesitable-img">
+              <img src="/resources/resources/img/books/${popularList.pro_image}" class="img-fluid w-100 rounded-top book_img_size" alt="">
             </div>
-          </div>
+            <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">인기 도서</div>
+
+            <div class="p-4 border border-top-0 rounded-bottom book_intro_box">
+              <i class="fa fa-star <c:if test='${popularList.review_star > 0}'>text-secondary</c:if>"></i>
+              <i class="fa fa-star <c:if test='${popularList.review_star > 1}'>text-secondary</c:if>"></i>
+              <i class="fa fa-star <c:if test='${popularList.review_star > 2}'>text-secondary</c:if>"></i>
+              <i class="fa fa-star <c:if test='${popularList.review_star > 3}'>text-secondary</c:if>"></i>
+              <i class="fa fa-star <c:if test='${popularList.review_star > 4}'>text-secondary</c:if>"></i>
+              <h4>${popularList.pro_name}</h4>
+              <p>${popularList.pro_content}...</p>
+
+              <div class="d-flex justify-content-between flex-lg-wrap">
+                <p class="text-dark fs-5 fw-bold mb-0"><fmt:formatNumber value="${popularList.pro_sale_price}" pattern="#,###"/>원</p>
+                <div class="empty2"></div>
+                <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary cart_add_box"><i class="fa fa-shopping-bag me-2 text-primary"></i> 장바구니에 추가</a>
+              </div>
+            </div>
+          </a>
         </div>
       </c:forEach>
     </div>

@@ -303,50 +303,13 @@
                                                         <img src="/resources/resources/img/books/${list.pro_image}" class="img-fluid w-100 rounded-top book_img_size" alt="책 이미지"/>
                                                     </div>
                                                     <div class="p-4 border border-top-0 rounded-bottom book_intro_box">
-                                                        <c:choose>
-                                                            <c:when test="${list.review_star_avg eq '1'}">
-                                                                <i class="fa fa-star text-secondary"></i>
-                                                                <i class="fa fa-star"></i>
-                                                                <i class="fa fa-star"></i>
-                                                                <i class="fa fa-star"></i>
-                                                                <i class="fa fa-star"></i>
-                                                            </c:when>
-                                                            <c:when test="${list.review_star_avg eq '2'}">
-                                                                <i class="fa fa-star text-secondary"></i>
-                                                                <i class="fa fa-star text-secondary"></i>
-                                                                <i class="fa fa-star"></i>
-                                                                <i class="fa fa-star"></i>
-                                                                <i class="fa fa-star"></i>
-                                                            </c:when>
-                                                            <c:when test="${list.review_star_avg eq '3'}">
-                                                                <i class="fa fa-star text-secondary"></i>
-                                                                <i class="fa fa-star text-secondary"></i>
-                                                                <i class="fa fa-star text-secondary"></i>
-                                                                <i class="fa fa-star"></i>
-                                                                <i class="fa fa-star"></i>
-                                                            </c:when>
-                                                            <c:when test="${list.review_star_avg eq '4'}">
-                                                                <i class="fa fa-star text-secondary"></i>
-                                                                <i class="fa fa-star text-secondary"></i>
-                                                                <i class="fa fa-star text-secondary"></i>
-                                                                <i class="fa fa-star text-secondary"></i>
-                                                                <i class="fa fa-star"></i>
-                                                            </c:when>
-                                                            <c:when test="${list.review_star_avg eq '5'}">
-                                                                <i class="fa fa-star text-secondary"></i>
-                                                                <i class="fa fa-star text-secondary"></i>
-                                                                <i class="fa fa-star text-secondary"></i>
-                                                                <i class="fa fa-star text-secondary"></i>
-                                                                <i class="fa fa-star text-secondary"></i>
-                                                            </c:when>
-                                                            <c:otherwise>
-                                                                <i class="fa fa-star"></i>
-                                                                <i class="fa fa-star"></i>
-                                                                <i class="fa fa-star"></i>
-                                                                <i class="fa fa-star"></i>
-                                                                <i class="fa fa-star"></i>
-                                                            </c:otherwise>
-                                                        </c:choose>
+                                                        <div class="d-flex mb-3">
+                                                            <i class="fa fa-star <c:if test='${review.review_star > 0}'>text-secondary</c:if>"></i>
+                                                            <i class="fa fa-star <c:if test='${review.review_star > 1}'>text-secondary</c:if>"></i>
+                                                            <i class="fa fa-star <c:if test='${review.review_star > 2}'>text-secondary</c:if>"></i>
+                                                            <i class="fa fa-star <c:if test='${review.review_star > 3}'>text-secondary</c:if>"></i>
+                                                            <i class="fa fa-star <c:if test='${review.review_star > 4}'>text-secondary</c:if>"></i>
+                                                        </div>
                                                         <h4>${list.pro_name}</h4>
                                                         <p>${list.pro_content}...</p>
 

@@ -48,8 +48,8 @@ public class DataServiceImpl implements DataServiceIf{
     }
 
     @Override
-    public int modifyData(String member_id, String comu_title, String comu_content, String comu_file, int comu_idx) {
-        int result = dataMapper.modifyData(member_id, comu_title, comu_content, comu_file, comu_idx);
+    public int modifyData(String comu_title, String comu_content, String comu_file, String member_id) {
+        int result = dataMapper.modifyData(comu_title, comu_content, comu_file, member_id);
         return result;
     }
 
