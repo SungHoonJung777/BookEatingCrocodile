@@ -194,3 +194,14 @@ i.first_star {
 .rating__star:hover {
   filter: drop-shadow(1px 1px 4px gold);
 }
+
+div.proBanner {
+  background: linear-gradient(rgb(204 199 199 / 34%), rgb(166 166 166 / 30%)), url(/resources/resources/img/banner/proBanner.jpg);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+a.proB {
+  color: #5b8d00;
+}
