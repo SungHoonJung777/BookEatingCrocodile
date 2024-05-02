@@ -304,11 +304,11 @@
                                                     </div>
                                                     <div class="p-4 border border-top-0 rounded-bottom book_intro_box">
                                                         <div class="d-flex mb-3">
-                                                            <i class="fa fa-star <c:if test='${review.review_star > 0}'>text-secondary</c:if>"></i>
-                                                            <i class="fa fa-star <c:if test='${review.review_star > 1}'>text-secondary</c:if>"></i>
-                                                            <i class="fa fa-star <c:if test='${review.review_star > 2}'>text-secondary</c:if>"></i>
-                                                            <i class="fa fa-star <c:if test='${review.review_star > 3}'>text-secondary</c:if>"></i>
-                                                            <i class="fa fa-star <c:if test='${review.review_star > 4}'>text-secondary</c:if>"></i>
+                                                            <i class="fa fa-star <c:if test='${list.review_star_avg > 0}'>text-secondary</c:if>"></i>
+                                                            <i class="fa fa-star <c:if test='${list.review_star_avg > 1}'>text-secondary</c:if>"></i>
+                                                            <i class="fa fa-star <c:if test='${list.review_star_avg > 2}'>text-secondary</c:if>"></i>
+                                                            <i class="fa fa-star <c:if test='${list.review_star_avg > 3}'>text-secondary</c:if>"></i>
+                                                            <i class="fa fa-star <c:if test='${list.review_star_avg > 4}'>text-secondary</c:if>"></i>
                                                         </div>
                                                         <h4>${list.pro_name}</h4>
                                                         <p>${list.pro_content}...</p>

@@ -28,12 +28,13 @@
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Raleway:wght@600;800&display=swap" rel="stylesheet">
 
   <!-- Bootstrap CSS -->
+  <%--<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+--%>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
-
   <!-- Icon Font Stylesheet -->
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="/resources/resources/css/all.css"/>
+  <link href="/resources/resources/css/bootstrap-icons" rel="stylesheet">
 
   <!-- Libraries Stylesheet -->
   <link href="/resources/resources/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
@@ -49,7 +50,7 @@
   <link href="/resources/resources/css/product.css" rel="stylesheet">
   <!-- sidebars css -->
   <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/sidebars/">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
+  <link rel="stylesheet" href="/resources/resources/css/docsearch.css">
 
 
   <title>책먹는 악어</title>
@@ -117,11 +118,11 @@
           <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">신간 도서</div>
 
           <div class="p-4 border border-top-0 rounded-bottom book_intro_box">
-            <i class="fa fa-star <c:if test='${review.review_star > 0}'>text-secondary</c:if>"></i>
-            <i class="fa fa-star <c:if test='${review.review_star > 1}'>text-secondary</c:if>"></i>
-            <i class="fa fa-star <c:if test='${review.review_star > 2}'>text-secondary</c:if>"></i>
-            <i class="fa fa-star <c:if test='${review.review_star > 3}'>text-secondary</c:if>"></i>
-            <i class="fa fa-star <c:if test='${review.review_star > 4}'>text-secondary</c:if>"></i>
+            <i class="fa fa-star <c:if test='${newList.review_star_avg > 0}'>text-secondary</c:if>"></i>
+            <i class="fa fa-star <c:if test='${newList.review_star_avg > 1}'>text-secondary</c:if>"></i>
+            <i class="fa fa-star <c:if test='${newList.review_star_avg > 2}'>text-secondary</c:if>"></i>
+            <i class="fa fa-star <c:if test='${newList.review_star_avg > 3}'>text-secondary</c:if>"></i>
+            <i class="fa fa-star <c:if test='${newList.review_star_avg > 4}'>text-secondary</c:if>"></i>
             <h4>${newList.pro_name}</h4>
             <p>${newList.pro_content}...</p>
 
@@ -154,17 +155,17 @@
             <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">인기 도서</div>
 
             <div class="p-4 border border-top-0 rounded-bottom book_intro_box">
-              <i class="fa fa-star <c:if test='${popularList.review_star > 0}'>text-secondary</c:if>"></i>
-              <i class="fa fa-star <c:if test='${popularList.review_star > 1}'>text-secondary</c:if>"></i>
-              <i class="fa fa-star <c:if test='${popularList.review_star > 2}'>text-secondary</c:if>"></i>
-              <i class="fa fa-star <c:if test='${popularList.review_star > 3}'>text-secondary</c:if>"></i>
-              <i class="fa fa-star <c:if test='${popularList.review_star > 4}'>text-secondary</c:if>"></i>
+              <i class="fa fa-star <c:if test='${popularList.review_star_avg > 0}'>text-secondary</c:if>"></i>
+              <i class="fa fa-star <c:if test='${popularList.review_star_avg > 1}'>text-secondary</c:if>"></i>
+              <i class="fa fa-star <c:if test='${popularList.review_star_avg > 2}'>text-secondary</c:if>"></i>
+              <i class="fa fa-star <c:if test='${popularList.review_star_avg > 3}'>text-secondary</c:if>"></i>
+              <i class="fa fa-star <c:if test='${popularList.review_star_avg > 4}'>text-secondary</c:if>"></i>
               <h4>${popularList.pro_name}</h4>
               <p>${popularList.pro_content}...</p>
 
               <div class="d-flex justify-content-between flex-lg-wrap">
                 <p class="text-dark fs-5 fw-bold mb-0"><fmt:formatNumber value="${popularList.pro_sale_price}" pattern="#,###"/>원</p>
-                <div class="empty2"></div>
+                <div class="empty"></div>
                 <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary cart_add_box"><i class="fa fa-shopping-bag me-2 text-primary"></i> 장바구니에 추가</a>
               </div>
             </div>

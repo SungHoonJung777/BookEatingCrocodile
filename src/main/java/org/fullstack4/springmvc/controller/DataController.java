@@ -109,6 +109,7 @@ public class DataController {
     @GetMapping("/modify")
     public void dataModifyGET(@RequestParam(name = "comu_idx", defaultValue="0") int comu_idx,
                               HttpSession session,
+
                               Model model) {
         DataDTO dataDTO = dataServiceIf.viewData(comu_idx);
         model.addAttribute("dataDTO", dataDTO);
@@ -118,32 +119,57 @@ public class DataController {
     public String dataViewPOST(@Valid DataDTO dataDTO,
                                BindingResult bindingResult,
                                RedirectAttributes redirectAttributes,
-                               @RequestParam("upload") MultipartFile file,
+                               @RequestParam("file") MultipartFile file,
+                               @RequestParam(name="upload") String upload,
                                Model model) {
 
-
+        log.info("=====================================");
+        log.info("DataController >> dataViewPOST START");
+        log.info("dataDTO : "+dataDTO.toString());
+        log.info("filefilefilefilefilefile : "+file);
+/*
         if (bindingResult.hasErrors()) {
             log.info("Errors");
             redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
             redirectAttributes.addFlashAttribute("dataDTO", dataDTO);
 
             return "redirect:/data/modify?comu_idx=" + dataDTO.getComu_idx();
+        }*/
+
+        int resultFile = 0;
+        String comu_file = "";
+        if(file != null &&  file.getOriginalFilename() != null && !file.getOriginalFilename().isEmpty() ){
+
+            log.info("file  : "+file);
+            log.info("getOriginalFilename : "+file.getOriginalFilename());
+
+
+            comu_file = FileUtil.dataCreateFile(file);
+
+            log.info("comu_file : "+comu_file);
+        }
+        if(comu_file != null && !comu_file.isEmpty()){
+            resultFile = dataServiceIf.modifyData(dataDTO.getComu_title(), dataDTO.getComu_content(), comu_file, dataDTO.getMember_id());
+
+        }   else {
+            resultFile = dataServiceIf.modifyData(dataDTO.getComu_title(), dataDTO.getComu_content(), upload, dataDTO.getMember_id());
+
         }
 
 
-
-        String comu_file = FileUtil.dataCreateFile(file);
-
-        int resultFile = dataServiceIf.modifyData(dataDTO.getMember_id(), dataDTO.getComu_title(), dataDTO.getComu_content(), comu_file, dataDTO.getComu_idx());
-
-
-        if (file.isEmpty() || file == null) {
-            FileUtil.dataDeleteFile(comu_file);
-        }
+        log.info("resultFile : "+ resultFile);
+/*
+            if (file.isEmpty() || file == null) {
+                FileUtil.dataDeleteFile(comu_file);
+            }*/
 
 
+
+
+
+        log.info("DataController >> dataViewPOST END");
+        log.info("=====================================");
   /*      int result = dataServiceIf.modifyData(dataDTO);*/
-
         if (resultFile > 0) {
             return "redirect:/data/view?comu_idx=" + dataDTO.getComu_idx();
         }
@@ -177,7 +203,7 @@ public class DataController {
         return "redirect:/data/main";
     }
 
-    @RequestMapping(value = "/resources/resources/uploads/data/{comu_file}", method = RequestMethod.GET)
+  /*  @RequestMapping(value = "/resources/resources/uploads/data/{comu_file}", method = RequestMethod.GET)
     public void downloadFile(@PathVariable("comu_file") String comu_file, HttpServletResponse response) throws IOException {
         // 파일을 가져오는 로직 (파일 시스템에서 또는 데이터베이스에서)
         // 여기서는 예시로 파일 시스템에서 가져온다고 가정합니다.
@@ -196,5 +222,5 @@ public class DataController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 }
