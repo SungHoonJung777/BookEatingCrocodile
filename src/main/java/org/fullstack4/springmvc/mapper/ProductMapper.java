@@ -2,6 +2,7 @@ package org.fullstack4.springmvc.mapper;
 
 import org.fullstack4.springmvc.domain.ProductVO;
 import org.fullstack4.springmvc.dto.PageRequestDTO;
+import org.fullstack4.springmvc.dto.ProductDTO;
 
 import java.util.List;
 
@@ -15,6 +16,7 @@ public interface ProductMapper {
 
     List<ProductVO> productListByPage(PageRequestDTO pageRequestDTO);
 
-/*    List<ProductVO> indexRandomList();*/
+    List<ProductVO> indexNewList();
 
+    List<ProductVO> indexPopularList();
 }

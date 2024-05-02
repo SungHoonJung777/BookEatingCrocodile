@@ -64,7 +64,7 @@
                             <div class="dropdown-menu m-0 bg-secondary rounded-0">
                                 <a href="/faq/view" class="dropdown-item">FAQ</a>
                                 <a href="/qna/main" class="dropdown-item">Q&A</a>
-                                <a href="#" class="dropdown-item">자료실</a>
+                                <a href="/data/main" class="dropdown-item">자료실</a>
                             </div>
                         </div>
                         <div class="nav-item dropdown">

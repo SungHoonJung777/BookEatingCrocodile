@@ -11,9 +11,11 @@
     </select>
 
     <select id="pro_view" resultType="org.fullstack4.springmvc.domain.ProductVO">
-        select pro_idx, pro_name, pro_writer, pro_price, pro_amount, pro_content, pro_image, pro_company, pro_video, pro_category1, pro_category2, pro_category3, pro_reg_date, pro_modify_date, FLOOR(pro_price-(pro_price * (pro_sale / 100))) AS pro_sale_price
-        from bec_product
-        where pro_idx = #{pro_idx}
+        select BP.pro_idx, BP.pro_name, BP.pro_writer, BP.pro_price, BP.pro_amount, BP.pro_content, BP.pro_image, BP.pro_company, BP.pro_video,
+               BP.pro_category1, BP.pro_category2, BP.pro_category3, BP.pro_reg_date, BP.pro_modify_date, FLOOR(BP.pro_price-(BP.pro_price * (BP.pro_sale / 100))) AS pro_sale_price, ifNULL( FLOOR(AVG(BR.review_star)), 0)AS review_star_avg
+        from bec_product BP
+        INNER JOIN bec_review BR ON BP.pro_idx = BR.pro_idx
+        where BP.pro_idx = #{pro_idx}
     </select>
 
 
@@ -21,7 +23,9 @@
         SELECT
         BP.pro_idx, BP.pro_name, BP.pro_writer, BP.pro_price, BP.pro_sale, BP.pro_amount, BP.pro_content, BP.pro_image, BP.pro_company, BP.pro_video, BP.pro_category1, BP.pro_category2, BP.pro_category3, BP.pro_reg_date, BP.pro_modify_date,
         FLOOR(BP.pro_price - BP.pro_price * (BP.pro_sale / 100)) AS pro_sale_price,
-        FLOOR(AVG(BR.review_star)) AS review_star_avg
+
+        ifNULL( FLOOR(AVG(BR.review_star)), 0)AS review_star_avg
+
         FROM bec_product BP
         LEFT JOIN bec_review BR ON BP.pro_idx = BR.pro_idx
         WHERE 1=1
@@ -77,11 +81,38 @@
     </select>
 
 
-    <select id="indexRandomList" resultType="org.fullstack4.springmvc.domain.ProductVO">
-        SELECT pro_image, pro_idx
-        FROM bec_product
-        ORDER BY RAND()
-        LIMIT 4;
+    <select id="indexNewList" resultType="org.fullstack4.springmvc.domain.ProductVO">
+        SELECT
+            BP.pro_idx, BP.pro_name, BP.pro_writer, BP.pro_price, BP.pro_sale, BP.pro_amount, BP.pro_content, BP.pro_image, BP.pro_company, BP.pro_video, BP.pro_category1, BP.pro_category2, BP.pro_category3, BP.pro_reg_date, BP.pro_modify_date,
+            FLOOR(BP.pro_price - BP.pro_price * (BP.pro_sale / 100)) AS pro_sale_price,
+            FLOOR(AVG(BR.review_star)) AS review_star_avg
+        FROM bec_product BP
+        LEFT JOIN bec_review BR ON BP.pro_idx = BR.pro_idx
+        GROUP BY BP.pro_idx
+        ORDER BY BP.pro_reg_date DESC
+            LIMIT 10
     </select>
+
+    <select id="indexPopularList" resultType="org.fullstack4.springmvc.domain.ProductVO">
+        SELECT
+            BP.pro_idx, BP.pro_name, BP.pro_writer, BP.pro_price, BP.pro_sale,
+            BP.pro_content, BP.pro_image, BP.pro_reg_date,
+            FLOOR(BP.pro_price - BP.pro_price * (BP.pro_sale / 100)) AS pro_sale_price,
+            FLOOR(AVG(BR.review_star)) AS review_star_avg,
+            COALESCE(orders.order_count, 0) AS order_count
+        FROM bec_product BP
+             LEFT JOIN bec_review BR ON BP.pro_idx = BR.pro_idx
+             LEFT JOIN (
+                    SELECT pro_idx, COUNT(*) AS order_count
+                    FROM bec_order
+                    GROUP BY pro_idx
+             ) AS orders ON BP.pro_idx = orders.pro_idx
+        GROUP BY
+            BP.pro_idx
+        ORDER BY
+            order_count DESC
+            LIMIT 10;
+    </select>
+
 
 </mapper>
