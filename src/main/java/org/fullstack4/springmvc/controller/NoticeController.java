@@ -3,32 +3,29 @@ package org.fullstack4.springmvc.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.fullstack4.springmvc.common.FileUtil;
-import org.fullstack4.springmvc.dto.*;
+import org.fullstack4.springmvc.dto.DataDTO;
+import org.fullstack4.springmvc.dto.PageRequestDTO;
+import org.fullstack4.springmvc.dto.PageResponseDTO;
 import org.fullstack4.springmvc.service.data.DataServiceIf;
-import org.fullstack4.springmvc.service.qnaService.QnaServiceIf;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.UUID;
 import java.util.stream.Stream;
 
 @Log4j2
 @Controller
-@RequestMapping("/data")
+@RequestMapping("/notice")
 @RequiredArgsConstructor
-public class DataController {
+public class NoticeController {
     private final DataServiceIf dataServiceIf;
 
     @GetMapping("/write")
@@ -56,7 +53,7 @@ public class DataController {
             redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
             redirectAttributes.addFlashAttribute("dataDTO", dataDTO);
 
-            return "redirect:/data/write";
+            return "redirect:/notice/write";
         }
 
 
@@ -73,7 +70,7 @@ public class DataController {
             log.info("comu_file : "+comu_file);
         }
 
-            resultFile = dataServiceIf.data_fileUpload(dataDTO.getMember_id(),comu_file, dataDTO.getComu_title(), dataDTO.getComu_content(),  dataDTO.getCommu_category());
+        resultFile = dataServiceIf.data_fileUpload(dataDTO.getMember_id(),comu_file, dataDTO.getComu_title(), dataDTO.getComu_content(),  dataDTO.getCommu_category());
 
 
 
@@ -91,10 +88,10 @@ public class DataController {
         log.info("=====================================");
         /*      int result = dataServiceIf.modifyData(dataDTO);*/
         if (resultFile > 0) {
-            return "redirect:/data/main";
+            return "redirect:/notice/main";
         }
         else {
-            return "redirect:/data/write";
+            return "redirect:/notice/write";
         }
 
 
@@ -107,7 +104,7 @@ public class DataController {
         log.info("DataController >> dataList() START");
 
         String member_id = (String)session.getAttribute("member_id");
-        pageRequestDTO.setCommu_category("d");
+        pageRequestDTO.setCommu_category("n");
         PageResponseDTO<DataDTO> dataList = dataServiceIf.dataList( pageRequestDTO);
 
         model.addAttribute("dataList", dataList);
@@ -131,6 +128,7 @@ public class DataController {
     @GetMapping("/modify")
     public void dataModifyGET(@RequestParam(name = "comu_idx", defaultValue="0") int comu_idx,
                               HttpSession session,
+
                               Model model) {
         DataDTO dataDTO = dataServiceIf.viewData(comu_idx);
         model.addAttribute("dataDTO", dataDTO);
@@ -192,10 +190,10 @@ public class DataController {
         log.info("=====================================");
   /*      int result = dataServiceIf.modifyData(dataDTO);*/
         if (resultFile > 0) {
-            return "redirect:/data/view?comu_idx=" + dataDTO.getComu_idx();
+            return "redirect:/notice/view?comu_idx=" + dataDTO.getComu_idx();
         }
         else {
-            return "redirect:/data/modify?comu_idx=" + dataDTO.getComu_idx();
+            return "redirect:/notice/modify?comu_idx=" + dataDTO.getComu_idx();
         }
 
     }
@@ -221,7 +219,7 @@ public class DataController {
         dataServiceIf.deleteDataList(newArr);
 
         log.info("idxList : " + idxList);
-        return "redirect:/data/main";
+        return "redirect:/notice/main";
     }
 
   /*  @RequestMapping(value = "/resources/resources/uploads/data/{comu_file}", method = RequestMethod.GET)

@@ -42,6 +42,7 @@ public class PageResponseDTO<E> {
     private String qna_category;
     private String member_id;
     private String qna_select;
+    private String commu_category;
 
     PageResponseDTO() {} //빈으로 등록되기 위해 기본생성자 필요
 
@@ -71,6 +72,7 @@ public class PageResponseDTO<E> {
         this.qna_category = requestDTO.getQna_category();
         this.member_id = requestDTO.getMember_id();
         this.qna_select = requestDTO.getQna_select();
+        this.commu_category = requestDTO.getCommu_category();
 
         this.search_type = requestDTO.getSearch_type();
         this.search_type_string = search_type !=null ? Arrays.toString(search_type).replace("[", "").replace("]", "") : "";

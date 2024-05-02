@@ -101,10 +101,11 @@
                                                     <i class="bx bx-upload d-block d-sm-none"></i>
                                                     <input type="file" id="upload" name="upload" class="account-file-input" hidden  accept="image/png, image/jpeg" onchange="readURL(this)" />
                                                 </label>
-                                                <button type="button" class="btn btn-outline-secondary account-image-reset mb-4">
-                                                    <i class="bx bx-reset d-block d-sm-none"></i>
-                                                    <span class="d-none d-sm-block">Reset</span>
-                                                </button>
+                                                <input type="hidden" name="member_img" value="${member.member_img}">
+<%--                                                <button type="button" class="btn btn-outline-secondary account-image-reset mb-4">--%>
+<%--                                                    <i class="bx bx-reset d-block d-sm-none"></i>--%>
+<%--                                                    <span class="d-none d-sm-block">Reset</span>--%>
+<%--                                                </button>--%>
 
                                                 <p class="text-muted mb-0">JPG 또는 PNG 파일만 업로드 가능합니다. 최대 사이즈는 800K 입니다.</p>
                                             </div>
@@ -288,23 +289,29 @@
         
         
         e.preventDefault();
+
+        if (name.value.length < 1) {
+            alert("이름을 입력해 주세요.");
+            return false;
+        }
+
         if (pwd.value === pwdChk.value) {
             pwdYN.value = "Y";
             console.log(pwdYN);
         }
 
         if (pwdYN.value === "N") {
-            alert("안맞음");
+            alert("비밀번호가 일치하지 않습니다.");
             return false;
         }
         if (!regPhone.test(phone)) {
-            alert("안맞음");
+            alert("전화번호 형식에 맞춰주세요. ex)010-1234-5678");
             return false;
         }
 
 
         else {
-            alert("맞음");
+            alert("수정 완료");
             frm.submit();
         }
 

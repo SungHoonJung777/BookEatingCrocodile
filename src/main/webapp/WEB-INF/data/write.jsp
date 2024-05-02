@@ -91,7 +91,8 @@
                                 </div>
                                 <div class="card-body">
                                     <form action="/data/write" method="post" enctype="multipart/form-data">
-                                        <input type="hidden" name="member_id" value="abc01">
+                                        <input type="hidden" name="commu_category" value="d">
+                                        <input type="hidden" name="member_id" value="${sessionScope.member_id}">
                                         <div class="mb-3"></div>
                                         <div class="mb-3">
                                             <label class="form-label" for="basic-default-fullname">제목</label>
@@ -111,13 +112,13 @@
                                             <label for="upload">파일첨부</label>
                                             <input type="file" name="upload" id="upload" value=""/>
                                         </div>
-                                        <div class="button-wrapper">
-                                            <button type="button" class="btn btn-outline-secondary account-image-reset mb-4">
-                                                <i class="bx bx-reset d-block d-sm-none"></i>
-                                                <span class="d-none d-sm-block">Reset</span>
-                                            </button>
-                                        </div>
-
+<%--                                        <div class="button-wrapper">--%>
+<%--                                            <button type="button" class="btn btn-outline-secondary account-image-reset mb-4">--%>
+<%--                                                <i class="bx bx-reset d-block d-sm-none"></i>--%>
+<%--                                                <span class="d-none d-sm-block">Reset</span>--%>
+<%--                                            </button>--%>
+<%--                                        </div>--%>
+                                        <div class="mb-3"></div>
                                         <button type="submit" class="btn btn-primary">등록하기</button>
                                         <button type="reset" class="btn btn-secondary" onclick="location.href='/data/main'">목록으로</button>
                                     </form>

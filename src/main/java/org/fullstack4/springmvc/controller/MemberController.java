@@ -195,13 +195,33 @@ public class MemberController {
                              MemberImageDTO memberImageDTO,
                              BindingResult bindingResult,
                              RedirectAttributes redirectAttributes,
+                             @RequestParam(name="member_img") String upload,
                              @RequestParam("upload") MultipartFile file) {
         log.info("============================");
         log.info("MemberController >> modifyPOST()");
 
 
-        String saveFileName = FileUtil.createFile(file);
-        int resultMemImg = memberServiceIf.modifyImage(memberDTO.getMember_id(), saveFileName);
+        String saveFileName = "";
+        int resultMemImg = 0;
+        if(file != null &&  file.getOriginalFilename() != null && !file.getOriginalFilename().isEmpty() ){
+
+            log.info("file  : "+file);
+            log.info("getOriginalFilename : "+file.getOriginalFilename());
+
+
+            saveFileName = FileUtil.createFile(file);
+
+            log.info("member_file : "+saveFileName);
+        }
+        if(saveFileName != null && !saveFileName.isEmpty()){
+            resultMemImg = memberServiceIf.modifyImage(memberDTO.getMember_id(), saveFileName);
+
+        }   else {
+            resultMemImg = memberServiceIf.modifyImage(memberDTO.getMember_id(), upload);
+
+        }
+
+
         //int resultImg = memberImageServiceIf.regist(memberDTO.getMember_id(), orgFile, saveFileName);
     //}
 

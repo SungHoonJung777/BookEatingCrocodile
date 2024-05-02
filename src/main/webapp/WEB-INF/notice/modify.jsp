@@ -80,17 +80,17 @@
                 <!-- Content -->
 
                 <div class="container-xxl flex-grow-1 container-p-y">
-                    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">커뮤니티 /</span> 자료실</h4>
+                    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">커뮤니티 /</span> 공지사항</h4>
 
                     <div class="row">
                         <div class="col-xl">
                             <div class="card mb-4">
                                 <div class="card-header d-flex justify-content-between align-items-center">
-                                    <h5 class="mb-0">자료실</h5>
+                                    <h5 class="mb-0">공지사항</h5>
                                     <small class="text-muted float-end">수정하기</small>
                                 </div>
                                 <div class="card-body">
-                                    <form action="/data/modify" method="post" enctype="multipart/form-data">
+                                    <form action="/notice/modify" method="post" enctype="multipart/form-data">
                                         <input type="hidden" name="member_id" value="abc01">
                                         <input type="hidden" name="comu_idx" value="${dataDTO.comu_idx}">
                                         <div class="mb-3"></div>
@@ -116,7 +116,7 @@
                                         </div>
 
                                         <button type="submit" class="btn btn-primary">수정완료</button>
-                                        <button type="reset" class="btn btn-secondary" onclick="location.href='/data/view?comu_idx=${dataDTO.comu_idx}'">게시글로 돌아가기</button>
+                                        <button type="reset" class="btn btn-secondary" onclick="location.href='/notice/view?comu_idx=${dataDTO.comu_idx}'">게시글로 돌아가기</button>
 
                                     </form>
                                 </div>

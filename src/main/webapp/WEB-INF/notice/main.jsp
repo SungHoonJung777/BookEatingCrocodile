@@ -81,9 +81,10 @@
                 <!-- Content -->
 
                 <div class="container-xxl flex-grow-1 container-p-y">
-                    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">커뮤니티 /</span> 자료실</h4>
+                    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">커뮤니티 /</span> 공지사항</h4>
 
                     <form role="search" id="frmSearch">
+                        <input type="hidden" name="commu_category" value="n">
                         <div class="mb-3 row">
                             <label class="col-sm-2 col-form-label">검색 범위</label>
                             <div class="col-sm-2">
@@ -91,8 +92,7 @@
                                 <label class="form-check-label" for="search_type1">제목</label>
                                 <input class="form-check-input" type="checkbox" name="search_type" id="search_type3" value="c" <c:if test="${dataList['search_type_string'].contains('c')}">checked</c:if>>
                                 <label class="form-check-label" for="search_type3">내용</label><br>
-                                <input class="form-check-input" type="checkbox" name="search_type" id="search_type2" value="u" <c:if test="${dataList['search_type_string'] != 'null' && dataList['search_type_string'].contains('u')}">checked</c:if>>
-                                <label for="search_type2">작성자</label>
+
                             </div>
                             <div class="col">
                                 <input class="form-check-label" type="search" name="search_word"  id="search_word" placeholder="Search" aria-label="Search" value="${dataList.search_word}">
@@ -113,14 +113,14 @@
 
                             <div class="col-sm-2">
                                 <button class="btn btn-outline-success" id="btnSearch" type="submit">Search</button>
-                                <button class="btn btn-outline-success" id="btnReset" type="reset" onclick="location.href='/data/main'">reset</button>
+                                <button class="btn btn-outline-success" id="btnReset" type="reset" onclick="location.href='/notice/main'">reset</button>
                             </div>
                         </div>
                     </form>
 
 
                     <div class="row">
-                        <form action="/data/delete" method="get">
+                        <form action="/notice/delete" method="get">
                             <div class="col-md-12">
                                 <ul class="nav nav-pills flex-column flex-md-row mb-3">
                                     <li class="nav-item">
@@ -131,11 +131,11 @@
 
                                 <div class="card mb-4">
                                     <!-- Notifications -->
-                                    <h5 class="card-header">자료실</h5>
+                                    <h5 class="card-header">공지사항</h5>
                                     <div class="card-body">
                                         <br>
                                         <span>
-                                    <span class="notificationRequest"><strong>회원만 이용 가능한 자료실 게시판입니다.</strong></span></span>
+                                    <span class="notificationRequest"><strong>공지사항 입니다.</strong></span></span>
                                         <div class="error"></div>
 
                                     </div>
@@ -166,7 +166,7 @@
                                                     </c:if>
 
                                                         <td class="text-nowrap">${dataList.total_count - ((dataList.page-1)*dataList.page_size + (status.count-1))}</td>
-                                                        <td class="text-nowrap"><a href="/data/view?comu_idx=${dto.comu_idx}">${dto.comu_title}</a></td>
+                                                        <td class="text-nowrap"><a href="/data/view?comu_idx=${dto.comu_idx}">${dto.comu_title} <c:if test="${not empty dto.comu_file}"> <i class="fa-solid fa-paperclip"></i> </c:if></a></td>
                                                         <td class="text-nowrap">${dto.member_id}</td>
                                                         <td class="text-nowrap">${fn:substring(dto.comu_reg_date, 0, 10)} ${fn:substring(dto.comu_reg_date, 11, 20)}</td>
 
@@ -196,8 +196,8 @@
                                 <div class="col">
                                 </div>
                                 <div class="col">
-                                    <c:if test="${not empty sessionScope.member_id}">
-                                        <button type="button" class="btn btn-sm btn-primary" onclick="location.href='/data/write'">글등록</button>
+                                    <c:if test="${sessionScope.member_id eq 'admin'}">
+                                        <button type="button" class="btn btn-sm btn-primary" onclick="location.href='/notice/write'">글등록</button>
                                     </c:if>
                                     <c:if test="${sessionScope.member_id eq 'admin'}">
                                         <button type="submit" class="btn btn-sm btn-danger" id="btnDelete">삭제</button>
@@ -261,6 +261,7 @@
 
 <jsp:include page="../common/footer.jsp"/>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="https://kit.fontawesome.com/be97bd8e1b.js" crossorigin="anonymous"></script>
 <script>
 
     let frm = document.querySelector("#frm");
