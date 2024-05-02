@@ -21,4 +21,5 @@ public class QnaVO {
     private String qna_answer;
     private LocalDateTime qna_reg_date;
     private LocalDateTime qna_answer_date;
+    private int qna_view_cnt;
 }

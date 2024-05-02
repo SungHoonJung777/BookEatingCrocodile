@@ -10,6 +10,7 @@ import org.fullstack4.springmvc.dto.*;
 import org.fullstack4.springmvc.service.BbsServiceIf;
 import org.fullstack4.springmvc.service.MemberImageServiceIf;
 import org.fullstack4.springmvc.service.MemberServiceIf;
+import org.fullstack4.springmvc.service.qnaService.QnaServiceIf;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -41,6 +42,7 @@ public class MemberController {
     private final MemberServiceIf memberServiceIf;
     private final MemberImageServiceIf memberImageServiceIf;
     private final BbsServiceIf bbsServiceIf;
+    private final QnaServiceIf qnaServiceIf;
 
     @Autowired
     private JavaMailSender mailSender;
@@ -333,9 +335,11 @@ public class MemberController {
         log.info("============================");
         log.info("MemberController >> qnaList()");
         String member_id = (String)session.getAttribute("member_id");
-        PageResponseDTO<QnaDTO> qnaList = memberServiceIf.getQnaList(member_id, "one", pageRequestDTO);
+//        PageResponseDTO<QnaDTO> qnaList = memberServiceIf.getQnaList(member_id, "one", pageRequestDTO);
+        pageRequestDTO.setQna_category("one");
+        pageRequestDTO.setMember_id(member_id);
+        PageResponseDTO<QnaDTO> qnaList = qnaServiceIf.getQna(pageRequestDTO);
 
-        //PageResponseDTO<BbsDTO> responseDTO = bbsServiceIf.bbsListByPage(pageRequestDTO);
 
         model.addAttribute("qnaList", qnaList);
        // model.addAttribute("responseDTO", responseDTO);
@@ -353,8 +357,13 @@ public class MemberController {
                         Model model) {
         log.info("============================");
         log.info("MemberController >> qnaList()");
+//        String member_id = (String)session.getAttribute("member_id");
+//        PageResponseDTO<QnaDTO> qnaList = memberServiceIf.getQnaList(member_id, "qna", pageRequestDTO);
         String member_id = (String)session.getAttribute("member_id");
-        PageResponseDTO<QnaDTO> qnaList = memberServiceIf.getQnaList(member_id, "qna", pageRequestDTO);
+        pageRequestDTO.setQna_category("qna");
+        pageRequestDTO.setMember_id(member_id);
+        PageResponseDTO<QnaDTO> qnaList = qnaServiceIf.getQna(pageRequestDTO);
+        log.info("qnaList : "+qnaList.toString());
 
         //PageResponseDTO<BbsDTO> responseDTO = bbsServiceIf.bbsListByPage(pageRequestDTO);
 

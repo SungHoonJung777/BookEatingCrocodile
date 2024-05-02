@@ -85,6 +85,18 @@
 
                 <div class="container-xxl flex-grow-1 container-p-y">
                     <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">마이페이지 /</span> 1:1 문의</h4>
+                    <form id="frmSort">
+                        <div class="bg-light ps-3 py-3 rounded d-flex justify-content-between mb-4">
+
+                            <label for="sortMethod">정렬 순서:</label>
+                            <select id="sortMethod" name="sortDir" onchange="goList()" class="border-0 form-select-sm bg-light me-3">
+                                <option value="">선택</option>
+                                <option value="DESC" <c:if test="${qnaList.sortDir eq 'DESC'}"> selected</c:if>>최신순</option>
+                                <option value="ASC" <c:if test="${qnaList.sortDir eq 'ASC'}"> selected</c:if>>오래된순</option>
+
+                            </select>
+                        </div>
+                    </form>
 
                     <div class="row">
                         <div class="col-md-12">
@@ -252,6 +264,13 @@
         }
         location.href="#";
     }
+
+    //정렬
+    function goList() {
+        const frmSort = document.getElementById("frmSort");
+        frmSort.submit();
+    }
+
 </script>
 </body>
 </html>

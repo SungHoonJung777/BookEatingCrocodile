@@ -15,4 +15,5 @@ public interface QnaServiceIf {
     int registFaq(QnaDTO qnaDTO);
     PageResponseDTO<QnaDTO> getQna(PageRequestDTO pageRequestDTO);
     int deleteQnaCommu(Integer[] idxList);
+    int viewUpdate(QnaDTO qnaDTO);
 }

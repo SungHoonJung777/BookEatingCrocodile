@@ -92,4 +92,13 @@ public class QnaServiceImpl implements QnaServiceIf{
         log.info("deleteQnaCommu : qna_idx = " + idxList);
         return result;
     }
+
+    @Override
+    public int viewUpdate(QnaDTO qnaDTO) {
+        QnaVO qnaVO = modelMapper.map(qnaDTO, QnaVO.class);
+        int result = qnaMapper.viewUpdate(qnaVO);
+        return 0;
+    }
+
+
 }

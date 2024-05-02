@@ -68,11 +68,11 @@
                             </div>
                         </div>
                         <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Contact</a>
+                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">About Company</a>
                             <div class="dropdown-menu m-0 bg-secondary rounded-0">
-                                <a href="#" class="dropdown-item">인사말</a>
-                                <a href="#" class="dropdown-item">연혁</a>
-                                <a href="#" class="dropdown-item">오시는길</a>
+                                <a href="/company/introduce" class="dropdown-item">인사말</a>
+                                <a href="/company/history" class="dropdown-item">연혁</a>
+                                <a href="/company/place" class="dropdown-item">오시는길</a>
                             </div>
                         </div>
                     </div>

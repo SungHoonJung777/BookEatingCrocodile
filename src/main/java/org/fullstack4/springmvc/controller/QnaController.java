@@ -92,6 +92,7 @@ public class QnaController {
                         HttpSession session,
                         Model model) {
         QnaDTO qnaDTO = qnaServiceIf.viewQna(qna_idx);
+        qnaServiceIf.viewUpdate(qnaDTO);
         model.addAttribute("qnaDTO", qnaDTO);
     }
 

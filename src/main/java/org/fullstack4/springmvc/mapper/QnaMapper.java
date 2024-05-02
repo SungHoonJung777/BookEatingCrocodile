@@ -20,4 +20,5 @@ public interface QnaMapper {
     List<QnaVO> getQna(PageRequestDTO pageRequestDTO);
     int totalQnaCommu(PageRequestDTO requestDTO);
     int deleteQnaCommu(Integer[] idxList);
+    int viewUpdate(QnaVO qnaVO);
 }
