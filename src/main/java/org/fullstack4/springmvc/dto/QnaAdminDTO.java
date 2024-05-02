@@ -17,4 +17,5 @@ public class QnaAdminDTO {
     private String qna_answer;
     private String qna_answer_YN;
     private LocalDateTime qna_answer_date;
+    private String qna_select;
 }

@@ -48,19 +48,19 @@
     </sql>
 
     <insert id="registQna">
-        insert into bec_qna(member_id, qna_title, qna_content, qna_category)
-        values(#{member_id}, #{qna_title}, #{qna_content}, #{qna_category})
+        insert into bec_qna(member_id, qna_title, qna_content, qna_category, qna_select)
+        values(#{member_id}, #{qna_title}, #{qna_content}, #{qna_category}, #{qna_select})
     </insert>
 
     <select id="viewQna" resultType="org.fullstack4.springmvc.domain.QnaVO">
-        select qna_idx, member_id, qna_title, qna_content, qna_secret, qna_answer_YN, qna_category, qna_answer, qna_reg_date, qna_answer_date
+        select qna_idx, member_id, qna_title, qna_content, qna_secret, qna_answer_YN, qna_category, qna_answer, qna_reg_date, qna_answer_date, qna_select
         from bec_qna
         where qna_idx=#{qna_idx}
     </select>
 
     <update id="modifyQna">
         update bec_qna
-        set qna_title=#{qna_title}, qna_content=#{qna_content}
+        set qna_title=#{qna_title}, qna_content=#{qna_content}, qna_select=#{qna_select}
         where qna_idx=#{qna_idx}
     </update>
 
@@ -76,7 +76,7 @@
 
     <update id="registAdmin">
         update bec_qna
-        set qna_answer=#{qna_answer}, qna_answer_date=now(), qna_answer_YN='Y'
+        set qna_answer=#{qna_answer}, qna_answer_date=now(), qna_answer_YN='Y', qna_select=#{qna_select}
         where qna_idx=#{qna_idx}
     </update>
     <update id="deleteAdmin">
@@ -86,12 +86,12 @@
     </update>
 
     <insert id="registFaq">
-        insert into bec_qna(member_id, qna_title, qna_content, qna_category, qna_answer)
-        values(#{member_id}, #{qna_title}, #{qna_content}, #{qna_category}, #{qna_answer})
+        insert into bec_qna(member_id, qna_title, qna_content, qna_category, qna_answer, qna_select)
+        values(#{member_id}, #{qna_title}, #{qna_content}, #{qna_category}, #{qna_answer}, #{qna_select})
     </insert>
 
     <select id="getQna" resultType="org.fullstack4.springmvc.domain.QnaVO">
-        select qna_idx, member_id, qna_title, qna_content, qna_secret, qna_answer_YN, qna_category, qna_answer, qna_reg_date, qna_answer_date, qna_view_cnt
+        select qna_idx, member_id, qna_title, qna_content, qna_secret, qna_answer_YN, qna_category, qna_answer, qna_reg_date, qna_answer_date, qna_view_cnt, qna_select
         from bec_qna
         where qna_category=#{qna_category}
         <if test="member_id != null and member_id != ''">
@@ -123,6 +123,9 @@
 
         <if test="search_date2 != null and search_date2 != 'null'  and search_date2 != ''">
             and qna_reg_date <![CDATA[<=]]> #{search_date2}
+        </if>
+        <if test="qna_select != null and qna_select != ''">
+            and qna_select = #{qna_select}
         </if>
         <choose>
             <when test="sortDir != null and sortDir == 'ASC'.toString()">

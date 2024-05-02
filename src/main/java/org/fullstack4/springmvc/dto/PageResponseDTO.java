@@ -41,6 +41,7 @@ public class PageResponseDTO<E> {
 
     private String qna_category;
     private String member_id;
+    private String qna_select;
 
     PageResponseDTO() {} //빈으로 등록되기 위해 기본생성자 필요
 
@@ -69,6 +70,7 @@ public class PageResponseDTO<E> {
         this.search_date2 = requestDTO.getSearch_date2();
         this.qna_category = requestDTO.getQna_category();
         this.member_id = requestDTO.getMember_id();
+        this.qna_select = requestDTO.getQna_select();
 
         this.search_type = requestDTO.getSearch_type();
         this.search_type_string = search_type !=null ? Arrays.toString(search_type).replace("[", "").replace("]", "") : "";
@@ -105,6 +107,9 @@ public class PageResponseDTO<E> {
             sb.append("&search_date2=" + search_date2);
         }
 
+        if (qna_select != null) {
+            sb.append("&qna_select=" + qna_select );
+        }
 
         this.linkParams = sb.toString(); //쿼리스트링
         log.info("ResponseDTO END");
