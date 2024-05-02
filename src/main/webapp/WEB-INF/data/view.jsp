@@ -118,10 +118,12 @@
                                                   rows="10" id="comu_content">${dataDTO.comu_content}</textarea>
 
                                     </div>
+                                    <c:if test="${not empty dataDTO.comu_file}">
                                     <div class="d-flex">
                                         <a download href="/resources/resources/uploads/data/${dataDTO.comu_file}" class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary"><i class="me-2 text-primary"></i>파일 다운로드</a>
                                         <div class="px-4 py-2 mb-4">${dataDTO.comu_file}</div>
                                     </div>
+                                    </c:if>
                                     <br>
                                     <c:if test="${dataDTO.member_id eq sessionScope.member_id}">
                                         <button type="submit" class="btn btn-primary"

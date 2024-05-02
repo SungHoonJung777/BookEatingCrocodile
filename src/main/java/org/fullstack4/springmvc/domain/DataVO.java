@@ -21,4 +21,5 @@ public class DataVO {
     private LocalDateTime comu_reg_date;
     private LocalDateTime comu_modify_date;
     private String comu_file;
+    private String commu_category;
 }

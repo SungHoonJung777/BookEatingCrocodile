@@ -84,6 +84,7 @@
                     <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">커뮤니티 /</span> 자료실</h4>
 
                     <form role="search" id="frmSearch">
+                        <input type="hidden" name="commu_category" value="n">
                         <div class="mb-3 row">
                             <label class="col-sm-2 col-form-label">검색 범위</label>
                             <div class="col-sm-2">
@@ -166,7 +167,7 @@
                                                     </c:if>
 
                                                         <td class="text-nowrap">${dataList.total_count - ((dataList.page-1)*dataList.page_size + (status.count-1))}</td>
-                                                        <td class="text-nowrap"><a href="/data/view?comu_idx=${dto.comu_idx}">${dto.comu_title}</a></td>
+                                                        <td class="text-nowrap"><a href="/data/view?comu_idx=${dto.comu_idx}">${dto.comu_title} <c:if test="${not empty dto.comu_file}"> <i class="fa-solid fa-paperclip"></i> </c:if></a></td>
                                                         <td class="text-nowrap">${dto.member_id}</td>
                                                         <td class="text-nowrap">${fn:substring(dto.comu_reg_date, 0, 10)} ${fn:substring(dto.comu_reg_date, 11, 20)}</td>
 
@@ -261,6 +262,7 @@
 
 <jsp:include page="../common/footer.jsp"/>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="https://kit.fontawesome.com/be97bd8e1b.js" crossorigin="anonymous"></script>
 <script>
 
     let frm = document.querySelector("#frm");

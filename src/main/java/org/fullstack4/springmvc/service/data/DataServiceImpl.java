@@ -28,8 +28,8 @@ public class DataServiceImpl implements DataServiceIf{
     }*/
 
     @Override
-    public int data_fileUpload(String member_id, String comu_file, String comu_title, String comu_content) {
-        int result = dataMapper.data_fileUpload(member_id, comu_file, comu_title, comu_content);
+    public int data_fileUpload(String member_id, String comu_file, String comu_title, String comu_content, String commu_category) {
+        int result = dataMapper.data_fileUpload(member_id, comu_file, comu_title, comu_content, commu_category);
         return result;
     }
 

@@ -33,8 +33,8 @@
         values( #{member_id}, #{comu_title}, #{comu_content}, now())
     </insert>-->
     <insert id="data_fileUpload">
-        insert into bec_community(member_id, comu_file, comu_title, comu_content)
-        values (#{arg0}, #{arg1}, #{arg2}, #{arg3});
+        insert into bec_community(member_id, comu_file, comu_title, comu_content, commu_category)
+        values (#{arg0}, #{arg1}, #{arg2}, #{arg3}, #{arg4});
     </insert>
 
     <select id="viewData" resultType="org.fullstack4.springmvc.domain.DataVO">
@@ -61,14 +61,14 @@
 
 
     <select id="dataList" resultType="org.fullstack4.springmvc.domain.DataVO">
-        select comu_idx, member_id, comu_title, comu_content, comu_reg_date, comu_file
+        select comu_idx, member_id, comu_title, comu_content, comu_reg_date, comu_file, commu_category
         from bec_community
-        <where>
+        where commu_category=#{commu_category}
         <if test="search_type != null">
             <foreach collection="search_type" item="type" >
                 <choose>
                     <when test="type == 't'.toString()">
-                        comu_title like concat('%', #{search_word},'%')
+                        and comu_title like concat('%', #{search_word},'%')
                     </when>
                     <when test="type == 'u'.toString()">
                         and member_id like concat('%', #{search_word},'%' )
@@ -85,19 +85,20 @@
         <if test="search_date2 != null and search_date2 != 'null'  and search_date2 != ''">
             and comu_reg_date <![CDATA[<=]]> #{search_date2}
         </if>
-        </where>
+
         order by comu_idx desc
         limit #{page_skip_count}, #{page_size}
     </select>
 
     <select id="totalDataSearch" resultType="int">
         select count(*) from bec_community
-        <where>
+        where commu_category=#{commu_category}
+
         <if test="search_type != null">
             <foreach collection="search_type" item="type" >
                 <choose>
                     <when test="type == 't'.toString()">
-                        comu_title like concat('%', #{search_word},'%')
+                       and comu_title like concat('%', #{search_word},'%')
                     </when>
                     <when test="type == 'u'.toString()">
                         and member_id like concat('%', #{search_word},'%' )
@@ -115,7 +116,7 @@
         <if test="search_date2 != null and search_date2 != 'null'  and search_date2 != ''">
             and comu_reg_date <![CDATA[<=]]> #{search_date2}
         </if>
-        </where>
+
     </select>
 
     <delete id="deleteDataList" parameterType="java.util.Arrays">
