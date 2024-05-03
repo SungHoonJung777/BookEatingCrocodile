@@ -14,4 +14,17 @@
     <select id="blackFridayList" resultType="org.fullstack4.springmvc.domain.BlackFridayVO">
         select * from bec_black
     </select>
+
+    <select id="blackFridayStart"  resultType="org.fullstack4.springmvc.domain.BlackFridayVO">
+        select * from bec_black  limit 0,1
+    </select>
+
+
+    <select id="countBlack">
+        select count(*) from bec_black
+    </select>
+
+    <update id="blackStatusChange">
+        update bec_black set black_status = 's';
+    </update>
 </mapper>

@@ -16,5 +16,5 @@ public class BlackFridayDTO {
     private String pro_image;
     private int black_price;
     private String member_id;
-
+    private String black_status;
 }
