@@ -75,7 +75,7 @@
 <!-- Content -->
 <jsp:include page="/WEB-INF/common/header.jsp"></jsp:include>
 <div class="container-xxl">
-    <div class="authentication-wrapper authentication-basic container-p-y">
+    <div class="authentication-wrapper authentication-basic container-p-y" style="margin-top: 30px">
         <div class="authentication-inner">
             <!-- Register -->
             <div class="card">
@@ -206,18 +206,18 @@
 
 <!-- Core JS -->
 <!-- build:js assets/vendor/js/core.js -->
-<script src="resources/assets/vendor/libs/jquery/jquery.js"></script>
-<script src="resources/assets/vendor/libs/popper/popper.js"></script>
-<script src="resources/assets/vendor/js/bootstrap.js"></script>
-<script src="resources/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+<script src="/resources/assets/vendor/libs/jquery/jquery.js"></script>
+<script src="/resources/assets/vendor/libs/popper/popper.js"></script>
+<script src="/resources/assets/vendor/js/bootstrap.js"></script>
+<script src="/resources/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
 
-<script src="resources/assets/vendor/js/menu.js"></script>
+<script src="/resources/assets/vendor/js/menu.js"></script>
 <!-- endbuild -->
 
 <!-- Vendors JS -->
 
 <!-- Main JS -->
-<script src="resources/assets/js/main.js"></script>
+<script src="/resources/assets/js/main.js"></script>
 
 <!-- Page JS -->
 
@@ -231,6 +231,27 @@
        frm.submit();
     });
 
+    document.getElementById('member_id').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            let frm = document.querySelector("form");
+            frm.method = "post";
+            frm.action = "/login/login";
+            frm.submit();
+
+        }
+    });
+
+    document.getElementById('pwd').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            let frm = document.querySelector("form");
+            frm.method = "post";
+            frm.action = "/login/login";
+            frm.submit();
+
+        }
+    });
 
 </script>
 </body>
