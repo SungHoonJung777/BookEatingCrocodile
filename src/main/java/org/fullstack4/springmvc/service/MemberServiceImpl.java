@@ -112,7 +112,6 @@ public class MemberServiceImpl implements MemberServiceIf{
 
     @Override
     public void cartout(String cart_id){
-        log.info("왜 안나오니cart_idx : "+cart_id);
         memberMapper.cartout(cart_id);
     }
     @Override
@@ -173,14 +172,36 @@ public class MemberServiceImpl implements MemberServiceIf{
     }
 
     @Override
-    public void cartplus(String cartIdx) {
-        memberMapper.cartplus(cartIdx);
+    public void cartplus(String cartIdx, String pro_quantity) {
+        memberMapper.cartplus(cartIdx, pro_quantity);
     }
 
     @Override
     public void cartminus(String cartIdx) {
         memberMapper.cartminus(cartIdx);
     }
+
+    @Override
+    public void addcart(String proIdx, String memberId, String pro_quantity) {
+        memberMapper.addcart(proIdx, memberId, pro_quantity);
+    }
+
+    @Override
+    public void minusamount(int proIdx, int proQuantity) {
+        memberMapper.minusamount(proIdx, proQuantity);
+    }
+
+    @Override
+    public OrderDTO orderinfo(String orderIdx){
+        OrderDTO orderDTO = memberMapper.orderinfo(orderIdx);
+        return orderDTO;
+    }
+
+//    @Override
+//    public String orderDetail(String orderIdx) {
+//        String list =  memberMapper.orderDetail(orderIdx);
+//        return list;
+//    }
 
 
 }

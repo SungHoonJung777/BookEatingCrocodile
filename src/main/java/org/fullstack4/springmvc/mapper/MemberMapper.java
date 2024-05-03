@@ -41,5 +41,12 @@ public interface MemberMapper {
     void insertOrderDetail(List<CartDTO> cartList);
 
     void cartminus(String cartIdx);
-    void cartplus(String cartIdx);
+    void cartplus(String cartIdx, String pro_quantity);
+
+    void addcart(String proIdx, String memberId, String pro_quantity);
+
+    void minusamount(int proIdx, int proQuantity);
+
+    OrderDTO orderinfo(String orderIdx);
+//    String orderDetail(String orderIdx);
 }

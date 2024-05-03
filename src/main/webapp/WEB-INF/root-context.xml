@@ -17,7 +17,7 @@
                             https://www.springframework.org/schema/aop/spring-aop.xsd">
 <!--    <bean class="org.fullstack4.springmvc.sample.SampleDAO" />-->
 <!--    <bean class="org.fullstack4.springmvc.sample.SampleService" />-->
-    <context:component-scan base-package="org.fullstack4.springmvc.sample"/>
+<!--    <context:component-scan base-package="org.fullstack4.springmvc.sample"/>-->
 
     <!--
     HikariConfig hikariConfig = new HikariConfig() 랑 똑같음 !

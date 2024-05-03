@@ -89,7 +89,7 @@
                                 <c:choose>
                                     <c:when test="${empty sessionScope.loginInfo}">
                                         <a href="/login/login" class="dropdown-item">로그인</a>
-                                        <a href="/member/join" class="dropdown-item">회원가입</a>
+                                        <a href="/memberJoin/join" class="dropdown-item">회원가입</a>
                                     </c:when>
                                     <c:when test="${sessionScope.member_type eq 'a'}">
                                         <a href="/login/logout" class="dropdown-item">로그아웃</a>

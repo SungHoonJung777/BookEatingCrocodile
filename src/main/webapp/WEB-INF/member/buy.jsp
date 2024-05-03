@@ -119,40 +119,43 @@
                                                 <td class="text-nowrap">${fn:substring(dto.order_date,0,10)} ${fn:substring(dto.order_date, 11,20)}</td>
                                                 <td class="text-nowrap">
                                                     <c:choose>
-                                                        <c:when test="${dto.order_status eq '주문취소'}">
-                                                            <a style="text-decoration: line-through; color: black" class="" href="product/view?pro_idx=${dto.pro_idx}">${dto.pro_name}</a>
+                                                        <c:when test="${dto.delivery eq '주문취소'}">
+                                                            <a style="text-decoration: line-through; color: black" class="" href="javascript:orderDetail(${dto.order_idx})">${dto.req_term}</a>
                                                         </c:when>
                                                         <c:otherwise>
-                                                            <a class=""  href="/product/view?pro_idx=${dto.pro_idx}">${dto.pro_name}</a>
+                                                            <a class="" href="javascript:orderDetail(${dto.order_idx})">${dto.req_term}</a>
                                                         </c:otherwise>
                                                     </c:choose>
 
                                                 </td>
 
                                                 <c:choose>
-                                                    <c:when test="${dto.order_status eq '배송중'}">
-                                                        <td class="text-nowrap"><span class="badge bg-label-info me-1">${dto.order_status}</span></td>
-                                                        <td class="text-nowrap"></td>
-                                                    </c:when>
-                                                    <c:when test="${dto.order_status eq '배송완료'}">
-                                                        <td class="text-nowrap"><span class="badge bg-label-success me-1">${dto.order_status}</span></td>
-                                                        <td class="text-nowrap"></td>
-                                                    </c:when>
-                                                    <c:when test="${dto.order_status eq '주문취소'}">
-                                                        <td class="text-nowrap"><span class="badge bg-label-danger me-1">${dto.order_status}</span></td>
-                                                        <td class="text-nowrap"></td>
-                                                    </c:when>
-                                                    <c:when test="${dto.order_status eq '결제완료' or dto.order_status eq '배송준비중'}">
-                                                        <td> <span class="badge bg-label-warning me-1">${dto.order_status}</span></td>
+                                                    <c:when test="${dto.delivery eq '주문완료'}">
+                                                        <td> <span class="badge bg-label-secondary me-1">${dto.delivery}</span></td>
                                                         <td>
-
-                                                            <form action="/member/orderDelete" method="post" id="frmDelete">
-                                                                <input type="hidden" name="order_idx" value="${dto.order_idx}">
-                                                                <button type="submit" class="btn p-0  hide-arrow" onclick="orderDelete()" data-bs-toggle="dropdown">
-                                                                    <i class="bx bx-trash me-2"></i>
-                                                                </button>
-                                                            </form>
-
+                                                            <button type="submit" class="btn p-0  hide-arrow" onclick="orderDelete(${dto.order_idx})" data-bs-toggle="dropdown">
+                                                                <i class="bx bx-trash me-2"></i>
+                                                            </button>
+                                                        </td>
+                                                    </c:when>
+                                                    <c:when test="${dto.delivery eq '배송중'}">
+                                                        <td class="text-nowrap"><span class="badge bg-label-info me-1">${dto.delivery}</span></td>
+                                                        <td class="text-nowrap"></td>
+                                                    </c:when>
+                                                    <c:when test="${dto.delivery eq '배송완료'}">
+                                                        <td class="text-nowrap"><span class="badge bg-label-success me-1">${dto.delivery}</span></td>
+                                                        <td class="text-nowrap"></td>
+                                                    </c:when>
+                                                    <c:when test="${dto.delivery eq '주문취소'}">
+                                                        <td class="text-nowrap"><span class="badge bg-label-danger me-1">${dto.delivery}</span></td>
+                                                        <td class="text-nowrap"></td>
+                                                    </c:when>
+                                                    <c:when test="${dto.delivery eq '결제완료' or dto.delivery eq '배송준비'}">
+                                                        <td> <span class="badge bg-label-warning me-1">${dto.delivery}</span></td>
+                                                        <td>
+                                                            <button type="submit" class="btn p-0  hide-arrow" onclick="orderDelete(${dto.order_idx})" data-bs-toggle="dropdown">
+                                                                <i class="bx bx-trash me-2"></i>
+                                                            </button>
                                                         </td>
                                                     </c:when>
                                                     <c:otherwise>
@@ -168,6 +171,11 @@
 
                                         </tbody>
                                     </table>
+
+
+                                    <form action="/member/orderDelete" method="post" id="frmDelete">
+                                        <input type="hidden" name="order_idx" id="order_idx" value="${dto.order_idx}">
+                                    </form>
                                 </div>
 
 
@@ -219,15 +227,19 @@
 <jsp:include page="../common/footer.jsp"/>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
-    function orderDelete(e) {
+    function orderDelete(order_idx) {
         let yn = confirm("주문을 취소하시겠습니까?");
         if (yn) {
+            document.getElementById("order_idx").value = order_idx;
             document.getElementById("frmDelete").submit();
         }
-        e.preventDefault();
     }
 
-
+    function orderDetail(order_idx){
+        document.getElementById("order_idx").value = order_idx;
+        document.getElementById("frmDelete").action = "/member/orderdetail";
+        document.getElementById("frmDelete").submit();
+    }
 </script>
 </body>
 </html>

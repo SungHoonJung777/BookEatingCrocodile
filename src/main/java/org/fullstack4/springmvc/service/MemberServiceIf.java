@@ -35,6 +35,13 @@ public interface MemberServiceIf {
     int getorderidx(String member_id);
     void insertOrderDetail(List<CartDTO> cartList);
 
-    void cartplus(String cartIdx);
+    void cartplus(String cartIdx, String pro_quantity);
     void cartminus(String cartIdx);
+
+    void addcart(String proIdx, String memberId, String pro_quantity);
+
+    void minusamount(int proIdx, int proQuantity);
+
+//    String orderDetail(String orderIdx);
+    OrderDTO orderinfo(String orderIdx);
 }
