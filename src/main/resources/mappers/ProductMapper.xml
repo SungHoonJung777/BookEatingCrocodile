@@ -23,9 +23,7 @@
         SELECT
         BP.pro_idx, BP.pro_name, BP.pro_writer, BP.pro_price, BP.pro_sale, BP.pro_amount, BP.pro_content, BP.pro_image, BP.pro_company, BP.pro_video, BP.pro_category1, BP.pro_category2, BP.pro_category3, BP.pro_reg_date, BP.pro_modify_date,
         FLOOR(BP.pro_price - BP.pro_price * (BP.pro_sale / 100)) AS pro_sale_price,
-
         ifNULL( FLOOR(AVG(BR.review_star)), 0)AS review_star_avg
-
         FROM bec_product BP
         inner JOIN bec_review BR ON BP.pro_idx = BR.pro_idx
         WHERE 1=1
@@ -41,7 +39,11 @@
         <if test="search_word != null and search_word != ''">
             AND (BP.pro_name LIKE CONCAT('%', #{search_word}, '%') OR BP.pro_content LIKE CONCAT('%', #{search_word}, '%'))
         </if>
+        <if test="pro_price != null and pro_price != ''">
+            and BP.pro_price >= #{pro_price}
+        </if>
         GROUP BY BP.pro_idx
+
         <choose>
             <when test="sortField != null and sortDir != null">
                 ORDER BY ${sortField} ${sortDir}
@@ -69,6 +71,9 @@
         </if>
         <if test="search_word != null and search_word != ''">
             AND (pro_name LIKE CONCAT('%', #{search_word}, '%') OR pro_content LIKE CONCAT('%', #{search_word}, '%'))
+        </if>
+        <if test="pro_price != null and pro_price != ''">
+            AND pro_price >= #{pro_price}
         </if>
         <choose>
             <when test="sortField != null and sortDir != null">

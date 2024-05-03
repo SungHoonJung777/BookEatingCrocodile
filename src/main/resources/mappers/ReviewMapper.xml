@@ -9,12 +9,13 @@
         from bec_review BR
         INNER JOIN bec_member BM ON BR.member_id = BM.member_id
         where pro_idx = #{pro_idx}
+        order by BR.review_idx desc
     </select>
 
 
     <insert id="review_regist">
         insert into bec_review (pro_idx, member_id, review_content, review_title, review_star, review_reg_date)
-        values(#{pro_idx}, #{member_id}, #{review_content}, #{review_content}, #{review_star}, now())
+        values(#{pro_idx}, #{member_id}, #{review_content}, #{review_title}, #{review_star}, now())
     </insert>
 
     <delete id="review_delete">

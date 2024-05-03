@@ -280,8 +280,8 @@
                             <div class="col-lg-12">
                                 <div class="mb-3">
                                     <h4 class="mb-2">Price</h4>
-                                    <input type="range" class="form-range w-100" id="rangeInput" name="rangeInput" min="0" max="500" value="0" oninput="amount.value=rangeInput.value">
-                                    <output id="amount" name="amount" min-velue="0" max-value="500" for="rangeInput">0</output>
+                                    <input type="range" class="form-range w-100" id="rangeInput" name="pro_price" min="1000" max="20000" value="${responseDTO.pro_price}" onchange="abc(this);" oninput="amount.value=rangeInput.value">
+                                    <output id="amount" name="amount" min-velue="1000" max-value="100000" for="rangeInput">${responseDTO.pro_price}</output>
                                 </div>
                             </div>
 
@@ -380,6 +380,25 @@
 <a href="#" class="btn btn-primary border-3 border-primary rounded-circle back-to-top"><i class="fa fa-arrow-up"></i></a>
 
 <script>
+    function abc(el) {
+        console.log(el.value);
+        let frm9 = document.createElement("form");
+        frm9.id = "frmQuery9";
+        frm9.action ="/product/main";
+        frm9.method="get";
+
+        let input9 = document.createElement("input");
+        input9.name = el.name;
+        input9.value = el.value;
+        input9.type="hidden";
+        frm9.append(input9);
+
+        document.body.append(frm9);
+        document.getElementById("frmQuery9").submit();
+    }
+
+
+
     //카테고리 이동 필터
     function filterCategory(element) {
         event.preventDefault();
