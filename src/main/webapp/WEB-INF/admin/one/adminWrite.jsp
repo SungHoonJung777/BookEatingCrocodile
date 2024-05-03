@@ -323,7 +323,7 @@
                                         <textarea style="resize:none;" class="form-control" rows="10" readonly name="qna_content" id="qna_content" >${qnaDTO.qna_content}</textarea>
                                         <div id="div_err_qna_content" style="display: none"></div>
                                     </div>
-
+                                    <input type="hidden" name="qna_idx" value="${qnaDTO.qna_idx}">
                                 </div>
                                 <div class="card-body">
                                     <form action="/admin/one/adminWrite" method="post">
