@@ -137,16 +137,24 @@
                                     <i class="fa fa-minus"></i>
                                 </button>
                             </div>
-                            <input type="text" class="form-control form-control-sm text-center border-0" name="orderBook" id="orderBook" value="1">
+                            <input type="text" class="form-control form-control-sm text-center border-0" name="orderBook" id="orderBook" value="1" readonly>
                             <div class="input-group-btn">
                                 <button class="btn btn-sm btn-plus rounded-circle bg-light border">
                                     <i class="fa fa-plus"></i>
                                 </button>
                             </div>
                         </div>
-                        <a href="javascript:addcart();" class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary payBtn"><i class="fa fa-shopping-bag me-2 text-primary"></i> 장바구니</a>
-                        <a href="#" class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary payBtn"><i class="fas fa-copyright me-2 text-primary"></i> 바로구매</a>
-
+                        <c:if test="${product.pro_amount != null}">
+                            <div>
+                                <a href="javascript:addcart();" class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary payBtn"><i class="fa fa-shopping-bag me-2 text-primary"></i> 장바구니</a>
+                                <a href="#" class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary payBtn"><i class="fas fa-copyright me-2 text-primary"></i> 바로구매</a>
+                            </div>
+                        </c:if>
+                        <c:if test="${product.pro_amount == null}">
+                            <div>
+                                <h3>해당 도서는 품절입니다.</h3>
+                            </div>
+                        </c:if>
                     </div>
                     <div class="col-lg-12">
                         <nav>
@@ -220,98 +228,41 @@
                                     </c:choose>
                                 </form>
                             </div>
-
-
-                            <%--<div class="tab-pane active" id="nav-about" role="tabpanel" aria-labelledby="nav-about-tab">
-                                <br>
-                                <h4>출판사 제공 북트레일러</h4>
-                                <br>
-                                <div class="px-2">
-                                    <div class="row g-4">
-                                        <div class="book_video">
-                                            <iframe src="${product.pro_video}" width="90%" height="500px"></iframe>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <h4>책 소개</h4>
-
-                                <p>${pro_content}</p>
-                            </div>
-                            <div class="tab-pane" id="nav-mission" role="tabpanel" aria-labelledby="nav-mission-tab">
-                                <form name="frmDelete" id="frmDelete" method="post" action="/product/reviewDelete">
-
-                                    <c:choose>
-                                        <c:when test="${reviewVO != null}">
-                                            <c:forEach var="review" items="${reviewVO}">
-                                                <div class="d-flex">
-                                                    <input type="hidden" name="pro_idx" id="pro_idx" value="${review.pro_idx}"/>
-                                                    <input type="hidden" name="review_idx" id="review_idx" value="${review.review_idx}"/>
-
-                                                    <img src="/resources/resources/uploads/img/member/${review.member_img}" class="img-fluid rounded-circle p-3" style="width: 100px; height: 100px;" alt="">
-                                                    <div class="d-flex">
-                                                        <div class="">
-                                                            <p class="mb-2 text-nowrap" style="font-size: 14px;">${fn:substring(review.review_reg_date, 0, 10)} &nbsp; ${fn:substring(review.review_reg_date, 11, 20)}</p>
-                                                            <div class="d-flex">
-                                                                <div class="d-flex mb-3">
-                                                                    <i class="fa fa-star <c:if test='${review.review_star > 0}'>text-secondary</c:if>"></i>
-                                                                    <i class="fa fa-star <c:if test='${review.review_star > 1}'>text-secondary</c:if>"></i>
-                                                                    <i class="fa fa-star <c:if test='${review.review_star > 2}'>text-secondary</c:if>"></i>
-                                                                    <i class="fa fa-star <c:if test='${review.review_star > 3}'>text-secondary</c:if>"></i>
-                                                                    <i class="fa fa-star <c:if test='${review.review_star > 4}'>text-secondary</c:if>"></i>
-                                                                </div>
-                                                            </div>
-                                                            <h5>${review.member_id}</h5>
-                                                            <h5>${review.review_title}</h5>
-                                                            <p>${review.review_content}</p>
-                                                            <div class="empty"></div>
-                                                        </div>
-                                                        <c:if test="${sessionScope.member_id eq review.member_id || sessionScope.member_id eq 'admin'}">
-                                                            <button type="submit" onclick="goDelete()" id="review_delete_btn" name="review_delete_btn" class="btn border border-secondary text-primary rounded-pill px-4 py-3 review_del_btn">삭제</button>
-                                                        </c:if>
-                                                    </div>
-                                                </div>
-
-                                            </c:forEach>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <p>리뷰가 없습니다.</p>
-                                        </c:otherwise>
-                                    </c:choose>
-                                </form>
-                            </div>--%>
                         </div>
                     </div>
-                    <form name="frmReview" id="frmReview" action="/product/view" method="post">
-                        <h4 class="mb-5 fw-bold">리뷰 작성하기</h4>
-                        <div class="row g-4">
-                                <input type="hidden" name="pro_idx" value="${product.pro_idx}">
-                                <div class="col-lg-12">
-                                    <div class="border-bottom rounded">
-                                        <input type="text" name="review_title" id="review_title"  class="form-control border-0" placeholder="제목을 입력하세요 *">
+                    <c:if test="${sessionScope.loginInfo != null}" >
+                        <form name="frmReview" id="frmReview" action="/product/view" method="post">
+                            <input type="hidden" name="member_id" value="${sessionScope.member_id}" />
+                            <h4 class="mb-5 fw-bold">리뷰 작성하기</h4>
+                            <div class="row g-4">
+                                    <input type="hidden" name="pro_idx" value="${product.pro_idx}">
+                                    <div class="col-lg-12">
+                                        <div class="border-bottom rounded">
+                                            <input type="text" name="review_title" id="review_title"  class="form-control border-0" placeholder="제목을 입력하세요 *">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-lg-12">
-                                    <div class="border-bottom rounded my-4">
-                                        <textarea name="review_content" id="review_content" class="form-control border-0" cols="30" rows="8" placeholder="리뷰 내용을 입력하세요 *" spellcheck="false"></textarea>
+                                    <div class="col-lg-12">
+                                        <div class="border-bottom rounded my-4">
+                                            <textarea name="review_content" id="review_content" class="form-control border-0" cols="30" rows="8" placeholder="리뷰 내용을 입력하세요 *" spellcheck="false"></textarea>
+                                        </div>
                                     </div>
-                                </div>
 
-                                <br>
+                                    <br>
 
-                                <div class="rating">
+                                    <div class="rating">
 
-                                    <span class="rating__result star_span"></span>
-                                    <i class="fa fa-star text-secondary first_star"></i>
-                                    <i class="rating__star far fa-star"></i>
-                                    <i class="rating__star far fa-star"></i>
-                                    <i class="rating__star far fa-star"></i>
-                                    <i class="rating__star far fa-star"></i>
-                                </div>
-                                <button type="submit" name="reviewBtn" id="reviewBtn" class="btn border border-secondary text-primary rounded-pill px-4 py-3 review_regist_btn">작성 완료</button>
-                                <input type="hidden" name="review_star" id="review_star" class="rating__input" readonly/>
-                        </div>
-                    </form>
+                                        <span class="rating__result star_span"></span>
+                                        <i class="fa fa-star text-secondary first_star"></i>
+                                        <i class="rating__star far fa-star"></i>
+                                        <i class="rating__star far fa-star"></i>
+                                        <i class="rating__star far fa-star"></i>
+                                        <i class="rating__star far fa-star"></i>
+                                    </div>
+                                    <button type="submit" name="reviewBtn" id="reviewBtn" class="btn border border-secondary text-primary rounded-pill px-4 py-3 review_regist_btn">작성 완료</button>
+                                    <input type="hidden" name="review_star" id="review_star" class="rating__input" readonly/>
+                            </div>
+                        </form>
+                    </c:if>
                 </div>
             </div>
             <div class="col-lg-4 col-xl-3">
@@ -622,7 +573,7 @@
 
     }
     function addcart(){
-        let pro_quantity = document.getElementById("quantity").value ;
+        let pro_quantity = document.getElementById("orderBook").value ;
         $.ajax({
             type: "POST",            // HTTP method type(GET, POST) 형식이다.
             url: "/member/addcart",      // 컨트롤러에서 대기중인 URL 주소이다.

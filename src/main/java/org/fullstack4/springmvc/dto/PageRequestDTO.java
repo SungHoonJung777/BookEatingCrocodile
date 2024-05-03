@@ -70,6 +70,7 @@ public class PageRequestDTO {
     private String member_id;
     private String qna_select;
     private String commu_category;
+    private int pro_price;
 
     public void setTotal_count(int total_count) {
         this.total_count = total_count;
