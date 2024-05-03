@@ -4,8 +4,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.fullstack4.springmvc.domain.BlackFridayVO;
 import org.fullstack4.springmvc.domain.MemberVO;
+import org.fullstack4.springmvc.domain.ProductVO;
 import org.fullstack4.springmvc.dto.BlackFridayDTO;
 import org.fullstack4.springmvc.dto.MemberDTO;
+import org.fullstack4.springmvc.dto.ProductDTO;
 import org.fullstack4.springmvc.mapper.blackFriday.BlackFirdayMapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,5 +41,28 @@ public class BlackFirdayServiceImpl implements BlackFirdayService{
 
 
         return blackFridayList;
+    }
+
+    @Override
+    public BlackFridayDTO blackFridayStart() {
+        BlackFridayVO blackFridayDTO = blackFirdayMapper.blackFridayStart();
+
+        BlackFridayDTO productDTO = modelMapper.map(blackFridayDTO, BlackFridayDTO.class);
+
+
+
+        return productDTO;
+    }
+
+    @Override
+    public int countBlack() {
+        int count = blackFirdayMapper.countBlack();
+        return count;
+    }
+
+    @Override
+    public int blackStatusChange() {
+        int uResult = blackFirdayMapper.blackStatusChange();
+        return uResult;
     }
 }

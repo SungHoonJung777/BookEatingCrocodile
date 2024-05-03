@@ -106,4 +106,52 @@ public class EventController {
         return "/event/blackFridayList";
     }
 
+    @GetMapping("/blackFridayStart")
+    public String blackFridayStart(Model model) throws Exception {
+
+        int count = blackFirdayService.countBlack();
+
+        if(count > 0){
+            BlackFridayDTO dto = blackFirdayService.blackFridayStart();
+            model.addAttribute("list", dto);
+            return "/event/blackFridayStart";
+        } else {
+            return "/event/blackFridayLoading";
+        }
+
+
+
+    }
+
+    @GetMapping("/timerStart")
+    public String timerStart(String time, Model model) throws Exception{
+        int timer = Integer.parseInt(time);
+        int uResult = blackFirdayService.blackStatusChange();
+
+        // 타이머 기능을 가진 스레드를 생성하고 시작합니다.
+        TimerThread timerThread = new TimerThread(timer);
+        timerThread.start();
+        System.out.println("timer : " + timer);
+        model.addAttribute("timer", timer);
+        return "redirect:/event/blackFridayStart";
+    }
+}
+class TimerThread extends Thread {
+    private int timeInSeconds;
+
+    public TimerThread(int timeInSeconds) {
+        this.timeInSeconds = timeInSeconds;
+    }
+
+    @Override
+    public void run() {
+        try {
+            System.out.println("타이머 시작: " + timeInSeconds + " 초");
+            Thread.sleep(timeInSeconds * 1000 * 60); // 입력된 시간만큼 스레드를 일시 정지합니다.
+            System.out.println("타이머 종료: " + timeInSeconds + " 초");
+        } catch (InterruptedException e) {
+            System.out.println("타이머가 중단되었습니다.");
+        }
+    }
+
 }

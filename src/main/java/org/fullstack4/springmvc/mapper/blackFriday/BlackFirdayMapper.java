@@ -8,4 +8,10 @@ public interface BlackFirdayMapper {
     int blackFridayRegist(BlackFridayVO vo);
 
     List<BlackFridayVO> blackFridayList();
+
+    BlackFridayVO blackFridayStart();
+
+    int countBlack();
+
+    int blackStatusChange();
 }

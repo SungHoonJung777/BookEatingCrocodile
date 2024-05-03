@@ -8,4 +8,11 @@ public interface BlackFirdayService {
     int blackFridayRegist(BlackFridayDTO dto);
 
     List<BlackFridayDTO> blackFridayList();
+
+    BlackFridayDTO blackFridayStart();
+
+    int countBlack();
+
+    int blackStatusChange();
+
 }
