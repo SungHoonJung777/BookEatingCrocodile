@@ -59,7 +59,7 @@
             width: 80%;
             text-align: center;
             border-radius: 20px;
-            height: 500px;
+            height: 800px;
             box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
             margin-top: 200px;
             margin-left: 140px;
@@ -68,7 +68,7 @@
 
         #main img {
             width: 20%;
-            margin-top: 30px;
+            margin-top: 230px;
             margin-bottom: 10px;
             height: auto;
 
@@ -79,7 +79,7 @@
             width: 80%;
             text-align: center;
             border-radius: 20px;
-            height:610px;
+            height:810px;
             margin-left: 140px;
             box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
             margin-top: 200px;
@@ -118,7 +118,7 @@
             border-radius: 20px;
             box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
 
-
+            margin-top: 200px;
 
         }
         #result > h1 {
@@ -242,7 +242,7 @@
         ];
         let resultLists = [
             "기초가 매우 부족합니다. 수학의 개념을 다시 정립하세요. 이 책을 추천드립니다.", "기출문제를 많이 풀어보셔야 합니다. 이 책을 추천드립니다." , "최신유형과 응용문제를 많이 풀어보세요. 이 책을 추천드립니다." ,"수학과 조금 더 가까워져야 할거 같아요. 이 책을 추천드립니다."
-            ,"필수 유횽을 반드시 확인하셔야 합니다. 이 책을 추천드립니다."
+            ,"필수 유형을 반드시 확인하셔야 합니다. 이 책을 추천드립니다." ,"악악악악 필수 유횽을 반드시 확인하셔야 합니다. 이 책을 추천드립니다."
         ]
 
         let main = document.querySelector("#main");

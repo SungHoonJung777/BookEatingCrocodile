@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.fullstack4.springmvc.mapper.blackFriday.BlackFirdayMapper">
+
+
+    <insert id="blackFridayRegist" >
+        insert into bec_black (pro_idx, pro_name,pro_price,pro_image , black_price)
+        values (#{pro_idx} , #{pro_name}  ,#{pro_price} , #{pro_image}  ,#{black_price} )
+
+    </insert>
+
+    <select id="blackFridayList" resultType="org.fullstack4.springmvc.domain.BlackFridayVO">
+        select * from bec_black
+    </select>
+</mapper>
