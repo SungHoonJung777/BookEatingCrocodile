@@ -315,7 +315,7 @@
                                         <input type="text" readonly class="form-control" id="qna_title" name="qna_title" value="${qnaDTO.qna_title}"/>
                                     </div>
                                     <div class="mb-3">
-                                        <label class="form-label"  for="basic-default-fullname">문의 제목</label>
+                                        <label class="form-label"  for="basic-default-fullname">문의 유형</label>
                                         <input type="text" readonly class="form-control" id="qna_select" name="qna_select" value="${qnaDTO.qna_select}"/>
                                     </div>
                                     <div class="mb-3">

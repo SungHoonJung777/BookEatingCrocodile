@@ -76,7 +76,7 @@
 
     <update id="registAdmin">
         update bec_qna
-        set qna_answer=#{qna_answer}, qna_answer_date=now(), qna_answer_YN='Y', qna_select=#{qna_select}
+        set qna_answer=#{qna_answer}, qna_answer_date=now(), qna_answer_YN='Y'
         where qna_idx=#{qna_idx}
     </update>
     <update id="deleteAdmin">
