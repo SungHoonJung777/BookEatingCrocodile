@@ -16,7 +16,7 @@
             content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
     />
 
-    <title>자료실 게시판</title>
+    <title>공지사항 게시판</title>
 
     <meta name="description" content=""/>
 
@@ -166,7 +166,7 @@
                                                     </c:if>
 
                                                         <td class="text-nowrap">${dataList.total_count - ((dataList.page-1)*dataList.page_size + (status.count-1))}</td>
-                                                        <td class="text-nowrap"><a href="/data/view?comu_idx=${dto.comu_idx}">${dto.comu_title} <c:if test="${not empty dto.comu_file}"> <i class="fa-solid fa-paperclip"></i> </c:if></a></td>
+                                                        <td class="text-nowrap"><a href="/notice/view?comu_idx=${dto.comu_idx}">${dto.comu_title} <c:if test="${not empty dto.comu_file}"> <i class="fa-solid fa-paperclip"></i> </c:if></a></td>
                                                         <td class="text-nowrap">${dto.member_id}</td>
                                                         <td class="text-nowrap">${fn:substring(dto.comu_reg_date, 0, 10)} ${fn:substring(dto.comu_reg_date, 11, 20)}</td>
 

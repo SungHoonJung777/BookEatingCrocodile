@@ -16,7 +16,7 @@
             content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
     />
 
-    <title>FAQ</title>
+    <title>FAQ 게시판</title>
 
     <meta name="description" content="" />
 
@@ -103,11 +103,11 @@
                                     <div class="mb-3">
                                         <label for="qna_select">문의 유형</label>
                                         <select id="qna_select" name="qna_select" onchange="goList()" class="border-0 form-select-sm bg-light me-3">
-                                            <option value="">선택</option>
+                                            <option value="기타" <c:if test="${qnaList.qna_select eq '기타'}"> selected</c:if>>기타</option>
                                             <option value="상품문의" <c:if test="${qnaDTO.qna_select eq '상품문의'}"> selected</c:if>>상품문의</option>
                                             <option value="주문문의" <c:if test="${qnaList.qna_select eq '주문문의'}"> selected</c:if>>주문문의</option>
                                             <option value="주문문의" <c:if test="${qnaList.qna_select eq '배송문의'}"> selected</c:if>>배송문의</option>
-                                            <option value="주문문의" <c:if test="${qnaList.qna_select eq '기타'}"> selected</c:if>>기타</option>
+
                                         </select>
                                     </div>
                                     <div class="mb-3">

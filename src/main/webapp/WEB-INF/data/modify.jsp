@@ -91,7 +91,8 @@
                                 </div>
                                 <div class="card-body">
                                     <form action="/data/modify" method="post" enctype="multipart/form-data">
-                                        <input type="hidden" name="member_id" value="abc01">
+                                        <input type="hidden" name="member_id" value="${dataDTO.member_id}">
+                                        <input type="hidden" name="commu_category" value="d">
                                         <input type="hidden" name="comu_idx" value="${dataDTO.comu_idx}">
                                         <div class="mb-3"></div>
                                         <div class="mb-3">

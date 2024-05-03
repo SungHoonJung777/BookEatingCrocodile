@@ -46,7 +46,7 @@
     <update id="modifyData">
         update bec_community
         set comu_title=#{arg0}, comu_content=#{arg1}, comu_file=#{arg2}
-        where member_id=#{arg3}
+        where comu_idx=#{arg3}
     </update>
 
     <delete id="deleteData">

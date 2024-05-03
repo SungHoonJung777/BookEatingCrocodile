@@ -16,7 +16,7 @@
             content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
     />
 
-    <title>1:1 게시판</title>
+    <title>QnA 게시판</title>
 
     <meta name="description" content=""/>
 
@@ -128,7 +128,7 @@
 
                                     </c:if>
                                     <button type="reset" class="btn btn-secondary" onclick="location.href='/qna/main'">
-                                        목록으로
+                                        QnA 게시판으로
                                     </button>
 
                                         <c:if test="${qnaDTO.qna_answer_YN eq 'N'}">

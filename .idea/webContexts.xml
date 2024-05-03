@@ -6,6 +6,7 @@
         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/common/header.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/common" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/member/checkout.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/member" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/member/modify.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/member" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/qna/write.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/qna" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/bbs/list.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/bbs" />
       </map>
     </option>
