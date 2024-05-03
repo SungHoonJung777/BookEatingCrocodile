@@ -16,7 +16,7 @@
             content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
     />
 
-    <title>자료실 게시판</title>
+    <title>공지사항 게시판</title>
 
     <meta name="description" content=""/>
 
@@ -101,7 +101,8 @@
                                     <div class="mb-3"></div>
                                     <div class="mb-3">
                                         <label class="form-label" for="basic-default-fullname">문의 제목</label>
-                                        <input type="text" readonly class="form-control" id="comu_title" name="comu_title"
+                                        <input type="text" readonly class="form-control" id="comu_title"
+                                               name="comu_title"
                                                value="${dataDTO.comu_title}"/>
 
                                     </div>
@@ -118,21 +119,26 @@
                                                   rows="10" id="comu_content">${dataDTO.comu_content}</textarea>
 
                                     </div>
-                                    <div class="d-flex">
-                                        <a download href="/resources/resources/uploads/data/${dataDTO.comu_file}" class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary"><i class="me-2 text-primary"></i>파일 다운로드</a>
-                                        <div class="px-4 py-2 mb-4">${dataDTO.comu_file}</div>
-                                    </div>
+                                    <c:if test="${not empty dataDTO.comu_file}">
+                                        <div class="d-flex">
+                                            <a download href="/resources/resources/uploads/data/${dataDTO.comu_file}"
+                                               class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary"><i
+                                                    class="me-2 text-primary"></i>파일 다운로드</a>
+                                            <div class="px-4 py-2 mb-4">${dataDTO.comu_file}</div>
+                                        </div>
+                                    </c:if>
                                     <br>
                                     <c:if test="${dataDTO.member_id eq sessionScope.member_id}">
                                         <button type="submit" class="btn btn-primary"
-                                                onclick="location.href='/notice/modify?comu_idx=${dataDTO.comu_idx}'">수정하기
+                                                onclick="location.href='/notice/modify?comu_idx=${dataDTO.comu_idx}'">
+                                            수정하기
                                         </button>
                                         <button type="button" id="deleteA" onclick="dataDelete(${dataDTO.comu_idx})"
                                                 class="btn btn-danger">글 삭제
                                         </button>
 
                                     </c:if>
-                                    <button type="reset" class="btn btn-secondary" onclick="location.href='/data/main'">
+                                    <button type="reset" class="btn btn-secondary" onclick="location.href='/notice/main'">
                                         목록으로
                                     </button>
                                 </div>

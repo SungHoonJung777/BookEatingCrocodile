@@ -170,10 +170,10 @@ public class DataController {
             log.info("comu_file : "+comu_file);
         }
         if(comu_file != null && !comu_file.isEmpty()){
-            resultFile = dataServiceIf.modifyData(dataDTO.getComu_title(), dataDTO.getComu_content(), comu_file, dataDTO.getMember_id());
+            resultFile = dataServiceIf.modifyData(dataDTO.getComu_title(), dataDTO.getComu_content(), comu_file, dataDTO.getComu_idx());
 
         }   else {
-            resultFile = dataServiceIf.modifyData(dataDTO.getComu_title(), dataDTO.getComu_content(), upload, dataDTO.getMember_id());
+            resultFile = dataServiceIf.modifyData(dataDTO.getComu_title(), dataDTO.getComu_content(), upload, dataDTO.getComu_idx());
 
         }
 

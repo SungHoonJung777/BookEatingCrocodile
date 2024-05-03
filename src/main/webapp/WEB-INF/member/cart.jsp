@@ -10,7 +10,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>장바구니</title>
 </head>
 <body>
 <jsp:include page="../common/header.jsp"/>

@@ -7,6 +7,7 @@ import org.fullstack4.springmvc.Criteria.PageMakerDTO;
 import org.fullstack4.springmvc.dto.*;
 import org.fullstack4.springmvc.mapper.QnaMapper;
 import org.fullstack4.springmvc.service.admin.AdminService;
+import org.fullstack4.springmvc.service.data.DataServiceIf;
 import org.fullstack4.springmvc.service.memberLoginService.MemberLoginService;
 import org.fullstack4.springmvc.service.qnaService.QnaServiceIf;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +46,7 @@ public class AdminController {
     @Autowired
     private AdminService adminService;
     private final QnaServiceIf qnaServiceIf;
+    private final DataServiceIf dataServiceIf;
 
     @GetMapping("/login")
     public String adminLogin() throws Exception{
@@ -418,6 +420,45 @@ public class AdminController {
 
         log.info(qnaList);
         log.info("MemberController >> qnaList() END");
+        log.info("========================");
+        log.info("============================");
+    }
+    @GetMapping("/noticeList")
+    public void noticeList(HttpSession session,
+                         @Valid PageRequestDTO pageRequestDTO,
+                         Model model) {
+        log.info("============================");
+        log.info("DataController >> dataList() START");
+
+        String member_id = (String)session.getAttribute("member_id");
+        pageRequestDTO.setCommu_category("n");
+        PageResponseDTO<DataDTO> dataList = dataServiceIf.dataList( pageRequestDTO);
+
+        model.addAttribute("dataList", dataList);
+
+
+        log.info(dataList);
+        log.info("DataController >> dataList() END");
+        log.info("========================");
+        log.info("============================");
+    }
+
+    @GetMapping("/dataList")
+    public void dataList(HttpSession session,
+                         @Valid PageRequestDTO pageRequestDTO,
+                         Model model) {
+        log.info("============================");
+        log.info("DataController >> dataList() START");
+
+        String member_id = (String)session.getAttribute("member_id");
+        pageRequestDTO.setCommu_category("d");
+        PageResponseDTO<DataDTO> dataList = dataServiceIf.dataList( pageRequestDTO);
+
+        model.addAttribute("dataList", dataList);
+
+
+        log.info(dataList);
+        log.info("DataController >> dataList() END");
         log.info("========================");
         log.info("============================");
     }

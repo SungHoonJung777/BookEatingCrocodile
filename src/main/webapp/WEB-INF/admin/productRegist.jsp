@@ -37,12 +37,11 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <title>Login Basic - Pages | Sneat - Bootstrap 5 HTML Admin Template - Pro</title>
+    <title>관리자 페이지</title>
 
     <meta name="description" content=""/>
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="/resources/resources/assets/img/favicon/favicon.ico"/>
+
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -111,15 +110,9 @@
 
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
             <div class="app-brand demo">
-                <a href="index.html" class="app-brand-link">
+                <a href="/admin/main" class="app-brand-link">
               <span class="app-brand-logo demo">
-                <svg
-                        width="25"
-                        viewBox="0 0 25 42"
-                        version="1.1"
-                        xmlns="http://www.w3.org/2000/svg"
-                        xmlns:xlink="http://www.w3.org/1999/xlink"
-                >
+                 <img src="/resources/resources/img/BEClogo.png"style="width: 15%" onclick="location='/'"/>
                   <defs>
                     <path
                             d="M13.7918663,0.358365126 L3.39788168,7.44174259 C0.566865006,9.69408886 -0.379795268,12.4788597 0.557900856,15.7960551 C0.68998853,16.2305145 1.09562888,17.7872135 3.12357076,19.2293357 C3.8146334,19.7207684 5.32369333,20.3834223 7.65075054,21.2172976 L7.59773219,21.2525164 L2.63468769,24.5493413 C0.445452254,26.3002124 0.0884951797,28.5083815 1.56381646,31.1738486 C2.83770406,32.8170431 5.20850219,33.2640127 7.09180128,32.5391577 C8.347334,32.0559211 11.4559176,30.0011079 16.4175519,26.3747182 C18.0338572,24.4997857 18.6973423,22.4544883 18.4080071,20.2388261 C17.963753,17.5346866 16.1776345,15.5799961 13.0496516,14.3747546 L10.9194936,13.4715819 L18.6192054,7.984237 L13.7918663,0.358365126 Z"
@@ -179,7 +172,7 @@
 
             <ul class="menu-inner py-1">
                 <!-- Dashboard -->
-                <li class="menu-item active">
+                <li class="menu-item ">
                     <a href="/admin/main" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-home-circle"></i>
                         <div data-i18n="Analytics">메인 페이지</div>
@@ -207,7 +200,7 @@
                         <div data-i18n="Basic">상품리스트</div>
                     </a>
                 </li>
-                <li class="menu-item">
+                <li class="menu-item active">
                     <a href="/admin/productRegist" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-box"></i>
                         <div data-i18n="Basic">상품등록</div>
@@ -219,7 +212,6 @@
                 <li class="menu-item">
                     <a
                             href="/admin/delivery"
-                            target="_blank"
                             class="menu-link"
                     >
                         <i class="menu-icon tf-icons bx bx-support"></i>
@@ -229,8 +221,7 @@
                 <li class="menu-header small text-uppercase"><span class="menu-header-text">Q&A</span></li>
                 <li class="menu-item">
                     <a
-                            href="https://themeselection.com/demo/sneat-bootstrap-html-admin-template/documentation/"
-                            target="_blank"
+                            href="/admin/oneList"
                             class="menu-link"
                     >
                         <i class="menu-icon tf-icons bx bx-file"></i>
@@ -239,18 +230,36 @@
                 </li>
                 <li class="menu-item">
                     <a
-                            href="https://themeselection.com/demo/sneat-bootstrap-html-admin-template/documentation/"
-                            target="_blank"
+                            href="/admin/qnaList"
                             class="menu-link"
                     >
                         <i class="menu-icon tf-icons bx bx-file"></i>
-                        <div data-i18n="Documentation">상품문의</div>
+                        <div data-i18n="Documentation">QnA</div>
                     </a>
                 </li>
                 <li class="menu-item">
                     <a
-                            href="https://themeselection.com/demo/sneat-bootstrap-html-admin-template/documentation/"
-                            target="_blank"
+                            href="/admin/faqList"
+                            class="menu-link"
+                    >
+                        <i class="menu-icon tf-icons bx bx-file"></i>
+                        <div data-i18n="Documentation">FaQ</div>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a
+                            href="/admin/dataList"
+
+                            class="menu-link"
+                    >
+                        <i class="menu-icon tf-icons bx bx-file"></i>
+                        <div data-i18n="Documentation">자료실</div>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a
+                            href="/admin/noticeList"
+
                             class="menu-link"
                     >
                         <i class="menu-icon tf-icons bx bx-file"></i>
@@ -265,107 +274,7 @@
         <div class="layout-page">
             <!-- Navbar -->
 
-            <nav
-                    class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
-                    id="layout-navbar"
-            >
-                <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
-                    <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
-                        <i class="bx bx-menu bx-sm"></i>
-                    </a>
-                </div>
 
-                <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
-                    <!-- Search -->
-                    <div class="navbar-nav align-items-center">
-                        <div class="nav-item d-flex align-items-center">
-                            <i class="bx bx-search fs-4 lh-0"></i>
-                            <input
-                                    type="text"
-                                    class="form-control border-0 shadow-none"
-                                    placeholder="Search..."
-                                    aria-label="Search..."
-                            />
-                        </div>
-                    </div>
-                    <!-- /Search -->
-
-                    <ul class="navbar-nav flex-row align-items-center ms-auto">
-                        <!-- Place this tag where you want the button to render. -->
-                        <li class="nav-item lh-1 me-3">
-                            <a
-                                    class="github-button"
-                                    href="https://github.com/themeselection/sneat-html-admin-template-free"
-                                    data-icon="octicon-star"
-                                    data-size="large"
-                                    data-show-count="true"
-                                    aria-label="Star themeselection/sneat-html-admin-template-free on GitHub"
-                            >Star</a
-                            >
-                        </li>
-
-                        <!-- User -->
-                        <li class="nav-item navbar-dropdown dropdown-user dropdown">
-                            <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
-                                <div class="avatar avatar-online">
-                                    <img src="../assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
-                                </div>
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-end">
-                                <li>
-                                    <a class="dropdown-item" href="#">
-                                        <div class="d-flex">
-                                            <div class="flex-shrink-0 me-3">
-                                                <div class="avatar avatar-online">
-                                                    <img src="../assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
-                                                </div>
-                                            </div>
-                                            <div class="flex-grow-1">
-                                                <span class="fw-semibold d-block">John Doe</span>
-                                                <small class="text-muted">Admin</small>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <div class="dropdown-divider"></div>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="#">
-                                        <i class="bx bx-user me-2"></i>
-                                        <span class="align-middle">My Profile</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="#">
-                                        <i class="bx bx-cog me-2"></i>
-                                        <span class="align-middle">Settings</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="#">
-                        <span class="d-flex align-items-center align-middle">
-                          <i class="flex-shrink-0 bx bx-credit-card me-2"></i>
-                          <span class="flex-grow-1 align-middle">Billing</span>
-                          <span class="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20">4</span>
-                        </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <div class="dropdown-divider"></div>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="auth-login-basic.html">
-                                        <i class="bx bx-power-off me-2"></i>
-                                        <span class="align-middle">Log Out</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <!--/ User -->
-                    </ul>
-                </div>
-            </nav>
 
             <!-- / Navbar -->
 

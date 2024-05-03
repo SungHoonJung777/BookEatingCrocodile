@@ -11,7 +11,7 @@ public interface DataMapper {
     int data_fileUpload(String member_id, String comu_file, String comu_title, String comu_content, String commu_category);
     DataVO viewData(int comu_idx);
 /*    int modifyData(DataVO dataVO);*/
-    int modifyData(String comu_title, String comu_content, String comu_file, String member_id);
+    int modifyData(String comu_title, String comu_content, String comu_file, int comu_idx );
     int deleteData(int comu_idx);
     int totalData(String member_id, String qna_category, PageRequestDTO requestDTO);
     List<DataVO> dataList(PageRequestDTO pageRequestDTO);

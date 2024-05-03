@@ -152,7 +152,7 @@ public class QnaController {
         log.info("idxList : " + idxList);
         return "redirect:/qna/main";
     }
-
+//
     @GetMapping("/adminWrite")
     public void registAdminGET(@RequestParam(name = "qna_idx", defaultValue="0") int qna_idx,
                                HttpSession session,

@@ -16,7 +16,7 @@
             content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
     />
 
-    <title>자료실 게시판</title>
+    <title>공지사항 게시판</title>
 
     <meta name="description" content="" />
 
@@ -91,7 +91,8 @@
                                 </div>
                                 <div class="card-body">
                                     <form action="/notice/modify" method="post" enctype="multipart/form-data">
-                                        <input type="hidden" name="member_id" value="abc01">
+                                        <input type="hidden" name="commu_category" value="n">
+                                        <input type="hidden" name="member_id" value="admin">
                                         <input type="hidden" name="comu_idx" value="${dataDTO.comu_idx}">
                                         <div class="mb-3"></div>
                                         <div class="mb-3">
@@ -110,10 +111,14 @@
                                             <input type="hidden" value="${dataDTO.comu_file}" name="upload"/>
                                         </div>
                                         <br>
-                                        <div class="d-flex">
-                                            <a download href="/resources/resources/uploads/data/${dataDTO.comu_file}" class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary"><i class="me-2 text-primary"></i>파일 다운로드</a>
-                                            <div class="px-4 py-2 mb-4">${dataDTO.comu_file}</div>
-                                        </div>
+                                        <c:if test="${not empty dataDTO.comu_file}">
+                                            <div class="d-flex">
+                                                <a download href="/resources/resources/uploads/data/${dataDTO.comu_file}"
+                                                   class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary"><i
+                                                        class="me-2 text-primary"></i>파일 다운로드</a>
+                                                <div class="px-4 py-2 mb-4">${dataDTO.comu_file}</div>
+                                            </div>
+                                        </c:if>
 
                                         <button type="submit" class="btn btn-primary">수정완료</button>
                                         <button type="reset" class="btn btn-secondary" onclick="location.href='/notice/view?comu_idx=${dataDTO.comu_idx}'">게시글로 돌아가기</button>

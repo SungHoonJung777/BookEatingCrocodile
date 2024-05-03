@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 @Log4j2
-@WebFilter(urlPatterns = { "/data/*" })
+@WebFilter(urlPatterns = { "/data/*", "/member/*" })
 public class LoginCheckFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
