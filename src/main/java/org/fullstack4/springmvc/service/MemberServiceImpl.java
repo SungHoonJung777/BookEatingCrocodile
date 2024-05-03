@@ -197,11 +197,13 @@ public class MemberServiceImpl implements MemberServiceIf{
         return orderDTO;
     }
 
-//    @Override
-//    public String orderDetail(String orderIdx) {
-//        String list =  memberMapper.orderDetail(orderIdx);
-//        return list;
-//    }
+    @Override
+    public List<ProductDTO> orderDetail(String orderIdx) {
+        List<ProductDTO> list = memberMapper.orderDetail(orderIdx).stream()
+                .map(vo->modelMapper.map(vo, ProductDTO.class))
+                .collect(Collectors.toList());
+        return list;
+    }
 
 
 }

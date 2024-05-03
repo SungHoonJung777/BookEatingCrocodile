@@ -1,14 +1,10 @@
-package org.fullstack4.springmvc.mapper.admin;
+package org.fullstack4.springmvc.mapper;
 
 import org.fullstack4.springmvc.Criteria.Criteria;
 import org.fullstack4.springmvc.domain.MemberVO;
-import org.fullstack4.springmvc.domain.OrderTestVO;
 import org.fullstack4.springmvc.domain.OrderVO;
 import org.fullstack4.springmvc.domain.ProductVO;
-import org.fullstack4.springmvc.dto.MemberDTO;
-import org.fullstack4.springmvc.dto.ProductDTO;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public interface AdminMapper {

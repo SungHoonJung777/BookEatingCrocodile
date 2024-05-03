@@ -151,17 +151,17 @@
         WHERE pro_idx = #{arg0}
     </update>
     <select id="orderinfo" resultType="org.fullstack4.springmvc.dto.OrderDTO">
-        SELECT order_date, delivery, order_total, deli_name, deli_addr, order_name, req_term, order_phone
+        SELECT delivery, order_total, deli_name, deli_addr, order_name, req_term, order_phone
         FROM bec_order
         WHERE order_idx = #{orderIdx}
     </select>
-<!--    <select id="orderDetail">-->
-<!--        SELECT od.pro_quantity, pro_name-->
-<!--             , ROUND(pro_price-(pro_price*(pro_sale/100))) AS pro_price-->
-<!--             , pro_image-->
-<!--        FROM bec_order_detail AS od-->
-<!--                 INNER JOIN bec_product AS bp-->
-<!--                            ON od.pro_idx = bp.pro_idx-->
-<!--        WHERE od.order_idx = #{orderIdx};-->
-<!--    </select>-->
+    <select id="orderDetail" resultType="org.fullstack4.springmvc.domain.ProductVO">
+        SELECT od.pro_quantity as pro_amount, pro_name
+             , ROUND(pro_price-(pro_price*(pro_sale/100))) AS pro_price
+             , pro_image
+        FROM bec_order_detail AS od
+                 INNER JOIN bec_product AS bp
+                            ON od.pro_idx = bp.pro_idx
+        WHERE od.order_idx = #{orderIdx}
+    </select>
 </mapper>

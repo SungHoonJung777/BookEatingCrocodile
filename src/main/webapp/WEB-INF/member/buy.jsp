@@ -63,7 +63,41 @@
 <jsp:include page="../common/header.jsp"/>
 <!-- Layout wrapper -->
 <%--<div class="layout-wrapper layout-content-navbar">--%>
-
+<div class="modal fade" id="orderDetails" style="display:none" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modal_title">order_no</h5>
+                <button calss="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body pb-0">
+                <table id="modal_table" style="width: 100%">
+                    <thead>
+                        <tr style="border-bottom: 1px solid black">
+                            <th colspan="2">상품정보</th>
+                            <th>상품 가격</th>
+                            <th>상품 수량</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            <div class="modal-footer flex-wrap justify-content-between bg-secondary fs-md">
+                <div class="px-2 py-1">
+                    <span class="text-muted"><h6>상품합계</h6></span>
+                    <span></span>
+                </div>
+                <div class="px-2 py-1">
+                    <span class="text-muted"><h6>배송비</h6></span>
+                    <span>3000</span>
+                </div>
+                <div class="px-2 py-1">
+                    <span class="text-muted"><h6>총합</h6></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="container">
 
     <div class="layout-container layout-content-navbar">
@@ -120,10 +154,10 @@
                                                 <td class="text-nowrap">
                                                     <c:choose>
                                                         <c:when test="${dto.delivery eq '주문취소'}">
-                                                            <a style="text-decoration: line-through; color: black" class="" href="javascript:orderDetail(${dto.order_idx})">${dto.req_term}</a>
+                                                            <a style="text-decoration: line-through; color: black" class="" onclick="orderDetail(${dto.order_idx}, this)" href="#orderDetails" data-bs-toggle="modal">${dto.req_term}</a>
                                                         </c:when>
                                                         <c:otherwise>
-                                                            <a class="" href="javascript:orderDetail(${dto.order_idx})">${dto.req_term}</a>
+                                                            <a class="" href="#orderDetails" onclick="orderDetail(${dto.order_idx}, this)" data-bs-toggle="modal">${dto.req_term}</a>
                                                         </c:otherwise>
                                                     </c:choose>
 
@@ -235,10 +269,50 @@
         }
     }
 
-    function orderDetail(order_idx){
-        document.getElementById("order_idx").value = order_idx;
-        document.getElementById("frmDelete").action = "/member/orderdetail";
-        document.getElementById("frmDelete").submit();
+    function orderDetail(order_idx, el){
+        $.ajax({
+            type: "POST",            // HTTP method type(GET, POST) 형식이다.
+            url: "/member/orderdetail",      // 컨트롤러에서 대기중인 URL 주소이다.
+            data: {
+                order_idx: order_idx
+            },            // Json 형식의 데이터이다.
+            success: function (result) { // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+                let resultList = result.getElementsByTagName("item");
+                let default_table = document.getElementById("modal_table").firstElementChild;
+                console.log(default_table);
+                document.getElementById("modal_table").append(default_table);
+                console.log(result);
+                for(let i = 0; i<resultList.length-1; i++){
+                    let trele = document.createElement("tr");
+                    trele.setAttribute("style","border-bottom:1px solid black")
+                    for(let j=0; j<resultList.item(i).childElementCount; j++){
+                        let tdele = document.createElement("td");
+                        let chiled = resultList.item(i).children.item(j);
+                        if(chiled.firstChild!=null){
+                            if(chiled.firstChild.length>1||chiled.tagName == "pro_amount") {
+                                if(chiled.tagName == "pro_image"){
+                                    let imgele = document.createElement("img");
+                                    imgele.setAttribute("src", "/resources/resources/img/books/"+resultList.item(i).getElementsByTagName("pro_image").item(0).firstChild.nodeValue);
+                                    imgele.setAttribute("width","100px");
+                                    imgele.setAttribute("height", "150px");
+                                    tdele.append(imgele);
+                                    trele.prepend(tdele);
+
+                                }else{
+                                    tdele.innerHTML=chiled.firstChild.nodeValue;
+                                    trele.append(tdele);
+                                }
+                            }
+                        }
+                    }
+                    document.getElementById("modal_table").prepend(trele);
+                }
+            },
+            error: function (error) { // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+                console.log(error);
+                console.log("실패");
+            }
+        });
     }
 </script>
 </body>
