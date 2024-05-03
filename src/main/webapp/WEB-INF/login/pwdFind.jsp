@@ -67,7 +67,7 @@
 
 <body>
 <!-- Content -->
-
+<jsp:include page="/WEB-INF/common/header.jsp"></jsp:include>
 <div class="container-xxl">
     <div class="authentication-wrapper authentication-basic container-p-y">
         <div class="authentication-inner py-4">
@@ -76,15 +76,9 @@
                 <div class="card-body">
                     <!-- Logo -->
                     <div class="app-brand justify-content-center">
-                        <a href="index.html" class="app-brand-link gap-2">
+                        <a href="/" class="app-brand-link gap-2">
                   <span class="app-brand-logo demo">
-                    <svg
-                            width="25"
-                            viewBox="0 0 25 42"
-                            version="1.1"
-                            xmlns="http://www.w3.org/2000/svg"
-                            xmlns:xlink="http://www.w3.org/1999/xlink"
-                    >
+                       <img src="/resources/resources/img/BEClogo.png" style="width: 60px; height: auto;">
                       <defs>
                         <path
                                 d="M13.7918663,0.358365126 L3.39788168,7.44174259 C0.566865006,9.69408886 -0.379795268,12.4788597 0.557900856,15.7960551 C0.68998853,16.2305145 1.09562888,17.7872135 3.12357076,19.2293357 C3.8146334,19.7207684 5.32369333,20.3834223 7.65075054,21.2172976 L7.59773219,21.2525164 L2.63468769,24.5493413 C0.445452254,26.3002124 0.0884951797,28.5083815 1.56381646,31.1738486 C2.83770406,32.8170431 5.20850219,33.2640127 7.09180128,32.5391577 C8.347334,32.0559211 11.4559176,30.0011079 16.4175519,26.3747182 C18.0338572,24.4997857 18.6973423,22.4544883 18.4080071,20.2388261 C17.963753,17.5346866 16.1776345,15.5799961 13.0496516,14.3747546 L10.9194936,13.4715819 L18.6192054,7.984237 L13.7918663,0.358365126 Z"
@@ -132,12 +126,12 @@
                       </g>
                     </svg>
                   </span>
-                            <span class="app-brand-text demo text-body fw-bolder">Sneat</span>
+                            <span class="app-brand-text demo text-body fw-bolder">책 먹는 악어</span>
                         </a>
                     </div>
                     <!-- /Logo -->
-                    <h4 class="mb-2">Forgot Password? 🔒</h4>
-                    <p class="mb-4">Enter your email and we'll send you instructions to reset your password</p>
+                    <h4 class="mb-2" style="font-size: 23px;">비밀번호가 기억이 안나시나요? 🔒</h4>
+                    <p class="mb-4" style="margin-top: 20px; font-size: 15px;">가입하신 이메일로 임시 비밀번호를 발급해드립니다. &nbsp;가입하신 정보를 입력해주세요.</p>
                     <c:choose>
                         <c:when test="${not empty success_login || success_login ne '' || success_login ne null} ">
                             <span id="success_login" style=" margin-top: 20px; margin-bottom: 10px;" >${success_login}</span>
@@ -186,12 +180,12 @@
                             />
                         </div>
                         <span id="final_phoneChk" style="display: none; color: red; margin-bottom: 10px;">핸드폰 번호를 입력해주세요.</span>
-                        <button type="button" id="pwdFindBtn"  class="btn btn-primary d-grid w-100">Send Reset Link</button>
+                        <button type="button" id="pwdFindBtn"  class="btn btn-primary d-grid w-100">비밀번호 찾기</button>
                     </form>
                     <div class="text-center">
                         <a href="/login/login" class="d-flex align-items-center justify-content-center">
                             <i class="bx bx-chevron-left scaleX-n1-rtl bx-sm"></i>
-                            Back to login
+                            로그인 하러 가기
                         </a>
                     </div>
                 </div>
@@ -202,7 +196,7 @@
 </div>
 
 <!-- / Content -->
-
+<jsp:include page="/WEB-INF/common/footer.jsp"></jsp:include>
 
 <!-- Core JS -->
 <!-- build:js assets/vendor/js/core.js -->
