@@ -1,5 +1,5 @@
 1. 프로젝트 명: 책먹는 악어
-   <img src="/SungHoonJung777/BookEatingCrocodile/blob/main/src/main/webapp/resources/img/BEClogo.png >
+   <img src="/src/main/webapp/resources/img/BEClogo.png" >
 
    
 
