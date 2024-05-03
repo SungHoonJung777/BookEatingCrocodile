@@ -67,7 +67,7 @@
     <!-- SqlSessionFactoryBean sqlSFB = new SqlSessionFactoryBean(dataSource); 와 같음 -->
     <bean id="sqlSFB" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
-        <property name="mapperLocations" value="classpath:/mappers/**/*.xml"></property>
+        <property name="mapperLocations" value="classpath:/mappers/**/*.xml"/>
     </bean>
 
     <!-- 트랜잭션 관리 객체 -->

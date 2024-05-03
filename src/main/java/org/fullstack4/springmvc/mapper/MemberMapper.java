@@ -48,5 +48,5 @@ public interface MemberMapper {
     void minusamount(int proIdx, int proQuantity);
 
     OrderDTO orderinfo(String orderIdx);
-//    String orderDetail(String orderIdx);
+    List<ProductVO> orderDetail(String orderIdx);
 }

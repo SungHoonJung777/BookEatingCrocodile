@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: paksa
@@ -25,6 +26,8 @@
         <td>${orderdto.order_date}</td>
     </tr>
 </table>
-${list}
+<c:forEach items="${list}" var="a">
+    ${a.pro_name}, ${a.pro_price}, ${a.pro_amount}, ${a.pro_image}<br>
+</c:forEach>
 </body>
 </html>
