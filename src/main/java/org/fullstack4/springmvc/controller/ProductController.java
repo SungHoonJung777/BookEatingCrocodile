@@ -5,8 +5,11 @@ import lombok.extern.log4j.Log4j2;
 import org.fullstack4.springmvc.domain.ProductVO;
 import org.fullstack4.springmvc.domain.ReviewVO;
 import org.fullstack4.springmvc.dto.*;
+import org.fullstack4.springmvc.mapper.MemberMapper;
 import org.fullstack4.springmvc.mapper.ProductMapper;
 import org.fullstack4.springmvc.mapper.ReviewMapper;
+import org.fullstack4.springmvc.service.MemberServiceIf;
+import org.fullstack4.springmvc.service.MemberServiceImpl;
 import org.fullstack4.springmvc.service.ProductServiceIf;
 import org.fullstack4.springmvc.service.ReviewServiceIf;
 import org.springframework.stereotype.Controller;
@@ -30,8 +33,10 @@ import java.util.List;
 public class ProductController {
     private final ProductServiceIf productServiceIf;
     private final ReviewServiceIf reviewServiceIf;
+    private final MemberServiceIf memberServiceIf;
     private ProductMapper productMapper;
     private ReviewMapper reviewMapper;
+    private MemberMapper memberMapper;
 
     @GetMapping("/main")
     public void pro_list(PageRequestDTO pageRequestDTO,
@@ -121,6 +126,7 @@ public class ProductController {
 
         model.addAttribute("reviewVO", reviewVOList);
         model.addAttribute("review_star_avg", review_star_avg);
+
 
         log.info("review_star_avg" +review_star_avg);
 

@@ -205,3 +205,11 @@ div.proBanner {
 a.proB {
   color: #5b8d00;
 }
+
+div.bookIntro {
+  margin-bottom: 50px;
+}
+
+div.reviewDiv {
+  margin-top: 50px;
+}

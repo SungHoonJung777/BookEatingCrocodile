@@ -30,11 +30,11 @@
   <!-- Bootstrap CSS -->
   <%--<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 --%>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <link href="/resources/resources/css/bootstrap5.1.3.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
   <!-- Icon Font Stylesheet -->
   <link rel="stylesheet" href="/resources/resources/css/all.css"/>
-  <link href="/resources/resources/css/bootstrap-icons" rel="stylesheet">
+  <link href="/resources/resources/css/bootstrap-icons.css" rel="stylesheet">
 
   <!-- Libraries Stylesheet -->
   <link href="/resources/resources/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
@@ -233,8 +233,9 @@
 </script>
 
 <!-- JavaScript Libraries -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<%--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>--%>
+<script src="/resources/resources/js/jquery.min.js"></script>
+<script src="/resources/resources/js/bundle.min.js"></script>
 <script src="/resources/resources/lib/easing/easing.min.js"></script>
 <script src="/resources/resources/lib/waypoints/waypoints.min.js"></script>
 <script src="/resources/resources/lib/lightbox/js/lightbox.min.js"></script>
