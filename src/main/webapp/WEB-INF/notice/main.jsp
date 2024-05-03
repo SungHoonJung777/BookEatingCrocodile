@@ -218,7 +218,7 @@
                                         </li>
                                         <li class="page-item prev">
                                             <a class="page-link"
-                                               href="<c:choose><c:when test="${dataList.page <= dataList.page_block_start}">#</c:when><c:otherwise>${dataList.linkParams}&page=${dataList.page-1}</c:otherwise></c:choose>"><i
+                                               href="<c:choose><c:when test="${dataList.page <= 1}">#</c:when><c:otherwise>${dataList.linkParams}&page=${dataList.page-1}</c:otherwise></c:choose>"><i
                                                     class="tf-icon bx bx-chevron-left"></i></a>
                                         </li>
                                         <c:forEach begin="${dataList.page_block_start}"
@@ -231,7 +231,7 @@
                                         </c:forEach>
                                         <li class="page-item prev">
                                             <a class="page-link"
-                                               href="<c:choose><c:when test="${dataList.page >= dataList.page_block_end}">#</c:when><c:otherwise>${dataList.linkParams}&page=${dataList.page + 1}</c:otherwise></c:choose>">
+                                               href="<c:choose><c:when test="${dataList.page >= dataList.total_page}">#</c:when><c:otherwise>${dataList.linkParams}&page=${dataList.page + 1}</c:otherwise></c:choose>">
                                                 <i class="tf-icon bx bx-chevron-right"></i></a>
                                         </li>
                                         <li class="page-item <c:if test="${dataList.next_page_flag ne true}"> disabled</c:if> last">

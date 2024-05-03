@@ -97,6 +97,9 @@
         <if test="member_id != null and member_id != ''">
             and member_id=#{member_id}
         </if>
+        <if test="qna_select != null and qna_select != ''">
+            and qna_select=#{qna_select}
+        </if>
         <if test="search_type != null">
             <foreach collection="search_type" item="type" >
                 <trim prefix="AND">
@@ -143,6 +146,9 @@
         where qna_category=#{qna_category}
         <if test="member_id != null and member_id != ''">
             and member_id=#{member_id}
+        </if>
+        <if test="qna_select != null and qna_select != ''">
+            and qna_select=#{qna_select}
         </if>
         <if test="search_type != null">
             <foreach collection="search_type" item="type" >

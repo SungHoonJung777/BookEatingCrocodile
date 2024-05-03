@@ -271,7 +271,7 @@
                                                href="<c:choose><c:when test="${qnaList.prev_page_flag}">${qnaList.linkParams}&page=${qnaList.page_block_start-10}</c:when><c:otherwise>#</c:otherwise></c:choose>"><i class="tf-icon bx bx-chevrons-left"></i></a>
                                         </li>
                                         <li class="page-item prev">
-                                            <a class="page-link" href="<c:choose><c:when test="${qnaList.page <= qnaList.page_block_start}">#</c:when><c:otherwise>${qnaList.linkParams}&page=${qnaList.page-1}</c:otherwise></c:choose>"><i class="tf-icon bx bx-chevron-left"></i></a>
+                                            <a class="page-link" href="<c:choose><c:when test="${qnaList.page <= 1}">#</c:when><c:otherwise>${qnaList.linkParams}&page=${qnaList.page-1}</c:otherwise></c:choose>"><i class="tf-icon bx bx-chevron-left"></i></a>
                                         </li>
                                         <c:forEach begin="${qnaList.page_block_start}"
                                                    end="${qnaList.page_block_end}"
@@ -282,7 +282,7 @@
                                             </li>
                                         </c:forEach>
                                         <li class="page-item prev">
-                                            <a class="page-link" href="<c:choose><c:when test="${qnaList.page >= qnaList.page_block_end}">#</c:when><c:otherwise>${qnaList.linkParams}&page=${qnaList.page + 1}</c:otherwise></c:choose>"><i class="tf-icon bx bx-chevron-right"></i></a>
+                                            <a class="page-link" href="<c:choose><c:when test="${qnaList.page >= qnaList.total_page}">#</c:when><c:otherwise>${qnaList.linkParams}&page=${qnaList.page + 1}</c:otherwise></c:choose>"><i class="tf-icon bx bx-chevron-right"></i></a>
                                         </li>
                                         <li class="page-item <c:if test="${qnaList.next_page_flag ne true}"> disabled</c:if> last">
                                             <a class="page-link" data-num="<c:choose><c:when test="${qnaList.next_page_flag}">${qnaList.page_block_end+1}</c:when><c:otherwise>${qnaList.page_block_end}</c:otherwise></c:choose>"
