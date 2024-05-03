@@ -18,8 +18,14 @@ public class ReviewServiceImpl implements ReviewServiceIf{
 
     private final ReviewMapper reviewMapper;
     private final ModelMapper modelMapper;
-    @Override
+   /* @Override
     public List<ReviewVO> review_list(int pro_idx) {
+
+        return reviewMapper.review_list(pro_idx);
+    }*/
+   @Override
+    public List<ReviewVO> review_list(int pro_idx) {
+
         return reviewMapper.review_list(pro_idx);
     }
 

@@ -26,9 +26,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Raleway:wght@600;800&display=swap" rel="stylesheet">
 
     <!-- Icon Font Stylesheet -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
-
+    <%--<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">--%>
+    <link rel="stylesheet" href="/resources/resources/css/all.css"/>
+    <link href="/resources/resources/css/bootstrap-icons.css" rel="stylesheet">
     <!-- Libraries Stylesheet -->
     <link href="/resources/resources/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
     <link href="/resources/resources/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
@@ -43,7 +44,9 @@
     <link href="/resources/resources/css/product.css" rel="stylesheet">
 
     <!-- 별점 매기기 사용 -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+  <%--  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">--%>
+    <link rel="stylesheet" href="/resources/resources/css/star.css">
+
 </head>
 
 <body>
@@ -76,11 +79,8 @@
 
 
 <!-- Single Page Header start -->
-<div class="container-fluid page-header py-5">
-    <h1 class="text-center text-white display-6">BOOK SHOP</h1>
-    <%--<ol class="breadcrumb justify-content-center mb-0">
-        <li class="breadcrumb-item"><a href="#">Home</a></li>
-    </ol>--%>
+<div class="container-fluid page-header py-5 proBanner">
+    <h1 class="text-center text-white display-6 "><a href="/product/main" class="proB">BOOK SHOP</a></h1>
 </div>
 <!-- Single Page Header End -->
 
@@ -160,7 +160,7 @@
                             </div>
                         </nav>
                         <div class="tab-content mb-5">
-                            <div class="tab-pane active" id="nav-about" role="tabpanel" aria-labelledby="nav-about-tab">
+                            <div class="tab-pane active bookIntro" id="nav-about" role="tabpanel" aria-labelledby="nav-about-tab">
                                 <br>
                                 <h4>출판사 제공 북트레일러</h4>
                                 <br>
@@ -176,7 +176,9 @@
 
                                 <p>${pro_content}</p>
                             </div>
-                            <div class="tab-pane" id="nav-mission" role="tabpanel" aria-labelledby="nav-mission-tab">
+
+                            <div class="reviewDiv" id="nav-mission" aria-labelledby="nav-mission-tab">
+                                <h4>리뷰</h4>
                                 <form name="frmDelete" id="frmDelete" method="post" action="/product/reviewDelete">
 
                                     <c:choose>
@@ -185,7 +187,8 @@
                                                 <div class="d-flex">
                                                     <input type="hidden" name="pro_idx" id="pro_idx" value="${review.pro_idx}"/>
                                                     <input type="hidden" name="review_idx" id="review_idx" value="${review.review_idx}"/>
-                                                    <img src="img/avatar.jpg" class="img-fluid rounded-circle p-3" style="width: 100px; height: 100px;" alt="">
+
+                                                    <img src="/resources/resources/uploads/img/member/${review.member_img}" class="img-fluid rounded-circle p-3" style="width: 100px; height: 100px;" alt="">
                                                     <div class="d-flex">
                                                         <div class="">
                                                             <p class="mb-2 text-nowrap" style="font-size: 14px;">${fn:substring(review.review_reg_date, 0, 10)} &nbsp; ${fn:substring(review.review_reg_date, 11, 20)}</p>
@@ -217,6 +220,66 @@
                                     </c:choose>
                                 </form>
                             </div>
+
+
+                            <%--<div class="tab-pane active" id="nav-about" role="tabpanel" aria-labelledby="nav-about-tab">
+                                <br>
+                                <h4>출판사 제공 북트레일러</h4>
+                                <br>
+                                <div class="px-2">
+                                    <div class="row g-4">
+                                        <div class="book_video">
+                                            <iframe src="${product.pro_video}" width="90%" height="500px"></iframe>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <h4>책 소개</h4>
+
+                                <p>${pro_content}</p>
+                            </div>
+                            <div class="tab-pane" id="nav-mission" role="tabpanel" aria-labelledby="nav-mission-tab">
+                                <form name="frmDelete" id="frmDelete" method="post" action="/product/reviewDelete">
+
+                                    <c:choose>
+                                        <c:when test="${reviewVO != null}">
+                                            <c:forEach var="review" items="${reviewVO}">
+                                                <div class="d-flex">
+                                                    <input type="hidden" name="pro_idx" id="pro_idx" value="${review.pro_idx}"/>
+                                                    <input type="hidden" name="review_idx" id="review_idx" value="${review.review_idx}"/>
+
+                                                    <img src="/resources/resources/uploads/img/member/${review.member_img}" class="img-fluid rounded-circle p-3" style="width: 100px; height: 100px;" alt="">
+                                                    <div class="d-flex">
+                                                        <div class="">
+                                                            <p class="mb-2 text-nowrap" style="font-size: 14px;">${fn:substring(review.review_reg_date, 0, 10)} &nbsp; ${fn:substring(review.review_reg_date, 11, 20)}</p>
+                                                            <div class="d-flex">
+                                                                <div class="d-flex mb-3">
+                                                                    <i class="fa fa-star <c:if test='${review.review_star > 0}'>text-secondary</c:if>"></i>
+                                                                    <i class="fa fa-star <c:if test='${review.review_star > 1}'>text-secondary</c:if>"></i>
+                                                                    <i class="fa fa-star <c:if test='${review.review_star > 2}'>text-secondary</c:if>"></i>
+                                                                    <i class="fa fa-star <c:if test='${review.review_star > 3}'>text-secondary</c:if>"></i>
+                                                                    <i class="fa fa-star <c:if test='${review.review_star > 4}'>text-secondary</c:if>"></i>
+                                                                </div>
+                                                            </div>
+                                                            <h5>${review.member_id}</h5>
+                                                            <h5>${review.review_title}</h5>
+                                                            <p>${review.review_content}</p>
+                                                            <div class="empty"></div>
+                                                        </div>
+                                                        <c:if test="${sessionScope.member_id eq review.member_id || sessionScope.member_id eq 'admin'}">
+                                                            <button type="submit" onclick="goDelete()" id="review_delete_btn" name="review_delete_btn" class="btn border border-secondary text-primary rounded-pill px-4 py-3 review_del_btn">삭제</button>
+                                                        </c:if>
+                                                    </div>
+                                                </div>
+
+                                            </c:forEach>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <p>리뷰가 없습니다.</p>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </form>
+                            </div>--%>
                         </div>
                     </div>
                     <form name="frmReview" id="frmReview" action="/product/view" method="post">
@@ -405,28 +468,6 @@
                 </div>
             </div>
         </div>
-        <h1 class="fw-bold mb-0">Related products</h1>
-        <div class="vesitable">
-            <div class="owl-carousel vegetable-carousel justify-content-center">
-
-                <div class="border border-primary rounded position-relative vesitable-item">
-                    <div class="vesitable-img">
-                        <img src="img/vegetable-item-6.jpg" class="img-fluid w-100 rounded-top" alt="">
-                    </div>
-                    <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Vegetable</div>
-                    <div class="p-4 pb-0 rounded-bottom">
-                        <h4>Parsely</h4>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
-                        <div class="d-flex justify-content-between flex-lg-wrap">
-                            <p class="text-dark fs-5 fw-bold">$4.99 / kg</p>
-                            <a href="#" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-                        </div>
-                    </div>
-                </div>
-
-
-            </div>
-        </div>
     </div>
 </div>
 <!-- Single Product End -->
@@ -581,26 +622,27 @@
 
     }
 
-</script>
-
-<script>
-    //재고량 주문 제한
+    // 주문량 제한
     const orderBookInput = document.getElementById('orderBook');
-    const orderBookAmount = ${product.pro_amount};
-
-    orderBookInput.addEventListener('change', function() {
-
-        const inputValue = parseInt(this.value);
-        if (inputValue > orderBookAmount) {
-            this.value = orderBookAmount;
-            alert('재고량을 초과할 수 없습니다.');
+    const plusButton = document.querySelector('.btn-plus');
+    plusButton.addEventListener('click', function() {
+        const maxValue = ${product.pro_amount}-1;
+        const currentValue = parseInt(orderBookInput.value);
+        if (currentValue < maxValue) {
+            orderBookInput.value = currentValue;
+        } else {
+            orderBookInput.value = maxValue;
+            alert('재고량을 초과하셨습니다.');
         }
     });
+
 </script>
 
 <!-- JavaScript Libraries -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<%--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>--%>
+<script src="/resources/resources/js/jquery.min.js"></script>
+<script src="/resources/resources/js/bundle.min.js"></script>
 <script src="/resources/resources/lib/easing/easing.min.js"></script>
 <script src="/resources/resources/lib/waypoints/waypoints.min.js"></script>
 <script src="/resources/resources/lib/lightbox/js/lightbox.min.js"></script>

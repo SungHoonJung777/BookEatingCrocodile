@@ -87,7 +87,7 @@
             FLOOR(BP.pro_price - BP.pro_price * (BP.pro_sale / 100)) AS pro_sale_price,
             ifnull(FLOOR(AVG(BR.review_star)),0) AS review_star_avg
         FROM bec_product BP
-        LEFT JOIN bec_review BR ON BP.pro_idx = BR.pro_idx
+        INNER JOIN bec_review BR ON BP.pro_idx = BR.pro_idx
         GROUP BY BP.pro_idx
         ORDER BY BP.pro_reg_date DESC
             LIMIT 10

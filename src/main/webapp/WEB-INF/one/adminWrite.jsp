@@ -138,7 +138,8 @@
 </div>
 
 <jsp:include page="../common/footer.jsp"/>
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<%--<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>--%>
+<script src="/resources/resources/js/postcode.v2.js"></script>
 <script>
     const serverValidResult = {}; //JSON 객체 빈값으로 선언
     <c:forEach items="${errors}" var="err">

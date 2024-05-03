@@ -5,8 +5,9 @@
 <mapper namespace="org.fullstack4.springmvc.mapper.ReviewMapper">
 
     <select id="review_list" resultType="org.fullstack4.springmvc.domain.ReviewVO">
-        select review_idx, pro_idx, member_id, review_content, review_title, review_star, review_reg_date
-        from bec_review
+        select BR.review_idx, BR.pro_idx, BR.member_id, BR.review_content, BR.review_title, BR.review_star, BR.review_reg_date, BM.member_img
+        from bec_review BR
+        INNER JOIN bec_member BM ON BR.member_id = BM.member_id
         where pro_idx = #{pro_idx}
     </select>
 
