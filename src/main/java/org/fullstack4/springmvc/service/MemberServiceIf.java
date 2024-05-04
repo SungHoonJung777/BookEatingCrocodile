@@ -42,6 +42,6 @@ public interface MemberServiceIf {
 
     void minusamount(int proIdx, int proQuantity);
 
-//    String orderDetail(String orderIdx);
+    List<ProductDTO> orderDetail(String orderIdx);
     OrderDTO orderinfo(String orderIdx);
 }

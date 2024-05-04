@@ -458,13 +458,14 @@ public class MemberController {
 
     }
 
+    @ResponseBody
     @PostMapping("/orderdetail")
-    public void orderdetail(Model model,
+    public List  orderdetail(Model model,
                             @RequestParam(value = "order_idx", defaultValue = "") String order_idx){
         OrderDTO orderdto = memberServiceIf.orderinfo(order_idx);
-//        String list = memberServiceIf.orderDetail(order_idx);
+        List list = memberServiceIf.orderDetail(order_idx);
+        list.add(orderdto);
 
-        model.addAttribute("orderdto", orderdto);
-//        model.addAttribute("list", list);
+        return list;
     }
 }
