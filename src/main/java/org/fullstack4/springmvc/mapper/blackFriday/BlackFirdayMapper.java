@@ -1,6 +1,7 @@
 package org.fullstack4.springmvc.mapper.blackFriday;
 
 import org.fullstack4.springmvc.domain.BlackFridayVO;
+import org.fullstack4.springmvc.dto.CartDTO;
 
 import java.util.List;
 
@@ -22,4 +23,6 @@ public interface BlackFirdayMapper {
     int finalStatus();
 
     int registBlack(String member_id, int price);
+
+    int addCart(CartDTO dto);
 }

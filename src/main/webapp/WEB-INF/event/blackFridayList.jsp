@@ -126,7 +126,6 @@
             cursor: pointer;
             transition: background-color 0.3s;
         }
-
     </style>
 </head>
 
@@ -222,7 +221,7 @@
                 <!-- Components -->
                 <li class="menu-header small text-uppercase"><span class="menu-header-text">Product</span></li>
                 <!-- Cards -->
-                <li class="menu-item active">
+                <li class="menu-item ">
                     <a href="/admin/productList" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-collection"></i>
                         <div data-i18n="Basic">상품리스트</div>

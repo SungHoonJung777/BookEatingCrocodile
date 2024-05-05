@@ -6,6 +6,7 @@ import org.fullstack4.springmvc.domain.BlackFridayVO;
 import org.fullstack4.springmvc.domain.MemberVO;
 import org.fullstack4.springmvc.domain.ProductVO;
 import org.fullstack4.springmvc.dto.BlackFridayDTO;
+import org.fullstack4.springmvc.dto.CartDTO;
 import org.fullstack4.springmvc.dto.MemberDTO;
 import org.fullstack4.springmvc.dto.ProductDTO;
 import org.fullstack4.springmvc.mapper.blackFriday.BlackFirdayMapper;
@@ -91,5 +92,11 @@ public class BlackFirdayServiceImpl implements BlackFirdayService{
     public int registBlack(String member_id, int price) {
         int uResult = blackFirdayMapper.registBlack(member_id,price);
         return uResult;
+    }
+
+    @Override
+    public int addCart(CartDTO cartDTO) {
+        int iResult = blackFirdayMapper.addCart(cartDTO);
+        return iResult;
     }
 }

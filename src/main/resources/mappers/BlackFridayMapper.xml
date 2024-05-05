@@ -43,4 +43,9 @@
     <update id="registBlack">
         update bec_black set member_id = #{arg0} , black_price = #{arg1}
     </update>
+
+    <insert id="addCart">
+        INSERT INTO bec_cart(member_id, pro_idx, pro_title, pro_price, pro_img, pro_quantity)
+        values (#{member_id} , #{pro_idx},#{pro_title},#{pro_price},#{pro_img},#{pro_quantity})
+    </insert>
 </mapper>

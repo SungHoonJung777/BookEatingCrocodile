@@ -1,6 +1,7 @@
 package org.fullstack4.springmvc.service.blackFriday;
 
 import org.fullstack4.springmvc.dto.BlackFridayDTO;
+import org.fullstack4.springmvc.dto.CartDTO;
 
 import java.util.List;
 
@@ -24,4 +25,5 @@ public interface BlackFirdayService {
 
     int registBlack(String member_id,int price);
 
+    int addCart(CartDTO cartDTO);
 }

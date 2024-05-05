@@ -174,7 +174,6 @@
                         <div data-i18n="Basic">상품등록</div>
                     </a>
                 </li>
-
                 <!-- Misc -->
                 <li class="menu-header small text-uppercase"><span class="menu-header-text">배송</span></li>
                 <li class="menu-item">
@@ -457,28 +456,27 @@
                             <div class="card">
                                 <div class="row row-bordered g-0">
                                     <div class="col-md-8">
-                                        <h5 class="card-header m-0 me-2 pb-3">Total Revenue</h5>
-                                        <div id="totalRevenueChart" class="px-2"></div>
+                                        <h5 class="card-header m-0 me-2 pb-3">Black Friday</h5>
+                                        <div id="totalRevenueChart" class="px-2" >
+                                            <img src="/resources/resources/img/black.png" style="width: 100%; height: 210px;"/>
+                                        </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="card-body">
                                             <div class="text-center">
                                                 <div class="dropdown">
-                                                    <button
-                                                            class="btn btn-sm btn-outline-primary dropdown-toggle"
-                                                            type="button"
-                                                            id="growthReportId"
-                                                            data-bs-toggle="dropdown"
-                                                            aria-haspopup="true"
-                                                            aria-expanded="false"
-                                                    >
-                                                        2022
-                                                    </button>
-                                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="growthReportId">
-                                                        <a class="dropdown-item" href="javascript:void(0);">2021</a>
-                                                        <a class="dropdown-item" href="javascript:void(0);">2020</a>
-                                                        <a class="dropdown-item" href="javascript:void(0);">2019</a>
-                                                    </div>
+                                                    <li class="menu-item">
+                                                        <a href="/event/blackFridayRegist" class="menu-link">
+                                                            <i class="menu-icon tf-icons bx bx-box"></i>
+                                                            <div data-i18n="Basic">블랙프라이데이 등록</div>
+                                                        </a>
+                                                    </li>
+                                                    <li class="menu-item">
+                                                        <a href="/event/blackFridayList" class="menu-link">
+                                                            <i class="menu-icon tf-icons bx bx-box"></i>
+                                                            <div data-i18n="Basic">블랙프라이데이 목록</div>
+                                                        </a>
+                                                    </li>
                                                 </div>
                                             </div>
                                         </div>

@@ -6,6 +6,7 @@ import org.fullstack4.springmvc.Criteria.Criteria;
 import org.fullstack4.springmvc.Criteria.PageMakerDTO;
 import org.fullstack4.springmvc.dto.AttachImageDTO;
 import org.fullstack4.springmvc.dto.BlackFridayDTO;
+import org.fullstack4.springmvc.dto.CartDTO;
 import org.fullstack4.springmvc.dto.ProductDTO;
 import org.fullstack4.springmvc.service.admin.AdminService;
 import org.fullstack4.springmvc.service.blackFriday.BlackFirdayService;
@@ -189,7 +190,15 @@ class TimerThread extends Thread {
             System.out.println("타이머가 중단되었습니다.");
         } finally {
             blackFirdayService.finalStatus();
-
+            List<BlackFridayDTO> dto = blackFirdayService.blackFridayList();
+            CartDTO cartDTO = new CartDTO();
+            cartDTO.setMember_id(dto.get(0).getMember_id());
+            cartDTO.setPro_idx(dto.get(0).getPro_idx());
+            cartDTO.setPro_img(dto.get(0).getPro_image());
+            cartDTO.setPro_price(dto.get(0).getBlack_price());
+            cartDTO.setPro_title(dto.get(0).getPro_name());
+            cartDTO.setPro_quantity(1);
+            blackFirdayService.addCart(cartDTO);
         }
     }
 }
