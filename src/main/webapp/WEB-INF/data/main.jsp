@@ -167,7 +167,7 @@
                                                     </c:if>
 
                                                         <td class="text-nowrap">${dataList.total_count - ((dataList.page-1)*dataList.page_size + (status.count-1))}</td>
-                                                        <td class="text-nowrap"><a href="/data/view?comu_idx=${dto.comu_idx}">${dto.comu_title} <c:if test="${not empty dto.comu_file}"> <i class="fa-solid fa-paperclip"></i> </c:if></a></td>
+                                                        <td class="text-nowrap"><a href="/data/view?comu_idx=${dto.comu_idx}">${dto.comu_title} <c:if test="${dto.reply_cnt > 0}">(${dto.reply_cnt})</c:if> <c:if test="${not empty dto.comu_file}"> <i class="fa-solid fa-paperclip"></i> </c:if></a></td>
                                                         <td class="text-nowrap">${dto.member_id}</td>
                                                         <td class="text-nowrap">${fn:substring(dto.comu_reg_date, 0, 10)} ${fn:substring(dto.comu_reg_date, 11, 20)}</td>
 
