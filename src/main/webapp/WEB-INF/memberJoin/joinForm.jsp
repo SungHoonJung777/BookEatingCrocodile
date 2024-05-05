@@ -329,7 +329,7 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 <!-- Page JS -->
-<%--<script>
+<script>
 
   // 전체 유효성 검사
   let idCheck = false;
@@ -601,8 +601,8 @@
     });
   });
 
-</script>--%>
-<script>
+</script>
+<%--<script>
   $(document).ready(function (){
     document.querySelector("#joinBtn").addEventListener("click", function (){
       let frm = document.querySelector("#formAuthentication");
@@ -611,7 +611,7 @@
       frm.submit();
     });
   });
-</script>
+</script>--%>
 <!-- Place this tag in your head or just before your close body tag. -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 </body>

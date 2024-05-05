@@ -13,6 +13,15 @@ public interface BlackFirdayService {
 
     int countBlack();
 
-    int blackStatusChange();
+    int blackStatusChange(int timer);
+
+
+    int getTime();
+
+    int timeMinus(int minus);
+
+    int finalStatus();
+
+    int registBlack(String member_id,int price);
 
 }

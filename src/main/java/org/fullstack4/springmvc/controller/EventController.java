@@ -12,21 +12,19 @@ import org.fullstack4.springmvc.service.blackFriday.BlackFirdayService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.PrintWriter;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.List;
-import java.util.UUID;
 
 @Log4j2
 @Controller
@@ -107,14 +105,21 @@ public class EventController {
     }
 
     @GetMapping("/blackFridayStart")
-    public String blackFridayStart(Model model) throws Exception {
-
+    public String blackFridayStart(Model model , HttpServletRequest request) throws Exception {
+        HttpSession session = request.getSession();
+        model.addAttribute("member_id", session.getAttribute("member_id"));
         int count = blackFirdayService.countBlack();
 
         if(count > 0){
             BlackFridayDTO dto = blackFirdayService.blackFridayStart();
             model.addAttribute("list", dto);
-            return "/event/blackFridayStart";
+
+            if(dto.getBlack_status().equals("s")){
+                return "/event/blackFridayStart";
+            } else {
+                return "/event/blackFridayLoad";
+            }
+
         } else {
             return "/event/blackFridayLoading";
         }
@@ -126,32 +131,65 @@ public class EventController {
     @GetMapping("/timerStart")
     public String timerStart(String time, Model model) throws Exception{
         int timer = Integer.parseInt(time);
-        int uResult = blackFirdayService.blackStatusChange();
 
-        // 타이머 기능을 가진 스레드를 생성하고 시작합니다.
-        TimerThread timerThread = new TimerThread(timer);
+
+        timer = timer * 60;
+        blackFirdayService.blackStatusChange(timer);
+
+        TimerThread timerThread = new TimerThread(timer,blackFirdayService);
         timerThread.start();
+      /*  try {
+            timerThread.join();
+            return "redirect:/event/blackFridayStart";
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }*/
         System.out.println("timer : " + timer);
         model.addAttribute("timer", timer);
         return "redirect:/event/blackFridayStart";
     }
+
+    @PostMapping("/registBlack")
+    public String registBlack(String member_id, String price) throws Exception{
+        int registPrice = Integer.parseInt(price);
+        int uResult = blackFirdayService.registBlack(member_id,registPrice);
+
+
+        if(uResult > 0){
+            return "redirect:/event/blackFridayStart";
+        } else {
+            return "redirect:/event/blackFridayStart";
+        }
+
+    }
 }
 class TimerThread extends Thread {
     private int timeInSeconds;
+    private BlackFirdayService blackFirdayService;
 
-    public TimerThread(int timeInSeconds) {
+    public TimerThread(int timeInSeconds, BlackFirdayService blackFirdayService) {
         this.timeInSeconds = timeInSeconds;
+        this.blackFirdayService = blackFirdayService;
     }
 
     @Override
     public void run() {
         try {
-            System.out.println("타이머 시작: " + timeInSeconds + " 초");
-            Thread.sleep(timeInSeconds * 1000 * 60); // 입력된 시간만큼 스레드를 일시 정지합니다.
-            System.out.println("타이머 종료: " + timeInSeconds + " 초");
+            System.out.println("타이머 시작: " + timeInSeconds + " 분");
+            int minus = timeInSeconds - 1; // 매 초마다 감소할 값
+
+            for (int i = timeInSeconds; i > 0 ; i--) {
+                minus = minus -1;
+                blackFirdayService.timeMinus(minus);
+                Thread.sleep(1000); // 1초 대기
+            }
+
+            System.out.println("타이머 종료: " + timeInSeconds + " 분");
         } catch (InterruptedException e) {
             System.out.println("타이머가 중단되었습니다.");
+        } finally {
+            blackFirdayService.finalStatus();
+
         }
     }
-
 }

@@ -341,6 +341,8 @@
                                         <td><span class="badge bg-label-primary me-1">${list.black_price}원</span></td>
                                         <td>
                                         <select id="timeSelect" name="timeSelect">
+                                            <option value="1">1분</option>
+                                            <option value="3">3분</option>
                                             <option value="5">5분</option>
                                             <option value="10">10분</option>
                                             <option value="15">15분</option>

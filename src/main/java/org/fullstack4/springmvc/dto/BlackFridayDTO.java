@@ -17,4 +17,5 @@ public class BlackFridayDTO {
     private int black_price;
     private String member_id;
     private String black_status;
+    private int black_time;
 }

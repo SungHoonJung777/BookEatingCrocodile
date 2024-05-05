@@ -61,8 +61,35 @@ public class BlackFirdayServiceImpl implements BlackFirdayService{
     }
 
     @Override
-    public int blackStatusChange() {
-        int uResult = blackFirdayMapper.blackStatusChange();
+    public int blackStatusChange(int timer) {
+        int uResult = blackFirdayMapper.blackStatusChange(timer);
+        return uResult;
+    }
+
+
+    @Override
+    public int getTime() {
+        System.out.println("서비스 확인 ");
+        int time = blackFirdayMapper.getTime();
+        System.out.println("서비스 확인 time" +time);
+        return time;
+    }
+
+    @Override
+    public int timeMinus(int minus) {
+        int minus1 = blackFirdayMapper.timeMinus(minus);
+        return minus1;
+    }
+
+    @Override
+    public int finalStatus() {
+        int end = blackFirdayMapper.finalStatus();
+        return end;
+    }
+
+    @Override
+    public int registBlack(String member_id, int price) {
+        int uResult = blackFirdayMapper.registBlack(member_id,price);
         return uResult;
     }
 }

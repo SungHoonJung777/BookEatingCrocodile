@@ -19,12 +19,28 @@
         select * from bec_black  limit 0,1
     </select>
 
+    <select id="getTime" resultType="int">
+        select black_time from bec_black where black_status = 's'
+    </select>
 
     <select id="countBlack">
         select count(*) from bec_black
     </select>
 
     <update id="blackStatusChange">
-        update bec_black set black_status = 's';
+        update bec_black set black_status = 's', black_time = #{timer}
+    </update>
+
+
+
+    <update id="timeMinus">
+        update bec_black set  black_time = #{minus}
+    </update>
+    <update id="finalStatus">
+        update bec_black set black_status = 'e'
+    </update>
+
+    <update id="registBlack">
+        update bec_black set member_id = #{arg0} , black_price = #{arg1}
     </update>
 </mapper>
