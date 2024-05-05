@@ -51,7 +51,32 @@
   <!-- sidebars css -->
   <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/sidebars/">
   <link rel="stylesheet" href="/resources/resources/css/docsearch.css">
+  <style>
+    .goBlack {
+      background-color: #4CAF50; /* Green */
+      border: none;
+      color: white;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+      border-radius: 10px;
+    }
 
+    /* 호버 효과 */
+    .goBlack:hover {
+      background-color: #45a049; /* Dark green */
+    }
+
+    /* 액티브 효과 */
+    .goBlack:active {
+      background-color: #4CAF50; /* Green */
+      transform: translateY(2px);
+    }
+  </style>
 
   <title>책먹는 악어</title>
 </head>
@@ -102,7 +127,14 @@
   </div>
 </div>
 <!-- Hero End -->
+<div>
+  <div class="w-100 mx-auto d-flex">
+    <input type="text" name="search_word" id="" style="width:100px; margin-left: 200px;" class="form-control border-2 border-secondary w-75 py-3 px-4 rounded-pill" placeholder="블랙 프라이데이 참여하기" aria-describedby="search-icon-1" readonly>
 
+    <button type="button"  class="goBlack" style="top: 0; right: 25%;">입장하기</button>
+
+  </div>
+</div>
 <!-- newList Shop Start-->
 <div class="container-fluid vesitable">
   <div class="container py-5">
@@ -179,9 +211,9 @@
       <div class="row g-4 align-items-center">
         <div class="col-lg-6">
           <div class="py-4">
-            <h3 class="display-3 text-white">무엇을 살까? 악악!</h3>
-            <p class="fw-normal display-3 text-dark mb-4">악악악악</p>
-            <p class="mb-4 text-dark">악악악악악악악악악악악악악악악악악악악악악악악악악악악악</p>
+            <h3 class="display-3 text-white" style="font-size: 45px;">무엇을 살지 고민이 되시군요!</h3>
+            <p class="fw-normal display-3 text-dark mb-4" style="font-size: 20px;">책먹는 악어가 책을 추천해드립니다.</p>
+            <p class="mb-4 text-dark">책먹는 악어의 최첨단 AI가 당신의 공부 성향에 맞춰 책을 추천해드립니다.</p>
             <a href="#" class="banner-btn btn border-2 border-white rounded-pill text-dark py-3 px-5" id="testBtn">테스트 하기!</a>
           </div>
         </div>
@@ -229,6 +261,9 @@
 
   document.querySelector("#testBtn").addEventListener("click",function (){
     location.href = '/event/choice';
+  })
+  document.querySelector(".goBlack").addEventListener("click",function (){
+    location.href = '/event/blackFridayStart';
   })
 </script>
 

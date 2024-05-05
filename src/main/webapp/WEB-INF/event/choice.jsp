@@ -181,7 +181,7 @@
 
 
             <button type="button" class="btn btn-success mt-3" id="mainBtn">메인으로</button>
-            <button type="button" class="btn btn-success mt-3" id="cartBtn">장바구니 담기</button>
+            <button type="button" class="btn btn-success mt-3" id="cartBtn">상품 상세</button>
         </section>
     </div>
 </form>
@@ -344,6 +344,11 @@
             let dec = document.querySelector(".resultDesc");
             let text = document.createTextNode(resultLists[avg]);
             dec.appendChild(text);
+
+            document.querySelector("#cartBtn").addEventListener("click", function (){
+                let src = "/product/view?pro_idx=" + avg
+                location.href = src;
+            });
         }
 
         let spinner1 = function () {
@@ -367,6 +372,8 @@
             frm.action = "/";
             frm.submit();
         });
+
+
     </script>
     <script src="" charset="utf-8">
 

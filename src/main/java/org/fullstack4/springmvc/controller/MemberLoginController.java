@@ -123,10 +123,10 @@ public class MemberLoginController {
                 String toMail = member_email;
                 String title = "책 먹는 악어 임시 비밀번호 발급 안내드립니다.";
 
-                String content = "<img src=\"/resources/uploads/BEClogo.png\" />" +
+                String content = "<img src=\"/resources/resources/img/BEClogo.png\" />" +
                         "책 먹는 악어를 방문해주셔서 감사합니다." +
                         "<br><br>" +
-                        "임시 비밀번호는 " + checkNum + "입니다." +
+                        "임시 비밀번호는 " + "crocodile"+checkNum + "입니다." +
                         "<br>" +
                         "해당 임시 비밀번호를 입력하여 로그인 후 마이페이지에서 정보를 변경해주세요.";
 
