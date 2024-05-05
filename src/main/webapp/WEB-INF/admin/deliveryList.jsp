@@ -428,9 +428,9 @@
                                         <td>${list.member_id}</td>
                                         <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>${list.order_total}원</strong></td>
                                         <c:choose>
-                                            <c:when test="${list.delivery eq '결제완료'}">
+                                            <c:when test="${list.delivery eq '1'}">
                                                <input type="hidden" name="order_idx" id="order_idx" value="${list.order_idx}">
-                                                <td><a href="#" onclick="openPopup('${list.delivery}')"><span class="badge bg-label-success me-1" style="background-color: yellow;">${list.delivery}</span></a></td>
+                                                <td><a href="#" onclick="openPopup('${list.delivery}')"><span class="badge bg-label-success me-1" style="background-color: yellow;">결제완료</span></a></td>
                                             </c:when>
                                             <c:when test="${list.delivery eq '배송중'}">
                                                 <td><span class="badge bg-label-primary me-1" style="background-color: yellow;">${list.delivery}</span></td>
