@@ -143,6 +143,56 @@
                         </div>
 
                     </div>
+                    <div class="mb-3">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">댓글번호</th>
+                                <th scope="col">제목</th>
+                                <th scope="col">작성자</th>
+                                <th scope="col">등록일</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <c:choose>
+                                <c:when test="${commuReplyDTOList != null}">
+                                    <c:forEach items="${commuReplyDTOList}" var="list" varStatus="status">
+                                        <tr>
+                                            <th scope="row"> ${status.index + 1}</th>
+                                            <td>${list.reply_content}</td>
+                                            <td>${list.member_id}</td>
+                                            <td>${fn:substring(list.reply_reg_date, 0, 10)} ${fn:substring(list.reply_reg_date, 11, 20)}</td>
+                                        </tr>
+                                    </c:forEach>
+                                </c:when>
+                                <c:otherwise>
+                                    <tr>
+                                        <td colspan="4">등록된 댓글이 존재하지 않습니다.</td>
+                                    </tr>
+                                </c:otherwise>
+                            </c:choose>
+
+                            <tr>
+                                <td colspan="4">
+                                    <form action="/data/replyRegist" id="replyRegist" method="post">
+                                        <input type="hidden" value="${dataDTO.comu_idx}" id="" name="comu_idx">
+                                        <div class="mb-3">
+                                            <label class="form-label">아이디 </label>
+                                            <input type="text" class="form-control" readonly name="member_id" id="" value="${sessionScope.member_id}">
+                                            <label class="form-label">댓글 </label>
+                                            <input type="text" class="form-control" name="reply_content" id="reply_content" maxlength="100" placeholder="댓글을 입력하세요">
+                                            <div id="div_err_reply_content" style="display: none"></div>
+                                        </div>
+                                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                            <button class="btn btn-primary me-md-2" id="replySubmit" type="submit">댓글등록</button>
+<%--                                            <button class="btn btn-secondary" type="button">취소</button>--%>
+                                        </div>
+                                    </form>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
 
             </div>
@@ -177,6 +227,17 @@
         }
 
     }
+
+    document.querySelector("#replySubmit").addEventListener("click", () => {
+        e.preventDefault();
+        let frm = document.getElementById("replyRegist");
+        if (${not empty sessionScope.member_id}) {
+            alert("댓글 작성이 완료되었습니다.");
+            frm.submit();
+        }
+
+        alert("로그인 해주세요.");
+    })
 </script>
 </body>
 </html>

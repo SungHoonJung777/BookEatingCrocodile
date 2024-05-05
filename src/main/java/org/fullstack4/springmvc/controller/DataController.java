@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.fullstack4.springmvc.common.FileUtil;
 import org.fullstack4.springmvc.dto.*;
+import org.fullstack4.springmvc.service.data.CommuReplyServiceIf;
 import org.fullstack4.springmvc.service.data.DataServiceIf;
 import org.fullstack4.springmvc.service.qnaService.QnaServiceIf;
 import org.springframework.stereotype.Controller;
@@ -21,6 +22,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 import java.util.UUID;
 import java.util.stream.Stream;
 
@@ -30,6 +32,7 @@ import java.util.stream.Stream;
 @RequiredArgsConstructor
 public class DataController {
     private final DataServiceIf dataServiceIf;
+    private final CommuReplyServiceIf commuReplyServiceIf;
 
     @GetMapping("/write")
     public void registDataGET(HttpSession session,
@@ -124,7 +127,10 @@ public class DataController {
                         HttpSession session,
                         Model model) {
         DataDTO dataDTO = dataServiceIf.viewData(comu_idx);
+        List<CommuReplyDTO> commuReplyDTOList = commuReplyServiceIf.reply_list(comu_idx);
+
         model.addAttribute("dataDTO", dataDTO);
+        model.addAttribute("commuReplyDTOList", commuReplyDTOList);
     }
 
 

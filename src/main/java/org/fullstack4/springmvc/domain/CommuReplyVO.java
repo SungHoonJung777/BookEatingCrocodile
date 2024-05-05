@@ -13,14 +13,11 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class DataVO {
+public class CommuReplyVO {
+    private int reply_idx;
     private int comu_idx;
-    private String comu_title;
-    private String comu_content;
     private String member_id;
-    private LocalDateTime comu_reg_date;
-    private LocalDateTime comu_modify_date;
-    private String comu_file;
-    private String commu_category;
-    private int reply_cnt;
+    private String reply_content;
+    private LocalDateTime reply_reg_date;
+    private LocalDateTime reply_modify_date;
 }

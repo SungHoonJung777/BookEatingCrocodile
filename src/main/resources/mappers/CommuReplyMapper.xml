@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.fullstack4.springmvc.mapper.CommuReplyMapper">
+
+   <insert id="reply_regist">
+       insert into bec_reply (comu_idx, member_id, reply_content)
+       values(#{comu_idx}, #{member_id}, #{reply_content})
+   </insert>
+
+    <select id="reply_list" resultType="org.fullstack4.springmvc.domain.CommuReplyVO">
+        select reply_idx, comu_idx, member_id, reply_content, reply_reg_date, reply_modify_date
+        from bec_reply
+        where comu_idx=#{comu_idx}
+        order by reply_idx asc
+    </select>
+
+    <update id="update_reply_cnt">
+        update bec_community set reply_cnt = reply_cnt + 1 where comu_idx=#{comu_idx}
+    </update>
+
+
+</mapper>

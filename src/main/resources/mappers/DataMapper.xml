@@ -61,7 +61,7 @@
 
 
     <select id="dataList" resultType="org.fullstack4.springmvc.domain.DataVO">
-        select comu_idx, member_id, comu_title, comu_content, comu_reg_date, comu_file, commu_category
+        select comu_idx, member_id, comu_title, comu_content, comu_reg_date, comu_file, commu_category, reply_cnt
         from bec_community
         where commu_category=#{commu_category}
         <if test="search_type != null">
