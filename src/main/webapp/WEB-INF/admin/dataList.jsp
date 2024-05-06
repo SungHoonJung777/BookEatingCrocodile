@@ -354,11 +354,11 @@
 
                                 <div class="card mb-4">
                                     <!-- Notifications -->
-                                    <h5 class="card-header">공지사항</h5>
+                                    <h5 class="card-header">자료실</h5>
                                     <div class="card-body">
                                         <br>
                                         <span>
-                                    <span class="notificationRequest"><strong>공지사항 입니다.</strong></span></span>
+                                    <span class="notificationRequest"><strong>자료실 입니다.</strong></span></span>
                                         <div class="error"></div>
 
                                     </div>
