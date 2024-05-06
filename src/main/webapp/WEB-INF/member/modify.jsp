@@ -167,6 +167,7 @@
                                 <h5 class="card-header">회원탈퇴</h5>
                                 <div class="card-body">
                                     <div class="mb-3 col-12 mb-0">
+                                        <br>
                                         <div class="alert alert-warning">
                                             <h6 class="alert-heading fw-bold mb-1">탈퇴 하시겠습니까?</h6>
                                             <p class="mb-0">탈퇴를 하시면 다시 조회를 하실 수 없습니다. 위 사항을 확인해 주십시오.</p>
@@ -261,6 +262,8 @@
     }
 
 
+
+
     //비밀번호 재확인
     let pwd = document.getElementById("pwd");
     let pwdChk = document.getElementById("pwdCheck");
@@ -285,39 +288,79 @@
 
     //비밀번호 맞지 않을 시, 전화번호 형식 안맞을 시, 이름 형식 안맞을 시, 빈칸일 시 제출 못함
 
+    let pwCheck = true;
+    let pwReCheck = true;
+    let nameCheck = true;
+    let emailCheck = true;
+    let addressCheck = true;
+    let phoneCheck = true;
+
+
     document.getElementById("btnSubmit").addEventListener("click", (e) => {
         let phone = document.getElementById("phone").value;
-        let regPhone=  /^01([0|1|6|7|8|9])-([0-9]{3,4})-([0-9]{4})$/;
+        let regPhone = /^01([0|1|6|7|8|9])-([0-9]{3,4})-([0-9]{4})$/;
         let name = document.querySelector("#name");
-        
-        
-        e.preventDefault();
+        let addr1 = document.getElementById("addr1");
+        let addr2 = document.getElementById("addr2");
+
+
+
 
         if (name.value.length < 1) {
             alert("이름을 입력해 주세요.");
-            return false;
+            nameCheck = false;
+        } else {
+            nameCheck = true;
         }
 
-        if (pwd.value === pwdChk.value) {
-            pwdYN.value = "Y";
-            console.log(pwdYN);
+        if (addr1.value.length < 1) {
+            alert("주소를 입력해 주세요.");
+            addressCheck = false;
+        } else {
+            addressCheck = true;
         }
 
-        if (pwdYN.value === "N") {
-            alert("비밀번호가 일치하지 않습니다.");
-            return false;
+        if (addr2.value.length < 1) {
+            alert("상세 주소를 입력해 주세요.");
+            addressCheck = false;
+        } else {
+            addressCheck = true;
         }
+
+
+
+            if (pwdYN.value === "N" || pwCheck === false) {
+                if ( strongPassword(pwd.value) === false) {
+                    alert("비밀번호는 특수문자 포함 8자리 이상입니다.");
+                    pwCheck = false;
+                } else {
+                    pwCheck = true;
+                }
+                if (pwd.value === pwdChk.value) {
+                    pwdYN.value = "Y"
+                    pwReCheck = true;
+                } else {
+                    alert("비밀번호가 일치하지 않습니다.");
+                    pwReCheck = false;
+                }
+            }
+
+
+
+
         if (!regPhone.test(phone)) {
             alert("전화번호 형식에 맞춰주세요. ex)010-1234-5678");
-            return false;
+            phoneCheck = false;
+        } else {
+            phoneCheck = true;
         }
 
-
-        else {
+        if (pwCheck && pwReCheck && nameCheck && emailCheck && addressCheck && phoneCheck && pwdYN.value === "Y") {
             alert("수정 완료");
             frm.submit();
         }
 
+        e.preventDefault();
     });
 
 
