@@ -80,7 +80,7 @@
                 <!-- Content -->
 
                 <div class="container-xxl flex-grow-1 container-p-y">
-                    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">마이페이지 /</span> 1:1 문의</h4>
+                    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">커뮤니티 /</span> FaQ</h4>
 
                     <div class="row">
                         <div class="col-xl">
@@ -88,8 +88,8 @@
                             <div class="card mb-4">
 
                                 <div class="card-header d-flex justify-content-between align-items-center">
-                                    <h5 class="mb-0">1:1 문의</h5>
-                                    <small class="text-muted float-end">등록하기</small>
+                                    <h5 class="mb-0">FAQ</h5>
+                                    <small class="text-muted float-end">수정하기</small>
                                 </div>
                                 <form action="/faq/modify" method="post">
                                     <input type="hidden" value="faq" name="qna_category">
@@ -164,7 +164,7 @@
     console.log(serverValidResult);
 
     document.getElementById("adminDelete").addEventListener("click", () => {
-        let yn = confirm("답변을 삭제 하시겠습니까?");
+        let yn = confirm("faq 글을 삭제 하시겠습니까?");
         if (yn) {
             location.href="/faq/delete?qna_idx=${qnaDTO.qna_idx}";
         }

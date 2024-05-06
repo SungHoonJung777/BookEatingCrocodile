@@ -186,7 +186,7 @@
                                                 </c:if>
                                                 <td><a><i class="fa-solid fa-arrow-right"></i></a></td>
                                                 <td></td>
-                                                <td class="text-nowrap"><strong><textarea style="resize:none;" rows="6" class="form-control">${dto.qna_answer}</textarea></strong>
+                                                <td class="text-nowrap"><strong><textarea style="resize:none;" rows="10" class="form-control">${dto.qna_answer}</textarea></strong>
                                                 </td>
                                                 <td>
                                                     <c:if test="${loginInfo.member_id eq 'admin'}">
