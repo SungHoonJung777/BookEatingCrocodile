@@ -20,5 +20,13 @@
         update bec_community set reply_cnt = reply_cnt + 1 where comu_idx=#{comu_idx}
     </update>
 
+    <delete id="deleteReply">
+        DELETE from bec_reply
+        WHERE reply_idx = #{reply_idx}
+    </delete>
+
+    <update id="dedate_reply_cnt">
+        update bec_community set reply_cnt = reply_cnt - 1 where comu_idx=#{comu_idx}
+    </update>
 
 </mapper>

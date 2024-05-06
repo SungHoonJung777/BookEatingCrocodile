@@ -58,4 +58,21 @@ public class CommuReplyServiceImpl implements CommuReplyServiceIf {
                 .collect(Collectors.toList());
         return commuReplyDTOList;
     }
+
+    @Override
+    @Transactional
+    public int deleteReply(int reply_idx, int comu_idx) {
+        int result = commuReplyMapper.deleteReply(reply_idx);
+        int replyResult = commuReplyMapper.dedate_reply_cnt(comu_idx);
+        return result;
+    }
+
+    @Override
+    public int dedate_reply_cnt(int comu_idx) {
+        log.info("================================");
+        int result = commuReplyMapper.dedate_reply_cnt(comu_idx);
+        log.info("result : " + result);
+        log.info("====================================");
+        return result;
+    }
 }

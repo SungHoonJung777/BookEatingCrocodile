@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
@@ -48,5 +49,12 @@ public class CommuReplyController {
         return "redirect:/data/view?comu_idx=" + commuReplyDTO.getComu_idx();
     }
 
+    @PostMapping("/deleteReply")
+    public String deleteReply(@RequestParam(name = "reply_idx", defaultValue="0") int reply_idx,
+                              @RequestParam(name = "comu_idx", defaultValue="0") int comu_idx) {
 
+        int result = commuReplyServiceIf.deleteReply(reply_idx, comu_idx);
+
+        return "redirect:/data/view?comu_idx=" + comu_idx;
+    }
 }

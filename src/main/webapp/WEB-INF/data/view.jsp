@@ -154,16 +154,25 @@
                             </tr>
                             </thead>
                             <tbody>
+
                             <c:choose>
-                                <c:when test="${commuReplyDTOList != null}">
+                                <c:when test="${not empty commuReplyDTOList}">
+
+
                                     <c:forEach items="${commuReplyDTOList}" var="list" varStatus="status">
+                                        <form action="/data/deleteReply" id="frmDeleteForm" method="post">
+                                        <input type="hidden" name="comu_idx" value="${dataDTO.comu_idx}">
+                                        <input type="hidden" name="reply_idx" value="${list.reply_idx}">
                                         <tr>
                                             <th scope="row"> ${status.index + 1}</th>
                                             <td>${list.reply_content}</td>
                                             <td>${list.member_id}</td>
-                                            <td>${fn:substring(list.reply_reg_date, 0, 10)} ${fn:substring(list.reply_reg_date, 11, 20)}</td>
+                                            <td>${fn:substring(list.reply_reg_date, 0, 10)} ${fn:substring(list.reply_reg_date, 11, 20)} <c:if test="${list.member_id eq sessionScope.member_id}"> <button id="deleteReply" class="btn-danger"  type="submit" > 삭제 </button> </c:if></td>
+
                                         </tr>
+                                        </form>
                                     </c:forEach>
+
                                 </c:when>
                                 <c:otherwise>
                                     <tr>
@@ -175,7 +184,7 @@
                             <tr>
                                 <td colspan="4">
                                     <form action="/data/replyRegist" id="replyRegist" method="post">
-                                        <input type="hidden" value="${dataDTO.comu_idx}" id="" name="comu_idx">
+                                        <input type="hidden" value="${dataDTO.comu_idx}"  name="comu_idx">
                                         <div class="mb-3">
                                             <label class="form-label">아이디 </label>
                                             <input type="text" class="form-control" readonly name="member_id" id="" value="${sessionScope.member_id}">
@@ -208,6 +217,17 @@
 <jsp:include page="../common/footer.jsp"/>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
+
+    //댓글 삭제
+    // function btnDeleteReply(e) {
+    //     let frmDeleteForm = document.getElementById("frmDeleteForm");
+    //     let deleteYN = confirm("댓글을 삭제하시겠습니까?");
+    //     if (deleteYN) {
+    //         frmDeleteForm.submit();
+    //     }
+    //     e.preventDefault();
+    // }
+
     const serverValidResult = {}; //JSON 객체 빈값으로 선언
     <c:forEach items="${errors}" var="err">
     if (document.getElementById("div_err_${err.getField()}") != null) {

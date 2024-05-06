@@ -337,7 +337,7 @@
                                     </div>
                                     <c:if test="${qnaDTO.qna_answer_YN eq 'N' and (qnaDTO.member_id eq sessionScope.member_id)}">
                                         <button type="submit" class="btn btn-primary"
-                                                onclick="location.href='/qna/modify?qna_idx=${qnaDTO.qna_idx}'">수정하기
+                                                onclick="location.href='/admin/qna/modify?qna_idx=${qnaDTO.qna_idx}'">수정하기
                                         </button>
                                         <button type="button" id="deleteA" onclick="qnaDelete(${qnaDTO.qna_idx})"
                                                 class="btn btn-danger">글 삭제

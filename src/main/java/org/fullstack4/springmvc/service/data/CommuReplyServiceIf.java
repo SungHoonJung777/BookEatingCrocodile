@@ -9,4 +9,6 @@ public interface CommuReplyServiceIf {
     int reply_regist(CommuReplyDTO commuReplyDTO);
     int update_reply_cnt(int comu_idx);
     List<CommuReplyDTO> reply_list(int comu_idx);
+    int deleteReply(int reply_idx, int comu_idx);
+    int dedate_reply_cnt(int comu_idx);
 }

@@ -11,4 +11,7 @@ public interface CommuReplyMapper {
     int update_reply_cnt(int comu_idx);
 
     List<CommuReplyVO> reply_list(int comu_idx);
+
+    int deleteReply(int reply_idx);
+    int dedate_reply_cnt(int comu_idx);
 }
