@@ -2,13 +2,9 @@ package org.fullstack4.springmvc.service.data;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.fullstack4.springmvc.domain.BbsReplyVO;
 import org.fullstack4.springmvc.domain.CommuReplyVO;
-import org.fullstack4.springmvc.dto.BbsReplyDTO;
 import org.fullstack4.springmvc.dto.CommuReplyDTO;
-import org.fullstack4.springmvc.mapper.BbsReplyMapper;
 import org.fullstack4.springmvc.mapper.CommuReplyMapper;
-import org.fullstack4.springmvc.service.BbsReplyServiceIf;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

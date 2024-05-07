@@ -2,9 +2,7 @@ package org.fullstack4.springmvc.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.fullstack4.springmvc.dto.BbsReplyDTO;
 import org.fullstack4.springmvc.dto.CommuReplyDTO;
-import org.fullstack4.springmvc.service.BbsReplyServiceIf;
 import org.fullstack4.springmvc.service.data.CommuReplyServiceIf;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;

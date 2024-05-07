@@ -5,15 +5,12 @@ import lombok.extern.log4j.Log4j2;
 import org.fullstack4.springmvc.common.FileUtil;
 import org.fullstack4.springmvc.dto.CartDTO;
 import org.fullstack4.springmvc.dto.MemberDTO;
-import org.fullstack4.springmvc.dto.ProductDTO;
 import org.fullstack4.springmvc.dto.*;
-import org.fullstack4.springmvc.service.BbsServiceIf;
 import org.fullstack4.springmvc.service.MemberImageServiceIf;
 import org.fullstack4.springmvc.service.MemberServiceIf;
 import org.fullstack4.springmvc.service.qnaService.QnaServiceIf;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -25,14 +22,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.Random;
-import java.io.File;
 import java.util.List;
-import java.util.UUID;
 
 @Log4j2
 @Controller
@@ -41,7 +35,6 @@ import java.util.UUID;
 public class MemberController {
     private final MemberServiceIf memberServiceIf;
     private final MemberImageServiceIf memberImageServiceIf;
-    private final BbsServiceIf bbsServiceIf;
     private final QnaServiceIf qnaServiceIf;
 
     @Autowired
