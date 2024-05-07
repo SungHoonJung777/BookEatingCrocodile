@@ -66,12 +66,24 @@
 <div class="modal fade" id="orderDetails" style="display:none" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-scrollable">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modal_title">order_no</h5>
-                <button calss="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-header border-bottom">
+                <h5 class="modal-title" id="modal_title">주문번호</h5>
+                <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body pb-0">
-                <table id="modal_table" style="width: 100%">
+                <div class="pt-2 ps-sm-3 mx-auto mx-sm-0" style="border-radius: 10px; border:solid 1px gray">
+                    <div>주문자명</div>
+                    <div class="text-muted mb-2 border-bottom" id="name"></div>
+                    <div>배송지</div>
+                    <div class="text-muted mb-2 border-bottom" id="addr"></div>
+                    <div>상태</div>
+                    <div class="text-muted mb-2 border-bottom" id="delivery"></div>
+                    <div>연락처</div>
+                    <div class="text-muted mb-2 border-bottom" id="phone"></div>
+                    <div>요청사항</div>
+                    <div class="text-muted mb-2 border-bottom" id="req_term"></div>
+                </div>
+                <table style="width: 100%">
                     <thead>
                         <tr style="border-bottom: 1px solid black">
                             <th colspan="2">상품정보</th>
@@ -79,20 +91,23 @@
                             <th>상품 수량</th>
                         </tr>
                     </thead>
+                    <tbody id="modal_table">
+
+                    </tbody>
                 </table>
             </div>
             <div class="modal-footer flex-wrap justify-content-between bg-secondary fs-md">
                 <div class="px-2 py-1">
-                    <span class="text-muted"><h6>상품합계</h6></span>
-                    <span></span>
+                    <span class="text-muted"><strong>상품합계</strong></span>
+                    <span id="pro_total"></span>
                 </div>
                 <div class="px-2 py-1">
-                    <span class="text-muted"><h6>배송비</h6></span>
-                    <span>3000</span>
+                    <span class="text-muted"><strong>배송비</strong></span>
+                    3000
                 </div>
                 <div class="px-2 py-1">
-                    <span class="text-muted"><h6>총합</h6></span>
-                    <span></span>
+                    <span class="text-muted"><strong>총합</strong></span>
+                    <span id="all_total"></span>
                 </div>
             </div>
         </div>
@@ -154,10 +169,10 @@
                                                 <td class="text-nowrap">
                                                     <c:choose>
                                                         <c:when test="${dto.delivery eq '주문취소'}">
-                                                            <a style="text-decoration: line-through; color: black" class="" onclick="orderDetail(${dto.order_idx}, this)" href="#orderDetails" data-bs-toggle="modal">${dto.req_term}</a>
+                                                            <a style="text-decoration: line-through; color: black" class="" onclick="orderDetail(${dto.order_idx})" href="#orderDetails" data-bs-toggle="modal">${dto.req_term}</a>
                                                         </c:when>
                                                         <c:otherwise>
-                                                            <a class="" href="#orderDetails" onclick="orderDetail(${dto.order_idx}, this)" data-bs-toggle="modal">${dto.req_term}</a>
+                                                            <a class="" href="#orderDetails" onclick="orderDetail(${dto.order_idx})" data-bs-toggle="modal">${dto.req_term}</a>
                                                         </c:otherwise>
                                                     </c:choose>
 
@@ -278,34 +293,46 @@
             },            // Json 형식의 데이터이다.
             success: function (result) { // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
                 let resultList = result.getElementsByTagName("item");
-                let default_table = document.getElementById("modal_table").firstElementChild;
-                console.log(default_table);
-                document.getElementById("modal_table").append(default_table);
+                document.getElementById("modal_table").innerHTML="";
+                document.getElementById("modal_title").innerHTML="주문번호 : "+order_idx;
                 console.log(result);
-                for(let i = 0; i<resultList.length-1; i++){
-                    let trele = document.createElement("tr");
-                    trele.setAttribute("style","border-bottom:1px solid black")
-                    for(let j=0; j<resultList.item(i).childElementCount; j++){
-                        let tdele = document.createElement("td");
-                        let chiled = resultList.item(i).children.item(j);
-                        if(chiled.firstChild!=null){
-                            if(chiled.firstChild.length>1||chiled.tagName == "pro_amount") {
-                                if(chiled.tagName == "pro_image"){
-                                    let imgele = document.createElement("img");
-                                    imgele.setAttribute("src", "/resources/resources/img/books/"+resultList.item(i).getElementsByTagName("pro_image").item(0).firstChild.nodeValue);
-                                    imgele.setAttribute("width","100px");
-                                    imgele.setAttribute("height", "150px");
-                                    tdele.append(imgele);
-                                    trele.prepend(tdele);
-
-                                }else{
-                                    tdele.innerHTML=chiled.firstChild.nodeValue;
-                                    trele.append(tdele);
+                for(let i = 0; i<resultList.length; i++) {
+                    if (i==resultList.length-1) {
+                        document.getElementById("all_total").innerHTML = resultList.item(i).getElementsByTagName("order_total").item(0).firstChild.nodeValue;
+                        document.getElementById("pro_total").innerHTML = Number(resultList.item(i).getElementsByTagName("order_total").item(0).firstChild.nodeValue)-3000;
+                        document.getElementById("name").innerHTML = resultList.item(i).getElementsByTagName("order_name").item(0).firstChild.nodeValue;
+                        document.getElementById("addr").innerHTML = resultList.item(i).getElementsByTagName("deli_addr").item(0).firstChild.nodeValue;
+                        document.getElementById("phone").innerHTML = resultList.item(i).getElementsByTagName("order_phone").item(0).firstChild.nodeValue;
+                        document.getElementById("delivery").innerHTML = resultList.item(i).getElementsByTagName("delivery").item(0).firstChild.nodeValue;
+                        if(resultList.item(i).getElementsByTagName("req_term").item(0).firstChild != null){
+                            document.getElementById("req_term").innerHTML = resultList.item(i).getElementsByTagName("req_term").item(0).firstChild.nodeValue;
+                        }else{
+                            document.getElementById("req_term").innerHTML = "요청사항 없음";
+                        }
+                    } else {
+                        let trele = document.createElement("tr");
+                        trele.setAttribute("style", "border-bottom:1px solid black")
+                        for (let j = 0; j < resultList.item(i).childElementCount; j++) {
+                            let tdele = document.createElement("td");
+                            let chiled = resultList.item(i).children.item(j);
+                            if (chiled.firstChild != null) {
+                                if (chiled.firstChild.length > 1 || chiled.tagName == "pro_amount") {
+                                    if (chiled.tagName == "pro_image") {
+                                        let imgele = document.createElement("img");
+                                        imgele.setAttribute("src", "/resources/resources/img/books/" + resultList.item(i).getElementsByTagName("pro_image").item(0).firstChild.nodeValue);
+                                        imgele.setAttribute("width", "100px");
+                                        imgele.setAttribute("height", "150px");
+                                        tdele.append(imgele);
+                                        trele.prepend(tdele);
+                                    } else {
+                                        tdele.innerHTML = chiled.firstChild.nodeValue;
+                                        trele.append(tdele);
+                                    }
                                 }
                             }
                         }
+                        document.getElementById("modal_table").prepend(trele);
                     }
-                    document.getElementById("modal_table").prepend(trele);
                 }
             },
             error: function (error) { // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.

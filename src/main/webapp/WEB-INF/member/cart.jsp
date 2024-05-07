@@ -17,18 +17,13 @@
 <div class="container">
     <!-- Single Page Header start -->
     <div class="container-fluid page-header py-5">
-        <h1 class="text-center text-white display-6">Cart</h1>
-        <ol class="breadcrumb justify-content-center mb-0">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item"><a href="#">Pages</a></li>
-            <li class="breadcrumb-item active text-white">Cart</li>
-        </ol>
+        <h1 class="text-center text-white display-6"><a href="/product/main" class="proB">Cart</a></h1>
     </div>
     <!-- Single Page Header End -->
 
 
     <!-- Cart Page Start -->
-    <form name="cartFrm" id="cartFrm" method="post" action="/member/checkout">
+    <form name="cartFrm" id="cartFrm" method="get" action="/member/checkout">
         <div class="container-fluid py-5">
             <div class="container py-5">
                 <div class="table-responsive">
@@ -58,7 +53,7 @@
                             </th>
                             <th scope="row">
                                 <div class="d-flex align-items-center">
-                                    <img src="" class="img-fluid me-5 rounded-circle" style="width: 80px; height: 80px;" alt="">
+                                    <img src="/resources/resources/img/books/${list.pro_img}" class="img-fluid me-5 rounded-circle" style="width: 80px; height: 80px;" alt="">
                                 </div>
                             </th>
                             <td>
