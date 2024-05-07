@@ -17,16 +17,11 @@
 <div class="container">
     <div class="container-fluid page-header py-5">
         <h1 class="text-center text-white display-6">Checkout</h1>
-        <ol class="breadcrumb justify-content-center mb-0">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item"><a href="#">Pages</a></li>
-            <li class="breadcrumb-item active text-white">Checkout</li>
-        </ol>
     </div>
     <div class="container-fluid py-5">
         <div class="container py-5">
             <h1 class="mb-4">Billing details</h1>
-            <form action="/member/checkout" method="get">
+            <form action="/member/checkout" method="post">
                 <div class="row g-5">
                     <div class="col-md-12 col-lg-6 col-xl-7">
                         <div class="row">
@@ -34,28 +29,34 @@
                                 <div class="form-item w-100">
                                     <label class="form-label my-3">이름<sup>*</sup></label>
                                     <input type="text" class="form-control" name="order_name">
+                                    <span id="err_order_name" style="display: none"></span>
                                 </div>
                             </div>
                         </div>
                         <div class="form-item">
                             <label class="form-label my-3">배송지 명<sup>*</sup></label>
                             <input type="text" class="form-control" name="deli_name">
+                            <span id="err_deli_name" style="display: none"></span>
                         </div>
                         <div class="form-item">
                             <label class="form-label my-3" >우편번호<sup>*</sup></label>
                             <input type="text" class="form-control" id="zonecode" name="zonecode" onfocus="address()">
+                            <span id="err_zonecode" style="display: none"></span>
                         </div>
                         <div class="form-item">
                             <label class="form-label my-3">주소 <sup>*</sup></label>
                             <input type="text" class="form-control" id="addr1" name="addr1" onfocus="address()">
+                            <span id="err_addr1" style="display: none"></span>
                         </div>
                         <div class="form-item">
                             <label class="form-label my-3">상세주소 <sup>*</sup></label>
                             <input type="text" class="form-control" name="addr2" id="addr2">
+                            <span id="err_addr2" style="display: none"></span>
                         </div>
                         <div class="form-item">
                             <label class="form-label my-3">전화번호<sup>*</sup></label>
                             <input type="tel" class="form-control" name="order_phone">
+                            <span id="err_order_phone" style="display: none"></span>
                         </div>
                         <hr>
                         <div class="form-item">
@@ -78,7 +79,7 @@
                                     <tr>
                                         <th scope="row">
                                             <div class="d-flex align-items-center mt-2">
-                                                <img src="img/vegetable-item-2.jpg" class="img-fluid rounded-circle" style="width: 90px; height: 90px;" alt="">
+                                                <img src="/resources/resources/img/books/${list.pro_img}" class="img-fluid rounded-circle" style="width: 90px; height: 90px;" alt="">
                                             </div>
                                         </th>
                                         <td class="py-5">${list.pro_title}</td>
@@ -159,6 +160,16 @@
             }
         }).open();
     }
+    const serverValidResult = {}; //JSON 객체 빈값으로 선언
+    <c:forEach items="${errors}" var="err">
+    if (document.getElementById("err_${err.getField()}") != null) {
+        document.getElementById("err_${err.getField()}").innerHTML = "<span style='color:red'>${err.defaultMessage}</span>";
+        document.getElementById("err_${err.getField()}").style.display = "block";
+    }
+    serverValidResult['${err.getField()}'] = '${err.defaultMessage}';
+    </c:forEach>
+
+    console.log(serverValidResult);
 </script>
 </body>
 </html>

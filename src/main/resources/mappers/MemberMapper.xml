@@ -57,7 +57,7 @@
         where user_id = #{user_id}
     </select>
     <select id="getCartList" resultType="org.fullstack4.springmvc.domain.CartVO">
-        SELECT bc.cart_idx, bc.pro_title, round(bp.pro_price-(bp.pro_price*(pro_sale/100))) AS pro_price, bp.pro_amount, bc.pro_quantity, bc.pro_idx
+        SELECT bc.cart_idx, bc.pro_title, round(bp.pro_price-(bp.pro_price*(pro_sale/100))) AS pro_price, bp.pro_amount, bc.pro_quantity, bc.pro_idx, bp.pro_image as pro_img
         FROM bec_product as bp
         inner join bec_cart AS bc ON bp.pro_idx = bc.pro_idx
         WHERE member_id = #{m_id}

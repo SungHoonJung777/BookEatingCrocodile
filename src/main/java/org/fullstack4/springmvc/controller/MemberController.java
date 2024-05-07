@@ -271,7 +271,6 @@ public class MemberController {
                         Model model) {
         String m_id = (String)session.getAttribute("member_id");
         List<CartDTO> cartList = memberServiceIf.getCartList(m_id, "");
-        System.out.println(cartList);
         model.addAttribute("cartList", cartList);
     }
     @ResponseBody
@@ -280,14 +279,12 @@ public class MemberController {
         memberServiceIf.cartout(cart_idx);
         System.out.println("cart_idx : "+ cart_idx);
     }
-    @PostMapping("/checkout")
+    @GetMapping("/checkout")
     public void checkout(@RequestParam(name = "cart_idx", defaultValue = "") String cart_idx,
                          HttpSession session,
                         Model model) {
         String m_id = (String)session.getAttribute("member_id");
-        log.info("cartIdx : "+cart_idx);
         List<CartDTO> cartList = memberServiceIf.getCartList(m_id, cart_idx);
-        log.info("cart_idx : "+ cart_idx);
 
         int total = 0;
         for(int i = 0; i < cartList.size(); i++) {
@@ -298,11 +295,20 @@ public class MemberController {
         model.addAttribute("total", total);
         model.addAttribute("cartList", cartList);
     }
-    @GetMapping("/checkout")
+    @PostMapping("/checkout")
     public String Postcheckout(@Valid OrderDTO orderDTO,
                                @RequestParam(name = "cart_idx", defaultValue = "") String cart_idx,
                                HttpSession session,
-                               Model model) {
+//                               BindingResult bindingResult,
+                               RedirectAttributes redirectAttributes) {
+//        if (bindingResult.hasErrors()) {
+//            log.info("Errors");
+//            redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
+//            redirectAttributes.addFlashAttribute("qnaDTO", orderDTO);
+//            redirectAttributes.addFlashAttribute("cart_idx", cart_idx);
+//            log.info("===============");
+//            return "redirect:/member/checkout";
+//        }
         String member_id = (String)session.getAttribute("member_id");
         
         orderDTO.setOrder_addr();
