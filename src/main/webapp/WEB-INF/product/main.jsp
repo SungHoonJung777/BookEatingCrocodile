@@ -298,7 +298,9 @@
                                                     <div class="fruite-img">
                                                         <img src="/resources/resources/img/books/${list.pro_image}" class="img-fluid w-100 rounded-top book_img_size" alt="책 이미지"/>
                                                     </div>
+
                                                     <div class="p-4 border border-top-0 rounded-bottom book_intro_box">
+
                                                         <div class="d-flex mb-3">
                                                             <i class="fa fa-star <c:if test='${list.review_star_avg > 0}'>text-secondary</c:if>"></i>
                                                             <i class="fa fa-star <c:if test='${list.review_star_avg > 1}'>text-secondary</c:if>"></i>
@@ -306,13 +308,15 @@
                                                             <i class="fa fa-star <c:if test='${list.review_star_avg > 3}'>text-secondary</c:if>"></i>
                                                             <i class="fa fa-star <c:if test='${list.review_star_avg > 4}'>text-secondary</c:if>"></i>
                                                         </div>
+                                                      
                                                         <h4>${list.pro_name}</h4>
                                                         <p>${list.pro_content}...</p>
 
                                                         <div class="d-flex justify-content-between flex-lg-wrap">
-                                                            <p class="text-dark fs-5 fw-bold mb-0"><fmt:formatNumber value="${list.pro_sale_price}" pattern="#,###"/>원</p>
+                                                            <p class="fw-bold mb-3 text-danger text-decoration-line-through">정가 : <fmt:formatNumber value="${list.pro_price}" pattern="#,###"/>원</p>
+                                                            <p class="text-dark fs-5 fw-bold mb-0 sale_price">할인가 : <fmt:formatNumber value="${list.pro_sale_price}" pattern="#,###"/>원</p>
                                                             <div class="empty" ></div>
-                                                            <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary cart_add_box"><i class="fa fa-shopping-bag me-2 text-primary"></i> 장바구니에 추가</a>
+<%--                                                            <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary cart_add_box"><i class="fa fa-shopping-bag me-2 text-primary"></i> 장바구니에 추가</a>--%>
                                                         </div>
                                                     </div>
                                                 </a>

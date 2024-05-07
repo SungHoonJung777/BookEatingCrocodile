@@ -159,9 +159,11 @@
             <p>${newList.pro_content}...</p>
 
             <div class="d-flex justify-content-between flex-lg-wrap">
-              <p class="text-dark fs-5 fw-bold mb-0"><fmt:formatNumber value="${newList.pro_sale_price}" pattern="#,###"/>원</p>
+              <p class="fw-bold mb-3 text-danger text-decoration-line-through">정가 : <fmt:formatNumber value="${newList.pro_price}" pattern="#,###"/>원</p>
+              <div class="empty"></div>
+              <p class="text-dark fs-5 fw-bold mb-0 sale_price">할인가 : <fmt:formatNumber value="${newList.pro_sale_price}" pattern="#,###"/>원</p>
               <div class="empty2"></div>
-              <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary cart_add_box"><i class="fa fa-shopping-bag me-2 text-primary"></i> 장바구니에 추가</a>
+<%--              <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary cart_add_box"><i class="fa fa-shopping-bag me-2 text-primary"></i> 장바구니에 추가</a>--%>
             </div>
           </div>
           </a>
@@ -174,7 +176,7 @@
 
 
 <!-- popular Shop Start-->
-<div class="container-fluid vesitable py-5">
+<div class="container-fluid vesitable">
   <div class="container py-5">
     <h1 class="mb-0">인기 도서</h1>
     <div class="owl-carousel vegetable-carousel justify-content-center">
@@ -196,9 +198,11 @@
               <p>${popularList.pro_content}...</p>
 
               <div class="d-flex justify-content-between flex-lg-wrap">
-                <p class="text-dark fs-5 fw-bold mb-0"><fmt:formatNumber value="${popularList.pro_sale_price}" pattern="#,###"/>원</p>
+                <p class="fw-bold mb-3 text-danger text-decoration-line-through">정가 : <fmt:formatNumber value="${popularList.pro_price}" pattern="#,###"/>원</p>
                 <div class="empty"></div>
-                <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary cart_add_box"><i class="fa fa-shopping-bag me-2 text-primary"></i> 장바구니에 추가</a>
+                <p class="text-dark fs-5 fw-bold mb-0 sale_price">할인가 : <fmt:formatNumber value="${popularList.pro_sale_price}" pattern="#,###"/>원</p>
+                <div class="empty"></div>
+<%--                <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary cart_add_box"><i class="fa fa-shopping-bag me-2 text-primary"></i> 장바구니에 추가</a>--%>
               </div>
             </div>
           </a>

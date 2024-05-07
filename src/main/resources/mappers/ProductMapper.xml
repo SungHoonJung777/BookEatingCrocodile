@@ -14,7 +14,7 @@
         select BP.pro_idx, BP.pro_name, BP.pro_writer, BP.pro_price, BP.pro_amount, BP.pro_content, BP.pro_image, BP.pro_company, BP.pro_video,
                BP.pro_category1, BP.pro_category2, BP.pro_category3, BP.pro_reg_date, BP.pro_modify_date, FLOOR(BP.pro_price-(BP.pro_price * (BP.pro_sale / 100))) AS pro_sale_price, ifNULL( FLOOR(AVG(BR.review_star)), 0)AS review_star_avg
         from bec_product BP
-        INNER JOIN bec_review BR ON BP.pro_idx = BR.pro_idx
+        left outer JOIN bec_review BR ON BP.pro_idx = BR.pro_idx
         where BP.pro_idx = #{pro_idx}
     </select>
 
@@ -25,7 +25,7 @@
         FLOOR(BP.pro_price - BP.pro_price * (BP.pro_sale / 100)) AS pro_sale_price,
         ifNULL( FLOOR(AVG(BR.review_star)), 0)AS review_star_avg
         FROM bec_product BP
-        inner JOIN bec_review BR ON BP.pro_idx = BR.pro_idx
+        LEFT JOIN bec_review BR ON BP.pro_idx = BR.pro_idx
         WHERE 1=1
         <if test="pro_category1 != null and pro_category1 != ''">
             AND BP.pro_category1 = #{pro_category1}

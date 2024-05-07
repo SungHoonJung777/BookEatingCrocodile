@@ -162,7 +162,7 @@
       </c:when>
       <c:when test="${list.black_status eq 'e'}">
         <input type="text" placeholder="가격을 입력해주세요." style="background-color: gray; color: white;" readonly>
-        <input type="button" value="경매 끝" style="background-color: #FD3267; color: white; " readonly>
+        <input type="button" value="경매 끝" style="background-color: #FD3267; color: white; " onclick="location.href='/'" readonly>
       </c:when>
     </c:choose>
 

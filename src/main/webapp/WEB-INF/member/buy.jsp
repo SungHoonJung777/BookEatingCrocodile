@@ -187,6 +187,14 @@
                                                             </button>
                                                         </td>
                                                     </c:when>
+                                                    <c:when test="${dto.delivery eq '배송대기'}">
+                                                        <td> <span class="badge bg-label-secondary me-1">${dto.delivery}</span></td>
+                                                        <td>
+<%--                                                            <button type="submit" class="btn p-0  hide-arrow" onclick="orderDelete(${dto.order_idx})" data-bs-toggle="dropdown">--%>
+<%--                                                                <i class="bx bx-trash me-2"></i>--%>
+<%--                                                            </button>--%>
+                                                        </td>
+                                                    </c:when>
                                                     <c:when test="${dto.delivery eq '배송중'}">
                                                         <td class="text-nowrap"><span class="badge bg-label-info me-1">${dto.delivery}</span></td>
                                                         <td class="text-nowrap"></td>

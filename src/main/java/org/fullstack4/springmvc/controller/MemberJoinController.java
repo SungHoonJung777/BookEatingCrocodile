@@ -52,7 +52,7 @@ public class MemberJoinController {
         String toMail = email;
         String title = "회원가입 인증 이메일 입니다.";
 
-        String content = "<img src=\"/resources/uploads/BEClogo.png\" />" +
+        String content =
                 "책 먹는 악어를 방문해주셔서 감사합니다." +
                 "<br><br>" +
                 "인증 번호는 " + checkNum + "입니다." +
